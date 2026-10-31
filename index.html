@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<meta name="rogue-rev" content="20261101a">
+<meta name="rogue-rev" content="20261101b">
 <meta name="theme-color" content="#0b0d17">
 <meta name="apple-mobile-web-app-title" content="ふしぎな地下">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261101a">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261101a">
-<link rel="manifest" href="manifest.webmanifest?v=20261101a">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261101b">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261101b">
+<link rel="manifest" href="manifest.webmanifest?v=20261101b">
 <title>ふしぎな地下ダンジョン</title>
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -122,7 +122,7 @@ button{font:inherit;color:inherit;border:0;cursor:pointer}
   <button class="big" id="bCont" style="display:none">つづきから</button>
   <button class="big" id="bStart">はじめる</button>
   <button class="big sub" id="bHow">あそびかた</button>
-  <div class="ver">rev 20261101a</div>
+  <div class="ver">rev 20261101b</div>
 </section>
 
 <section id="howto" class="scr">
@@ -180,7 +180,7 @@ button{font:inherit;color:inherit;border:0;cursor:pointer}
 <script>
 "use strict";
 const $=id=>document.getElementById(id);
-const REV="20261101a";
+const REV="20261101b";
 /* ===== 音 ===== */
 let AC=null;
 function ac(){try{if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();if(AC.state==="suspended")AC.resume()}catch(e){}return AC}
@@ -1141,11 +1141,11 @@ document.addEventListener("gesturestart",e=>e.preventDefault());
 (function(){const rows=[["slime","スライム","おそい。2回に1回だけうごく。"],["bat","コウモリ","ふらふら飛びまわる。"],["goblin","ゴブリン","まっすぐ追いかけてくる。"],["mage","まどうし","はなれた所から まほうをうつ。"],["skel","ガイコツ","強い。深い階にいる。"],["golem","ゴーレム","とても固い。おそい。"],["ghost","ゆうれい","ふらふら近づく。深い階にいる。"],["knight","やみのきし","強くて こわい。深い階にいる。"],["mimic","ミミック","たからばこの ふりをしている。"]];
   const bosses=[["dragon","ドラゴン","10階のボス。火をはく。"],["kslime","キングスライム","20階のボス。スライムを よぶ。"],["mino","ミノタウロス","30階のボス。2歩ずつ せまってくる。"],["lich","リッチ","40階のボス。まほうと ガイコツ。"]];
   const objD={fountain:"のむと HPが ふえる。",chest:"あけると 道具が出る。（たまに ミミック）",shrine:"いのると いいことが ある。",pot:"われると 何かが出るかも。",warp:"べつの まほうじんへ とぶ。",ice:"すべって まっすぐ 進んでしまう。",spike:"ふむと ダメージ。",poison:"どくになって HPがへる。",alarm:"まわりの敵が 目をさます。",pit:"下の階へ おちる。",tele:"どこかへ とばされる。",hunger:"おなかが へる。",rust:"ぶきか たてが さびて よわくなる。",sleep:"しばらく ねむってしまう。"};
-  const wrows=[["bronze","つるぎ","ふつうの ぶき。"],["spear","やり","2マス先まで とどく。"],["axe","おの","前の3マスを まとめて きる。"],["bow","ゆみ","はなれた敵を うてる（7マス）。"],["dagger","たんけん","1回で 2回 こうげき。"],["giant","おおきな ハンマー","とても強いが たまに はずれる。"],["flame","ほのおの けん","火で 大きなダメージ。"],["frost","こおりの けん","敵を こおらせて 止める。"],["venom","どくの けん","敵を どくにする。"],["vamp","ちすいの けん","あたえたダメージで HPが ふえる。"],["knock","ふっとばし ハンマー","敵を うしろへ とばす。"],["dream","ねむりの けん","敵を ねむらせる。"],["slayer","ボスごろし","ボスに 2ばいの ダメージ。"]];
+  const wrows=[["bronze","つるぎ","ふつうの ぶき。深い階ほど 強い。"],["spear","やり","2マス先まで とどく。"],["axe","おの","前の3マスを まとめて きる。"],["bow","ゆみ","はなれた敵を うてる（7マス）。"],["dagger","たんけん","1回で 2回 こうげき。"],["giant","おおきな ハンマー","とても強いが たまに はずれる。"],["flame","ほのおの けん","火で 大きなダメージ。"],["frost","こおりの けん","敵を こおらせて 止める。"],["venom","どくの けん","敵を どくにする。"],["vamp","ちすいの けん","あたえたダメージで HPが ふえる。"],["knock","ふっとばし ハンマー","敵を うしろへ とばす。"],["dream","ねむりの けん","敵を ねむらせる。"],["slayer","ボスごろし","ボスに 2ばいの ダメージ。"]];
   const items=Object.entries(ITEMS).map(([k,i])=>[k,i.name+(i.n?"（"+i.n+"回）":""),i.d]).concat([["shd","たて","まもりが 上がる。深い階ほど 強い"]]);
   let h="<b>敵</b>";rows.forEach(r=>{h+='<div class="hrow"><canvas width="64" height="64" data-e="'+r[0]+'"></canvas><span><b style="color:#ffd27a">'+r[1]+'</b>　'+r[2]+'</span></div>'});
   h+="<b>道具</b>（上に乗るとひろう。「持ち物」でつかう）";items.forEach(r=>{h+='<div class="hrow"><canvas width="64" height="64" data-i="'+r[0]+'"></canvas><span><b style="color:#9be59b">'+r[1]+'</b>　'+r[2]+'</span></div>'});
-  h+="<b>ぶき</b>（むいている方向に こうげき。そうびすると 持ち物から 消えて、ぶきの わくに入る）";wrows.forEach(r=>{h+='<div class="hrow"><canvas width="64" height="64" data-i="w:'+r[0]+'"></canvas><span><b style="color:#ffb27a">'+r[1]+'</b>　'+r[2]+'</span></div>'});
+  h+="<b>ぶき</b>（むいている方向に こうげき。そうびすると 持ち物から 消えて、ぶきの わくに入る）";wrows.forEach(r=>{h+='<div class="hrow"><canvas width="64" height="64" data-i="w:'+r[0]+'"></canvas><span><b style="color:#ffb27a">'+(r[0]!=="bronze"&&WDEF[r[0]]?WDEF[r[0]].n:r[1])+'</b>　'+r[2]+'</span></div>'});
   h+="<b>ボス</b>（10階ごと。深いほど 強い）";bosses.forEach(r=>{h+='<div class="hrow"><canvas width="64" height="64" data-e="'+r[0]+'"></canvas><span><b style="color:#ff8a8a">'+r[1]+'</b>　'+r[2]+'</span></div>'});
   h+="<b>しかけ</b>（わなは 見えないことも ある）";Object.entries(OBJS).forEach(([k,o])=>{h+='<div class="hrow"><canvas width="64" height="64" data-o="'+k+'"></canvas><span><b style="color:'+(o.trap?"#ff9a9a":"#9ad0ff")+'">'+o.n+'</b>　'+objD[k]+'</span></div>'});
   $("howList").innerHTML=h;$("howList").querySelectorAll("canvas").forEach(c=>{const x=c.getContext("2d");if(c.dataset.e)drawEnemy(x,c.dataset.e,6,8,52,false);else if(c.dataset.o)drawObj(x,c.dataset.o,4,4,56,false);else drawItemSprite(x,c.dataset.i,2,2,60)})})();
