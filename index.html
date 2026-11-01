@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<meta name="rogue-rev" content="20261101h">
+<meta name="rogue-rev" content="20261101i">
 <meta name="theme-color" content="#7fd0ff">
 <meta name="apple-mobile-web-app-title" content="ふしぎな地下">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261101h">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261101h">
-<link rel="manifest" href="manifest.webmanifest?v=20261101h">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261101i">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261101i">
+<link rel="manifest" href="manifest.webmanifest?v=20261101i">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800;900&display=swap" rel="stylesheet">
 <title>ふしぎな地下ダンジョン</title>
 <style>
@@ -199,6 +199,7 @@ button{font-family:var(--F)}
 #pop.go{animation:popup 1.3s cubic-bezier(.3,1.6,.5,1) forwards}
 @keyframes popup{0%{transform:translate(-50%,-50%) scale(.2) rotate(-8deg);opacity:0}18%{transform:translate(-50%,-50%) scale(1.25) rotate(3deg);opacity:1}32%{transform:translate(-50%,-50%) scale(1) rotate(-2deg)}80%{transform:translate(-50%,-60%) scale(1);opacity:1}100%{transform:translate(-50%,-80%) scale(.9);opacity:0}}
 @media (max-width:340px){.logo{font-size:29px}#pop{font-size:24px}.lvBox #lvGrid button{min-height:78px}.lvBox #lvGrid button b{font-size:17px}}
+#bTurn.on{background:linear-gradient(#fff1a0,#ffc83a)!important;box-shadow:0 0 0 3px #fff,0 0 14px #ffd84a,0 4px 0 var(--ink)!important}
 </style>
 </head>
 <body><div id="iosTopStrip" aria-hidden="true"></div>
@@ -210,13 +211,13 @@ button{font-family:var(--F)}
   <button class="big" id="bCont">つづきから</button>
   <button class="big" id="bStart">はじめから</button>
   <button class="big sub" id="bHow">あそびかた</button>
-  <div class="ver">rev 20261101h</div>
+  <div class="ver">rev 20261101i</div>
 </section>
 
 <section id="howto" class="scr">
   <h2>あそびかた</h2>
   <div class="hw">ダンジョンは <b>どこまでも</b> つづくよ。どこまで もぐれるかな？<br><b>10階ごと</b>に ボスの へや。ボスを たおすと 階段が出る。<br>自分が1歩うごくと、敵も1歩うごくよ。<br>やられたら、<b>1階からやり直し</b>。</div>
-  <div class="hw"><b>うごく</b>：左の十字ボタン（ななめもOK）。押しっぱなしで続けて歩く。<br><b>むき</b>：押した方向を むく（かべでも むきだけ かわる）。<br><b>こうげき</b>：敵のほうへうごく。やり・ゆみは はなれていても とどく。<br><b>足ぶみ</b>：まん中のボタン。その場で1回休む。<br><b>階段</b>：上に乗ったら「おりる」。<br><b>道具の上で足ぶみ</b>：ひろう・いれかえ・そのまま を えらべる。<br><b>足もと</b>：持ち物画面に 足もとの道具も 出るよ。ひろう・つかう・なげる・いれかえ ができる。<br><b>おく</b>：足もとに 道具があっても、まわり8マスの あいている所に 置ける。<br><b>なげる</b>：道具を むいている方向へ 7マスまで なげる。さいしょの敵に あたる。ぶきは こうげきが高いほど いたい。ばくだんは 爆発、なげナイフ・こおりのつぶて・ほのおのまきものは いつもどおり きく。くすりや やくそうを 敵に当てると 敵に きいてしまう（くすりのびんは われる）。外れた道具は とまった所に おちる。</div>
+  <div class="hw"><b>うごく</b>：左の十字ボタン（ななめもOK）。押しっぱなしで続けて歩く。<br><b>むき</b>：「むき」ボタンを押すと 光る。光っている間は 矢印で むきだけ かわる（ターンは へらない）。もう一度押すと もどる。<br><b>こうげき</b>：敵のほうへうごく。やり・ゆみは はなれていても とどく。<br><b>足ぶみ</b>：まん中のボタン。その場で1回休む。<br><b>階段</b>：上に乗ったら「おりる」。<br><b>道具の上で足ぶみ</b>：ひろう・いれかえ・そのまま を えらべる。<br><b>足もと</b>：持ち物画面に 足もとの道具も 出るよ。ひろう・つかう・なげる・いれかえ ができる。<br><b>おく</b>：足もとに 道具があっても、まわり8マスの あいている所に 置ける。<br><b>なげる</b>：道具を むいている方向へ 7マスまで なげる。さいしょの敵に あたる。ぶきは こうげきが高いほど いたい。ばくだんは 爆発、なげナイフ・こおりのつぶて・ほのおのまきものは いつもどおり きく。くすりや やくそうを 敵に当てると 敵に きいてしまう（くすりのびんは われる）。外れた道具は とまった所に おちる。</div>
   <div class="hw" id="howList"></div>
   <div class="hw"><b>おなか</b>：歩くとへる。0になるとHPがへるので、おにぎりを食べよう。<br><b>レベル</b>：敵をたおすと上がる。最大HPがふえて、<b>こうげき・ぼうぎょ・HP・アイテム運</b>から1つえらべる。上がる量は いつも同じ。どれを えらんでも だいじょうぶ。<br><b>アイテム運</b>：上げるほど、★の多い 強い道具が 見つかりやすくなる。<br><b>会心の一撃</b>：ときどき（10回に1回くらい）会心の一撃が出て、ダメージが<b>1.5倍</b>になる。金色の「会心！」が出るよ。こううんのゆびわ や たんけん だと もっと出やすい。<br><b>よける</b>：敵のこうげきを ときどき（8%）よける。<br><b>★レア度</b>：<span style="color:#e8e6f0">★ふつう</span>・<span style="color:#7fd8ff">★★めずらしい</span>・<span style="color:#d49bff">★★★とてもめずらしい</span>・<span style="color:#ffd24a">★★★★でんせつ</span>。強い道具ほど めったに 見つからない。<br><b>そうび</b>：ぶき・たて・ゆびわの わくが 1つずつ。持ち物画面の わくを タップすると、くわしく見たり はずしたりできる。わくが あいている時だけ、ひろうと 自動で そうびする。<br><b>ゆびわ</b>：1つだけつけられる。つけている間ずっと効く。<br><b>つえ</b>：何回か使える。<br><b>地図</b>：行った場所を全体で見られる。</div>
   <button class="big" id="bHowBack" style="flex:none">もどる</button>
@@ -244,6 +245,7 @@ button{font-family:var(--F)}
       <button data-d="1,1"><svg viewBox="0 0 24 24"><path d="M19 19H9l3-3-8-8 4-4 8 8 3-3z"/></svg></button>
     </div>
     <div id="sideR" class="side">
+      <button id="bTurn">むき</button>
       <button id="bDown">おりる</button>
     </div>
   </div>
@@ -265,7 +267,7 @@ button{font-family:var(--F)}
 <script>
 "use strict";
 const $=id=>document.getElementById(id);
-const REV="20261101h";
+const REV="20261101i";
 /* ===== 音 ===== */
 let AC=null;
 function ac(){try{if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();if(AC.state==="suspended")AC.resume()}catch(e){}return AC}
@@ -505,12 +507,13 @@ function msg(t,c){G.log.push({t,c:c||""});if(G.log.length>30)G.log.shift();drawL
 function drawLog(){const L=G.log.slice(-3);$("log").innerHTML=L.map(m=>'<div class="'+m.c+'">'+m.t+'</div>').join("")}
 
 /* ===== 行動 ===== */
-let busy=false,interrupt=false;
+let busy=false,interrupt=false,turnMode=false;
 function playerAct(dx,dy){
   if(!G||G.over||busy)return false;
   if(G.p.lvq>0){showLv();return false}
   const p=G.p;
   if(p.slp>0){p.slp--;msg(p.slp?"ねむっている…":"目がさめた！");endTurn();return true}
+  if(turnMode&&(dx||dy)){p.dir=[dx,dy];return false}
   if(dx||dy){
     p.dir=[dx,dy];
     if(tryAttack(dx,dy)){endTurn();return true}
@@ -1276,6 +1279,7 @@ $("bBag").onclick=()=>{SFX.ui();showMap=false;openBag()};
 $("bMap").onclick=()=>{SFX.ui();showMap=!showMap};
 $("mapWrap").addEventListener("click",()=>{if(showMap)showMap=false});
 $("bDown").onclick=()=>{showMap=false;descend()};
+$("bTurn").onclick=()=>{SFX.ui();turnMode=!turnMode;$("bTurn").classList.toggle("on",turnMode)};
 const KEYS={ArrowUp:[0,-1],ArrowDown:[0,1],ArrowLeft:[-1,0],ArrowRight:[1,0],k:[0,-1],j:[0,1],h:[-1,0],l:[1,0],y:[-1,-1],u:[1,-1],b:[-1,1],n:[1,1],Home:[-1,-1],PageUp:[1,-1],End:[-1,1],PageDown:[1,1]," ":[0,0],".":[0,0]};
 window.addEventListener("keydown",e=>{if(!$("game").classList.contains("on"))return;if($("lvup").classList.contains("on")){const m={"1":"atk","2":"def","3":"hp","4":"item"}[e.key];if(m)chooseStat(m);return}if($("bag").classList.contains("on")){if(e.key==="Escape"||e.key==="i")closeBag();return}
   if(KEYS[e.key]){e.preventDefault();doMove(...KEYS[e.key])}else if(e.key==="i"){openBag()}else if(e.key==="m"){showMap=!showMap}else if(e.key===">"||e.key==="Enter"){descend()}});
