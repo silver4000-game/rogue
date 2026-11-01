@@ -32,6 +32,15 @@ button{font:inherit;color:inherit;border:0;cursor:pointer}
 .big.sub:active{box-shadow:0 1px 0 #14172a}
 .ver{position:absolute;bottom:8px;right:10px;font-size:10px;color:#555a75}
 /* あそびかた */
+.tRow{display:flex;gap:8px;width:min(80vw,280px);margin:0 auto}.tRow .big{flex:1;min-width:0;width:auto;padding:0 2px;font-size:16px;letter-spacing:0}
+#rank{padding:18px 16px;overflow:auto;flex-direction:column;align-items:center}
+#rank h2{margin:6px 0 10px;text-align:center;font-size:26px;color:#fff;text-shadow:2px 2px 0 #4a3a8a,-2px 2px 0 #4a3a8a,2px -2px 0 #4a3a8a,-2px -2px 0 #4a3a8a}
+#rankList{width:100%;max-width:400px;display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
+.rk{display:flex;align-items:center;gap:8px;background:#fffaf0;border:3px solid #4a3a8a;border-radius:14px;padding:4px 10px;box-shadow:0 3px 0 #4a3a8a;color:#4a3a8a;font-weight:800}
+.rk .no{width:26px;text-align:center;font-size:17px;font-weight:900}.rk canvas{width:40px;height:40px;flex:none}
+.rk .rm{flex:1;min-width:0;line-height:1.25}.rk .rm b{font-size:14px}.rk .rm small{display:block;font-size:11px;color:#7a6aa8}
+.rk .fl{font-size:20px;font-weight:900;color:#e0408a}.rk.top1{background:#fff3c0}.rk.top2{background:#eef2ff}.rk.top3{background:#ffe8dc}
+.rk.new{outline:3px solid #ff7ab0}#rankEmpty{text-align:center;color:#fff;font-weight:800;padding:30px}
 #howto{padding:18px 16px;overflow:auto;-webkit-overflow-scrolling:touch}
 #howto h2{margin:6px 0 10px;text-align:center;color:#f3c860;font-size:22px;font-family:"Hiragino Mincho ProN","Yu Mincho",serif}
 .hw{background:linear-gradient(#1c1838,#141228);border:1px solid #5a4a8a;border-radius:12px;padding:10px 12px;margin:0 auto 10px;max-width:420px;width:100%;font-size:14px;line-height:1.6}
@@ -260,8 +269,14 @@ button{font-family:var(--F)}
   <div class="best" id="tBest"></div>
   <button class="big" id="bCont">つづきから</button>
   <button class="big" id="bStart">はじめから</button>
-  <button class="big sub" id="bHow">あそびかた</button>
+  <div class="tRow"><button class="big sub" id="bHow">あそびかた</button><button class="big sub" id="bRank">ランキング</button></div>
   <div class="ver">rev 20261102c</div>
+</section>
+
+<section id="rank" class="scr">
+  <h2>ランキング</h2>
+  <div id="rankList"></div>
+  <button class="big" id="bRankBack" style="flex:none">もどる</button>
 </section>
 
 <section id="howto" class="scr">
@@ -1023,7 +1038,7 @@ $("shopList").addEventListener("click",e=>{const b=e.target.closest("button[data
   if(p.gold<pr||G.bag.length>=bagCap())return;p.gold-=pr;o.stock.splice(+b.dataset.i,1);G.bag.push(it);SFX.coin();popMsg("💰 かった！");msg(nameOf(it)+"を "+pr+"ゴールドで かった。","g");hud();save();drawShop()});
 $("shopClose").onclick=()=>{SFX.ui();$("shop").classList.remove("on");msg("しょうにん「まいど！」");hud();save()};
 /* ===== おわり ===== */
-function gameOver(src){G.over=true;SFX.die();clearSave();const old=getBest().n;setBest(G.floor);const nb=G.floor>old;
+function gameOver(src){G.over=true;SFX.die();clearSave();addRank(src);const old=getBest().n;setBest(G.floor);const nb=G.floor>old;
   setTimeout(()=>{$("rT").textContent="やられてしまった…";$("rT").className=nb?"clear":"";$("rInfo").innerHTML="<b>"+G.floor+"階</b>で "+src+" にやられた。<br>レベル "+G.p.lv+"　たおした敵 "+G.p.kills+"<br>"+(nb?"<b style=\"color:#f3c860\">さいこう記録 こうしん！</b><br>":"")+"さいこう記録: "+getBest().txt;show("result")},900)}
 function setBest(f){const b=+localStorage.getItem("rogue-best")||0;if(f>b)localStorage.setItem("rogue-best",String(f))}
 function getBest(){const b=+localStorage.getItem("rogue-best")||0;return {n:b,txt:b?"地下"+b+"階":"なし"}}
@@ -1044,6 +1059,14 @@ let loadErr=false;
 function load(){try{const s=localStorage.getItem("rogue-save");if(!s)return false;const g=JSON.parse(s);if(!g||!g.p||!Array.isArray(g.map)||!(g.sv>=5))throw 0;migrate(g);G=g;updateSight();return true}catch(e){clearSave();loadErr=true;titleInfo();return false}}
 
 /* ===== 画面 ===== */
+const RK_KEY="rogue_rank1",RK_MAX=10;let rkLast=0;
+function getRank(){try{return JSON.parse(localStorage.getItem(RK_KEY))||[]}catch(e){return []}}
+function addRank(src){try{const p=G.p,d=new Date(),e={c:p.cls||"warrior",f:G.floor,lv:p.lv,k:p.kills||0,d:(d.getMonth()+1)+"/"+d.getDate(),t:Date.now()};rkLast=e.t;const L=getRank();L.push(e);L.sort((a,b)=>b.f-a.f||b.lv-a.lv||a.t-b.t);localStorage.setItem(RK_KEY,JSON.stringify(L.slice(0,RK_MAX)))}catch(e){}}
+const CLSN={warrior:"せんし",mage:"まほうつかい",merchant:"しょうにん",joker:"あそびにん"};
+function showRank(){const L=getRank(),el=$("rankList");if(!L.length){el.innerHTML='<div id="rankEmpty">まだ 記録が ないよ。<br>ぼうけんに 出かけよう！</div>'}
+  else{el.innerHTML=L.map((e,i)=>'<div class="rk'+(i<3?" top"+(i+1):"")+(e.t===rkLast?" new":"")+'"><span class="no">'+(i<3?["🥇","🥈","🥉"][i]:i+1)+'</span><canvas width="80" height="80" data-c="'+e.c+'"></canvas><span class="rm"><b>'+(CLSN[e.c]||"")+'</b><small>Lv'+e.lv+'・'+e.k+'たい たおした '+e.d+'</small></span><span class="fl">'+e.f+'F</span></div>').join("");
+    el.querySelectorAll("canvas").forEach(c=>{const g=c.getContext("2d");drawHero(g,4,6,72,"d","",c.dataset.c)})}
+  show("rank");$("rank").scrollTop=0}
 function show(id){document.querySelectorAll(".scr").forEach(s=>s.classList.toggle("on",s.id===id));if(id==="game"){resize();hud();drawLog()}if(id==="title")titleInfo()}
 function checkSave(){try{const s=localStorage.getItem("rogue-save");if(!s)return;const g=JSON.parse(s);if(!g||!g.p||!Array.isArray(g.map)||!Array.isArray(g.map[0])||!Array.isArray(g.seen)||typeof g.floor!=="number")throw 0;if(!(g.sv>=5)){clearSave();oldReset=true;return}migrate(g)}catch(e){clearSave();loadErr=true}}
 let oldReset=false;
@@ -1565,6 +1588,8 @@ $("askYes").onclick=()=>{SFX.ui();$("ask").classList.remove("on");startNew()};
 $("askNo").onclick=()=>{SFX.ui();$("ask").classList.remove("on")};
 $("bCont").onclick=()=>{SFX.ui();if(load()){show("game");if(G.p.lvq>0)showLv()}};
 $("bHow").onclick=()=>{SFX.ui();show("howto");$("howto").scrollTop=0};
+$("bRank").onclick=()=>{SFX.ui();showRank()};
+$("bRankBack").onclick=()=>{SFX.ui();show("title")};
 $("bHowBack").onclick=()=>{SFX.ui();show("title")};
 $("lvup").addEventListener("click",e=>{const b=e.target.closest("button[data-s]");if(b)chooseStat(b.dataset.s)});
 $("bAgain").onclick=()=>{SFX.ui();show("title");startNew()};
