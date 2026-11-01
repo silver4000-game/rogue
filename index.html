@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<meta name="rogue-rev" content="20261101j">
+<meta name="rogue-rev" content="20261101k">
 <meta name="theme-color" content="#7fd0ff">
 <meta name="apple-mobile-web-app-title" content="ふしぎな地下">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261101j">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261101j">
-<link rel="manifest" href="manifest.webmanifest?v=20261101j">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261101k">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261101k">
+<link rel="manifest" href="manifest.webmanifest?v=20261101k">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800;900&display=swap" rel="stylesheet">
 <title>ふしぎな地下ダンジョン</title>
 <style>
@@ -200,6 +200,7 @@ button{font-family:var(--F)}
 @keyframes popup{0%{transform:translate(-50%,-50%) scale(.2) rotate(-8deg);opacity:0}18%{transform:translate(-50%,-50%) scale(1.25) rotate(3deg);opacity:1}32%{transform:translate(-50%,-50%) scale(1) rotate(-2deg)}80%{transform:translate(-50%,-60%) scale(1);opacity:1}100%{transform:translate(-50%,-80%) scale(.9);opacity:0}}
 @media (max-width:340px){.logo{font-size:29px}#pop{font-size:24px}.lvBox #lvGrid button{min-height:78px}.lvBox #lvGrid button b{font-size:17px}}
 #bTurn.on{background:linear-gradient(#fff1a0,#ffc83a)!important;box-shadow:0 0 0 3px #fff,0 0 14px #ffd84a,0 4px 0 var(--ink)!important}
+#pad button.wait{font-size:13px;white-space:nowrap;letter-spacing:-.04em;padding:0}
 </style>
 </head>
 <body><div id="iosTopStrip" aria-hidden="true"></div>
@@ -211,7 +212,7 @@ button{font-family:var(--F)}
   <button class="big" id="bCont">つづきから</button>
   <button class="big" id="bStart">はじめから</button>
   <button class="big sub" id="bHow">あそびかた</button>
-  <div class="ver">rev 20261101j</div>
+  <div class="ver">rev 20261101k</div>
 </section>
 
 <section id="howto" class="scr">
@@ -267,7 +268,7 @@ button{font-family:var(--F)}
 <script>
 "use strict";
 const $=id=>document.getElementById(id);
-const REV="20261101j";
+const REV="20261101k";
 /* ===== 音 ===== */
 let AC=null;
 function ac(){try{if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();if(AC.state==="suspended")AC.resume()}catch(e){}return AC}
@@ -340,15 +341,15 @@ const ITEMS={
   treasure:{name:"たからのまきもの",d:"この階に道具が3つふえる（地図にのる）",w:1,f:3,c:"scroll",art:["scroll","#fff6c8","#ff9ad0"],rare:1},
   /* なげる・こうげき */
   bomb:{name:"ばくだん",d:"まわりの敵にダメージ",w:4,f:1,c:"atk"},
-  knife:{name:"なげナイフ",d:"いちばん近い敵になげて ダメージ",w:4,f:1,c:"atk"},
-  ice:{name:"こおりのつぶて",d:"近い敵に小ダメージ。少しのあいだ うごけなくする",w:3,f:2,c:"atk"},
+  knife:{name:"なげナイフ",d:"むいている方向の 敵になげて ダメージ",w:4,f:1,c:"atk"},
+  ice:{name:"こおりのつぶて",d:"むいている方向の 敵に小ダメージ。少しのあいだ うごけなくする",w:3,f:2,c:"atk"},
   pstr:{name:"ちからのくすり",d:"50ターンのあいだ こうげき+5",w:3,f:2,c:"buff",art:["pot","#ffe0b0","#ff8a2a"]},
   pdef:{name:"まもりのくすり",d:"50ターンのあいだ まもり+5",w:3,f:2,c:"buff",art:["pot","#cfe0ff","#3a6cff"]},
   /* つえ（何回か使える） */
-  wbolt:{name:"いかずちのつえ",d:"近い敵1体に大ダメージ",w:2,f:3,c:"wand",n:3,art:["staff","#fff3a0","#ffc83d"]},
-  wsleep:{name:"ねむりのつえ",d:"近い敵1体を長くねむらせる",w:2,f:2,c:"wand",n:4,art:["staff","#e6dcff","#9a7cff"]},
-  wpush:{name:"ふきとばしのつえ",d:"近い敵1体を遠くへとばす",w:2,f:2,c:"wand",n:3,art:["staff","#d8fbff","#3fd0f0"]},
-  wdrain:{name:"いのちのつえ",d:"近い敵からHPを15うばう",w:1,f:5,c:"wand",n:3,art:["staff","#ffd0e8","#ff4d8a"],rare:1},
+  wbolt:{name:"いかずちのつえ",d:"むいている方向の 敵1体に大ダメージ",w:2,f:3,c:"wand",n:3,art:["staff","#fff3a0","#ffc83d"]},
+  wsleep:{name:"ねむりのつえ",d:"むいている方向の 敵1体を長くねむらせる",w:2,f:2,c:"wand",n:4,art:["staff","#e6dcff","#9a7cff"]},
+  wpush:{name:"ふきとばしのつえ",d:"むいている方向の 敵1体を遠くへとばす",w:2,f:2,c:"wand",n:3,art:["staff","#d8fbff","#3fd0f0"]},
+  wdrain:{name:"いのちのつえ",d:"むいている方向の 敵からHPを15うばう",w:1,f:5,c:"wand",n:3,art:["staff","#ffd0e8","#ff4d8a"],rare:1},
   /* ゆびわ（1つだけ つけられる。つけている間ずっと効く） */
   rstr:{name:"ちからのゆびわ",d:"つけると こうげき+3",w:1,f:3,c:"ring",art:["ring","#ffb0a0","#e8382a"],rare:1},
   rdef:{name:"まもりのゆびわ",d:"つけると まもり+3",w:1,f:3,c:"ring",art:["ring","#b8d4ff","#2a5ce8"],rare:1},
@@ -552,7 +553,10 @@ function tryAttack(dx,dy){const p=G.p,W=p.wep?wdef(p.wep):{t:"fist"},t=W.t;
     let x=p.x,y=p.y;for(let i=0;i<7;i++){if(!canStep(x,y,dx,dy))break;x+=dx;y+=dy;const o=entAt(x,y);if(o){if(!vis(x,y))break;swing(dx,dy);FX.push({type:"arrow",x:p.x,y:p.y,x2:x,y2:y,a:0});hitEnemy(o,1,1);return true}}return false}
   if(!e1)return false;swing(dx,dy);
   if(t==="axe"){hitEnemy(e1,1);for(const [tx,ty] of arcTiles(dx,dy)){const o=entAt(p.x+tx,p.y+ty);if(o&&o!==e1&&canStep(p.x,p.y,tx,ty))hitEnemy(o,.75)}return true}
-  if(t==="dagger"){hitEnemy(e1,.62);if(G.ents.includes(e1))hitEnemy(e1,.62);return true}
+  if(t==="dagger"){hitEnemy(e1,.62);if(G.ents.includes(e1)){const n=FX.length,snd=[],keep={};for(const k of ["hit","crit","miss"]){keep[k]=SFX[k];SFX[k]=()=>snd.push(k)}
+    try{hitEnemy(e1,.62)}finally{Object.assign(SFX,keep)}
+    const late=FX.splice(n);for(const f of late)if(f.type==="txt"){f.x+=.28;f.y-=.18}
+    setTimeout(()=>{swing(dx,dy);const T=now();for(const f of late){if(f.t0)f.t0=T;FX.push(f)}for(const k of snd)SFX[k]()},170)}return true}
   hitEnemy(e1,1);return true}
 function hitEnemy(e,mult,ranged){const E=ENEMIES[e.k],p=G.p,W=p.wep?wdef(p.wep):{};e.sleep=0;e.aware=20;
   const col={fire:"#ff8a3a",ice:"#8fe0ff",poison:"#8ff06a",vamp:"#ff5d8a",sleep:"#c8a8ff",slayer:"#ffd75a"}[W.fx]||"#ffffff";
@@ -813,9 +817,11 @@ function useItem(i){const it=G.bag[i],p=G.p;let consume=true;if(!p.buf)p.buf={at
     case "hseed":{SFX.lvl();msg("しあわせな気持ちになった！","y");gainExp(Math.max(1,needExp(p.lv)-p.exp));break}
     case "wepup":{if(!p.wep){msg("ぶきを そうびしていない…");break}p.wep.v+=1;SFX.magic();msg(wdef(p.wep).n+"が+1強くなった！（こうげき"+Math.round(atkOf())+"）","y");break}
     case "shdup":{if(!p.shd){msg("たてを そうびしていない…");break}p.shd.v+=1;SFX.magic();msg(p.shd.name+"が+1強くなった！（まもり"+Math.round(defOf())+"）","y");break}
-    case "fire":case "knife":case "ice":case "wbolt":case "wsleep":case "wpush":case "wdrain":{const e=nearestEnemy();const I=ITEMS[it.k];
-      if(!e){msg("見えるところに敵がいない。");SFX.miss();return}
+    case "fire":case "knife":case "ice":case "wbolt":case "wsleep":case "wpush":case "wdrain":{const I=ITEMS[it.k],sc=it.k==="fire";let e=null,end=null;
+      if(sc)e=nearestEnemy();else{const [dx,dy]=p.dir;let x=p.x,y=p.y;for(let k=0;k<7;k++){if(!canStep(x,y,dx,dy))break;x+=dx;y+=dy;const o=entAt(x,y);if(o){e=o;break}}end={x,y}}
+      if(sc&&!e){msg("見えるところに敵がいない。");SFX.miss();return}
       if(I.n!=null){it.n=(it.n==null?I.n:it.n)-1;consume=it.n<=0;if(!consume)msg(I.name+"をふった。（あと"+it.n+"回）")}
+      if(!e){if(end.x!==p.x||end.y!==p.y)bolt(p,end);swing(p.dir[0],p.dir[1]);SFX.miss();msg((it.k==="knife"||it.k==="ice"?I.name+"は":"まほうは")+" 何にも あたらなかった。");break}
       const E=ENEMIES[e.k];e.aware=20;
       if(it.k==="fire"||it.k==="knife"||it.k==="wbolt"){const d=it.k==="fire"?30+G.floor*4:it.k==="wbolt"?25+G.floor*3:15+G.floor*2;bolt(G.p,e);e.hp-=d;e.sleep=0;fx(e.x,e.y,""+d,it.k==="knife"?"#fff":"#ffb44a");SFX.magic();msg(E.name+"に"+d+"のダメージ！","y");if(e.hp<=0)killEnemy(e,E)}
       else if(it.k==="ice"){const d=10+G.floor;e.hp-=d;e.sleep=6;fx(e.x,e.y,""+d,"#a8e4ff");SFX.magic();msg(E.name+"はこおりついた！","y");if(e.hp<=0)killEnemy(e,E)}
