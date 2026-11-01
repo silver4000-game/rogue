@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<meta name="rogue-rev" content="20261101e">
+<meta name="rogue-rev" content="20261101f">
 <meta name="theme-color" content="#0b0d17">
 <meta name="apple-mobile-web-app-title" content="ふしぎな地下">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261101e">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261101e">
-<link rel="manifest" href="manifest.webmanifest?v=20261101e">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261101f">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261101f">
+<link rel="manifest" href="manifest.webmanifest?v=20261101f">
 <title>ふしぎな地下ダンジョン</title>
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -127,7 +127,7 @@ button.big.off,button.big:disabled{opacity:.38;filter:grayscale(.8);pointer-even
   <button class="big" id="bCont">つづきから</button>
   <button class="big" id="bStart">はじめから</button>
   <button class="big sub" id="bHow">あそびかた</button>
-  <div class="ver">rev 20261101e</div>
+  <div class="ver">rev 20261101f</div>
 </section>
 
 <section id="howto" class="scr">
@@ -184,7 +184,7 @@ button.big.off,button.big:disabled{opacity:.38;filter:grayscale(.8);pointer-even
 <script>
 "use strict";
 const $=id=>document.getElementById(id);
-const REV="20261101e";
+const REV="20261101f";
 /* ===== 音 ===== */
 let AC=null;
 function ac(){try{if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();if(AC.state==="suspended")AC.resume()}catch(e){}return AC}
@@ -1127,7 +1127,7 @@ function frame(t){requestAnimationFrame(frame);if(!$("game").classList.contains(
     if(e.hf&&T-e.hf<150){cx.save();cx.globalCompositeOperation="lighter";cx.globalAlpha=.75*(1-(T-e.hf)/150);blitF(ec,sx,sy+breathe,e.fl);cx.restore()}
     if(e.psn>0){cx.fillStyle="rgba(140,240,110,.8)";cx.beginPath();cx.arc(sx+TS*.82,sy+TS*.2,TS*.08,0,7);cx.fill()}
     if(e.hp<e.mhp){rr(cx,sx+4,sy+TS-5,TS-8,4,2);cx.fillStyle="rgba(40,0,10,.8)";cx.fill();rr(cx,sx+4,sy+TS-5,Math.max(3,(TS-8)*e.hp/e.mhp),4,2);cx.fillStyle="#ff6b7a";cx.fill()}}
-  {const hf=heroFace(),wid=p.wep?p.wep.id:"",hc=cached("hero_"+hf+"_"+wid,TS,1.3,(g,a,b,s)=>drawHero(g,a,b,s,hf,wid)),lo=luOff(p),hx=ox+p.x*TS+lo[0],hy=oy+p.y*TS+Math.sin(t/330)*TS*0.02+lo[1];blit(hc,hx,hy);
+  {const hf=heroFace(),wid=p.wep?p.wep.id:"",hc=cached("hero_"+hf+"_"+wid,TS,1.3,(g,a,b,s)=>drawHero(g,a,b,s,hf,wid)),lo=luOff(p),hx=ox+p.x*TS+lo[0],hy=oy+p.y*TS+Math.sin(t/330)*TS*0.02+lo[1];HXY=[hx,hy];blit(hc,hx,hy);
     if(p.hf&&T-p.hf<160){cx.save();cx.globalCompositeOperation="lighter";cx.globalAlpha=.6*(1-(T-p.hf)/160);blit(hc,hx,hy);cx.restore()}
     if(p.slp>0){cx.fillStyle="#cbbcff";cx.font="900 "+Math.round(TS*.32)+"px sans-serif";cx.textAlign="left";cx.fillText("z",hx+TS*.75,hy+TS*.1)}
     if(p.psn>0){cx.fillStyle="rgba(140,240,110,.85)";cx.beginPath();cx.arc(hx+TS*.15,hy+TS*.15,TS*.08,0,7);cx.fill()}}
@@ -1154,14 +1154,15 @@ function frame(t){requestAnimationFrame(frame);if(!$("game").classList.contains(
   if(flash>0){cx.globalAlpha=flash/14;cx.fillStyle=flashC;cx.fillRect(0,0,W,H);cx.globalAlpha=1;flash--;if(!flash)flashC="#ff2a2a"}
 }
 /* いつも うすく見える地図（プレイのじゃまにならないように半とうめい） */
-function drawOverlay(W,H,t){const s=Math.min((W-16)/MW,(H-16)/MH),ox=(W-s*MW)/2,oy=(H-s*MH)/2;
-  cx.fillStyle="rgba(190,200,255,.16)";
-  for(let y=0;y<MH;y++)for(let x=0;x<MW;x++){if(!G.seen[y][x]||G.map[y][x]===1)continue;cx.fillStyle=G.roomMap[y][x]>=0?"rgba(170,180,255,.17)":"rgba(170,180,255,.11)";cx.fillRect(ox+x*s,oy+y*s,s+.3,s+.3)}
-  if(stOK()&&G.seen[G.stairs.y][G.stairs.x]){cx.fillStyle=G.boss?"rgba(255,215,110,.6)":"rgba(130,185,255,.6)";rr(cx,ox+G.stairs.x*s,oy+G.stairs.y*s,s,s,s*.3);cx.fill()}
-  for(const o of G.objs||[])if(!o.hid&&G.seen[o.y][o.x]){cx.fillStyle=OBJS[o.k].trap?"rgba(255,140,90,.55)":o.k==="ice"?"rgba(170,225,255,.35)":"rgba(255,230,140,.5)";cx.fillRect(ox+o.x*s+s*.25,oy+o.y*s+s*.25,s*.5,s*.5)}
-  cx.fillStyle="rgba(140,240,170,.5)";for(const it of G.items)if(vis(it.x,it.y)||G.mapRevealed||it.shown){cx.beginPath();cx.arc(ox+it.x*s+s/2,oy+it.y*s+s/2,s*.32,0,7);cx.fill()}
-  cx.fillStyle="rgba(255,110,125,.6)";for(const e of G.ents)if(vis(e.x,e.y)){cx.beginPath();cx.arc(ox+e.x*s+s/2,oy+e.y*s+s/2,s*.4,0,7);cx.fill()}
-  const px=ox+G.p.x*s+s/2,py=oy+G.p.y*s+s/2;glow(cx,px,py,s*(1.6+.25*Math.sin(t/300)),"rgba(255,215,130,.45)");cx.fillStyle="rgba(255,228,150,.9)";cx.beginPath();cx.arc(px,py,s*.48,0,7);cx.fill()}
+let HXY=null;
+function drawOverlay(W,H,t){const s=Math.min((W-16)/MW,(H-16)/MH)/2,ox=8,oy=8;cx.save();if(HXY&&HXY[0]+TS*.2<ox+s*MW&&HXY[1]+TS*.2<oy+s*MH)cx.globalAlpha=.35;
+  rr(cx,ox-4,oy-4,s*MW+8,s*MH+8,6);cx.fillStyle="rgba(10,8,26,.38)";cx.fill();cx.strokeStyle="rgba(217,180,90,.35)";cx.lineWidth=1;cx.stroke();
+  for(let y=0;y<MH;y++)for(let x=0;x<MW;x++){if(!G.seen[y][x]||G.map[y][x]===1)continue;cx.fillStyle=G.roomMap[y][x]>=0?"rgba(170,180,255,.42)":"rgba(170,180,255,.28)";cx.fillRect(ox+x*s,oy+y*s,s+.3,s+.3)}
+  if(stOK()&&G.seen[G.stairs.y][G.stairs.x]){cx.fillStyle=G.boss?"rgba(255,215,110,.85)":"rgba(130,185,255,.85)";rr(cx,ox+G.stairs.x*s,oy+G.stairs.y*s,s,s,s*.3);cx.fill()}
+  for(const o of G.objs||[])if(!o.hid&&G.seen[o.y][o.x]){cx.fillStyle=OBJS[o.k].trap?"rgba(255,140,90,.8)":o.k==="ice"?"rgba(170,225,255,.55)":"rgba(255,230,140,.75)";cx.fillRect(ox+o.x*s+s*.25,oy+o.y*s+s*.25,s*.5,s*.5)}
+  cx.fillStyle="rgba(140,240,170,.8)";for(const it of G.items)if(vis(it.x,it.y)||G.mapRevealed||it.shown){cx.beginPath();cx.arc(ox+it.x*s+s/2,oy+it.y*s+s/2,s*.42,0,7);cx.fill()}
+  cx.fillStyle="rgba(255,110,125,.85)";for(const e of G.ents)if(vis(e.x,e.y)){cx.beginPath();cx.arc(ox+e.x*s+s/2,oy+e.y*s+s/2,s*.5,0,7);cx.fill()}
+  const px=ox+G.p.x*s+s/2,py=oy+G.p.y*s+s/2;glow(cx,px,py,s*(2.2+.3*Math.sin(t/300)),"rgba(255,215,130,.45)");cx.fillStyle="rgba(255,228,150,1)";cx.beginPath();cx.arc(px,py,s*.62,0,7);cx.fill();cx.restore()}
 function drawMini(W,H){const s=Math.floor(Math.min((W-12)/MW,(H-40)/MH)),ox=Math.floor((W-s*MW)/2),oy=Math.floor((H-s*MH)/2)+10;
   cx.fillStyle="#f3d58a";cx.font="800 14px sans-serif";cx.textAlign="center";cx.fillText(G.floor+"階の地図（タップでもどる）",W/2,22);
   for(let y=0;y<MH;y++)for(let x=0;x<MW;x++){if(!G.seen[y][x]||G.map[y][x]===1)continue;cx.fillStyle=G.roomMap[y][x]>=0?"#4a5288":"#323a66";cx.fillRect(ox+x*s,oy+y*s,s,s)}
