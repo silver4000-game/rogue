@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<meta name="rogue-rev" content="20261102f">
+<meta name="rogue-rev" content="20261102g">
 <meta name="theme-color" content="#7fd0ff">
 <meta name="apple-mobile-web-app-title" content="ふしぎな地下">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261102f">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261102f">
-<link rel="manifest" href="manifest.webmanifest?v=20261102f">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261102g">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261102g">
+<link rel="manifest" href="manifest.webmanifest?v=20261102g">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800;900&display=swap" rel="stylesheet">
 <title>ふしぎな地下ダンジョン</title>
 <style>
@@ -284,7 +284,7 @@ button{font-family:var(--F)}
   <button class="big" id="bCont">つづきから</button>
   <button class="big" id="bStart">はじめから</button>
   <div class="tRow"><button class="big sub" id="bHow">あそびかた</button><button class="big sub" id="bRank">ランキング</button></div>
-  <div class="ver">rev 20261102f</div>
+  <div class="ver">rev 20261102g</div>
 </section>
 
 <section id="rank" class="scr">
@@ -351,7 +351,7 @@ button{font-family:var(--F)}
 <script>
 "use strict";
 const $=id=>document.getElementById(id);
-const REV="20261102f";
+const REV="20261102g";
 /* ===== 音 ===== */
 let AC=null;
 function ac(){try{if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();if(AC.state==="suspended")AC.resume()}catch(e){}return AC}
@@ -987,6 +987,23 @@ let FAST=false;
 /* メニューから つかう: 画面がもどって ひと呼吸 おいてから モーション */
 function menuUse(fn){closeBag();const run=()=>{noPop=true;try{fn()}finally{noPop=false}};if(FAST||!G||G.over){run();return}busy=true;lockUntil=now()+450;hud();setTimeout(()=>{busy=false;if(G&&!G.over)run()},400)}
 function afterUse(ms){hud();if(FAST||G.over){endTurn();return}busy=true;lockUntil=now()+(ms||750);setTimeout(()=>{busy=false;if(G&&!G.over){endTurn();hud()}},ms||700)}
+/* ===== 道具ごとの エフェクト ===== */
+const SIG={
+ wep:["slash","⚔️","#ffd060"],shd:["stamp","🛡️","#7ab8ff"],
+ herb:["rise","🌿","#6ee07a"],pred:["fount","💖","#ff7aa8"],cure:["spiral","✨","#7ff0e0"],
+ food:["munch","🍙","#ffd8a0"],meat:["munch","🍖","#ffa060"],fseed:["swell","🍚","#ffc070"],
+ power:["rise","🔥","#ff7a40"],dseed:["fall","🪨","#a0a8c0"],life:["burst","❤️","#ff5a7a"],hseed:["shine","🌟","#ffe060"],
+ pstr:["burst","💢","#ff6040"],pdef:["spiral","🔷","#60a0ff"],
+ thunder:["shock","⚡","#fff07a"],sleep:["rain","💤","#b8a8ff"],holy:["pillar","✨","#fff2b0"],warp:["vortex","🌀","#b890ff"],stairsc:["rise","🔼","#8fe0ff"],
+ mapsc:["radar","🗺️","#80d0ff"],fire:["proj","🔥","#ff8040"],wepup:["fall","⚔️","#ffd060"],shdup:["fall","🛡️","#7ab8ff"],treasure:["burst","💎","#80f0ff"],
+ rstr:["orbit","💪","#ff9060"],rdef:["orbit","🔰","#70b0ff"],rheal:["orbit","💚","#70e090"],rfood:["orbit","🍙","#ffc080"],rluck:["orbit","🍀","#80e070"],rexp:["orbit","📘","#a0a0ff"],
+ knife:["spin","🔪","#e0e8f0"],ice:["spin","🟡","#ffe040"],bomb:["burst","💥","#ff9040"],
+ wbolt:["zig","⚡","#ffe860"],wsleep:["wave","💤","#b8a8ff"],wpush:["proj","💨","#c0f0ff"],wdrain:["chain","💗","#ff7ab0"],wsmash:["proj","☄️","#ff6a3a"],
+ wpar:["zig","💛","#ffd000"],wpierce:["lance","🔹","#70d0ff"],wpull:["chain","🧲","#d080ff"],wswap:["swap","🔄","#70f0b0"],wconf:["wave","💫","#ff8ad8"],wslow:["proj","🐌","#a0d070"]};
+function sigSnd(k){let h=0;for(const ch of k)h=(h*31+ch.charCodeAt(0))%9973;const sc=[392,440,494,523,587,659,698,784,880,988],ty=["sine","triangle","square","sine"][h%4],a=sc[h%10],b=sc[(h>>2)%10],c=sc[(h>>4)%10];
+  tone(a,.09,ty,.035);tone(b,.09,ty,.035,null,.08);tone(c*1.5,.14,ty,.03,null,.16)}
+function sigFx(k,x,y,x2,y2){const S=SIG[k];if(!S)return;const proj=["proj","spin","zig","wave","lance","chain","swap"].includes(S[0]);
+  FX.push({type:"sig",p:S[0],g:S[1],c:S[2],x,y,x2:x2==null?x:x2,y2:y2==null?y:y2,t0:now(),dur:proj?750:950});if(!FAST)sigSnd(k)}
 function aura(o,c,dur){FX.push({type:"aura",x:o.x,y:o.y,c,t0:now(),dur:dur||1000})}
 function ringFx(x,y,c){FX.push({type:"ring",x,y,c,t0:now(),dur:800})}
 function beam(a,b,c){FX.push({type:"beam",x:a.x,y:a.y,x2:b.x,y2:b.y,c,t0:now(),dur:380})}
@@ -996,6 +1013,8 @@ function heal(n){const p=G.p,h=Math.min(n,p.mhp-p.hp);p.hp+=h;return h}
 function lineTargets(rng,pierce){const p=G.p,[dx,dy]=p.dir;let x=p.x,y=p.y;const hits=[];for(let k=0;k<rng;k++){if(!canStep(x,y,dx,dy))break;x+=dx;y+=dy;const o=entAt(x,y);if(o){hits.push(o);if(!pierce)break}}return {hits,end:{x,y}}}
 function dmgE(e,d,col){const E=ENEMIES[e.k];if(E.hard)d=1;e.hp-=d;e.sleep=0;e.aware=20;e.hf=now();shake(e);lfx(e.x,e.y,""+d,col||"#ffb44a");if(e.hp<=0){killEnemy(e,E);return true}return false}
 function useItem(i){const it=G.bag[i],p=G.p;let consume=true;if(!p.buf)p.buf={atk:0,def:0,regen:0};const I=ITEMS[it.k]||{};
+  {const sk=it.k;if(I.rng){const {hits,end}=lineTargets(I.rng,I.pierce),t=hits[0]||end;sigFx(sk,p.x,p.y,t.x,t.y)}else if(sk==="fire"){const e=nearestEnemy();if(e)sigFx(sk,p.x,p.y,e.x,e.y)}else if(!(it.k==="warp"&&G.boss)&&!(it.k==="stairsc"&&!stOK())&&!((sk==="wepup"&&!p.wep)||(sk==="shdup"&&!p.shd)))sigFx(sk,p.x,p.y)}
+  const aura=()=>{},beam=()=>{};
   switch(it.k){
     case "wep":{const old=p.wep;p.wep=it.eq;if(old){G.bag[i]={k:"wep",eq:old};consume=false}msg(nameOf(it)+"をそうびした。（こうげき"+Math.round(atkOf())+"）","g");popMsg("⚔️ そうび！");aura(p,"#ffe08a",700);SFX.pick();break}
     case "shd":{const old=p.shd;p.shd=it.eq;if(old){G.bag[i]={k:"shd",eq:old};consume=false}msg(nameOf(it)+"をそうびした。（まもり"+Math.round(defOf())+"）","g");popMsg("🛡️ そうび！");aura(p,"#9ad0ff",700);SFX.pick();break}
@@ -1561,6 +1580,35 @@ function frame(t){requestAnimationFrame(frame);if(!$("game").classList.contains(
     if(f.type==="crit"){const el=now()-f.t0;if(el>700){FX.splice(i,1);continue}const sx=ox+f.x*TS+TS/2,sy=oy+f.y*TS-TS*0.25-Math.min(el,200)/200*TS*0.25,k=el<120?0.6+el/120*0.7:1.3-Math.min(.3,(el-120)/600);
       cx.save();cx.globalAlpha=el>500?Math.max(0,1-(el-500)/200):1;cx.translate(sx,sy);cx.scale(k,k);cx.fillStyle="rgba(255,220,90,.35)";cx.beginPath();for(let j=0;j<16;j++){const a=j/16*Math.PI*2,rr2=j%2?TS*.42:TS*.9;cx.lineTo(Math.cos(a)*rr2,Math.sin(a)*rr2*.6)}cx.fill();
       cx.font="900 "+Math.round(TS*0.62)+"px "+PF;cx.textAlign="center";cx.textBaseline="middle";cx.lineWidth=5;cx.lineJoin="round";cx.strokeStyle="#5a2a00";cx.strokeText("会心！",0,0);cx.fillStyle=LG(cx,0,-TS*.3,0,TS*.3,["#fff8c0","#ffc830","#ff8a00"]);cx.fillText("会心！",0,0);cx.restore();cx.textBaseline="alphabetic";continue}
+    if(f.type==="sig"){const el=T-f.t0,pr=el/f.dur;if(pr>=1){FX.splice(i,1);continue}if(el<0)continue;const X=ox+f.x*TS+TS/2,Y=oy+f.y*TS+TS/2,X2=ox+f.x2*TS+TS/2,Y2=oy+f.y2*TS+TS/2,F=(sz)=>{cx.font=Math.round(TS*sz*1.5)+"px sans-serif";cx.textAlign="center";cx.textBaseline="middle"},G2=(gx,gy,sz,al)=>{cx.globalAlpha=Math.max(0,Math.min(1,al));F(sz);cx.fillText(f.g,gx,gy)},fade=pr>.8?(1-pr)/.2:1;cx.save();
+      switch(f.p){
+      case "rise":for(let j=0;j<6;j++){const ph=(pr*1.3-j*.1);if(ph<0||ph>1)continue;G2(X+Math.sin(j*2.1+ph*5)*TS*.35,Y+TS*.3-ph*TS*1.2,.32,Math.sin(Math.PI*ph))}break;
+      case "fount":for(let j=0;j<8;j++){const a=-Math.PI/2+(j-3.5)*.25,t2=pr*1.2,vx=Math.cos(a)*TS*1.3*t2,vy=Math.sin(a)*TS*1.6*t2+TS*2.2*t2*t2;G2(X+vx,Y+vy,.3,1-pr)}glow(cx,X,Y,TS*.7*(1-pr),f.c+"88");break;
+      case "spiral":for(let j=0;j<8;j++){const a=j/8*6.283+pr*8,r=TS*(1.1-pr);G2(X+Math.cos(a)*r,Y+Math.sin(a)*r*.7,.28,fade)}break;
+      case "munch":{const n=Math.min(3,Math.floor(pr*4));G2(X,Y-TS*.7,.6*(1-n*.12),fade);cx.fillStyle=f.c;for(let j=0;j<n*3;j++){const a=j*2.4;cx.globalAlpha=fade;cx.beginPath();cx.arc(X+Math.cos(a)*TS*(.25+pr*.4),Y-TS*.5+Math.sin(a)*TS*.3+pr*TS*.4,TS*.05,0,7);cx.fill()}break}
+      case "swell":{const k2=.4+Math.sin(Math.min(1,pr*1.5)*Math.PI*.5)*.6;cx.globalAlpha=fade*.5;cx.strokeStyle=f.c;cx.lineWidth=TS*.08;cx.beginPath();cx.arc(X,Y,TS*.75*k2,0,7);cx.stroke();G2(X,Y-TS*.75,.5*k2,fade);break}
+      case "fall":{const t2=Math.min(1,pr*2.2),yy=Y-TS*2.2*(1-t2*t2);G2(X,yy,.6,fade);if(t2>=1){cx.globalAlpha=fade;cx.strokeStyle=f.c;cx.lineWidth=TS*.06;for(let j=0;j<6;j++){const a=j/6*6.283;cx.beginPath();cx.moveTo(X+Math.cos(a)*TS*.4,Y+Math.sin(a)*TS*.25+TS*.2);cx.lineTo(X+Math.cos(a)*TS*(.4+pr*.5),Y+Math.sin(a)*TS*(.25+pr*.3)+TS*.2);cx.stroke()}}break}
+      case "burst":for(let j=0;j<10;j++){const a=j/10*6.283,r=TS*(.2+pr*1.2);G2(X+Math.cos(a)*r,Y+Math.sin(a)*r,.3*(1-pr*.4),1-pr)}break;
+      case "shine":{cx.save();cx.globalAlpha=fade;cx.globalCompositeOperation="lighter";cx.translate(X,Y-TS*.3);cx.rotate(pr*2);cx.fillStyle=f.c+"aa";for(let j=0;j<8;j++){cx.rotate(Math.PI/4);cx.beginPath();cx.moveTo(-TS*.06,0);cx.lineTo(0,TS*1.3*Math.min(1,pr*2));cx.lineTo(TS*.06,0);cx.fill()}cx.restore();G2(X,Y-TS*.3,.5+pr*.3,fade);break}
+      case "stamp":{const k2=pr<.25?2-pr/.25:1;G2(X,Y-TS*.1,.75*k2,fade);if(pr>.25){cx.globalAlpha=fade*.7;cx.strokeStyle=f.c;cx.lineWidth=TS*.07;cx.beginPath();cx.arc(X,Y,TS*(.4+(pr-.25)*.8),0,7);cx.stroke()}break}
+      case "slash":{cx.globalAlpha=fade;cx.strokeStyle=f.c;cx.lineWidth=TS*.12;cx.lineCap="round";cx.shadowColor=f.c;cx.shadowBlur=TS*.4;const a0=-2.4,a1=a0+Math.min(1,pr*2)*2.6;cx.beginPath();cx.arc(X,Y,TS*.6,a0,a1);cx.stroke();cx.shadowBlur=0;G2(X,Y-TS*.8,.45,fade);break}
+      case "orbit":for(let j=0;j<3;j++){const a=j/3*6.283+pr*9,r=TS*.6;G2(X+Math.cos(a)*r,Y+Math.sin(a)*r*.45-TS*.1,.32,fade)}{cx.globalAlpha=fade*.6;cx.strokeStyle=f.c;cx.lineWidth=TS*.05;cx.beginPath();cx.ellipse(X,Y-TS*.1,TS*.6,TS*.27,0,0,7);cx.stroke()}break;
+      case "shock":{cx.globalAlpha=fade;cx.strokeStyle=f.c;cx.lineWidth=TS*.1;cx.shadowColor=f.c;cx.shadowBlur=TS*.6;for(const e of G.ents){if(!vis(e.x,e.y))continue;const ex=ox+e.x*TS+TS/2,ey=oy+e.y*TS+TS/2;cx.beginPath();let zy=ey-TS*3;cx.moveTo(ex,zy);while(zy<ey){zy+=TS*.4;cx.lineTo(ex+(Math.random()-.5)*TS*.5,zy)}cx.stroke()}cx.shadowBlur=0;G2(X,Y-TS*.9,.5,fade);break}
+      case "rain":for(let j=0;j<16;j++){const ph=(pr*1.4+j*.07)%1,rx=(j*.137%1)*cv.width/DPR,ry=ph*cv.height/DPR;G2(rx,ry,.34,fade*.9)}break;
+      case "pillar":for(const e of G.ents){if(!vis(e.x,e.y))continue;const ex=ox+e.x*TS+TS/2,ey=oy+e.y*TS+TS/2;cx.globalAlpha=fade*.55;cx.fillStyle=LG(cx,0,ey-TS*3,0,ey+TS*.4,["rgba(255,250,210,0)",f.c]);cx.fillRect(ex-TS*.32,ey-TS*3,TS*.64,TS*3.4);G2(ex,ey-TS*(.6+pr),.3,fade)}{cx.globalAlpha=fade*.5;cx.fillStyle=f.c;cx.fillRect(X-TS*.25,Y-TS*2.5,TS*.5,TS*2.9)}break;
+      case "vortex":for(let j=0;j<12;j++){const a=j/12*6.283+pr*14,r=TS*(.15+.9*Math.abs(Math.sin(pr*Math.PI)))*(j%2?.6:1);G2(X+Math.cos(a)*r,Y+Math.sin(a)*r*.6,.26,fade)}break;
+      case "radar":{for(let j=0;j<3;j++){const ph=pr*1.5-j*.25;if(ph<0||ph>1)continue;cx.globalAlpha=1-ph;cx.strokeStyle=f.c;cx.lineWidth=TS*.08;cx.beginPath();cx.arc(X,Y,TS*ph*5,0,7);cx.stroke()}G2(X,Y-TS*.8,.5,fade);break}
+      default:{/* とぶもの */const tt=Math.min(1,pr/.6),lx=X+(X2-X)*tt,ly=Y+(Y2-Y)*tt,ang=Math.atan2(Y2-Y,X2-X);
+        if(f.p==="lance"){cx.globalAlpha=fade;cx.strokeStyle=f.c;cx.lineCap="round";cx.lineWidth=TS*.22*(1-pr*.5);cx.shadowColor=f.c;cx.shadowBlur=TS*.5;cx.beginPath();cx.moveTo(X,Y);cx.lineTo(lx,ly);cx.stroke();cx.strokeStyle="#fff";cx.lineWidth=TS*.07;cx.beginPath();cx.moveTo(X,Y);cx.lineTo(lx,ly);cx.stroke()}
+        else if(f.p==="chain"){cx.globalAlpha=fade;cx.strokeStyle=f.c;cx.lineWidth=TS*.06;cx.setLineDash([TS*.15,TS*.1]);cx.beginPath();cx.moveTo(X,Y);cx.lineTo(lx,ly);cx.stroke();cx.setLineDash([]);if(pr>.6){const bt=(pr-.6)/.4;G2(X2+(X-X2)*bt,Y2+(Y-Y2)*bt,.36,1)}else G2(lx,ly,.36,1)}
+        else if(f.p==="swap"){G2(X+(X2-X)*tt,Y+(Y2-Y)*tt-Math.sin(tt*Math.PI)*TS*.6,.36,fade);G2(X2+(X-X2)*tt,Y2+(Y-Y2)*tt+Math.sin(tt*Math.PI)*TS*.6,.36,fade)}
+        else if(f.p==="zig"){cx.globalAlpha=fade;cx.strokeStyle=f.c;cx.lineWidth=TS*.09;cx.shadowColor=f.c;cx.shadowBlur=TS*.4;cx.beginPath();cx.moveTo(X,Y);const n=8;for(let j=1;j<=n;j++){const q=j/n*tt,px=X+(X2-X)*q,py=Y+(Y2-Y)*q,o2=(j%2?1:-1)*TS*.22*(j<n?1:0);cx.lineTo(px-Math.sin(ang)*o2,py+Math.cos(ang)*o2)}cx.stroke();cx.shadowBlur=0;if(tt>=1)G2(X2,Y2-TS*.3,.4,fade)}
+        else{let wx=lx,wy=ly;if(f.p==="wave"){const o2=Math.sin(tt*Math.PI*4)*TS*.3;wx-=Math.sin(ang)*o2;wy+=Math.cos(ang)*o2}
+          for(let j=1;j<5&&f.p!=="spin";j++){const q=Math.max(0,tt-j*.06);cx.globalAlpha=.35*(1-j/5)*fade;cx.fillStyle=f.c;cx.beginPath();cx.arc(X+(X2-X)*q,Y+(Y2-Y)*q,TS*.12*(1-j/6),0,7);cx.fill()}
+          cx.save();cx.translate(wx,wy);if(f.p==="spin")cx.rotate(el/40);G2(0,0,f.g==="☄️"?.6:.42,tt<1?1:fade);cx.restore();
+          if(tt>=1){cx.globalAlpha=fade;cx.strokeStyle=f.c;cx.lineWidth=TS*.07;cx.beginPath();cx.arc(X2,Y2,TS*(.2+(pr-.6)*1.4),0,7);cx.stroke()}}}
+      }
+      cx.restore();continue}
     if(f.type==="icon"||f.type==="ring"||f.type==="aura"||f.type==="beam"||f.type==="book"||f.type==="zap"){const el=T-f.t0;if(el<0)continue;const pr=el/f.dur;if(pr>=1){FX.splice(i,1);continue}const cxp=ox+f.x*TS+TS/2,cyp=oy+f.y*TS+TS/2;cx.save();
       if(f.type==="icon"){const k=pr<.2?.5+pr/.2*.7:1.2-Math.min(.2,(pr-.2));cx.globalAlpha=pr>.75?(1-pr)/.25:1;cx.font=Math.round(TS*.6*k)+"px sans-serif";cx.textAlign="center";cx.textBaseline="middle";cx.fillText(f.t,cxp,cyp-TS*(.55+pr*.4));cx.textBaseline="alphabetic"}
       else if(f.type==="ring"){cx.globalAlpha=1-pr;cx.strokeStyle=f.c;cx.lineWidth=TS*.12*(1-pr)+1;cx.shadowColor=f.c;cx.shadowBlur=TS*.4;for(const m of [1,.6]){cx.beginPath();cx.ellipse(cxp,cyp+TS*.2,TS*(.2+pr*1.1)*m,TS*(.1+pr*.5)*m,0,0,7);cx.stroke()}for(let j=0;j<6;j++){const a=j/6*Math.PI*2+pr*3;star(cx,cxp+Math.cos(a)*TS*.5*pr*1.4,cyp-pr*TS*.9+Math.sin(a)*TS*.2,TS*.07,"#fff")}}
