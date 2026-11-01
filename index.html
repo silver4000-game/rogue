@@ -105,8 +105,8 @@ button.big.off,button.big:disabled{opacity:.38;filter:grayscale(.8);pointer-even
 #bagInfo{font-size:11.5px;line-height:1.4;color:#f3e6c4;margin:0 0 4px;min-height:0}
 #bagInfo:empty{display:none}
 #bagSt:empty{display:none}
-#bagInfo{border:2px solid #c9b8f0;border-radius:10px;padding:5px 8px!important;background:#fff;max-height:none!important;margin:0 0 5px!important}
-#bagInfo .rar{font-size:10.5px;color:#8a7ab0}
+#bag #bagInfo{border:2.5px solid #f28ab8;border-radius:12px;padding:7px 10px!important;background:linear-gradient(#fff0f6,#ffe0ee);box-shadow:0 2px 0 #f28ab8;max-height:none!important;margin:0 0 6px!important;font-size:13px!important;line-height:1.4!important;min-height:46px}
+#bag #bagInfo .rar{font-size:12px;color:#c0508a}
 #bag h3 .bagR{display:flex;align-items:center;gap:8px}
 #bSort{font-weight:900;font-size:12px;line-height:1;font-family:inherit;padding:5px 10px;border-radius:999px;border:2px solid #b8a4ec;background:#f3edff;color:#5a3eb0;box-shadow:0 2px 0 #b8a4ec}
 #bagList .it .nm{font-size:13px}
@@ -501,6 +501,7 @@ const OBJS={
   sheal:{n:"かいふくの像",statue:1,w:1.6,f:1,ic:"💚",c:"#7dff9a"},
   shaste:{n:"ばいそくの像",statue:1,w:1.1,f:2,ic:"💨",c:"#8fe0ff"},
   sinv:{n:"むてきの像",statue:1,w:.9,f:3,ic:"⭐",c:"#ffe060"},
+  sfood:{n:"まんぷくの像",statue:1,w:1,f:1,ic:"🍙",c:"#ffc070"},
   swarp:{n:"ワープの像",statue:1,w:1.2,f:1,ic:"🌀",c:"#c8a8ff"},
   shop:{n:"しょうにん",good:1,w:0,f:999}
 };
@@ -508,7 +509,7 @@ const OBJS={
 /* ===== 状態 ===== */
 let G=null;   /* 1回の冒険 */
 function newRun(cls){cls=CLS[cls]?cls:"warrior";
-  G={floor:1,turn:0,sv:5,p:{x:0,y:0,arrows:5,hp:30,mhp:30,lv:1,exp:0,atk:3,def:0,food:500,fmax:500,wep:{id:"club",lv:1},shd:{name:SHIELDS[0].name,lv:1},dir:[0,1],psn:0,slp:0,conf:0,slow:0,par:0,regen:0,kills:0,sv:5,lvq:0,atkP:0,defP:0,hpP:0,cls,gold:cls==="merchant"?50:0,iluck:cls==="joker"?2:0,ring:null,buf:{atk:0,def:0,regen:0}},
+  G={floor:1,turn:0,sv:5,p:{x:0,y:0,arrows:5,hp:30,mhp:30,lv:1,exp:0,atk:4,def:1,food:500,fmax:500,wep:null,shd:null,dir:[0,1],psn:0,slp:0,conf:0,slow:0,par:0,regen:0,kills:0,sv:5,lvq:0,atkP:0,defP:0,hpP:0,cls,gold:cls==="merchant"?50:0,iluck:cls==="joker"?2:0,ring:null,buf:{atk:0,def:0,regen:0}},
      bag:cls==="mage"?[{k:"herb"},{k:"food"},{k:"wsleep",n:ITEMS.wsleep.n+2}]:[{k:"herb"},{k:"food"}],log:[],map:null,seen:null,ents:[],items:[],stairs:null,rooms:[],spawnT:0,objs:[],boss:0};
   genFloor();msg("ふしぎな地下ダンジョンに入った。","y");msg("どこまで もぐれるかな？ 10階ごとに ボスがいるよ！");
 }
@@ -725,6 +726,7 @@ function breakStatue(o,staged){const p=G.p,O=OBJS[o.k];if(!staged){removeObj(o);
   if(o.k==="sheal"){const h=heal(Math.ceil(p.mhp*.5));lfx(p.x,p.y,"+"+h,"#7dff9a");aura(p,"#7dff9a",1100);popMsg("💚 HP +"+h);msg("HPが "+h+" 回ふくした！","g");SFX.heal()}
   else if(o.k==="shaste"){p.haste=20;aura(p,"#8fe0ff",1100);popMsg("💨 ばいそく！");msg("体が かるい！ しばらく 2回ずつ うごける。","g")}
   else if(o.k==="sinv"){p.inv=10;aura(p,"#ffe060",1200);popMsg("⭐ むてき！");msg("むてきに なった！（10ターン）","g")}
+  else if(o.k==="sfood"){p.food=p.fmax||500;aura(p,"#ffc070",1100);lfx(p.x,p.y,"まんぷく","#ffb040");msg("おなかが いっぱいに なった！","g");SFX.eat()}
   else if(o.k==="swarp"){ringFx(p.x,p.y,"#c8a8ff");warpRandom();aura(p,"#d8c8ff",1000);popMsg("🌀 ワープ！");msg("どこかへ ワープした！","y");SFX.warp()}}
 function afterStep(dx,dy){const p=G.p;
   for(let n=0;n<8;n++){const it=G.items.findIndex(i=>i.x===p.x&&i.y===p.y);if(it>=0)pickUp(it);
@@ -866,7 +868,7 @@ function* turnGen(){
   if(p.slow>0){yield* enemyTurn();if(G.over)return;p.slow--;if(!p.slow)msg("どんそくが なおった。")}
   if(p.conf>0){p.conf--;if(!p.conf)msg("こんらんが なおった。")}
   /* おなか */
-  if(p.food>0&&!(p.ring==="rfood"&&G.turn%3===0)){p.food--;if(p.food===100)msg("おなかがへってきた…","w");if(p.food===0)msg("おなかがペコペコだ！何か食べないと…","w")}
+  if(p.food>0&&!(p.ring==="rfood"&&G.turn%3===0)){p.food--;if(p.food===50){msg("お腹が減ってきた・・・","w");popMsg("🍙 お腹が減ってきた・・・");SFX.hurt()}if(p.food===0)msg("おなかがペコペコだ！何か食べないと…","w")}
   if(p.psn>0){p.psn--;const d=1+Math.floor(G.floor/10);p.hp-=d;fx(p.x,p.y,""+d,"#8ff06a");if(!p.psn)msg("どくが ぬけた。");if(p.hp<=0){p.hp=0;gameOver("どく");return}}
   if(p.food<=0){p.hp-=1;interrupt=true;if(p.hp<=0){p.hp=0;gameOver("空腹");return}}
   else{p.regen+=p.mhp/120*(p.ring==="rheal"?2:1)+(bufOf("regen")?2:0);if(p.regen>=1){const a=Math.floor(p.regen);p.regen-=a;p.hp=Math.min(p.mhp,p.hp+a)}}
@@ -1057,7 +1059,7 @@ function getBest(){const b=+localStorage.getItem("rogue-best")||0;return {n:b,tx
 /* 中断データ（ホーム画面アプリが閉じても続きから） */
 function save(){try{if(G&&!G.over)localStorage.setItem("rogue-save",JSON.stringify(G))}catch(e){}}
 function clearSave(){try{localStorage.removeItem("rogue-save")}catch(e){}}
-function migrate(G){const p=G.p;p.arrows=p.arrows||0;p.proofs=p.proofs||{};p.haste=p.haste||0;p.inv=p.inv||0;p.bind=p.bind||0;p.fmax=p.fmax||500;p.conf=p.conf||0;p.slow=p.slow||0;p.par=p.par||0;p.gold=p.gold||0;p.cls=CLS[p.cls]?p.cls:"warrior";G.ents.forEach(e=>{e.conf=e.conf||0;e.slow=e.slow||0;e.par=e.par||0});
+function migrate(G){const p=G.p;p.hf=0;p.lu=null;(G.ents||[]).forEach(e=>{e.hf=0;e.lu=null});(G.objs||[]).forEach(o=>{delete o.crack});p.arrows=p.arrows||0;p.proofs=p.proofs||{};p.haste=p.haste||0;p.inv=p.inv||0;p.bind=p.bind||0;p.fmax=p.fmax||500;p.conf=p.conf||0;p.slow=p.slow||0;p.par=p.par||0;p.gold=p.gold||0;p.cls=CLS[p.cls]?p.cls:"warrior";G.ents.forEach(e=>{e.conf=e.conf||0;e.slow=e.slow||0;e.par=e.par||0});
   if(!p.sv){/* 20261101c: 運・空腹は なくなった → そのポイントを えらびなおし。こうげき・ぼうぎょは 新しい上がり方に そろえる（へらさない） */
     const og=(n,a,r)=>a*(1-Math.pow(r,n))/(1-r),aP=p.atkP||0,dP=p.defP||0,ref=(p.luck||0)+(p.hung||0);
     p.atk=r1((p.atk||3)+Math.max(0,aP*BAL.atkG-og(aP,2.6,.45)));p.def=r1((p.def||0)+Math.max(0,dP*BAL.defG-og(dP,1.8,.45)));
@@ -1516,12 +1518,12 @@ function frame(t){requestAnimationFrame(frame);if(!$("game").classList.contains(
   for(const e of G.ents){if(!vis(e.x,e.y))continue;let sx=ox+e.x*TS,sy=oy+e.y*TS;if(e.sh){sx+=(e.sh%2?3:-3);e.sh--}const lo=luOff(e);sx+=lo[0];sy+=lo[1];
     const breathe=e.sleep>0?0:Math.sin(t/260+e.x*1.7)*TS*0.025;const big=ENEMIES[e.k].boss?1.55:1.25;if(e.fl==null||e.x!==G.p.x)e.fl=G.p.x<e.x;
     const ec=cached("e_"+e.k+(e.sleep>0?"z":""),TS,big,(g,a,b,s)=>drawEnemy(g,e.k,a,b,s,e.sleep>0));blitF(ec,sx,sy+breathe,e.fl);
-    if(e.hf&&T-e.hf<150){cx.save();cx.globalCompositeOperation="lighter";cx.globalAlpha=.75*(1-(T-e.hf)/150);blitF(ec,sx,sy+breathe,e.fl);cx.restore()}
+    if(e.hf&&T>=e.hf&&T-e.hf<150){cx.save();cx.globalCompositeOperation="lighter";cx.globalAlpha=.75*(1-(T-e.hf)/150);blitF(ec,sx,sy+breathe,e.fl);cx.restore()}
     {const ic=[];if(e.psn>0)ic.push("☠");if(e.conf>0)ic.push("💫");if(e.slow>0)ic.push("🐌");if(e.par>0)ic.push("⚡");if(e.sleep>0&&e.sleep<99)ic.push("💤");if(e.hide)ic.push("🛡️");if(e.fuse)ic.push("💢");
       if(ic.length){cx.font=Math.round(TS*.3)+"px sans-serif";cx.textAlign="center";const bob=Math.sin(t/200)*TS*.04;ic.forEach((c,j)=>cx.fillText(c,sx+TS*(.5+(j-(ic.length-1)/2)*.32),sy-TS*.02+bob))}}
     if(e.hp<e.mhp){rr(cx,sx+4,sy+TS-5,TS-8,4,2);cx.fillStyle="rgba(40,0,10,.8)";cx.fill();rr(cx,sx+4,sy+TS-5,Math.max(3,(TS-8)*e.hp/e.mhp),4,2);cx.fillStyle="#ff6b7a";cx.fill()}}
   {const hf=heroFace(),wid=p.wep?p.wep.id:"",hc=cached("hero_"+(p.cls||"warrior")+hf+"_"+wid,TS,1.3,(g,a,b,s)=>drawHero(g,a,b,s,hf,wid,p.cls)),lo=luOff(p),hx=ox+p.x*TS+lo[0],hy=oy+p.y*TS+Math.sin(t/330)*TS*0.02+lo[1];HXY=[hx,hy];blit(hc,hx,hy);
-    if(p.hf&&T-p.hf<160){cx.save();cx.globalCompositeOperation="lighter";cx.globalAlpha=.6*(1-(T-p.hf)/160);blit(hc,hx,hy);cx.restore()}
+    if(p.hf&&T>=p.hf&&T-p.hf<160){cx.save();cx.globalCompositeOperation="lighter";cx.globalAlpha=.6*(1-(T-p.hf)/160);blit(hc,hx,hy);cx.restore()}
     {const ic=[];if(p.psn>0)ic.push("☠");if(p.conf>0)ic.push("💫");if(p.slow>0)ic.push("🐌");if(p.par>0)ic.push("⚡");if(p.slp>0)ic.push("💤");
       if(ic.length){cx.font=Math.round(TS*.32)+"px sans-serif";cx.textAlign="center";const bob=Math.sin(t/200)*TS*.04;ic.forEach((c,j)=>cx.fillText(c,hx+TS*(.5+(j-(ic.length-1)/2)*.34),hy-TS*.12+bob))}}}
   /* 部屋の中の光のつぶ */
@@ -1618,7 +1620,7 @@ document.addEventListener("gesturestart",e=>e.preventDefault());
   drawStairs(g,W-70,96,40,false);drawHero(g,W/2-30,86,58);drawEnemy(g,"slime",34,104,40,false);drawItemSprite(g,"herb2",W/2+30,108,30);})();
 (function(){const ED={slime:"おそい。2回に1回だけうごく。",bat:"ふらふら飛びまわる。",goblin:"まっすぐ追いかけてくる。",skel:"強い。",golem:"とても固い。おそい。",knight:"強くて こわい。"};const rows=Object.entries(ENEMIES).filter(([k,e])=>!e.boss).map(([k,e])=>[k,e.name,e.d||ED[k]||""]);
   const bosses=[["dragon","ドラゴン","10階のボス。ブレスを はく。"],["kslime","キングスライム","20階のボス。スライムを よぶ。"],["mino","ミノタウロス","30階のボス。2歩ずつ せまってくる。"],["lich","リッチ","40階のボス。まほうの本を たくさん つかう。"]];
-  const objD={lvdown:"ふむと レベルが 1さがる。",spike:"ふむと HPが 3わり へる。",conf:"こんらん する。",poison:"どくに なる。",bind:"5ターン その場から うごけない。",slowt:"10ターン、まわりが 2回ずつ うごく。",sheal:"こうげきで こわすと HPが 半分 回ふく。",shaste:"こわすと しばらく 2回ずつ うごける。",sinv:"こわすと 10ターン むてき。",swarp:"こわすと どこかへ ワープ。",shop:"お金で 道具を 買える。"};
+  const objD={lvdown:"ふむと レベルが 1さがる。",spike:"ふむと HPが 3わり へる。",conf:"こんらん する。",poison:"どくに なる。",bind:"5ターン その場から うごけない。",slowt:"10ターン、まわりが 2回ずつ うごく。",sheal:"こうげきで こわすと HPが 半分 回ふく。",shaste:"こわすと しばらく 2回ずつ うごける。",sinv:"こわすと 10ターン むてき。",sfood:"こわすと おなかが いっぱいに なる。",swarp:"こわすと どこかへ ワープ。",shop:"お金で 道具を 買える。"};
   const wrows=[["bronze","つるぎ","ふつうの ぶき。深い階ほど 強い。"],["spear","やり","2マス先まで とどく。"],["axe","おの","前の3マスを まとめて きる。"],["dagger","たんけん","1回で 2回 こうげき。会心の一撃も 出やすい。"],["giant","おおきな ハンマー","とても強いが たまに はずれる。"],["maze","まどわしのけん","敵を こんらん させる。"],["venom","どくの けん","敵を どくにする。"],["vamp","ちすいの けん","あたえたダメージで HPが ふえる。"],["knock","ふっとばし ハンマー","敵を うしろへ とばす。"],["dream","ねむりの けん","敵を ねむらせる。"],["slayer","ボスごろし","ボスに 2ばいの ダメージ。"]];
   const items=Object.entries(ITEMS).map(([k,i])=>[k,i.name+(i.n?"（"+i.n+"回）":""),i.d]).concat([["shd","たて","まもりが 上がる。深い階ほど 強い"]]);
   let h="<b>敵</b>";rows.forEach(r=>{h+='<div class="hrow"><canvas width="64" height="64" data-e="'+r[0]+'"></canvas><span><b style="color:#e0408a">'+r[1]+'</b>　'+r[2]+'</span></div>'});
