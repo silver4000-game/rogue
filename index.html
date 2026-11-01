@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<meta name="rogue-rev" content="20261101c">
+<meta name="rogue-rev" content="20261101d">
 <meta name="theme-color" content="#0b0d17">
 <meta name="apple-mobile-web-app-title" content="ふしぎな地下">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261101c">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261101c">
-<link rel="manifest" href="manifest.webmanifest?v=20261101c">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261101d">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261101d">
+<link rel="manifest" href="manifest.webmanifest?v=20261101d">
 <title>ふしぎな地下ダンジョン</title>
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -97,6 +97,8 @@ button.big.off,button.big:disabled{opacity:.38;filter:grayscale(.8);pointer-even
 /* レベルアップのえらぶ画面（上の帯の色はかえない） */
 #lvup{position:fixed;left:0;right:0;top:58px;bottom:0;display:none;align-items:center;justify-content:center;z-index:30;background:rgba(8,6,20,.72);padding:14px}
 #lvup.on{display:flex}
+#ask{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:40;background:rgba(8,6,20,.72);padding:14px}#ask.on{display:flex}
+#askT{margin:8px 0 6px;font-size:17px;line-height:1.6;color:#f3e6c4;font-weight:700}.askB{display:flex;gap:10px}.askB button{justify-content:center;text-align:center;font-size:17px;font-weight:700}#askYes{background:linear-gradient(#f3c860,#c8902a);color:#2a1a08;border-color:#ffe3a0}
 .lvBox{width:100%;max-width:340px;border-radius:20px;padding:14px 14px 16px;background:linear-gradient(#2a2254,#16122e);border:1px solid #d9b45a;box-shadow:0 0 30px rgba(243,200,96,.25),inset 0 0 20px rgba(150,120,255,.15);text-align:center}
 #lvT{font-family:"Hiragino Mincho ProN","Yu Mincho",serif;font-size:26px;font-weight:900;background:linear-gradient(#fff6d0,#f3c860 60%,#c08624);-webkit-background-clip:text;background-clip:text;color:transparent}
 #lvSub{font-size:13px;color:#cbbcff;margin:2px 0 10px}
@@ -124,7 +126,7 @@ button.big.off,button.big:disabled{opacity:.38;filter:grayscale(.8);pointer-even
   <button class="big" id="bCont">つづきから</button>
   <button class="big" id="bStart">はじめから</button>
   <button class="big sub" id="bHow">あそびかた</button>
-  <div class="ver">rev 20261101c</div>
+  <div class="ver">rev 20261101d</div>
 </section>
 
 <section id="howto" class="scr">
@@ -166,6 +168,7 @@ button.big.off,button.big:disabled{opacity:.38;filter:grayscale(.8);pointer-even
 <div id="bag"><h3><span id="bagTitle">持ち物</span> <small id="bagN"></small></h3><div id="eqSlots"></div><div id="bagFloor"></div><div id="bagInfo"></div><div id="bagSt"></div><div id="bagList"></div>
   <div id="bagAct"><button id="baUse" class="main">つかう</button><button id="baDrop">すてる</button><button id="baClose">とじる</button></div></div>
 
+<div id="ask"><div class="lvBox"><div class="orn">◆</div><div id="askT">中断データがあります。<br>はじめからにしますか？</div><div class="askB"><button id="askYes">はい</button><button id="askNo">いいえ</button></div></div></div>
 <div id="lvup"><div class="lvBox"><div class="orn">◆</div><div id="lvT">レベル 2 ！</div><div id="lvSub">どれをのばす？</div>
   <button data-s="atk"><b>こうげき</b><span>こうげき +2</span></button>
   <button data-s="def"><b>ぼうぎょ</b><span>まもり +2</span></button>
@@ -180,7 +183,7 @@ button.big.off,button.big:disabled{opacity:.38;filter:grayscale(.8);pointer-even
 <script>
 "use strict";
 const $=id=>document.getElementById(id);
-const REV="20261101c";
+const REV="20261101d";
 /* ===== 音 ===== */
 let AC=null;
 function ac(){try{if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();if(AC.state==="suspended")AC.resume()}catch(e){}return AC}
@@ -1140,7 +1143,10 @@ $("bDown").onclick=()=>{showMap=false;descend()};
 const KEYS={ArrowUp:[0,-1],ArrowDown:[0,1],ArrowLeft:[-1,0],ArrowRight:[1,0],k:[0,-1],j:[0,1],h:[-1,0],l:[1,0],y:[-1,-1],u:[1,-1],b:[-1,1],n:[1,1],Home:[-1,-1],PageUp:[1,-1],End:[-1,1],PageDown:[1,1]," ":[0,0],".":[0,0]};
 window.addEventListener("keydown",e=>{if(!$("game").classList.contains("on"))return;if($("lvup").classList.contains("on")){const m={"1":"atk","2":"def","3":"item"}[e.key];if(m)chooseStat(m);return}if($("bag").classList.contains("on")){if(e.key==="Escape"||e.key==="i")closeBag();return}
   if(KEYS[e.key]){e.preventDefault();doMove(...KEYS[e.key])}else if(e.key==="i"){openBag()}else if(e.key==="m"){showMap=!showMap}else if(e.key===">"||e.key==="Enter"){descend()}});
-$("bStart").onclick=()=>{SFX.ui();if(localStorage.getItem("rogue-save")&&!confirm("中断データがあります。はじめからにしますか？"))return;clearSave();newRun();show("game")};
+const startNew=()=>{clearSave();newRun();show("game")};
+$("bStart").onclick=()=>{SFX.ui();if(localStorage.getItem("rogue-save"))$("ask").classList.add("on");else startNew()};
+$("askYes").onclick=()=>{SFX.ui();$("ask").classList.remove("on");startNew()};
+$("askNo").onclick=()=>{SFX.ui();$("ask").classList.remove("on")};
 $("bCont").onclick=()=>{SFX.ui();if(load()){show("game");if(G.p.lvq>0)showLv()}};
 $("bHow").onclick=()=>{SFX.ui();show("howto");$("howto").scrollTop=0};
 $("bHowBack").onclick=()=>{SFX.ui();show("title")};
