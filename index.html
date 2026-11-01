@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<meta name="rogue-rev" content="20261101d">
+<meta name="rogue-rev" content="20261101e">
 <meta name="theme-color" content="#0b0d17">
 <meta name="apple-mobile-web-app-title" content="ふしぎな地下">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261101d">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261101d">
-<link rel="manifest" href="manifest.webmanifest?v=20261101d">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261101e">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261101e">
+<link rel="manifest" href="manifest.webmanifest?v=20261101e">
 <title>ふしぎな地下ダンジョン</title>
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -80,8 +80,9 @@ button.big.off,button.big:disabled{opacity:.38;filter:grayscale(.8);pointer-even
 .it.r3{border-color:#9a6ad8}.it.r4{border-color:#e8b830;box-shadow:0 0 10px rgba(255,210,74,.35) inset}
 .it.sel{border-color:#f3c860;background:#33285a;box-shadow:0 0 10px rgba(243,200,96,.25)}
 .it .eq{margin-left:auto;font-size:11px;color:#1d1206;background:#ffd27a;border-radius:6px;padding:1px 6px;font-weight:800}
-#bagAct{display:flex;gap:8px;margin-top:6px}
-#bagAct button{flex:1;height:48px;border-radius:24px;background:linear-gradient(#2c2654,#1c1838);border:1px solid #8a76c8;color:#f3e6c4;font-weight:800;font-size:16px}
+#bagFloor .eq{white-space:nowrap;font-size:12px;padding:3px 6px}
+#bagAct{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+#bagAct button{flex:1 1 0;min-width:0;padding:0 4px;height:46px;border-radius:24px;background:linear-gradient(#2c2654,#1c1838);border:1px solid #8a76c8;color:#f3e6c4;font-weight:800;font-size:16px}
 #bagAct button.main{background:linear-gradient(#ffe7a0,#e8b44a 55%,#c08624);color:#2a1606;border:1px solid #fff0c0}
 #bagAct button:disabled{opacity:.35}
 #bagSt{font-size:10.5px;line-height:1.45;color:#cbbcff;margin:0 0 6px}
@@ -126,13 +127,13 @@ button.big.off,button.big:disabled{opacity:.38;filter:grayscale(.8);pointer-even
   <button class="big" id="bCont">つづきから</button>
   <button class="big" id="bStart">はじめから</button>
   <button class="big sub" id="bHow">あそびかた</button>
-  <div class="ver">rev 20261101d</div>
+  <div class="ver">rev 20261101e</div>
 </section>
 
 <section id="howto" class="scr">
   <h2>あそびかた</h2>
   <div class="hw">ダンジョンは <b>どこまでも</b> つづくよ。どこまで もぐれるかな？<br><b>10階ごと</b>に ボスの へや。ボスを たおすと 階段が出る。<br>自分が1歩うごくと、敵も1歩うごくよ。<br>やられたら、<b>1階からやり直し</b>。</div>
-  <div class="hw"><b>うごく</b>：左の十字ボタン（ななめもOK）。押しっぱなしで続けて歩く。<br><b>むき</b>：押した方向を むく（かべでも むきだけ かわる）。<br><b>こうげき</b>：敵のほうへうごく。やり・ゆみは はなれていても とどく。<br><b>足ぶみ</b>：まん中のボタン。その場で1回休む。<br><b>階段</b>：上に乗ったら「おりる」。<br><b>道具の上で足ぶみ</b>：ひろう・いれかえ・そのまま を えらべる。</div>
+  <div class="hw"><b>うごく</b>：左の十字ボタン（ななめもOK）。押しっぱなしで続けて歩く。<br><b>むき</b>：押した方向を むく（かべでも むきだけ かわる）。<br><b>こうげき</b>：敵のほうへうごく。やり・ゆみは はなれていても とどく。<br><b>足ぶみ</b>：まん中のボタン。その場で1回休む。<br><b>階段</b>：上に乗ったら「おりる」。<br><b>道具の上で足ぶみ</b>：ひろう・いれかえ・そのまま を えらべる。<br><b>足もと</b>：持ち物画面に 足もとの道具も 出るよ。ひろう・つかう・なげる・いれかえ ができる。<br><b>おく</b>：足もとに 道具があっても、まわり8マスの あいている所に 置ける。<br><b>なげる</b>：道具を むいている方向へ 7マスまで なげる。さいしょの敵に あたる。ぶきは こうげきが高いほど いたい。ばくだんは 爆発、なげナイフ・こおりのつぶて・ほのおのまきものは いつもどおり きく。くすりや やくそうを 敵に当てると 敵に きいてしまう（くすりのびんは われる）。外れた道具は とまった所に おちる。</div>
   <div class="hw" id="howList"></div>
   <div class="hw"><b>おなか</b>：歩くとへる。0になるとHPがへるので、おにぎりを食べよう。<br><b>レベル</b>：敵をたおすと上がる。最大HPがふえて、<b>こうげき・ぼうぎょ・アイテム運</b>から1つえらんでのばせる。何回えらんでも 上がる量は いつも同じ。1つだけ上げても、まんべんなく上げても だいじょうぶ。<br><b>アイテム運</b>：上げるほど、★の多い 強い道具が 見つかりやすくなる。<br><b>会心の一撃</b>：ときどき（10回に1回くらい）会心の一撃が出て、ダメージが<b>1.5倍</b>になる。金色の「会心！」が出るよ。こううんのゆびわ や たんけん だと もっと出やすい。<br><b>よける</b>：敵のこうげきを ときどき（8%）よける。<br><b>★レア度</b>：<span style="color:#e8e6f0">★ふつう</span>・<span style="color:#7fd8ff">★★めずらしい</span>・<span style="color:#d49bff">★★★とてもめずらしい</span>・<span style="color:#ffd24a">★★★★でんせつ</span>。強い道具ほど めったに 見つからない。<br><b>そうび</b>：ぶき・たて・ゆびわの わくが 1つずつ。持ち物画面の わくを タップすると、くわしく見たり はずしたりできる。わくが あいている時だけ、ひろうと 自動で そうびする。<br><b>ゆびわ</b>：1つだけつけられる。つけている間ずっと効く。<br><b>つえ</b>：何回か使える。<br><b>地図</b>：行った場所を全体で見られる。</div>
   <button class="big" id="bHowBack" style="flex:none">もどる</button>
@@ -166,7 +167,7 @@ button.big.off,button.big:disabled{opacity:.38;filter:grayscale(.8);pointer-even
 </section>
 
 <div id="bag"><h3><span id="bagTitle">持ち物</span> <small id="bagN"></small></h3><div id="eqSlots"></div><div id="bagFloor"></div><div id="bagInfo"></div><div id="bagSt"></div><div id="bagList"></div>
-  <div id="bagAct"><button id="baUse" class="main">つかう</button><button id="baDrop">すてる</button><button id="baClose">とじる</button></div></div>
+  <div id="bagAct"><button id="baUse" class="main">つかう</button><button id="baDrop">おく</button><button id="baThrow">なげる</button><button id="baSwap" style="display:none">いれかえ</button><button id="baClose">とじる</button></div></div>
 
 <div id="ask"><div class="lvBox"><div class="orn">◆</div><div id="askT">中断データがあります。<br>はじめからにしますか？</div><div class="askB"><button id="askYes">はい</button><button id="askNo">いいえ</button></div></div></div>
 <div id="lvup"><div class="lvBox"><div class="orn">◆</div><div id="lvT">レベル 2 ！</div><div id="lvSub">どれをのばす？</div>
@@ -183,7 +184,7 @@ button.big.off,button.big:disabled{opacity:.38;filter:grayscale(.8);pointer-even
 <script>
 "use strict";
 const $=id=>document.getElementById(id);
-const REV="20261101d";
+const REV="20261101e";
 /* ===== 音 ===== */
 let AC=null;
 function ac(){try{if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();if(AC.state==="suspended")AC.resume()}catch(e){}return AC}
@@ -634,31 +635,69 @@ let bagSel=-1,bagMode="bag";
 const floorIdx=()=>G.items.findIndex(i=>i.x===G.p.x&&i.y===G.p.y);
 function openBag(){if(!G||G.over)return;if(G.p.lvq>0){showLv();return}bagMode="bag";bagSel=G.bag.length?0:"wep";$("bag").classList.add("on");drawBag()}
 function openSwap(){if(!G||G.over)return;if(G.p.lvq>0){showLv();return}bagMode="swap";bagSel="floor";$("bag").classList.add("on");drawBag()}
+/* 置ける場所: かべ・道具・階段・しかけ・敵が ない */
+function tileFree(x,y,allowEnt){return !wall(x,y)&&!G.items.some(i=>i.x===x&&i.y===y)&&!(G.stairs&&G.stairs.x===x&&G.stairs.y===y)&&!(G.objs||[]).some(o=>o.x===x&&o.y===y)&&(allowEnt||!entAt(x,y))}
+function dropSpot(x,y,allowEnt){if(tileFree(x,y,true))return [x,y];const c=[];for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){if(!dx&&!dy)continue;const nx=x+dx,ny=y+dy;if(tileFree(nx,ny,allowEnt)&&!(nx===G.p.x&&ny===G.p.y&&!(x===G.p.x&&y===G.p.y)))c.push([nx,ny])}return c.length?pick(c):null}
+function placeItem(it,x,y){const s=dropSpot(x,y,true);if(!s)return false;delete it.shown;G.items.push({...it,x:s[0],y:s[1]});return s}
+const isWand=k=>ITEMS[k]&&ITEMS[k].c==="wand",isPot=k=>["pred","pregen","pstr","pdef"].includes(k);
+/* なげる: むいている方向へ 7マスまで。最初の敵に あたる */
+function throwItem(it){const p=G.p,d=p.dir||[0,1],E0=null;let x=p.x,y=p.y,hit=null,n=0;
+  for(n=1;n<=7;n++){if(!canStep(x,y,d[0],d[1]))break;x+=d[0];y+=d[1];const e=entAt(x,y);if(e){hit=e;break}}
+  if(!hit)n--;const ex=p.x+d[0]*n,ey=p.y+d[1]*n;
+  FX.push({type:"throw",k:skey(it),x:p.x,y:p.y,x2:hit?hit.x:ex,y2:hit?hit.y:ey,t0:now(),dur:70+Math.max(1,n)*55});SFX.miss();swing(d[0],d[1]);
+  const nm=nameOf(it);msg(nm+"を なげた。");
+  const land=()=>{if(isPot(it.k)){msg(nm+"は われてしまった。");return}const s=placeItem(it,hit?hit.x:ex,hit?hit.y:ey);if(!s)msg(nm+"は どこかへ 消えてしまった。")};
+  if(!hit){land();return}
+  const E=ENEMIES[hit.k];hit.aware=20;hit.sleep=0;let dmg=0,col="#fff",gone=false;
+  if(it.k==="wep")dmg=Math.round(it.eq.v*1.2+3+G.floor*.5);
+  else if(it.k==="shd")dmg=Math.round(it.eq.v+2);
+  else if(it.k==="knife"){dmg=15+G.floor*2;gone=true}
+  else if(it.k==="ice"){dmg=10+G.floor;hit.sleep=6;msg(E.name+"は こおりついた！","y");gone=true;col="#a8e4ff"}
+  else if(it.k==="fire"){dmg=30+G.floor*4;gone=true;col="#ffb44a";msg("まきものが もえあがった！","y")}
+  else if(it.k==="bomb"){SFX.boom();boomFx(hit.x,hit.y);msg("ばくだんが 爆発した！","y");for(const e of G.ents.slice()){if(Math.abs(e.x-hit.x)<=1&&Math.abs(e.y-hit.y)<=1){const dd=25+G.floor*2;e.hp-=dd;e.sleep=0;e.aware=20;fx(e.x,e.y,""+dd,"#ffb44a");if(e.hp<=0)killEnemy(e,ENEMIES[e.k])}}return}
+  else if(["herb","herb2","pred"].includes(it.k)){const h=it.k==="herb"?30:it.k==="pred"?60:hit.mhp;const hh=Math.min(h,hit.mhp-hit.hp);hit.hp+=hh;fx(hit.x,hit.y,"+"+hh,"#7dff9a");msg(E.name+"の HPが 回ふくしてしまった…","w");gone=true}
+  else if(it.k==="pregen"){hit.hp=hit.mhp;fx(hit.x,hit.y,"+","#7dff9a");msg(E.name+"は 元気に なってしまった…","w");gone=true}
+  else if(it.k==="pstr"){hit.atk=Math.round(hit.atk*1.3);msg(E.name+"が 強くなってしまった！","w");gone=true}
+  else if(it.k==="pdef"){hit.def+=4;msg(E.name+"の まもりが 上がってしまった！","w");gone=true}
+  else if(it.k==="sleep"||it.k==="wsleep"){hit.sleep=E.boss?3:8;fx(hit.x,hit.y,"Zz","#b9a7ff");msg(E.name+"は ねむってしまった。","y");dmg=it.k==="wsleep"?3:0;gone=it.k==="sleep"}
+  else if(ITEMS[it.k]&&ITEMS[it.k].c==="food"){dmg=2;msg(E.name+"に "+nm+"が ぶつかった。","")}
+  else dmg=isWand(it.k)?4:2;
+  if(dmg>0){dmg=Math.max(1,dmg-Math.floor((hit.def||0)*.3));hit.hp-=dmg;hit.hf=now();shake(hit);fx(hit.x,hit.y,""+dmg,col);SFX.hit();msg(E.name+"に "+dmg+"の ダメージ！")}
+  if(hit.hp<=0)killEnemy(hit,E);
+  if(gone){if(isPot(it.k))msg(nm+"は われてしまった。");return}
+  land()}
 function closeBag(){$("bag").classList.remove("on")}
 function itemDesc(it){if(it.k==="wep"){const W=wdef(it.eq);return W.d+"（こうげき "+it.eq.v+"）"}if(it.k==="shd")return "まもり "+it.eq.v;return ITEMS[it.k].d}
 function slotItem(s){const p=G.p;return s==="wep"?(p.wep?{k:"wep",eq:p.wep}:null):s==="shd"?(p.shd?{k:"shd",eq:p.shd}:null):(p.ring?{k:p.ring}:null)}
 function drawBag(){const L=$("bagList"),p=G.p,swap=bagMode==="swap";$("bagTitle").textContent=swap?"足もとの道具":"持ち物";$("bagN").textContent=G.bag.length+"/14";
   $("eqSlots").innerHTML=[["wep","ぶき"],["shd","たて"],["ring","ゆびわ"]].map(([s,l])=>{const it=slotItem(s);return '<button class="slot'+(bagSel===s?" sel":"")+'" data-s="'+s+'"><canvas width="56" height="56" data-k="'+(it?skey(it):"")+'"></canvas><span><small>'+l+'</small>'+(it?'<span style="color:'+RAR[tierOf(it)].c+'">'+nameOf(it)+'</span>':"なし")+'</span></button>'}).join("");
-  const fi=floorIdx(),fl=swap&&fi>=0?G.items[fi]:null;
-  $("bagFloor").innerHTML=fl?'<button class="it fl'+(bagSel==="floor"?" sel":"")+'" data-f="1"><canvas width="60" height="60" data-k="'+skey(fl)+'"></canvas><span>'+rarName(fl)+'<span class="d">'+RAR[tierOf(fl)].n+'・'+itemDesc(fl)+'</span></span><b class="eq">足もと</b></button>':"";
+  const fi=floorIdx(),fl=fi>=0?G.items[fi]:null;
+  $("bagFloor").innerHTML=fl?'<button class="it fl'+(bagSel==="floor"?" sel":"")+'" data-f="1"><canvas width="60" height="60" data-k="'+skey(fl)+'"></canvas><span>'+rarName(fl)+'<span class="d">'+RAR[tierOf(fl)].n+'・'+itemDesc(fl)+'</span></span><b class="eq">足もと</b></button>':"";if(bagSel==="floor"&&!fl)bagSel=G.bag.length?0:"wep";
   const si=typeof bagSel==="string"&&bagSel!=="floor"?slotItem(bagSel):null;
-  $("bagInfo").innerHTML=swap?"持ち物を えらんで「いれかえ」、または「ひろう」「そのまま」":typeof bagSel==="string"?(si?"<b>"+rarName(si)+"</b>（"+RAR[tierOf(si)].n+"）："+itemDesc(si):"何も そうびしていない。"):"";
+  $("bagInfo").innerHTML=swap?"持ち物を えらんで「いれかえ」、または「ひろう」「そのまま」":bagSel==="floor"?"<b>足もと</b>："+(G.bag.length>=14?"持ち物が いっぱい。持ち物を えらぶと「いれかえ」できる。":"ひろう・つかう・なげる が できる。"):typeof bagSel==="number"&&fl?"持ち物を えらんで「いれかえ」すると 足もとの道具と こうかんできる。":typeof bagSel==="string"?(si?"<b>"+rarName(si)+"</b>（"+RAR[tierOf(si)].n+"）："+itemDesc(si):"何も そうびしていない。"):"";
   $("bagSt").innerHTML="こうげき "+Math.round(atkOf())+"　まもり "+Math.round(defOf())+"　アイテム運 "+(p.iluck||0)+"<br>会心 "+pct(critRate())+"（ダメージ1.5倍）　よける "+pct(dodgeRate())+"　おなか "+foodEvery()+"ターンで1へる"+(bufOf("atk")?"　<b style=color:#ffb44a>ちから"+p.buf.atk+"</b>":"")+(bufOf("def")?"　<b style=color:#7ab0ff>まもり"+p.buf.def+"</b>":"")+(bufOf("regen")?"　<b style=color:#7dff9a>めぐみ"+p.buf.regen+"</b>":"")+(p.psn?"　<b style=color:#8ff06a>どく"+p.psn+"</b>":"");
   if(!G.bag.length){L.innerHTML='<div style="color:#a9a8b8;padding:20px;text-align:center">何も持っていない。</div>'}
   else L.innerHTML=G.bag.map((it,i)=>'<button class="it r'+tierOf(it)+(i===bagSel?" sel":"")+'" data-i="'+i+'"><canvas width="60" height="60" data-k="'+skey(it)+'"></canvas><span>'+rarName(it)+'<span class="d">'+itemDesc(it)+'</span></span></button>').join("");
   $("bag").querySelectorAll("canvas").forEach(c=>{if(!c.dataset.k)return;const x=c.getContext("2d");x.clearRect(0,0,c.width,c.height);drawItemSprite(x,c.dataset.k,0,0,c.width)});
-  const U=$("baUse"),Dp=$("baDrop"),C=$("baClose");
-  if(swap){U.textContent="ひろう";U.disabled=!fl||G.bag.length>=14;Dp.textContent="いれかえ";Dp.disabled=!fl||typeof bagSel!=="number"||!G.bag[bagSel];C.textContent="そのまま";return}
+  const U=$("baUse"),Dp=$("baDrop"),C=$("baClose"),T=$("baThrow"),S=$("baSwap");const eqk=it=>it&&(it.k==="wep"||it.k==="shd"||(ITEMS[it.k]&&ITEMS[it.k].c==="ring"));
+  S.style.display="none";T.style.display="";
+  if(swap){U.textContent="ひろう";U.disabled=!fl||G.bag.length>=14;Dp.textContent="いれかえ";Dp.disabled=!fl||typeof bagSel!=="number"||!G.bag[bagSel];T.style.display="none";C.textContent="そのまま";return}
   C.textContent="とじる";Dp.textContent="おく";
-  if(typeof bagSel==="string"){U.textContent="はずす";U.disabled=!si||G.bag.length>=14;Dp.disabled=true;return}
-  const it=G.bag[bagSel];U.disabled=!it;Dp.disabled=!it;U.textContent=it&&(it.k==="wep"||it.k==="shd"||(ITEMS[it.k]&&ITEMS[it.k].c==="ring"))?"そうび":"つかう"}
+  if(bagSel==="floor"){U.textContent="ひろう";U.disabled=G.bag.length>=14;Dp.textContent=eqk(fl)?"そうび":"つかう";Dp.disabled=!fl;T.disabled=!fl;return}
+  if(typeof bagSel==="string"){U.textContent="はずす";U.disabled=!si||G.bag.length>=14;Dp.disabled=true;T.disabled=true;return}
+  const it=G.bag[bagSel];U.disabled=!it;Dp.disabled=!it;T.disabled=!it;if(fl&&it){S.style.display="";S.disabled=false}U.textContent=eqk(it)?"そうび":"つかう"}
 $("bag").addEventListener("click",e=>{const b=e.target.closest(".it,.slot");if(!b)return;bagSel=b.dataset.s?b.dataset.s:b.dataset.f?"floor":+b.dataset.i;SFX.ui();drawBag()});
 $("baClose").onclick=()=>{SFX.ui();const sw=bagMode==="swap";closeBag();if(sw){msg("足ぶみした。");endTurn()}};
 $("baDrop").onclick=()=>{const p=G.p;
   if(bagMode==="swap"){const fi=floorIdx(),b=G.bag[bagSel];if(fi<0||!b)return;const f=G.items[fi];G.items[fi]={x:p.x,y:p.y,...b};delete f.x;delete f.y;delete f.shown;G.bag[bagSel]=f;msg(nameOf(b)+"を おいて、"+nameOf(f)+"を ひろった。","g");SFX.pick();closeBag();endTurn();return}
-  const it=G.bag[bagSel];if(!it)return;if(G.items.some(i=>i.x===p.x&&i.y===p.y)||(stOK()&&G.stairs.x===p.x&&G.stairs.y===p.y)){msg("ここには置けない。");closeBag();return}G.bag.splice(bagSel,1);G.items.push({x:p.x,y:p.y,...it});msg(nameOf(it)+"を足もとに置いた。");closeBag();endTurn()};
+  if(bagSel==="floor"){useFloor();return}
+  const it=G.bag[bagSel];if(!it)return;const s=dropSpot(p.x,p.y,false);if(!s){msg("まわりに 置ける場所が ない。");closeBag();return}G.bag.splice(bagSel,1);G.items.push({...it,x:s[0],y:s[1]});msg(nameOf(it)+"を "+(s[0]===p.x&&s[1]===p.y?"足もと":"すぐそば")+"に置いた。");SFX.ui();closeBag();endTurn()};
+function useFloor(){const p=G.p,fi=floorIdx();if(fi<0)return;closeBag();const f=G.items.splice(fi,1)[0];delete f.x;delete f.y;delete f.shown;const n0=G.bag.length;G.bag.push(f);useItem(n0);
+  if(G.bag.length>n0){const left=G.bag.splice(n0,1)[0];if(!placeItem(left,p.x,p.y))msg(nameOf(left)+"は どこかへ 消えてしまった。");save()}}
+$("baThrow").onclick=()=>{if(bagMode==="swap")return;let it;if(bagSel==="floor"){const fi=floorIdx();if(fi<0)return;it=G.items.splice(fi,1)[0];delete it.x;delete it.y;delete it.shown}else{if(typeof bagSel!=="number"||!G.bag[bagSel])return;it=G.bag.splice(bagSel,1)[0]}closeBag();throwItem(it);endTurn()};
+$("baSwap").onclick=()=>{const p=G.p,fi=floorIdx(),b=G.bag[bagSel];if(fi<0||!b)return;const f=G.items[fi];G.items[fi]={x:p.x,y:p.y,...b};delete f.x;delete f.y;delete f.shown;G.bag[bagSel]=f;msg(nameOf(b)+"を おいて、"+nameOf(f)+"を ひろった。","g");SFX.pick();closeBag();endTurn()};
 $("baUse").onclick=()=>{const p=G.p;
-  if(bagMode==="swap"){const fi=floorIdx();if(fi<0||G.bag.length>=14)return;closeBag();const f=G.items[fi];G.items.splice(fi,1);delete f.x;delete f.y;delete f.shown;G.bag.push(f);msg(nameOf(f)+"を ひろった。","g");SFX.pick();endTurn();return}
+  if(bagMode==="swap"||bagSel==="floor"){const fi=floorIdx();if(fi<0||G.bag.length>=14)return;closeBag();const f=G.items[fi];G.items.splice(fi,1);delete f.x;delete f.y;delete f.shown;G.bag.push(f);msg(nameOf(f)+"を ひろった。","g");SFX.pick();endTurn();return}
   if(typeof bagSel==="string"){const it=slotItem(bagSel);if(!it||G.bag.length>=14)return;G.bag.push(it);if(bagSel==="wep")p.wep=null;else if(bagSel==="shd")p.shd=null;else p.ring=null;msg(nameOf(it)+"を はずした。");SFX.ui();closeBag();endTurn();return}
   const it=G.bag[bagSel];if(!it)return;closeBag();useItem(bagSel)};
 function unequip(s){const it=slotItem(s);if(!it||G.bag.length>=14)return false;G.bag.push(it);if(s==="wep")G.p.wep=null;else if(s==="shd")G.p.shd=null;else G.p.ring=null;return true}
@@ -1107,6 +1146,9 @@ function frame(t){requestAnimationFrame(frame);if(!$("game").classList.contains(
       if(pr<.5){cx.save();cx.globalAlpha=1-pr*2;star(cx,cxp,cyp,TS*(.15+pr*.4),"#fff");cx.restore()}}
     else if(f.type==="hit"){const pr=(T-f.t0)/200;if(pr>=1){FX.splice(i,1);continue}const cxp=ox+f.x*TS+TS/2,cyp=oy+f.y*TS+TS/2;cx.save();cx.globalAlpha=1-pr;glow(cx,cxp,cyp,TS*(.3+pr*.4),f.c);star(cx,cxp,cyp,TS*(.12+pr*.35),"#fff");cx.restore()}
     else if(f.type==="arrow"){const tt=Math.min(1,f.a/7),ax=ox+(f.x+(f.x2-f.x)*tt)*TS+TS/2,ay=oy+(f.y+(f.y2-f.y)*tt)*TS+TS/2,an=Math.atan2(f.y2-f.y,f.x2-f.x);cx.save();cx.translate(ax,ay);cx.rotate(an);cx.strokeStyle="#f3e6c4";cx.lineWidth=TS*.06;cx.beginPath();cx.moveTo(-TS*.3,0);cx.lineTo(TS*.2,0);cx.stroke();cx.fillStyle="#fff";cx.beginPath();cx.moveTo(TS*.3,0);cx.lineTo(TS*.16,-TS*.07);cx.lineTo(TS*.16,TS*.07);cx.fill();cx.restore();if(f.a>7)FX.splice(i,1)}
+    else if(f.type==="throw"){const el=now()-f.t0,tt=Math.min(1,el/f.dur);if(el>f.dur+30){FX.splice(i,1);continue}const L=Math.hypot(f.x2-f.x,f.y2-f.y),hgt=TS*(.25+.07*L)*Math.sin(Math.PI*tt),px=ox+(f.x+(f.x2-f.x)*tt)*TS,py=oy+(f.y+(f.y2-f.y)*tt)*TS;
+      cx.globalAlpha=.35;cx.fillStyle="#000";cx.beginPath();cx.ellipse(px+TS/2,py+TS*.82,TS*.2,TS*.06,0,0,7);cx.fill();cx.globalAlpha=1;
+      cx.save();cx.translate(px+TS/2,py+TS/2-hgt);cx.rotate(tt*Math.PI*2.2);const sc=cached("i_"+f.k,TS,1,(g,a,b,s)=>drawItemSprite(g,f.k,a,b,s));cx.globalAlpha=.25;glow(cx,0,0,TS*.45,"rgba(255,240,200,.6)");cx.globalAlpha=1;cx.scale(.8,.8);blit(sc,-TS/2,-TS/2);cx.restore()}
     else if(f.type==="bolt"){const tt=Math.min(1,f.a/10),sx=ox+(f.x+(f.x2-f.x)*tt)*TS+TS/2,sy=oy+(f.y+(f.y2-f.y)*tt)*TS+TS/2;glow(cx,sx,sy,TS*0.5,"rgba(255,150,60,.8)");cx.fillStyle="#fff3b0";cx.beginPath();cx.arc(sx,sy,TS*0.12,0,7);cx.fill();if(f.a>10)FX.splice(i,1)}
     else if(f.type==="boom"){const r=TS*(0.5+f.a/8);cx.globalAlpha=Math.max(0,1-f.a/16);glow(cx,ox+f.x*TS+TS/2,oy+f.y*TS+TS/2,r,"rgba(255,180,70,1)");cx.globalAlpha=1;if(f.a>16)FX.splice(i,1)}}
   if(flash>0){cx.globalAlpha=flash/14;cx.fillStyle=flashC;cx.fillRect(0,0,W,H);cx.globalAlpha=1;flash--;if(!flash)flashC="#ff2a2a"}
