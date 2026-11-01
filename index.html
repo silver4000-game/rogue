@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<meta name="rogue-rev" content="20261102e">
+<meta name="rogue-rev" content="20261102f">
 <meta name="theme-color" content="#7fd0ff">
 <meta name="apple-mobile-web-app-title" content="ふしぎな地下">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261102e">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261102e">
-<link rel="manifest" href="manifest.webmanifest?v=20261102e">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261102f">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261102f">
+<link rel="manifest" href="manifest.webmanifest?v=20261102f">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800;900&display=swap" rel="stylesheet">
 <title>ふしぎな地下ダンジョン</title>
 <style>
@@ -241,6 +241,20 @@ button{font-family:var(--F)}
 #shopList button canvas{width:40px;height:40px;flex:none}#shopList button span{flex:1;min-width:0;font-size:14px}#shopList button b{flex:none;color:#c86a00;font-size:15px;font-family:var(--F);font-weight:900}
 #shopClose,#clsBack{display:block;margin-left:auto!important;margin-right:auto!important;text-align:center}
 #shopList button:disabled{opacity:.45}
+#shopTabs{display:flex;gap:8px;margin:0 0 8px}#shopTabs button{flex:1;min-height:38px;border:3px solid var(--ink);border-radius:14px;background:#f3edff;color:var(--ink);font-weight:900;font-size:16px;font-family:inherit;box-shadow:0 3px 0 var(--ink)}
+#shopTabs button.on{background:linear-gradient(#fff1a0,#ffc84a)}
+#shop #shopInfo{border:2.5px solid #f28ab8;border-radius:12px;padding:7px 10px;background:linear-gradient(#fff0f6,#ffe0ee);box-shadow:0 2px 0 #f28ab8;margin:0 0 8px;font-size:13px;line-height:1.4;min-height:46px;text-align:left;color:var(--ink);font-weight:800}
+#shopInfo .rar{font-size:12px;color:#c0508a}
+#shopList{max-height:min(46vh,340px);overflow:auto;padding:2px 2px 0}
+#shopList button.sel{background:linear-gradient(#fff7c8,#ffe680)}
+#shopList button.half{border-color:#ff4a8a}#shopList .tag{display:inline-block;background:#ff4a8a;color:#fff;font-size:11px;border-radius:8px;padding:1px 6px;margin-left:4px;vertical-align:1px}
+#shopList b s{color:#a09ab8;font-size:11px;margin-right:3px}
+#shopBtns{display:flex;gap:8px;margin-top:6px}#shopBtns button{flex:1;width:auto!important;margin:0!important}
+#shopAct{min-height:48px;border:3px solid var(--ink);border-radius:24px;background:linear-gradient(#fff1a0,#ffc84a);box-shadow:0 4px 0 var(--ink);color:var(--ink);font-weight:900;font-size:17px;font-family:inherit}
+#shopAct:disabled{opacity:.45}
+#shopTabs button,#shopAct,#shopClose{display:flex!important;align-items:center;justify-content:center;text-align:center}
+#shopList button>span{text-align:left;line-height:1.25}#shopList button>b{margin-left:auto;text-align:right;white-space:nowrap}
+@media (max-height:600px){#shopList button{padding:2px 10px;margin-bottom:5px}#shopList button canvas{width:34px;height:34px}#shopT{font-size:20px!important;margin-bottom:2px!important}}
 #shopClose{margin-top:4px;min-height:48px;width:70%;border:3px solid var(--ink);border-radius:24px;background:linear-gradient(#ffe0f0,#ffb0d8);box-shadow:0 4px 0 var(--ink);color:var(--ink);font-weight:900;font-size:17px;font-family:var(--F)}
 #lvGrid{grid-template-columns:1fr 1fr 1fr!important}
 #sideR{gap:8px}#bBow small{display:block;font-size:11px;line-height:1;margin-top:1px}#bBow{line-height:1.1}
@@ -270,7 +284,7 @@ button{font-family:var(--F)}
   <button class="big" id="bCont">つづきから</button>
   <button class="big" id="bStart">はじめから</button>
   <div class="tRow"><button class="big sub" id="bHow">あそびかた</button><button class="big sub" id="bRank">ランキング</button></div>
-  <div class="ver">rev 20261102e</div>
+  <div class="ver">rev 20261102f</div>
 </section>
 
 <section id="rank" class="scr">
@@ -326,7 +340,7 @@ button{font-family:var(--F)}
 <div id="lvup"><div class="lvBox"><div id="lvT">レベルアップ！</div><div id="lvSub"></div><div id="lvGrid"><button data-s="atk"><i>⚔️</i><b>こうげき</b><span></span></button><button data-s="def"><i>🛡️</i><b>ぼうぎょ</b><span></span></button><button data-s="hp"><i>❤️</i><b>HP</b><span></span></button></div></div></div>
 <div id="pop"></div>
 <div id="cls"><div class="lvBox"><div id="clsT">だれで あそぶ？</div><div id="clsGrid"></div><button id="clsBack" style="margin-top:10px;min-height:44px;width:60%;border:3px solid var(--ink);border-radius:22px;background:#fff;box-shadow:0 3px 0 var(--ink);color:var(--ink);font-weight:900;font-family:var(--F)">もどる</button></div></div>
-<div id="shop"><div class="lvBox"><div id="shopT">しょうにん</div><div id="shopG"></div><div id="shopList"></div><button id="shopClose">とじる</button></div></div>
+<div id="shop"><div class="lvBox"><div id="shopT">しょうにん</div><div id="shopG"></div><div id="shopTabs"><button data-m="buy" class="on">かう</button><button data-m="sell">うる</button></div><div id="shopInfo"></div><div id="shopList"></div><div id="shopBtns"><button id="shopAct">かう</button><button id="shopClose">とじる</button></div></div></div>
 <section id="result" class="scr">
   <div id="rT">やられてしまった…</div>
   <div id="rInfo"></div>
@@ -337,7 +351,7 @@ button{font-family:var(--F)}
 <script>
 "use strict";
 const $=id=>document.getElementById(id);
-const REV="20261102e";
+const REV="20261102f";
 /* ===== 音 ===== */
 let AC=null;
 function ac(){try{if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();if(AC.state==="suspended")AC.resume()}catch(e){}return AC}
@@ -1041,15 +1055,27 @@ function useItem(i){const it=G.bag[i],p=G.p;let consume=true;if(!p.buf)p.buf={at
 /* ===== しょうにん ===== */
 const PRICE=[0,40,110,260,600];
 function priceOf(it){let b=PRICE[tierOf(it)]||40;if(it.eq&&it.eq.lv)b+=(it.eq.lv-1)*40;return Math.round(b*(1+G.floor*.06)/5)*5}
-function shopStock(){const out=[];for(let i=0;i<5;i++){let it=randItem();if(it.k==="gold")it=randItem();if(it.k==="gold")continue;out.push(it)}return out}
+function shopStock(){const out=[];for(let i=0;i<5;i++){let it=randItem();if(it.k==="gold"||it.k==="arrow")it=randItem();if(it.k==="gold"||it.k==="arrow")continue;out.push(it)}if(out.length)pick(out).half=1;return out}
+const buyPrice=it=>it.half?Math.max(5,Math.round(priceOf(it)/10)*5):priceOf(it);
+const sellPrice=it=>Math.max(5,Math.floor(priceOf(it)/10)*5);
+let shopMode="buy",shopSel=-1;
 let shopObj=null;
-function openShop(o){shopObj=o;SFX.coin();$("shop").classList.add("on");drawShop();msg("しょうにん「いらっしゃい！」","y")}
-function drawShop(){const o=shopObj,p=G.p;$("shopG").textContent="もっているお金 "+(p.gold||0)+"ゴールド";const L=$("shopList");
-  if(!o.stock.length){L.innerHTML='<div style="padding:12px;font-weight:800">うりきれ！ また きてね。</div>';return}
-  L.innerHTML=o.stock.map((it,i)=>{const pr=priceOf(it);return '<button data-i="'+i+'"'+(p.gold<pr||G.bag.length>=bagCap()?" disabled":"")+'><canvas width="80" height="80" data-k="'+skey(it)+'"></canvas><span>'+rarName(it)+'</span><b>'+pr+'G</b></button>'}).join("");
-  L.querySelectorAll("canvas").forEach(c=>{const x=c.getContext("2d");drawItemSprite(x,c.dataset.k,0,0,80)})}
-$("shopList").addEventListener("click",e=>{const b=e.target.closest("button[data-i]");if(!b||b.disabled)return;const o=shopObj,it=o.stock[+b.dataset.i],pr=priceOf(it),p=G.p;
-  if(p.gold<pr||G.bag.length>=bagCap())return;p.gold-=pr;o.stock.splice(+b.dataset.i,1);G.bag.push(it);SFX.coin();popMsg("💰 かった！");msg(nameOf(it)+"を "+pr+"ゴールドで かった。","g");hud();save();drawShop()});
+function openShop(o){shopObj=o;if(o.stock&&o.stock.length&&!o.stock.some(x=>x.half)&&!o.halfDone)pick(o.stock).half=1;o.halfDone=1;shopMode="buy";shopSel=-1;SFX.coin();$("shop").classList.add("on");drawShop();msg("しょうにん「いらっしゃい！」","y")}
+const shopInfoOf=it=>{const t=tierOf(it),r=RAR[t];return '<b style="color:'+r.c+'">'+nameOf(it)+'</b>　<span class="rar">レア度 '+"⭐".repeat(t)+"</span><br>"+itemDesc(it)};
+function drawShop(){const o=shopObj,p=G.p,buy=shopMode==="buy";$("shopG").textContent="もっているお金 💰"+(p.gold||0)+"G";const L=$("shopList");
+  document.querySelectorAll("#shopTabs button").forEach(b=>b.classList.toggle("on",b.dataset.m===shopMode));
+  const arr=buy?o.stock:G.bag,A=$("shopAct"),I=$("shopInfo"),it=arr[shopSel];
+  if(!arr.length){L.innerHTML='<div style="padding:12px;font-weight:800">'+(buy?"うりきれ！ また きてね。":"うれる 道具が ない。")+'</div>'}
+  else{L.innerHTML=arr.map((x,i)=>{const pr=buy?buyPrice(x):sellPrice(x);return '<button data-i="'+i+'" class="'+(i===shopSel?"sel ":"")+(buy&&x.half?"half":"")+'"><canvas width="80" height="80" data-k="'+skey(x)+'"></canvas><span><span style="color:'+RAR[tierOf(x)].c+'">'+cellName(x)+'</span>'+(buy&&x.half?'<span class="tag">半額！</span>':"")+'</span><b>'+(buy&&x.half?"<s>"+priceOf(x)+"G</s>":"")+pr+'G</b></button>'}).join("");
+    L.querySelectorAll("canvas").forEach(c=>{const x=c.getContext("2d");drawItemSprite(x,c.dataset.k,0,0,80)})}
+  if(it){I.innerHTML=shopInfoOf(it);const pr=buy?buyPrice(it):sellPrice(it);A.textContent=(buy?"かう ":"うる ")+pr+"G";A.disabled=buy?(p.gold<pr||G.bag.length>=bagCap()):false}
+  else{I.innerHTML=buy?"ほしい 道具を えらんでね。":"うりたい 道具を えらんでね。";A.textContent=buy?"かう":"うる";A.disabled=true}}
+$("shopTabs").addEventListener("click",e=>{const b=e.target.closest("button[data-m]");if(!b)return;SFX.ui();shopMode=b.dataset.m;shopSel=-1;$("shopList").scrollTop=0;drawShop()});
+$("shopList").addEventListener("click",e=>{const b=e.target.closest("button[data-i]");if(!b)return;SFX.ui();shopSel=+b.dataset.i;const st=$("shopList").scrollTop;drawShop();$("shopList").scrollTop=st});
+$("shopAct").onclick=()=>{const o=shopObj,p=G.p;if(shopMode==="buy"){const it=o.stock[shopSel];if(!it)return;const pr=buyPrice(it);if(p.gold<pr){msg("お金が たりない。");return}if(G.bag.length>=bagCap()){msg("持ち物が いっぱい。");return}
+    p.gold-=pr;o.stock.splice(shopSel,1);delete it.half;G.bag.push(it);SFX.coin();msg(nameOf(it)+"を "+pr+"ゴールドで かった。","g")}
+  else{const it=G.bag[shopSel];if(!it)return;const pr=sellPrice(it);G.bag.splice(shopSel,1);p.gold=(p.gold||0)+pr;SFX.coin();msg(nameOf(it)+"を "+pr+"ゴールドで うった。","g")}
+  shopSel=-1;const st=$("shopList").scrollTop;hud();save();drawShop();$("shopList").scrollTop=st};
 $("shopClose").onclick=()=>{SFX.ui();$("shop").classList.remove("on");msg("しょうにん「まいど！」");hud();save()};
 /* ===== おわり ===== */
 function gameOver(src){G.over=true;SFX.die();clearSave();addRank(src);const old=getBest().n;setBest(G.floor);const nb=G.floor>old;
