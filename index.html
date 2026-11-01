@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<meta name="rogue-rev" content="20261102c">
+<meta name="rogue-rev" content="20261102d">
 <meta name="theme-color" content="#7fd0ff">
 <meta name="apple-mobile-web-app-title" content="ふしぎな地下">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261102c">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261102c">
-<link rel="manifest" href="manifest.webmanifest?v=20261102c">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261102d">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261102d">
+<link rel="manifest" href="manifest.webmanifest?v=20261102d">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800;900&display=swap" rel="stylesheet">
 <title>ふしぎな地下ダンジョン</title>
 <style>
@@ -270,7 +270,7 @@ button{font-family:var(--F)}
   <button class="big" id="bCont">つづきから</button>
   <button class="big" id="bStart">はじめから</button>
   <div class="tRow"><button class="big sub" id="bHow">あそびかた</button><button class="big sub" id="bRank">ランキング</button></div>
-  <div class="ver">rev 20261102c</div>
+  <div class="ver">rev 20261102d</div>
 </section>
 
 <section id="rank" class="scr">
@@ -337,7 +337,7 @@ button{font-family:var(--F)}
 <script>
 "use strict";
 const $=id=>document.getElementById(id);
-const REV="20261102c";
+const REV="20261102d";
 /* ===== 音 ===== */
 let AC=null;
 function ac(){try{if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();if(AC.state==="suspended")AC.resume()}catch(e){}return AC}
@@ -775,7 +775,8 @@ function lvDesc(k){const p=G.p;
   if(k==="def")return "まもり +"+BAL.defG+"（いつも同じ）";
   if(k==="item"){const n=p.iluck||0;return "★の多い 強い道具が 見つかりやすくなる"+(n?"（いま"+n+"）":"")}}
 function showLv(){if(!G||!(G.p.lvq>0))return;$("lvT").textContent="レベルアップ！"+(G.p.lvq>1?"×"+G.p.lvq:"");$("lvup").classList.add("on")}
-function popMsg(s){const P=$("pop");P.textContent=s;P.classList.remove("go");void P.offsetWidth;P.classList.add("go")}
+let noPop=false;
+function popMsg(s){if(noPop)return;const P=$("pop");P.textContent=s;P.classList.remove("go");void P.offsetWidth;P.classList.add("go")}
 function chooseStat(k){const p=G.p;if(!(p.lvq>0))return;let m;
   if(k==="atk"){p.atk=r1(p.atk+BAL.atkG);p.atkP=(p.atkP||0)+1;m="こうげきが上がった！"}
   else if(k==="def"){p.def=r1(p.def+BAL.defG);p.defP=(p.defP||0)+1;m="ぼうぎょが上がった！"}
@@ -946,18 +947,20 @@ $("baDrop").onclick=()=>{const p=G.p;
   if(bagMode==="swap"){const fi=floorIdx(),b=G.bag[bagSel];if(fi<0||!b)return;const f=G.items[fi];G.items[fi]={x:p.x,y:p.y,...b};delete f.x;delete f.y;delete f.shown;G.bag[bagSel]=f;msg(nameOf(b)+"を おいて、"+nameOf(f)+"を ひろった。","g");SFX.pick();closeBag();endTurn();return}
   if(bagSel==="floor"){useFloor();return}
   const it=G.bag[bagSel];if(!it)return;const s=dropSpot(p.x,p.y,false);if(!s){msg("まわりに 置ける場所が ない。");closeBag();return}G.bag.splice(bagSel,1);G.items.push({...it,x:s[0],y:s[1]});msg(nameOf(it)+"を "+(s[0]===p.x&&s[1]===p.y?"足もと":"すぐそば")+"に置いた。");SFX.ui();closeBag();endTurn()};
-function useFloor(){const p=G.p,fi=floorIdx();if(fi<0)return;closeBag();const f=G.items.splice(fi,1)[0];delete f.x;delete f.y;delete f.shown;const n0=G.bag.length;G.bag.push(f);useItem(n0);
-  if(G.bag.length>n0){const left=G.bag.splice(n0,1)[0];if(!placeItem(left,p.x,p.y))msg(nameOf(left)+"は どこかへ 消えてしまった。");save()}}
-$("baThrow").onclick=()=>{if(bagMode==="swap")return;let it;if(bagSel==="floor"){const fi=floorIdx();if(fi<0)return;it=G.items.splice(fi,1)[0];delete it.x;delete it.y;delete it.shown}else{if(typeof bagSel!=="number"||!G.bag[bagSel])return;it=G.bag.splice(bagSel,1)[0]}closeBag();throwItem(it);afterUse(600)};
-$("baSwap").onclick=()=>{if(bagMode==="swap"){if(bagSel==="floor"){SFX.ui();useFloor()}else if(typeof bagSel==="number"&&G.bag[bagSel]){closeBag();useItem(bagSel)}return}const p=G.p,fi=floorIdx(),b=G.bag[bagSel];if(fi<0||!b)return;const f=G.items[fi];G.items[fi]={x:p.x,y:p.y,...b};delete f.x;delete f.y;delete f.shown;G.bag[bagSel]=f;msg(nameOf(b)+"を おいて、"+nameOf(f)+"を ひろった。","g");SFX.pick();closeBag();endTurn()};
+function useFloor(){const p=G.p,fi=floorIdx();if(fi<0)return;menuUse(()=>{const fi2=floorIdx();if(fi2<0)return;const f=G.items.splice(fi2,1)[0];delete f.x;delete f.y;delete f.shown;const n0=G.bag.length;G.bag.push(f);useItem(n0);
+  if(G.bag.length>n0){const left=G.bag.splice(n0,1)[0];if(!placeItem(left,p.x,p.y))msg(nameOf(left)+"は どこかへ 消えてしまった。");save()}})}
+$("baThrow").onclick=()=>{if(bagMode==="swap")return;let it;if(bagSel==="floor"){const fi=floorIdx();if(fi<0)return;it=G.items.splice(fi,1)[0];delete it.x;delete it.y;delete it.shown}else{if(typeof bagSel!=="number"||!G.bag[bagSel])return;it=G.bag.splice(bagSel,1)[0]}menuUse(()=>{throwItem(it);afterUse(600)})};
+$("baSwap").onclick=()=>{if(bagMode==="swap"){if(bagSel==="floor"){SFX.ui();useFloor()}else if(typeof bagSel==="number"&&G.bag[bagSel]){const i=bagSel;menuUse(()=>useItem(i))}return}const p=G.p,fi=floorIdx(),b=G.bag[bagSel];if(fi<0||!b)return;const f=G.items[fi];G.items[fi]={x:p.x,y:p.y,...b};delete f.x;delete f.y;delete f.shown;G.bag[bagSel]=f;msg(nameOf(b)+"を おいて、"+nameOf(f)+"を ひろった。","g");SFX.pick();closeBag();endTurn()};
 $("baUse").onclick=()=>{const p=G.p;
   if(bagMode==="swap"||bagSel==="floor"){const fi=floorIdx();if(fi<0||G.bag.length>=bagCap())return;closeBag();const f=G.items[fi];G.items.splice(fi,1);delete f.x;delete f.y;delete f.shown;G.bag.push(f);msg(nameOf(f)+"を ひろった。","g");SFX.pick();endTurn();return}
   if(typeof bagSel==="string"){const it=slotItem(bagSel);if(!it||G.bag.length>=bagCap())return;G.bag.push(it);if(bagSel==="wep")p.wep=null;else if(bagSel==="shd")p.shd=null;else p.ring=null;msg(nameOf(it)+"を はずした。");SFX.ui();closeBag();endTurn();return}
-  const it=G.bag[bagSel];if(!it)return;closeBag();useItem(bagSel)};
+  const it=G.bag[bagSel];if(!it)return;const i=bagSel;menuUse(()=>useItem(i))};
 function unequip(s){const it=slotItem(s);if(!it||G.bag.length>=bagCap())return false;G.bag.push(it);if(s==="wep")G.p.wep=null;else if(s==="shd")G.p.shd=null;else G.p.ring=null;return true}
 function nearestEnemy(){const p=G.p;let best=null,bd=99;for(const e of G.ents){if(!vis(e.x,e.y))continue;const d=Math.max(Math.abs(e.x-p.x),Math.abs(e.y-p.y));if(d<bd){bd=d;best=e}}return best}
 /* 道具を つかったあと: 何が おきたか 見えるように 少し まってから 敵がうごく */
 let FAST=false;
+/* メニューから つかう: 画面がもどって ひと呼吸 おいてから モーション */
+function menuUse(fn){closeBag();const run=()=>{noPop=true;try{fn()}finally{noPop=false}};if(FAST||!G||G.over){run();return}busy=true;lockUntil=now()+450;hud();setTimeout(()=>{busy=false;if(G&&!G.over)run()},400)}
 function afterUse(ms){hud();if(FAST||G.over){endTurn();return}busy=true;lockUntil=now()+(ms||750);setTimeout(()=>{busy=false;if(G&&!G.over){endTurn();hud()}},ms||700)}
 function aura(o,c,dur){FX.push({type:"aura",x:o.x,y:o.y,c,t0:now(),dur:dur||1000})}
 function ringFx(x,y,c){FX.push({type:"ring",x,y,c,t0:now(),dur:800})}
