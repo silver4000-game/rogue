@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<meta name="rogue-rev" content="20261101g">
+<meta name="rogue-rev" content="20261101h">
 <meta name="theme-color" content="#7fd0ff">
 <meta name="apple-mobile-web-app-title" content="ふしぎな地下">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261101g">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261101g">
-<link rel="manifest" href="manifest.webmanifest?v=20261101g">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261101h">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261101h">
+<link rel="manifest" href="manifest.webmanifest?v=20261101h">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800;900&display=swap" rel="stylesheet">
 <title>ふしぎな地下ダンジョン</title>
 <style>
@@ -210,7 +210,7 @@ button{font-family:var(--F)}
   <button class="big" id="bCont">つづきから</button>
   <button class="big" id="bStart">はじめから</button>
   <button class="big sub" id="bHow">あそびかた</button>
-  <div class="ver">rev 20261101g</div>
+  <div class="ver">rev 20261101h</div>
 </section>
 
 <section id="howto" class="scr">
@@ -265,7 +265,7 @@ button{font-family:var(--F)}
 <script>
 "use strict";
 const $=id=>document.getElementById(id);
-const REV="20261101g";
+const REV="20261101h";
 /* ===== 音 ===== */
 let AC=null;
 function ac(){try{if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();if(AC.state==="suspended")AC.resume()}catch(e){}return AC}
@@ -1178,18 +1178,18 @@ function drawStairs(g,x,y,s,goal){const u=s/32;
   star(g,x+16*u,y+8*u,2*u,goal?"#fff6c8":"#e8f4ff")}
 
 /* ---- 床と壁（石のダンジョン） ---- */
-function tileFloor(g,x,y,s,v){const u=s/32;g.fillStyle="#6a52b8";g.fillRect(x,y,s,s);
-  const C=[["#fff4d6","#ffe2b8"],["#e8fbff","#c8eeff"],["#fff0f8","#ffd6ec"],["#eafff4","#c8f5e0"]][v];
+function tileFloor(g,x,y,s,v){const u=s/32;g.fillStyle="#8a8296";g.fillRect(x,y,s,s);
+  const C=[["#efe8da","#e4dccb"],["#ece5d6","#e1d9c8"],["#eee7d8","#e3dbca"],["#ebe4d5","#e0d8c7"]][v];
   g.fillStyle=LG(g,x,y,x,y+s,C);rr(g,x+1.2*u,y+1.2*u,29.6*u,29.6*u,7*u);g.fill();
-  g.strokeStyle="rgba(106,82,184,.45)";g.lineWidth=1.4*u;rr(g,x+1.2*u,y+1.2*u,29.6*u,29.6*u,7*u);g.stroke();
-  g.fillStyle="rgba(255,255,255,.7)";rr(g,x+5*u,y+4*u,10*u,2.4*u,1.2*u);g.fill();
-  if(v===1){star(g,x+23*u,y+22*u,1.6*u,"rgba(127,208,255,.8)")}
-  if(v===3){ell(g,x+22*u,y+21*u,2.4*u,1.6*u,"rgba(80,200,140,.35)")}}
-function tileRoad(g,x,y,s){const u=s/32;g.fillStyle="#6a52b8";g.fillRect(x,y,s,s);const c=["#d8ccff","#c3b2ff"];for(const [a,b] of [[2,2],[17,2],[2,17],[17,17]]){g.fillStyle=LG(g,x,y+b*u,x,y+(b+13)*u,c);rr(g,x+a*u,y+b*u,13*u,13*u,4*u);g.fill();g.strokeStyle="rgba(74,42,134,.4)";g.lineWidth=1*u;g.stroke()}}
-function tileWall(g,x,y,s,face){const u=s/32;g.fillStyle="#4a2a86";g.fillRect(x,y,s,s);
+  g.strokeStyle="rgba(120,110,130,.35)";g.lineWidth=1.4*u;rr(g,x+1.2*u,y+1.2*u,29.6*u,29.6*u,7*u);g.stroke();
+  g.fillStyle="rgba(255,255,255,.35)";rr(g,x+5*u,y+4*u,10*u,2.4*u,1.2*u);g.fill();
+  if(v===1){star(g,x+23*u,y+22*u,1.6*u,"rgba(160,150,140,.35)")}
+  if(v===3){ell(g,x+22*u,y+21*u,2.4*u,1.6*u,"rgba(140,130,120,.25)")}}
+function tileRoad(g,x,y,s){const u=s/32;g.fillStyle="#8a8296";g.fillRect(x,y,s,s);const c=["#d6d0c6","#c9c2b7"];for(const [a,b] of [[2,2],[17,2],[2,17],[17,17]]){g.fillStyle=LG(g,x,y+b*u,x,y+(b+13)*u,c);rr(g,x+a*u,y+b*u,13*u,13*u,4*u);g.fill();g.strokeStyle="rgba(100,92,110,.35)";g.lineWidth=1*u;g.stroke()}}
+function tileWall(g,x,y,s,face){const u=s/32;g.fillStyle="#3e3a4e";g.fillRect(x,y,s,s);
   const rows=face?2:3;for(let r=0;r<rows;r++){const off=r%2?8:0;for(let c=-1;c<2;c++){const bx=x+(c*16+off)*u,by=y+r*10.6*u;const bw=15*u,bh=9.6*u;if(bx+bw<x||bx>x+s)continue;g.save();g.beginPath();g.rect(x,y,s,s);g.clip();
-    g.fillStyle=LG(g,bx,by,bx,by+bh,(r+c)%2?["#ffb8dc","#f07ab8"]:["#c8b0ff","#9a7ae8"]);rr(g,bx+.8*u,by+.8*u,bw-.4*u,bh-.4*u,3*u);g.fill();g.fillStyle="rgba(255,255,255,.45)";rr(g,bx+2*u,by+1.6*u,bw-5*u,1.8*u,.9*u);g.fill();g.restore()}}
-  if(face){g.fillStyle=LG(g,x,y+21*u,x,y+s,["#7a5ad0","#5a3aa8"]);g.fillRect(x,y+21*u,s,11*u);g.fillStyle="rgba(255,255,255,.25)";g.fillRect(x,y+21*u,s,1.4*u)}}
+    g.fillStyle=LG(g,bx,by,bx,by+bh,(r+c)%2?["#7c7690","#6a6480"]:["#76708a","#646078"]);rr(g,bx+.8*u,by+.8*u,bw-.4*u,bh-.4*u,3*u);g.fill();g.fillStyle="rgba(255,255,255,.15)";rr(g,bx+2*u,by+1.6*u,bw-5*u,1.8*u,.9*u);g.fill();g.restore()}}
+  if(face){g.fillStyle=LG(g,x,y+21*u,x,y+s,["#5a556c","#48445a"]);g.fillRect(x,y+21*u,s,11*u);g.fillStyle="rgba(255,255,255,.12)";g.fillRect(x,y+21*u,s,1.4*u)}}
 const TV=(x,y)=>((x*73856093)^(y*19349663))>>>0;
 function torchAt(x,y){return G.map[y][x]===1&&y+1<MH&&G.map[y+1][x]===0&&TV(x,y)%7===0}
 function drawTorch(x,y,s,t){const u=s/32,fl=Math.sin(t/120+x*3)*0.6+Math.sin(t/57+y)*0.4;
