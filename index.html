@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<meta name="rogue-rev" content="20261102t">
+<meta name="rogue-rev" content="20261102u">
 <meta name="theme-color" content="#9fe0ff">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <script>try{if(navigator.standalone||matchMedia("(display-mode: standalone)").matches){document.documentElement.classList.add("sa");const st=()=>{const g=document.querySelector(".scr");if(!g)return;const r=g.getBoundingClientRect(),d=document.documentElement.style;d.setProperty("--gt",r.top+"px");d.setProperty("--gb",Math.max(0,innerHeight-r.bottom)+"px")};addEventListener("resize",st);addEventListener("load",st);setTimeout(st,300)}}catch(e){}</script>
 <meta name="apple-mobile-web-app-title" content="ふしぎな地下">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261102t">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261102t">
-<link rel="manifest" href="manifest.webmanifest?v=20261102t">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261102u">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261102u">
+<link rel="manifest" href="manifest.webmanifest?v=20261102u">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800;900&display=swap" rel="stylesheet">
 <title>ふしぎな地下ダンジョン</title>
 <style>
@@ -328,7 +328,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
   <button class="big" id="bCont">つづきから</button>
   <button class="big" id="bStart">はじめから</button>
   <div class="tRow"><button class="big sub" id="bHow">あそびかた</button><button class="big sub" id="bRank">ランキング</button></div>
-  <div class="ver">rev 20261102t</div>
+  <div class="ver">rev 20261102u</div>
 </section>
 
 <section id="rank" class="scr">
@@ -398,7 +398,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
 <script>
 "use strict";
 const $=id=>document.getElementById(id);
-const REV="20261102t";
+const REV="20261102u";
 /* ===== 音 ===== */
 let AC=null;
 function ac(){try{if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();if(AC.state==="suspended")AC.resume()}catch(e){}return AC}
@@ -1101,6 +1101,8 @@ function aura(o,c,dur){FX.push({type:"aura",x:o.x,y:o.y,c,t0:now(),dur:dur||1000
 function ringFx(x,y,c){FX.push({type:"ring",x,y,c,t0:now(),dur:800})}
 function beam(a,b,c){FX.push({type:"beam",x:a.x,y:a.y,x2:b.x,y2:b.y,c,t0:now(),dur:380})}
 function lfx(x,y,t,c){const w=impactWait();FX.push({x,y,t,c,a:0,type:"txt",big:0,slow:1,st:w>0?now()+w:0})}
+/* やくそう: 回ふくの 見た目（HP表示・文字）は モーションが おわってから */
+let hPend=null;
 function heal(n){const p=G.p,h=Math.min(n,p.mhp-p.hp);p.hp+=h;return h}
 /* むいている方向に とぶ道具・つえ: rng=1 目の前だけ / 7 / 99 どこまでも */
 function lineTargets(rng,pierce){const p=G.p,[dx,dy]=p.dir;let x=p.x,y=p.y;const hits=[];for(let k=0;k<rng;k++){if(!canStep(x,y,dx,dy))break;x+=dx;y+=dy;const o=entAt(x,y);if(o){hits.push(o);if(!pierce)break}}return {hits,end:{x,y}}}
@@ -1111,7 +1113,9 @@ function useItem(i){const it=G.bag[i],p=G.p;let consume=true;if(!p.buf)p.buf={at
   switch(it.k){
     case "wep":{if(p.wep&&p.wep.cur){cursedNo(p.wep,"ぶき");consume=false;break}const old=p.wep;p.wep=it.eq;if(old){G.bag[i]={k:"wep",eq:old};consume=false}msg(nameOf(it)+"をそうびした。（こうげき"+Math.round(atkOf())+"）","g");popMsg("⚔️ そうび！");aura(p,"#ffe08a",700);SFX.pick();revealCurse(it);break}
     case "shd":{if(p.shd&&p.shd.cur){cursedNo(p.shd,"たて");consume=false;break}const old=p.shd;p.shd=it.eq;if(old){G.bag[i]={k:"shd",eq:old};consume=false}msg(nameOf(it)+"をそうびした。（まもり"+Math.round(defOf())+"）","g");popMsg("🛡️ そうび！");aura(p,"#9ad0ff",700);SFX.pick();revealCurse(it);break}
-    case "herb":case "pred":{const n=it.k==="herb"?30:100,up=it.k==="herb"?1:3,h=heal(n);if(!h){p.mhp+=up;p.hp+=up}msg(h?"HPが"+h+"回ふくした。":"最大HPが"+up+"ふえた。","g");lfx(p.x,p.y,"+"+(h||up),"#7dff9a");popMsg(h?"💚 HP +"+h:"❤️ 最大HP +"+up);aura(p,"#7dff9a");SFX.heal();break}
+    case "herb":case "pred":{const n=it.k==="herb"?30:100,up=it.k==="herb"?1:3,h=heal(n);if(!h){p.mhp+=up;p.hp+=up}
+      if(it.k==="herb"&&!FAST){const pe={G,h,up:h?0:up};hPend=pe;setTimeout(()=>{if(hPend===pe)hPend=null;if(G!==pe.G)return;msg(h?"HPが"+h+"回ふくした。":"最大HPが"+up+"ふえた。","g");fx(p.x,p.y,"+"+(h||up),"#7dff9a");popMsg(h?"💚 HP +"+h:"❤️ 最大HP +"+up);aura(p,"#7dff9a");SFX.heal();hud()},950);break}
+      msg(h?"HPが"+h+"回ふくした。":"最大HPが"+up+"ふえた。","g");lfx(p.x,p.y,"+"+(h||up),"#7dff9a");popMsg(h?"💚 HP +"+h:"❤️ 最大HP +"+up);aura(p,"#7dff9a");SFX.heal();break}
     case "cure":{clearSt(p);msg("体が すっきりした！ 状態異常が なおった。","g");popMsg("✨ すっきり！");aura(p,"#a0fff0",1100);SFX.heal();hud();break}
     case "fseed":{p.fmax=(p.fmax||500)+100;p.food=Math.min(p.fmax,p.food+100);msg("おなかが 大きくなった！ 最大おなか+100。","g");popMsg("🍙 最大おなか +100");aura(p,"#ffc070",1100);SFX.lvl();break}
     case "food":case "food2":case "food3":case "meat":{const fm=p.fmax||500,n=it.k==="food"?150:it.k==="food2"?300:fm,f0=p.food;p.food=Math.min(fm,p.food+n);let t="おなか +"+(p.food-f0);if(it.k==="meat"){const h=heal(9999);lfx(p.x,p.y,"+"+h,"#7dff9a");t="おなかも HPも まんたん！"}else if(p.food>=fm)t="おなか いっぱい！";
@@ -1236,7 +1240,7 @@ function show(id){document.querySelectorAll(".scr").forEach(s=>s.classList.toggl
 function checkSave(){try{const s=localStorage.getItem("rogue-save");if(!s)return;const g=JSON.parse(s);if(!g||!g.p||!Array.isArray(g.map)||!Array.isArray(g.map[0])||!Array.isArray(g.seen)||typeof g.floor!=="number")throw 0;if(!(g.sv>=5)){clearSave();oldReset=true;return}migrate(g)}catch(e){clearSave();loadErr=true}}
 let oldReset=false;
 function titleInfo(){const b=getBest();$("tBest").innerHTML=(oldReset?"<span style=\"color:#e0303a\">ゲームが 大きく かわったので、新しく はじめてね。</span><br>":"")+(loadErr?"<span style=\"color:#e0303a\">前の セーブデータは 読みこめなかったので、新しく はじめてね。</span><br>":"")+(b.n?"さいこう記録: "+b.txt:"");{const has=!!localStorage.getItem("rogue-save");$("bCont").disabled=!has;$("bCont").classList.toggle("off",!has)}}
-function hud(){const p=G.p;$("hFloor").textContent=G.floor+"F";$("hpI").style.width=(100*p.hp/p.mhp)+"%";$("hpT").textContent="HP "+p.hp+"/"+p.mhp;$("hLv").textContent="Lv"+p.lv;
+function hud(){const p=G.p;$("hFloor").textContent=G.floor+"F";{const pe=hPend&&G===hPend.G?hPend:null,dm=p.mhp-(pe?pe.up:0),dh=Math.min(p.hp,Math.max(1,p.hp-(pe?pe.h+pe.up:0)));$("hpI").style.width=(100*dh/dm)+"%";$("hpT").textContent="HP "+dh+"/"+dm}$("hLv").textContent="Lv"+p.lv;
   $("hFood").innerHTML="<small>おなか</small><b>"+p.food+"</b>";$("hFood").classList.toggle("low",p.food<=100);$("sAtk").textContent=Math.round(atkOf());$("sDef").textContent=Math.round(defOf());$("sGold").textContent=p.gold||0;$("bBow").innerHTML="ゆみ<small>"+(p.arrows||0)+"</small>";$("hSt").innerHTML=["psn","conf","slow","slp","par","bind","haste","inv"].filter(k=>p[k]>0).map(k=>'<i style="background:'+STS[k].c+'">'+STS[k].n+'</i>').join("");$("xpI").style.width=(100*p.exp/needExp(p.lv))+"%";
   $("bDown").classList.toggle("ok",stOK()&&p.x===G.stairs.x&&p.y===G.stairs.y)}
 
