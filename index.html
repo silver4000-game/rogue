@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<meta name="rogue-rev" content="20261102l">
+<meta name="rogue-rev" content="20261102m">
 <meta name="theme-color" content="#9fe0ff">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <script>try{if(navigator.standalone||matchMedia("(display-mode: standalone)").matches){document.documentElement.classList.add("sa");const st=()=>{const g=document.querySelector(".scr");if(!g)return;const r=g.getBoundingClientRect(),d=document.documentElement.style;d.setProperty("--gt",r.top+"px");d.setProperty("--gb",Math.max(0,innerHeight-r.bottom)+"px")};addEventListener("resize",st);addEventListener("load",st);setTimeout(st,300)}}catch(e){}</script>
 <meta name="apple-mobile-web-app-title" content="ふしぎな地下">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261102l">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261102l">
-<link rel="manifest" href="manifest.webmanifest?v=20261102l">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261102m">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261102m">
+<link rel="manifest" href="manifest.webmanifest?v=20261102m">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800;900&display=swap" rel="stylesheet">
 <title>ふしぎな地下ダンジョン</title>
 <style>
@@ -304,7 +304,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
   <button class="big" id="bCont">つづきから</button>
   <button class="big" id="bStart">はじめから</button>
   <div class="tRow"><button class="big sub" id="bHow">あそびかた</button><button class="big sub" id="bRank">ランキング</button></div>
-  <div class="ver">rev 20261102l</div>
+  <div class="ver">rev 20261102m</div>
 </section>
 
 <section id="rank" class="scr">
@@ -372,7 +372,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
 <script>
 "use strict";
 const $=id=>document.getElementById(id);
-const REV="20261102l";
+const REV="20261102m";
 /* ===== 音 ===== */
 let AC=null;
 function ac(){try{if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();if(AC.state==="suspended")AC.resume()}catch(e){}return AC}
@@ -1197,7 +1197,7 @@ function blit(c,x,y){cx.drawImage(c,x-c.off,y-c.off,c.full,c.full)}
 function blitF(c,x,y,flip){if(!flip)return blit(c,x,y);cx.save();cx.translate(x+TS/2,0);cx.scale(-1,1);cx.drawImage(c,-TS/2-c.off,y-c.off,c.full,c.full);cx.restore()}
 function luOff(o){if(!o.lu||o.lu.t0==null){o.lu=null;return [0,0]}const pr=(now()-o.lu.t0)/180;if(pr>=1||pr<0){o.lu=null;return [0,0]}const k=Math.sin(pr*Math.PI)*TS*.34;return [o.lu.dx*k,o.lu.dy*k]}
 const skey=it=>it.k==="gold"?"gold":it.k==="arrow"?"arrow":it.k==="wep"?"w:"+(it.eq.id||"bronze"):it.k;
-const heroFace=()=>{const d=G.p.dir||[0,1];return d[0]>0?"r":d[0]<0?"l":d[1]<0?"u":"d"};
+const heroFace=()=>{const d=G.p.dir||[0,1];if(d[0]&&d[1])return (d[1]>0?"d":"u")+(d[0]>0?"r":"l");return d[0]>0?"r":d[0]<0?"l":d[1]<0?"u":"d"};
 const LG=(g,x0,y0,x1,y1,st)=>{const r=g.createLinearGradient(x0,y0,x1,y1);st.forEach((c,i)=>r.addColorStop(i/(st.length-1),c));return r};
 const RG=(g,x,y,r0,r1,st,fx2,fy2)=>{const r=g.createRadialGradient(fx2==null?x:fx2,fy2==null?y:fy2,r0,x,y,r1);st.forEach((c,i)=>r.addColorStop(i/(st.length-1),c));return r};
 function rr(g,x,y,w,h,r){g.beginPath();g.moveTo(x+r,y);g.arcTo(x+w,y,x+w,y+h,r);g.arcTo(x+w,y+h,x,y+h,r);g.arcTo(x,y+h,x,y,r);g.arcTo(x,y,x+w,y,r);g.closePath()}
@@ -1254,10 +1254,14 @@ const HPALS={warrior:{c:["#e04a5e","#8a1f3c"],cb:["#f0606e","#a02446","#7a1830"]
   merchant:{c:["#c89048","#7a5020"],cb:["#d8a058","#9a6830","#704818"],t:["#6ad89a","#2a9a5a"],h:["#5a3a24","#3a2414"]},
   joker:{c:["#ffb83a","#e0601a"],cb:["#ffc84a","#f07a2a","#c05010"],t:["#ff7ac8","#c83a90"],h:["#ffd27a","#c08a3a"]}};
 let HPAL=HPALS.warrior;
-function drawHero(g,x,y,s,f,wid,cls){f=f||"d";cls=cls||(G&&G.p&&G.p.cls)||"warrior";HPAL=HPALS[cls]||HPALS.warrior;if(cls==="mage"||cls==="joker"){if(f==="l"){g.save();g.translate(2*x+s,0);g.scale(-1,1);mageGirl(g,x,y,s,"r",wid,cls);g.restore()}else mageGirl(g,x,y,s,f,wid,cls);return}if(f==="l"){g.save();g.translate(2*x+s,0);g.scale(-1,1);heroBody(g,x,y,s,"r",wid);heroHat(g,x,y,s,"r",cls);g.restore();return}heroBody(g,x,y,s,f,wid);heroHat(g,x,y,s,f,cls)}
+function drawHero(g,x,y,s,f,wid,cls){f=f||"d";if(f.length===2){/* ななめ: 3/4の向き。左は右を反転 */const fl=f[1]==="l";g.save();if(fl){g.translate(2*x+s,0);g.scale(-1,1)}g.translate(x+s/2,0);g.scale(.92,1);g.translate(-(x+s/2),0);drawHero3(g,x,y,s,f[0]==="d"?"q":"b",wid,cls);g.restore();return}cls=cls||(G&&G.p&&G.p.cls)||"warrior";HPAL=HPALS[cls]||HPALS.warrior;if(cls==="mage"||cls==="joker"){if(f==="l"){g.save();g.translate(2*x+s,0);g.scale(-1,1);mageGirl(g,x,y,s,"r",wid,cls);g.restore()}else mageGirl(g,x,y,s,f,wid,cls);return}if(f==="l"){g.save();g.translate(2*x+s,0);g.scale(-1,1);heroBody(g,x,y,s,"r",wid);heroHat(g,x,y,s,"r",cls);g.restore();return}heroBody(g,x,y,s,f,wid);heroHat(g,x,y,s,f,cls)}
+function drawHero3(g,x,y,s,f,wid,cls){cls=cls||(G&&G.p&&G.p.cls)||"warrior";HPAL=HPALS[cls]||HPALS.warrior;const u=s/32,girl=cls==="mage"||cls==="joker";if(girl)mageGirl(g,x,y,s,f,wid,cls);else{heroBody(g,x,y,s,f,wid);heroHat(g,x,y,s,f,cls)}
+  if(f==="b"){/* うしろななめ: ほっぺと 手が すこし見える */g.save();if(girl){g.translate(x+16*u,y+32*u);g.scale(.8,.8);g.translate(-(x+16*u),-(y+30*u))}
+    const cy=girl?12.6:11.4,cx=girl?22.9:22.7;g.save();g.beginPath();g.ellipse(x+cx*u,y+cy*u,1.5*u,2.6*u,0,0,7);g.clip();ell(g,x+(cx+.3)*u,y+cy*u,1.5*u,2.6*u,"#ffd9b8");ell(g,x+(cx+.4)*u,y+(cy+1.4)*u,1*u,.6*u,"rgba(255,120,140,.45)");g.restore();
+    if(wid)heldWeapon(g,x,y,u,wid,23.6,girl?21.4:21.6);ell(g,x+23.6*u,y+(girl?21.4:21.6)*u,1.5*u,1.5*u,"#ffd9b8");g.restore()}}
 /* 魔法使い（女の子） */
 function mageGirl(g,x,y,s,f,wid,kind){const u0=s/32;g.save();g.translate(x+16*u0,y+32*u0);g.scale(.8,.8);g.translate(-(x+16*u0),-(y+30*u0));try{mageGirl0(g,x,y,s,f,wid,kind)}finally{g.restore()}}
-function mageGirl0(g,x,y,s,f,wid,kind){const bun=kind==="joker";const u=s/32,P=(a,b)=>[x+a*u,y+b*u],back=f==="u",side=f==="r",fo=side?1.6:0;softShadow(g,x,y,s,.28);
+function mageGirl0(g,x,y,s,f,wid,kind){const bun=kind==="joker";const u=s/32,P=(a,b)=>[x+a*u,y+b*u],back=f==="u"||f==="b",side=f==="r",fo=side?1.6:f==="q"?.9:f==="b"?-.9:0;softShadow(g,x,y,s,.28);
   const HR=bun?["#ffe0ec","#f6a0c4","#d8709c"]:["#fff2b0","#f0c860","#d09a30"],hairG=()=>LG(g,x,y+2*u,x,y+24*u,HR);
   const tail=(sx,dir)=>{g.fillStyle=hairG();g.beginPath();g.moveTo(x+(sx-dir*1)*u,y+7*u);g.quadraticCurveTo(x+(sx+dir*2.6)*u,y+9*u,x+(sx+dir*2.4)*u,y+16*u);g.quadraticCurveTo(x+(sx+dir*2.6)*u,y+22*u,x+(sx+dir*2)*u,y+25.6*u);g.quadraticCurveTo(x+(sx+dir*.2)*u,y+26.4*u,x+(sx-dir*1.6)*u,y+25.4*u);g.lineTo(x+(sx-dir*1.4)*u,y+12*u);g.closePath();g.fill();
     g.strokeStyle="rgba(255,255,255,.55)";g.lineWidth=.6*u;g.beginPath();g.moveTo(x+(sx+dir*.8)*u,y+11*u);g.quadraticCurveTo(x+(sx+dir*1.4)*u,y+17*u,x+(sx+dir*.9)*u,y+23*u);g.stroke();g.strokeStyle="rgba(170,110,20,.3)";g.beginPath();g.moveTo(x+(sx-dir*.4)*u,y+14*u);g.lineTo(x+(sx-dir*.3)*u,y+24*u);g.stroke()};
@@ -1319,7 +1323,7 @@ function mageGirl0(g,x,y,s,f,wid,kind){const bun=kind==="joker";const u=s/32,P=(
   
   if(!back){bow(x+(side?19.6:20.2)*u,y+4.2*u,1.9*u)}else bow(x+16*u,y+4.4*u,1.9*u);}
   }
-function heroHat(g,x,y,s,f,cls){const u=s/32,back=f==="u";
+function heroHat(g,x,y,s,f,cls){const u=s/32,back=f==="u"||f==="b";
   if(cls==="mage"){g.fillStyle=LG(g,x,y-6*u,x,y+6*u,["#a07af8","#5a34b8"]);g.beginPath();g.moveTo(x+7*u,y+6.5*u);g.quadraticCurveTo(x+16*u,y+3*u,x+25*u,y+6.5*u);g.lineTo(x+21*u,y+5*u);g.quadraticCurveTo(x+19*u,y-4*u,x+13*u,y-6*u);g.quadraticCurveTo(x+15*u,y-1*u,x+11*u,y+5*u);g.closePath();g.fill();ell(g,x+16*u,y+6.2*u,9.6*u,1.8*u,"#4a2a98");if(!back)star(g,x+16*u,y+1.5*u,1.8*u,"#ffe060")}
   else if(cls==="warrior"){g.fillStyle=LG(g,x,y+2*u,x,y+8*u,["#f0f4ff","#a8b4d0"]);g.beginPath();g.arc(x+16*u,y+8.6*u,7.6*u,Math.PI,0);g.fill();g.fillStyle="#8a94b8";rr(g,x+8.2*u,y+7.2*u,15.6*u,2.2*u,1*u);g.fill();g.fillStyle="#ff6a7a";g.beginPath();g.moveTo(x+16*u,y+1.2*u);g.quadraticCurveTo(x+19*u,y-2.5*u,x+22*u,y-.5*u);g.quadraticCurveTo(x+19*u,y+.5*u,x+17*u,y+2.4*u);g.fill()}
   else if(cls==="merchant"){g.fillStyle=LG(g,x,y+1*u,x,y+8*u,["#ffe07a","#e0a020"]);g.beginPath();g.ellipse(x+16*u,y+5.6*u,8.4*u,4.2*u,0,Math.PI,0);g.fill();ell(g,x+16*u,y+6*u,9.4*u,1.6*u,"#c08010");if(!back){g.fillStyle="#ff6a7a";g.beginPath();g.arc(x+16*u,y+2.4*u,1.4*u,0,7);g.fill()}
@@ -1327,7 +1331,7 @@ function heroHat(g,x,y,s,f,cls){const u=s/32,back=f==="u";
   else if(cls==="joker"){const hat=(a,col)=>{g.fillStyle=col;g.beginPath();g.moveTo(x+16*u,y+5.5*u);g.quadraticCurveTo(x+(16+a*4)*u,y-3*u,x+(16+a*10)*u,y+1*u);g.quadraticCurveTo(x+(16+a*6)*u,y+2*u,x+(16+a*7.5)*u,y+6.5*u);g.closePath();g.fill();g.fillStyle="#ffe060";g.beginPath();g.arc(x+(16+a*10)*u,y+1*u,1.6*u,0,7);g.fill()};
     hat(-1,"#ff5fa8");hat(1,"#ffc83a");g.fillStyle=LG(g,x,y+3*u,x,y+7*u,["#ff8ac8","#e04090"]);g.beginPath();g.ellipse(x+16*u,y+6*u,8.4*u,2.6*u,0,Math.PI,0);g.fill();g.fillStyle="#ffe060";g.beginPath();g.arc(x+16*u,y-1*u,1.6*u,0,7);g.fill();g.fillStyle="#ff5fa8";g.beginPath();g.moveTo(x+16*u,y+5.5*u);g.quadraticCurveTo(x+14*u,y+1*u,x+16*u,y-1*u);g.quadraticCurveTo(x+18*u,y+1*u,x+16*u,y+5.5*u);g.fill()}}
 function heldWeapon(g,x,y,u,wid,hx,hy){const S=19*u;drawWeapon(g,wid||"bronze",x+hx*u-9*S/32,y+hy*u-23*S/32,S)}
-function heroBody(g,x,y,s,f,wid){const u=s/32;softShadow(g,x,y,s,.28);const back=f==="u",fo=f==="r"?1.7:0;
+function heroBody(g,x,y,s,f,wid){const u=s/32;softShadow(g,x,y,s,.28);const back=f==="u"||f==="b",fo=f==="r"?1.7:f==="q"?.9:f==="b"?-.9:0;
   if(back&&wid)heldWeapon(g,x,y,u,wid,10,21.5);
   if(!back){g.fillStyle=LG(g,x,y+14*u,x,y+29*u,HPAL.c);g.beginPath();g.moveTo(x+10.5*u,y+15*u);g.quadraticCurveTo(x+16*u,y+13*u,x+21.5*u,y+15*u);g.quadraticCurveTo(x+25*u,y+22*u,x+24*u,y+28.5*u);g.quadraticCurveTo(x+16*u,y+30.5*u,x+8*u,y+28.5*u);g.quadraticCurveTo(x+7*u,y+22*u,x+10.5*u,y+15*u);g.fill()}
   g.fillStyle="#5a3a24";rr(g,x+12.6*u,y+24*u,2.8*u,4.6*u,1.2*u);g.fill();rr(g,x+16.6*u,y+24*u,2.8*u,4.6*u,1.2*u);g.fill();
