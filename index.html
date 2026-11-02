@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<meta name="rogue-rev" content="20261102o">
+<meta name="rogue-rev" content="20261102p">
 <meta name="theme-color" content="#9fe0ff">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <script>try{if(navigator.standalone||matchMedia("(display-mode: standalone)").matches){document.documentElement.classList.add("sa");const st=()=>{const g=document.querySelector(".scr");if(!g)return;const r=g.getBoundingClientRect(),d=document.documentElement.style;d.setProperty("--gt",r.top+"px");d.setProperty("--gb",Math.max(0,innerHeight-r.bottom)+"px")};addEventListener("resize",st);addEventListener("load",st);setTimeout(st,300)}}catch(e){}</script>
 <meta name="apple-mobile-web-app-title" content="ふしぎな地下">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261102o">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261102o">
-<link rel="manifest" href="manifest.webmanifest?v=20261102o">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261102p">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261102p">
+<link rel="manifest" href="manifest.webmanifest?v=20261102p">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800;900&display=swap" rel="stylesheet">
 <title>ふしぎな地下ダンジョン</title>
 <style>
@@ -267,7 +267,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
 #clsGrid button{display:flex;flex-direction:column;align-items:center;gap:2px;border:3px solid var(--ink);border-radius:20px;box-shadow:0 4px 0 var(--ink);padding:6px 4px 8px;color:var(--ink);font-family:var(--F)}
 #clsGrid button:active{transform:translateY(3px);box-shadow:0 1px 0 var(--ink)}
 #clsGrid canvas{width:84px;height:84px}
-#clsGrid b{font-size:17px;font-weight:900;color:var(--ink);font-family:var(--F)}#clsGrid small{font-size:11px;line-height:1.35;font-weight:800;color:#6a4ab0}
+#clsGrid b{font-size:17px;font-weight:900;color:var(--ink);font-family:var(--F)}#clsGrid small{font-size:11px;line-height:1.35;font-weight:800;color:#6a4ab0}#clsGrid small{text-align:center}#clsGrid small span{display:block;white-space:nowrap}
 #clsGrid [data-c=warrior]{background:linear-gradient(#ffe0e6,#ffb0c0)}#clsGrid [data-c=mage]{background:linear-gradient(#efe0ff,#c8a8ff)}#clsGrid [data-c=merchant]{background:linear-gradient(#e0ffe8,#9ae8b8)}#clsGrid [data-c=joker]{background:linear-gradient(#fff6c8,#ffd84a)}
 #shopG{font-weight:900;color:#c86a00;margin-bottom:6px}
 #shopList button{display:flex;align-items:center;gap:8px;width:100%;margin:0 0 7px;padding:5px 10px;border:3px solid var(--ink);border-radius:16px;background:linear-gradient(#fff,#f0eaff);box-shadow:0 3px 0 var(--ink);color:var(--ink);text-align:left;font-family:var(--F);font-weight:800}
@@ -317,7 +317,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
   <button class="big" id="bCont">つづきから</button>
   <button class="big" id="bStart">はじめから</button>
   <div class="tRow"><button class="big sub" id="bHow">あそびかた</button><button class="big sub" id="bRank">ランキング</button></div>
-  <div class="ver">rev 20261102o</div>
+  <div class="ver">rev 20261102p</div>
 </section>
 
 <section id="rank" class="scr">
@@ -329,7 +329,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
 <section id="howto" class="scr">
   <h2>あそびかた</h2>
   <div class="hw">ダンジョンは <b>どこまでも</b> つづくよ。どこまで もぐれるかな？<br><b>10階ごと</b>に ボスの階。ボスを たおすと 階段が出る。<br>自分が1歩うごくと、敵も1歩うごくよ。<br>やられたら、<b>1階からやり直し</b>。</div>
-  <div class="hw"><b>主人公</b>：はじめに 4人から えらぶ。<br>せんし＝レベルの高い ぶき・たてが 出やすい／まほうつかい＝つえの回数 +2、まほうで 状態異常に ならない／しょうにん＝お金 1.5倍、持ち物 +5／あそびにん＝いい道具が 出やすい。</div>
+  <div class="hw"><b>主人公</b>：はじめに 4人から えらぶ。<br>せんし＝レベルアップで こうげき・まもりが 大きく 上がる／まほうつかい＝つえの回数 +3／しょうにん＝持ち物 +6、ひろう お金 1.5倍、はじめから 50G／あそびにん＝いい道具が 出やすい。</div>
   <div class="hw"><b>うごく</b>：十字ボタン（ななめもOK）。押しっぱなしで 続けて歩く。<br><b>むき</b>：光っている間は 矢印で むきだけ かわる。<br><b>こうげき</b>：むいている方向へ こうげき。敵がいなければ からぶり（休むかわりにもなる）。<br><b>足もと</b>：足もとの道具を ひろう・つかう・なげる・いれかえ できる。<br><b>おりる</b>：階段の上で押す。<br><b>ゆみ</b>：いつも もっている。や を 1本つかって むいている方向へ うつ。や は ダンジョンで ひろえる。<br><b>像</b>：こうげきすると こわれて 力が 出る。<br><b>なげる</b>：むいている方向へ 7マスまで。<br><b>むきで とぶ道具</b>：つえ・なげる道具は むいている方向へ。「目の前だけ」「7マス」「どこまでも」の しゅるいが ある。まきものは 向きに かんけいなし。</div>
   <div class="hw" id="howList"></div>
   <div class="hw"><b>おなか</b>：1回うごくと 1へる（さいしょ 500）。0になると HPがへる（でも 1より下には へらない）。塩むすび＝+150、シャケおむすび＝+300、ジャンボおむすび＝おなか ぜんぶ回ふく、まんがにく＝おなかも HPも ぜんぶ回ふく。いぶくろのたね＝最大おなか +100。<br><b>レベル</b>：<b>こうげき・ぼうぎょ・HP</b>から1つえらぶ。どれでも だいじょうぶ。<br><b>ぶき・たての Lv</b>：Lvが高いほど 強い。深い階ほど 高いLvが 出やすい。<br><b>お金</b>：ひろったり 敵が 落としたり。<b>しょうにん</b>が いる階では 買い物が できる（ぶつかると 話せる）。<br><b>状態異常</b>：<b style="color:#5ab030">どく</b>＝HPがへる／<b style="color:#e050c0">こんらん</b>＝思った方へ 歩けない／<b style="color:#d09020">どんそく</b>＝敵が 2回うごく／<b style="color:#8a70e0">ねむり</b>・<b style="color:#d0b000">しびれ</b>＝うごけない。敵にも きく。なおりぐさで なおる。<br><b>会心の一撃</b>：ときどき ダメージ1.5倍。<br><b>★レア度</b>：★が多いほど 強くて めずらしい。<br><b>ゆびわ</b>：1つだけ。つけている間 ずっと効く。<br><b>〇〇の証</b>：敵を たおすと たまに（1%）手に入る。+1ごとに その敵の EXPが 10%ふえる。持ち物画面で 見られる。<br><b>ボスの階</b>：10階ごと。ボスを たおすと 階段が出る。ボスは なかまを よぶことも ある。</div>
@@ -386,7 +386,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
 <script>
 "use strict";
 const $=id=>document.getElementById(id);
-const REV="20261102o";
+const REV="20261102p";
 /* ===== 音 ===== */
 let AC=null;
 function ac(){try{if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();if(AC.state==="suspended")AC.resume()}catch(e){}return AC}
@@ -457,7 +457,9 @@ const BOOKS={bolt:{n:"まほうだんの本",c:"#ffb0e0"},sleep:{n:"ねむりの
 /* 状態異常 */
 const STS={psn:{n:"どく",c:"#5ab030",ic:"☠"},conf:{n:"こんらん",c:"#e050c0",ic:"💫"},slow:{n:"どんそく",c:"#d09020",ic:"🐌"},slp:{n:"ねむり",c:"#8a70e0",ic:"💤"},par:{n:"しびれ",c:"#d0b000",ic:"⚡"},bind:{n:"こうそく",c:"#7a7a90",ic:"⛓️"},haste:{n:"ばいそく",c:"#30a8e0",ic:"💨"},inv:{n:"むてき",c:"#e0a000",ic:"⭐"}};
 /* 主人公 */
-const CLS={warrior:{n:"せんし",d:"レベルの高い ぶき・たてを ひろいやすい"},mage:{n:"まほうつかい",d:"つえを 多く ふれる。まほうで 状態異常に ならない"},merchant:{n:"しょうにん",d:"お金が 多く 手に入る。持ち物 +5"},joker:{n:"あそびにん",d:"いい道具を ひろいやすい"}};
+const CLS={warrior:{n:"せんし",d:["レベルアップで","こうげき・まもりが","大きく 上がる"]},mage:{n:"まほうつかい",d:["つえの 回数 +3"]},merchant:{n:"しょうにん",d:["持ち物 +6","ひろう お金 1.5倍","はじめから 50G"]},joker:{n:"あそびにん",d:["いい道具が","見つかりやすい"]}};
+/* せんしは レベルアップの こうげき・まもりが 1.5倍 */
+const atkG=()=>G&&G.p.cls==="warrior"?3:BAL.atkG,defG=()=>G&&G.p.cls==="warrior"?3.2:BAL.defG;
 const ITEMS={
   /* 回ふく */
   herb:{name:"やくそう",d:"HPを30回ふく。満タンなら 最大HP+1",w:10,f:1,c:"heal",sd:"HP+30"},
@@ -570,7 +572,7 @@ function newRun(cls){cls=CLS[cls]?cls:"warrior";
 const bufOf=k=>(G.p.buf&&G.p.buf[k]>0)?1:0;
 const wst=W=>Math.max(1,Math.round(W.v*.22));const wv=eq=>{if(!eq)return 0;const W=wdef(eq);return W.v+((eq.lv||1)-1)*wst(W)};
 const shB=name=>{const s=SHIELDS.find(x=>x.name===name);return s?s.v:1};const sv=eq=>{if(!eq)return 0;const b=shB(eq.name);return b+((eq.lv||1)-1)*Math.max(1,Math.round(b*.25))};
-const bagCap=()=>14+(G&&G.p.cls==="merchant"?5:0);
+const bagCap=()=>14+(G&&G.p.cls==="merchant"?6:0);
 const atkOf=()=>G.p.atk+(G.p.wep?wv(G.p.wep)-(G.p.wep.cur?2:0):0)+(G.p.ring==="rstr"?3:0)+(bufOf("atk")?5:0);
 const defOf=()=>G.p.def+(G.p.shd?sv(G.p.shd)-(G.p.shd.cur?2:0):0)+(G.p.ring==="rdef"?3:0)+(bufOf("def")?5:0);
 const needExp=l=>Math.round(10*Math.pow(l,1.7));
@@ -625,7 +627,7 @@ function mkEnemy(k,x,y,sleep){const e=ENEMIES[k],f0=e.boss?e.bf:(e.f[0]>100?1:e.
   const hp=Math.round(e.boss?e.hp*BAL.bh*(1+0.08*dd):e.hp*(1+BAL.gh*dd)*BAL.eh);
   const atk=Math.round(e.boss?e.atk*BAL.ba*(1+0.045*dd):e.atk*(1+BAL.ga*dd)*BAL.ea);
   return {k,x,y,hp,mhp:hp,atk,def:e.def+Math.floor(dd/(e.boss?5:6)),exp:Math.round(e.exp*(1+0.05*dd)),shot:e.shot?Math.round(e.shot*(1+0.045*dd)):0,sleep:sleep?99:0,conf:0,slow:0,par:0,psn:0,aware:0,tick:0,dir:[pick([-1,0,1]),pick([-1,0,1])]}}
-function rollLv(){const w=G.p.cls==="warrior";let lv=1;const n=Math.floor(G.floor/4)+(w?2:0),c=w?.42:.32;for(let i=0;i<n;i++)if(Math.random()<c)lv++;return Math.min(10,lv)}
+function rollLv(){const w=false;let lv=1;const n=Math.floor(G.floor/4)+(w?2:0),c=w?.42:.32;for(let i=0;i<n;i++)if(Math.random()<c)lv++;return Math.min(10,lv)}
 function arrowAmt(){return RI(4,9)}
 function goldAmt(){return Math.round(RI(8,20)*(1+G.floor*.18))}
 function eqBonus(){const c=.12+BAL.ilb*(G.p.iluck||0);let b=0;if(Math.random()<c){b++;if(Math.random()<Math.min(.7,c*.6))b++;if(Math.random()<Math.min(.5,c*.3))b++}return b}
@@ -638,7 +640,7 @@ function randItem(){const f=G.floor,fu=f+1+Math.floor(BAL.ilf*(G.p.iluck||0));le
   if(r<.23){let ls=SHIELDS.filter(w=>w.f>0&&w.f<=fu&&w.f>=f-15);if(!ls.length)ls=[SHIELDS[1]];
     const w=wpick(ls.map(s=>{const tt=sTier(s.v);return [s,TW[tt]*lukM(tt)]}));return {k:"shd",eq:{name:w.name,lv:rollLv(),cur:Math.random()<CURSE?1:0}}}
   const k=wpick(Object.entries(ITEMS).filter(([k,i])=>fu-1>=i.f).map(([k,i])=>{const tt=ITIER[k]||1;return [k,TW[tt]*(tt===1?(ISHARE[k]||1):1)*lukM(tt)*(/^food/.test(k)?BAL.fw:1)]}));
-  const i=ITEMS[k];return i.n?{k,n:i.n+(G.p.cls==="mage"?2:0)}:{k}}
+  const i=ITEMS[k];return i.n?{k,n:i.n+(G.p.cls==="mage"?3:0)}:{k}}
 
 /* ===== 見える範囲（部屋の中は部屋全体、通路は周り1マス） ===== */
 let VIS=null;
@@ -689,7 +691,7 @@ function shootBow(){const p=G.p;if(!G||G.over||busy)return;if(p.lvq>0){showLv();
 /* ===== 状態異常 ===== */
 /* t: どれだけ続くか。magic=まほうで かかった（まほうつかいは かからない） */
 function setSt(o,k,t,magic){const isP=o===G.p,S=STS[k];
-  if(isP&&magic&&G.p.cls==="mage"){msg("まほうを はじいた！","g");fx(o.x,o.y,"ガード","#9ad0ff");SFX.ui();return false}
+  if(false&&isP&&magic&&G.p.cls==="mage"){msg("まほうを はじいた！","g");fx(o.x,o.y,"ガード","#9ad0ff");SFX.ui();return false}
   if(!isP&&ENEMIES[o.k].boss)t=Math.max(1,Math.ceil(t/3));
   if(k==="slp"){if(isP)o.slp=Math.max(o.slp||0,t);else o.sleep=Math.max(o.sleep<99?o.sleep:0,t)}else o[k]=Math.max(o[k]||0,t);
   const nm=isP?"":ENEMIES[o.k].name+"は ";
@@ -853,15 +855,15 @@ const rarTag=it=>{const r=RAR[tierOf(it)];return '<span style="color:'+r.c+'">'+
 const infoOf=it=>{const t=tierOf(it),r=RAR[t];return '<b style="color:'+r.c+'">'+nameOf(it)+'</b>　<span class="rar">レア度 '+"⭐".repeat(t)+"</span><br>"+itemDesc(it)};
 const rarName=it=>{const r=RAR[tierOf(it)];return '<span style="color:'+r.c+'">'+nameOf(it)+'</span> <small style="color:'+r.c+'">'+r.s+'</small>'};
 function lvDesc(k){const p=G.p;
-  if(k==="atk")return "こうげき +"+BAL.atkG+"（いつも同じ）";
-  if(k==="def")return "まもり +"+BAL.defG+"（いつも同じ）";
+  if(k==="atk")return "こうげき +"+atkG()+"（いつも同じ）";
+  if(k==="def")return "まもり +"+defG()+"（いつも同じ）";
   if(k==="item"){const n=p.iluck||0;return "★の多い 強い道具が 見つかりやすくなる"+(n?"（いま"+n+"）":"")}}
 function showLv(){if(!G||!(G.p.lvq>0))return;if(!FAST&&now()<lvHold){clearTimeout(showLv.tm);showLv.tm=setTimeout(showLv,lvHold-now()+20);return}$("lvT").textContent="レベルアップ！"+(G.p.lvq>1?"×"+G.p.lvq:"");$("lvup").classList.add("on")}
 let noPop=false;
 function popMsg(s){if(noPop)return;const P=$("pop");P.textContent=s;P.classList.remove("go");void P.offsetWidth;P.classList.add("go")}
 function chooseStat(k){const p=G.p;if(!(p.lvq>0))return;let m;
-  if(k==="atk"){p.atk=r1(p.atk+BAL.atkG);p.atkP=(p.atkP||0)+1;m="こうげきが上がった！"}
-  else if(k==="def"){p.def=r1(p.def+BAL.defG);p.defP=(p.defP||0)+1;m="ぼうぎょが上がった！"}
+  if(k==="atk"){p.atk=r1(p.atk+atkG());p.atkP=(p.atkP||0)+1;m="こうげきが上がった！"}
+  else if(k==="def"){p.def=r1(p.def+defG());p.defP=(p.defP||0)+1;m="ぼうぎょが上がった！"}
   else if(k==="hp"){p.mhp+=BAL.hpG;p.hp+=BAL.hpG;p.hpP=(p.hpP||0)+1;m="HPが上がった！"}
     else return;
   msg(m,"g");popMsg(m);p.lvq--;SFX.lvl();if(p.lvq>0)showLv();else $("lvup").classList.remove("on");hud();save()}
@@ -1241,6 +1243,12 @@ function popify(c,s){try{const S=c.width,a=document.createElement("canvas");a.wi
   if("filter" in g)g.filter="saturate(1.35) brightness(1.08)";g.drawImage(a,0,0);g.filter="none"}catch(e){}}
 function blit(c,x,y){cx.drawImage(c,x-c.off,y-c.off,c.full,c.full)}
 function blitF(c,x,y,flip){if(!flip)return blit(c,x,y);cx.save();cx.translate(x+TS/2,0);cx.scale(-1,1);cx.drawImage(c,-TS/2-c.off,y-c.off,c.full,c.full);cx.restore()}
+/* なめらかに うごく: マスからマスへ 0.13秒で すべる（ワープは そのまま） */
+const VP=new WeakMap(),STEP=130;
+function vpos(o){const T=now();let r=VP.get(o);if(!r){r={x:o.x,y:o.y,q:[],sx:o.x,sy:o.y,t0:0};VP.set(o,r)}
+  const L=r.q.length?r.q[r.q.length-1]:r;if(L.x!==o.x||L.y!==o.y){if(FAST||Math.max(Math.abs(o.x-L.x),Math.abs(o.y-L.y))>1){r.q=[];r.x=r.sx=o.x;r.y=r.sy=o.y}else{if(!r.q.length){r.sx=r.x;r.sy=r.y;r.t0=T}r.q.push({x:o.x,y:o.y});if(r.q.length>3){const w=r.q.shift();r.x=r.sx=w.x;r.y=r.sy=w.y;r.t0=T}}}
+  while(r.q.length){const pr=(T-r.t0)/STEP;if(pr>=1){const w=r.q.shift();r.x=r.sx=w.x;r.y=r.sy=w.y;r.t0+=STEP;continue}const w=r.q[0];return {x:r.sx+(w.x-r.sx)*pr,y:r.sy+(w.y-r.sy)*pr,b:Math.sin(pr*Math.PI)}}
+  return {x:o.x,y:o.y,b:0}}
 function luOff(o){if(!o.lu||o.lu.t0==null){o.lu=null;return [0,0]}const pr=(now()-o.lu.t0)/180;if(pr>=1||pr<0){o.lu=null;return [0,0]}const k=Math.sin(pr*Math.PI)*TS*.34;return [o.lu.dx*k,o.lu.dy*k]}
 const skey=it=>it.k==="gold"?"gold":it.k==="arrow"?"arrow":it.k==="wep"?"w:"+(it.eq.id||"bronze"):it.k;
 const heroFace=()=>{const d=G.p.dir||[0,1];if(d[0]&&d[1])return (d[1]>0?"d":"u")+(d[0]>0?"r":"l");return d[0]>0?"r":d[0]<0?"l":d[1]<0?"u":"d"};
@@ -1664,7 +1672,7 @@ const MOTES=[];for(let i=0;i<18;i++)MOTES.push({x:Math.random(),y:Math.random(),
 function frame(t){requestAnimationFrame(frame);if(!$("game").classList.contains("on")||!G)return;t=t||0;
   const W=cv.width/DPR,H=cv.height/DPR;cx.setTransform(DPR,0,0,DPR,0,0);cx.fillStyle="#3b2f6e";cx.fillRect(0,0,W,H);
   if(showMap){drawMini(W,H);return}
-  const p=G.p,bb=G.boss?G.ents.find(e=>ENEMIES[e.k].boss&&vis(e.x,e.y)&&Math.abs(e.x-G.p.x)<=8&&Math.abs(e.y-G.p.y)<=8):null,fcx=bb?(p.x+bb.x)/2:p.x,fcy=bb?(p.y+bb.y)/2:p.y,se=now()-scrShake,sa=se<220?(1-se/220)*TS*0.12:0,ox=Math.round(W/2-TS/2-fcx*TS+(sa?Math.sin(se*0.09)*sa:0)),oy=Math.round(H/2-TS/2-fcy*TS+(sa?Math.cos(se*0.11)*sa*0.6:0));
+  const p=G.p,PV=vpos(p),bb=G.boss?G.ents.find(e=>ENEMIES[e.k].boss&&vis(e.x,e.y)&&Math.abs(e.x-G.p.x)<=8&&Math.abs(e.y-G.p.y)<=8):null,BV=bb?vpos(bb):null,fcx=bb?(PV.x+BV.x)/2:PV.x,fcy=bb?(PV.y+BV.y)/2:PV.y,se=now()-scrShake,sa=se<220?(1-se/220)*TS*0.12:0,ox=Math.round(W/2-TS/2-fcx*TS+(sa?Math.sin(se*0.09)*sa:0)),oy=Math.round(H/2-TS/2-fcy*TS+(sa?Math.cos(se*0.11)*sa*0.6:0));
   const x0=Math.max(0,Math.floor(-ox/TS)),x1=Math.min(MW-1,Math.ceil((W-ox)/TS)),y0=Math.max(0,Math.floor(-oy/TS)),y1=Math.min(MH-1,Math.ceil((H-oy)/TS));
   const torches=[],OM={};for(const o of G.objs||[])OM[o.x+","+o.y]=o;
   for(let y=y0;y<=y1;y++)for(let x=x0;x<=x1;x++){if(!G.seen[y][x])continue;const sx=ox+x*TS,sy=oy+y*TS,v=vis(x,y);
@@ -1677,14 +1685,14 @@ function frame(t){requestAnimationFrame(frame);if(!$("game").classList.contains(
   if(stOK()&&G.seen[G.stairs.y][G.stairs.x]){const sx=ox+G.stairs.x*TS,sy=oy+G.stairs.y*TS;if(vis(G.stairs.x,G.stairs.y))glow(cx,sx+TS/2,sy+TS/2,TS*(0.85+0.08*Math.sin(t/300)),G.boss?"rgba(255,210,100,.35)":"rgba(110,170,255,.32)");blit(cached("stairs"+(G.boss?1:0),TS,1,(g,a,b,s)=>drawStairs(g,a,b,s,G.boss)),sx,sy)}
   for(const it of G.items)if(vis(it.x,it.y)||G.mapRevealed||it.shown){const bob=Math.sin(t/400+it.x+it.y)*TS*0.03;{const sk=skey(it);blit(cached("i_"+sk,TS,1,(g,a,b,s)=>drawItemSprite(g,sk,a,b,s)),ox+it.x*TS,oy+it.y*TS+bob)}}
   const T=now();
-  for(const e of G.ents){if(!vis(e.x,e.y))continue;let sx=ox+e.x*TS,sy=oy+e.y*TS;if(e.sh&&!(e.shAt&&T<e.shAt)){sx+=(e.sh%2?3:-3);e.sh--}const lo=luOff(e);sx+=lo[0];sy+=lo[1];
+  for(const e of G.ents){if(!vis(e.x,e.y))continue;const EV=vpos(e);let sx=ox+EV.x*TS,sy=oy+EV.y*TS-EV.b*TS*.07;if(e.sh&&!(e.shAt&&T<e.shAt)){sx+=(e.sh%2?3:-3);e.sh--}const lo=luOff(e);sx+=lo[0];sy+=lo[1];
     const breathe=e.sleep>0?0:Math.sin(t/260+e.x*1.7)*TS*0.025;const big=ENEMIES[e.k].boss?1.55:1.25;if(e.fl==null||e.x!==G.p.x)e.fl=G.p.x<e.x;
     const ec=cached("e_"+e.k+(e.sleep>0?"z":""),TS,big,(g,a,b,s)=>drawEnemy(g,e.k,a,b,s,e.sleep>0));blitF(ec,sx,sy+breathe,e.fl);
     if(e.hf&&T>=e.hf&&T-e.hf<150){cx.save();cx.globalCompositeOperation="lighter";cx.globalAlpha=.75*(1-(T-e.hf)/150);blitF(ec,sx,sy+breathe,e.fl);cx.restore()}
     {const ic=[];if(e.psn>0)ic.push("☠");if(e.conf>0)ic.push("💫");if(e.slow>0)ic.push("🐌");if(e.par>0)ic.push("⚡");if(e.sleep>0&&e.sleep<99)ic.push("💤");if(e.hide)ic.push("🛡️");if(e.fuse)ic.push("💢");
       if(ic.length){cx.font=Math.round(TS*.3)+"px sans-serif";cx.textAlign="center";const bob=Math.sin(t/200)*TS*.04;ic.forEach((c,j)=>cx.fillText(c,sx+TS*(.5+(j-(ic.length-1)/2)*.32),sy-TS*.02+bob))}}
     if(e.hp<e.mhp){rr(cx,sx+4,sy+TS-5,TS-8,4,2);cx.fillStyle="rgba(40,0,10,.8)";cx.fill();rr(cx,sx+4,sy+TS-5,Math.max(3,(TS-8)*e.hp/e.mhp),4,2);cx.fillStyle="#ff6b7a";cx.fill()}}
-  {const hf=heroFace(),wid=p.wep?p.wep.id:"",hc=cached("hero_"+(p.cls||"warrior")+hf+"_"+wid,TS,1.3,(g,a,b,s)=>drawHero(g,a,b,s,hf,wid,p.cls)),lo=luOff(p),hx=ox+p.x*TS+lo[0],hy=oy+p.y*TS+Math.sin(t/330)*TS*0.02+lo[1];HXY=[hx,hy];blit(hc,hx,hy);
+  {const hf=heroFace(),wid=p.wep?p.wep.id:"",hc=cached("hero_"+(p.cls||"warrior")+hf+"_"+wid,TS,1.3,(g,a,b,s)=>drawHero(g,a,b,s,hf,wid,p.cls)),lo=luOff(p),hx=ox+PV.x*TS+lo[0],hy=oy+PV.y*TS+Math.sin(t/330)*TS*0.02+lo[1]-PV.b*TS*.07;HXY=[hx,hy];blit(hc,hx,hy);
     if(p.hf&&T>=p.hf&&T-p.hf<160){cx.save();cx.globalCompositeOperation="lighter";cx.globalAlpha=.6*(1-(T-p.hf)/160);blit(hc,hx,hy);cx.restore()}
     {const ic=[];if(p.psn>0)ic.push("☠");if(p.conf>0)ic.push("💫");if(p.slow>0)ic.push("🐌");if(p.par>0)ic.push("⚡");if(p.slp>0)ic.push("💤");
       if(ic.length){cx.font=Math.round(TS*.32)+"px sans-serif";cx.textAlign="center";const bob=Math.sin(t/200)*TS*.04;ic.forEach((c,j)=>cx.fillText(c,hx+TS*(.5+(j-(ic.length-1)/2)*.34),hy-TS*.12+bob))}}}
@@ -1797,7 +1805,7 @@ window.addEventListener("keydown",e=>{if(!$("game").classList.contains("on"))ret
   if(KEYS[e.key]){e.preventDefault();doMove(...KEYS[e.key])}else if(e.key==="i"){openBag()}else if(e.key==="m"){showMap=!showMap}else if(e.key===">"||e.key==="Enter"){descend()}});
 const startNew=()=>{$("cls").classList.add("on")};
 function pickCls(c){SFX.ui();$("cls").classList.remove("on");clearSave();newRun(c);show("game")}
-(function(){const g=$("clsGrid");g.innerHTML=Object.entries(CLS).map(([k,c])=>'<button data-c="'+k+'"><canvas width="168" height="168"></canvas><b>'+c.n+'</b><small>'+c.d+'</small></button>').join("");
+(function(){const g=$("clsGrid");g.innerHTML=Object.entries(CLS).map(([k,c])=>'<button data-c="'+k+'"><canvas width="168" height="168"></canvas><b>'+c.n+'</b><small>'+c.d.map(t=>'<span>'+t+'</span>').join('')+'</small></button>').join("");
   g.querySelectorAll("button").forEach(b=>{const x=b.querySelector("canvas").getContext("2d");drawHero(x,4,4,160,"d",{warrior:"bronze",mage:"",merchant:"",joker:"dagger"}[b.dataset.c],b.dataset.c)});
   g.addEventListener("click",e=>{const b=e.target.closest("button[data-c]");if(b)pickCls(b.dataset.c)});$("clsBack").onclick=()=>{SFX.ui();$("cls").classList.remove("on")}})();
 $("bStart").onclick=()=>{SFX.ui();if(localStorage.getItem("rogue-save"))$("ask").classList.add("on");else startNew()};
