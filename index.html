@@ -240,6 +240,17 @@ button{font-family:var(--F)}
 #pad button.wait{font-size:14px}
 #stat2 .st{display:inline-flex;gap:3px}#stat2 .st i{font-style:normal;padding:0 5px;border-radius:8px;color:#fff;font-weight:900}
 #obs{position:fixed;inset:0;z-index:56;display:none;align-items:center;justify-content:center;background:rgba(60,40,110,.45);padding:12px}#obs.on{display:flex}
+#rkd{position:fixed;inset:0;z-index:57;display:none;align-items:center;justify-content:center;background:rgba(60,40,110,.45);padding:12px}#rkd.on{display:flex}
+html.sa #rkd{top:var(--gt,0);bottom:var(--gb,0)}
+#rkd .lvBox{width:100%;max-width:360px;padding:12px 14px 14px;text-align:center;max-height:100%;overflow:auto}
+#rkdT{font-size:22px;font-weight:900;color:#fff;text-shadow:2px 2px 0 var(--ink),-2px 2px 0 var(--ink),2px -2px 0 var(--ink),-2px -2px 0 var(--ink);margin-bottom:4px}
+#rkdC{width:96px;height:96px;display:block;margin:0 auto;background:radial-gradient(#fff8e8,#f0e6ff);border:3px solid var(--ink);border-radius:18px}
+#rkdN{font-size:20px;font-weight:900;color:var(--ink);margin:6px 0 4px}#rkdN small{font-size:13px;color:#7a6aa8;margin-left:6px}
+#rkdS{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:8px}#rkdS div{border:2.5px solid var(--ink);border-radius:12px;background:#fff;padding:4px 2px;font-weight:900;color:var(--ink);line-height:1.15}#rkdS small{display:block;font-size:10.5px;color:#7a6aa8}#rkdS b{font-size:16px}
+#rkdD{border:2.5px solid #f28ab8;border-radius:12px;background:linear-gradient(#fff0f6,#ffe0ee);padding:7px 10px;text-align:left;font-size:12.5px;line-height:1.55;font-weight:800;color:var(--ink);margin-bottom:10px;word-break:break-all}
+#rkdClose{display:flex;align-items:center;justify-content:center;margin:0 auto;min-height:46px;width:70%;border:3px solid var(--ink);border-radius:24px;background:linear-gradient(#ffe0f0,#ffb0d8);box-shadow:0 4px 0 var(--ink);color:var(--ink);font-weight:900;font-size:17px;font-family:inherit}
+.rk{cursor:pointer}
+@media(max-height:640px){#rkdC{width:60px;height:60px}#rkdT{font-size:18px;margin:0}#rkdN{font-size:17px;margin:3px 0}#rkdS{gap:4px;margin-bottom:6px}#rkdS b{font-size:14px}#rkdD{font-size:12px;line-height:1.45;padding:5px 8px;margin-bottom:8px}#rkdClose{min-height:40px}}
 #obs .lvBox{width:100%;max-width:360px;padding:12px 14px 14px;text-align:center;max-height:100%;overflow:auto}
 #obsT{font-size:22px;font-weight:900;color:#fff;text-shadow:2px 2px 0 var(--ink),-2px 2px 0 var(--ink),2px -2px 0 var(--ink),-2px -2px 0 var(--ink);margin-bottom:4px}
 #obsC{width:120px;height:120px;display:block;margin:0 auto;background:radial-gradient(#fff8e8,#f0e6ff);border:3px solid var(--ink);border-radius:18px}
@@ -321,7 +332,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
   <div class="hw"><b>主人公</b>：はじめに 4人から えらぶ。<br>せんし＝レベルの高い ぶき・たてが 出やすい／まほうつかい＝つえの回数 +2、まほうで 状態異常に ならない／しょうにん＝お金 1.5倍、持ち物 +5／あそびにん＝いい道具が 出やすい。</div>
   <div class="hw"><b>うごく</b>：十字ボタン（ななめもOK）。押しっぱなしで 続けて歩く。<br><b>むき</b>：光っている間は 矢印で むきだけ かわる。<br><b>こうげき</b>：むいている方向へ こうげき。敵がいなければ からぶり（休むかわりにもなる）。<br><b>足もと</b>：足もとの道具を ひろう・つかう・なげる・いれかえ できる。<br><b>おりる</b>：階段の上で押す。<br><b>ゆみ</b>：いつも もっている。や を 1本つかって むいている方向へ うつ。や は ダンジョンで ひろえる。<br><b>像</b>：こうげきすると こわれて 力が 出る。<br><b>なげる</b>：むいている方向へ 7マスまで。<br><b>むきで とぶ道具</b>：つえ・なげる道具は むいている方向へ。「目の前だけ」「7マス」「どこまでも」の しゅるいが ある。まきものは 向きに かんけいなし。</div>
   <div class="hw" id="howList"></div>
-  <div class="hw"><b>おなか</b>：1回うごくと 1へる（さいしょ 500）。0になると HPがへる。おにぎり＝+250、まんがにく＝ぜんぶ回ふく。いぶくろのたね＝最大おなか +100。<br><b>レベル</b>：<b>こうげき・ぼうぎょ・HP</b>から1つえらぶ。どれでも だいじょうぶ。<br><b>ぶき・たての Lv</b>：Lvが高いほど 強い。深い階ほど 高いLvが 出やすい。<br><b>お金</b>：ひろったり 敵が 落としたり。<b>しょうにん</b>が いる階では 買い物が できる（ぶつかると 話せる）。<br><b>状態異常</b>：<b style="color:#5ab030">どく</b>＝HPがへる／<b style="color:#e050c0">こんらん</b>＝思った方へ 歩けない／<b style="color:#d09020">どんそく</b>＝敵が 2回うごく／<b style="color:#8a70e0">ねむり</b>・<b style="color:#d0b000">しびれ</b>＝うごけない。敵にも きく。なおりぐさで なおる。<br><b>会心の一撃</b>：ときどき ダメージ1.5倍。<br><b>★レア度</b>：★が多いほど 強くて めずらしい。<br><b>ゆびわ</b>：1つだけ。つけている間 ずっと効く。<br><b>〇〇の証</b>：敵を たおすと たまに（1%）手に入る。+1ごとに その敵の EXPが 10%ふえる。持ち物画面で 見られる。<br><b>ボスの階</b>：10階ごと。ボスを たおすと 階段が出る。ボスは なかまを よぶことも ある。</div>
+  <div class="hw"><b>おなか</b>：1回うごくと 1へる（さいしょ 500）。0になると HPがへる（でも 1より下には へらない）。塩むすび＝+150、シャケおむすび＝+300、ジャンボおむすび＝おなか ぜんぶ回ふく、まんがにく＝おなかも HPも ぜんぶ回ふく。いぶくろのたね＝最大おなか +100。<br><b>レベル</b>：<b>こうげき・ぼうぎょ・HP</b>から1つえらぶ。どれでも だいじょうぶ。<br><b>ぶき・たての Lv</b>：Lvが高いほど 強い。深い階ほど 高いLvが 出やすい。<br><b>お金</b>：ひろったり 敵が 落としたり。<b>しょうにん</b>が いる階では 買い物が できる（ぶつかると 話せる）。<br><b>状態異常</b>：<b style="color:#5ab030">どく</b>＝HPがへる／<b style="color:#e050c0">こんらん</b>＝思った方へ 歩けない／<b style="color:#d09020">どんそく</b>＝敵が 2回うごく／<b style="color:#8a70e0">ねむり</b>・<b style="color:#d0b000">しびれ</b>＝うごけない。敵にも きく。なおりぐさで なおる。<br><b>会心の一撃</b>：ときどき ダメージ1.5倍。<br><b>★レア度</b>：★が多いほど 強くて めずらしい。<br><b>ゆびわ</b>：1つだけ。つけている間 ずっと効く。<br><b>〇〇の証</b>：敵を たおすと たまに（1%）手に入る。+1ごとに その敵の EXPが 10%ふえる。持ち物画面で 見られる。<br><b>ボスの階</b>：10階ごと。ボスを たおすと 階段が出る。ボスは なかまを よぶことも ある。</div>
   <button class="big" id="bHowBack" style="flex:none">もどる</button>
 </section>
 
@@ -362,6 +373,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
 <div id="lvup"><div class="lvBox"><div id="lvT">レベルアップ！</div><div id="lvSub"></div><div id="lvGrid"><button data-s="atk"><i>⚔️</i><b>こうげき</b><span></span></button><button data-s="def"><i>🛡️</i><b>ぼうぎょ</b><span></span></button><button data-s="hp"><i>❤️</i><b>HP</b><span></span></button></div></div></div>
 <div id="pop"></div>
 <div id="cls"><div class="lvBox"><div id="clsT">だれで あそぶ？</div><div id="clsGrid"></div><button id="clsBack" style="margin-top:10px;min-height:44px;width:60%;border:3px solid var(--ink);border-radius:22px;background:#fff;box-shadow:0 3px 0 var(--ink);color:var(--ink);font-weight:900;font-family:var(--F)">もどる</button></div></div>
+<div id="rkd"><div class="lvBox"><div id="rkdT">きろく</div><canvas id="rkdC" width="240" height="240"></canvas><div id="rkdN"></div><div id="rkdS"></div><div id="rkdD"></div><button id="rkdClose">とじる</button></div></div>
 <div id="obs"><div class="lvBox"><div id="obsT">かんさつ</div><canvas id="obsC" width="240" height="240"></canvas><div id="obsN"></div><div id="obsS"></div><div id="obsD"></div><button id="obsClose">とじる</button></div></div>
 <div id="shop"><div class="lvBox"><div id="shopT">しょうにん</div><div id="shopG"></div><div id="shopTabs"><button data-m="buy" class="on">かう</button><button data-m="sell">うる</button></div><div id="shopInfo"></div><div id="shopList"></div><div id="shopBtns"><button id="shopAct">かう</button><button id="shopClose">とじる</button></div></div></div>
 <section id="result" class="scr">
@@ -933,7 +945,7 @@ function* turnGen(){
   /* おなか */
   if(p.food>0&&!(p.ring==="rfood"&&G.turn%3===0)){p.food--;if(p.food===50){msg("お腹が減ってきた・・・","w");popMsg("🍙 お腹が減ってきた・・・");SFX.hurt()}if(p.food===0)msg("おなかがペコペコだ！何か食べないと…","w")}
   if(p.psn>0){p.psn--;const d=1+Math.floor(G.floor/10);p.hp-=d;fx(p.x,p.y,""+d,"#8ff06a");if(!p.psn)msg("どくが ぬけた。");if(p.hp<=0){p.hp=0;gameOver("どく");return}}
-  if(p.food<=0){p.hp-=1;interrupt=true;if(p.hp<=0){p.hp=0;gameOver("空腹");return}}
+  if(p.food<=0){if(p.hp>1)p.hp-=1;interrupt=true}
   else{p.regen+=p.mhp/120*(p.ring==="rheal"?2:1)+(bufOf("regen")?2:0);if(p.regen>=1){const a=Math.floor(p.regen);p.regen-=a;p.hp=Math.min(p.mhp,p.hp+a)}}
   if(p.buf){for(const k in p.buf)if(p.buf[k]>0){p.buf[k]--;if(!p.buf[k])msg({atk:"ちからのくすりの効き目がきれた。",def:"まもりのくすりの効き目がきれた。",regen:"めぐみのしずくの効き目がきれた。"}[k])}}
   /* たまに敵がわく */
@@ -1175,11 +1187,23 @@ function load(){try{const s=localStorage.getItem("rogue-save");if(!s)return fals
 /* ===== 画面 ===== */
 const RK_KEY="rogue_rank1",RK_MAX=10;let rkLast=0;
 function getRank(){try{return JSON.parse(localStorage.getItem(RK_KEY))||[]}catch(e){return []}}
-function addRank(src){try{const p=G.p,d=new Date(),e={c:p.cls||"warrior",f:G.floor,lv:p.lv,k:p.kills||0,d:(d.getMonth()+1)+"/"+d.getDate(),t:Date.now()};rkLast=e.t;const L=getRank();L.push(e);L.sort((a,b)=>b.f-a.f||b.lv-a.lv||a.t-b.t);localStorage.setItem(RK_KEY,JSON.stringify(L.slice(0,RK_MAX)))}catch(e){}}
+function addRank(src){try{const p=G.p,d=new Date(),e={c:p.cls||"warrior",f:G.floor,lv:p.lv,k:p.kills||0,d:(d.getMonth()+1)+"/"+d.getDate(),t:Date.now(),x:rkDetail(src,d)};rkLast=e.t;const L=getRank();L.push(e);L.sort((a,b)=>b.f-a.f||b.lv-a.lv||a.t-b.t);localStorage.setItem(RK_KEY,JSON.stringify(L.slice(0,RK_MAX)))}catch(e){}}
+/* ランキングの くわしい記録（その時の ようす） */
+function rkDetail(src,d){const p=G.p,nm=it=>{if(!it)return "";const c=it.eq&&it.eq.cur?{...it,eq:{...it.eq,cv:1}}:it;return nameOf(c)};
+  return {src:String(src||""),hp:p.mhp,atk:Math.round(atkOf()),def:Math.round(defOf()),wep:nm(slotItem("wep")),shd:nm(slotItem("shd")),ring:p.ring&&ITEMS[p.ring]?ITEMS[p.ring].name:"",bag:G.bag.map(nm),gold:p.gold||0,turn:G.turn||0,food:Math.max(0,Math.round(p.food||0)),fmax:p.fmax||500,arrows:p.arrows||0,
+    pr:Object.values(p.proofs||{}).reduce((a,b)=>a+b,0),date:d.getFullYear()+"/"+(d.getMonth()+1)+"/"+d.getDate()+" "+d.getHours()+":"+String(d.getMinutes()).padStart(2,"0")}}
+function showRkd(i){const e=getRank()[i];if(!e)return;const x=e.x,c=$("rkdC").getContext("2d");c.clearRect(0,0,240,240);drawHero(c,24,20,192,"d","",e.c);
+  $("rkdN").innerHTML=(CLSN[e.c]||"")+"<small>Lv"+e.lv+"</small>";
+  const cell=(l,v)=>"<div><small>"+l+"</small><b>"+v+"</b></div>";
+  if(!x){$("rkdS").innerHTML=cell("とうたつ",e.f+"F")+cell("レベル",e.lv)+cell("たおした",e.k);$("rkdD").innerHTML="・日づけ："+e.d+"<br>・この記録は 前の バージョンなので、くわしい ようすは のこっていないよ。"}
+  else{$("rkdS").innerHTML=cell("とうたつ",e.f+"F")+cell("さいだいHP",x.hp)+cell("ターン",x.turn)+cell("こうげき",x.atk)+cell("まもり",x.def)+cell("たおした",e.k);
+    const L=["😵 やられた原因："+(x.src||"？"),"⚔️ ぶき："+(x.wep||"なし"),"🛡️ たて："+(x.shd||"なし"),"💍 ゆびわ："+(x.ring||"なし"),"💰 ゴールド："+x.gold+"G　🏹 や："+x.arrows+"本","🍙 おなか："+x.food+" / "+x.fmax+(x.pr?"　🏅 証："+x.pr+"こ":""),"🎒 持ち物（"+x.bag.length+"こ）："+(x.bag.length?x.bag.join("、"):"なし"),"📅 "+x.date];
+    $("rkdD").innerHTML=L.map(t=>"・"+t).join("<br>")}
+  $("rkd").classList.add("on")}
 const CLSN={warrior:"せんし",mage:"まほうつかい",merchant:"しょうにん",joker:"あそびにん"};
 function showRank(){const L=getRank(),el=$("rankList");if(!L.length){el.innerHTML='<div id="rankEmpty">まだ 記録が ないよ。<br>ぼうけんに 出かけよう！</div>'}
-  else{el.innerHTML=L.map((e,i)=>'<div class="rk'+(i<3?" top"+(i+1):"")+(e.t===rkLast?" new":"")+'"><span class="no">'+(i<3?["🥇","🥈","🥉"][i]:i+1)+'</span><canvas width="80" height="80" data-c="'+e.c+'"></canvas><span class="rm"><b>'+(CLSN[e.c]||"")+'</b><small>Lv'+e.lv+'・'+e.k+'たい たおした '+e.d+'</small></span><span class="fl">'+e.f+'F</span></div>').join("");
-    el.querySelectorAll("canvas").forEach(c=>{const g=c.getContext("2d");drawHero(g,4,6,72,"d","",c.dataset.c)})}
+  else{el.innerHTML=L.map((e,i)=>'<div data-i="'+i+'" class="rk'+(i<3?" top"+(i+1):"")+(e.t===rkLast?" new":"")+'"><span class="no">'+(i<3?["🥇","🥈","🥉"][i]:i+1)+'</span><canvas width="80" height="80" data-c="'+e.c+'"></canvas><span class="rm"><b>'+(CLSN[e.c]||"")+'</b><small>Lv'+e.lv+'・'+e.k+'たい たおした '+e.d+'</small></span><span class="fl">'+e.f+'F</span></div>').join("");
+    el.querySelectorAll("canvas").forEach(c=>{const g=c.getContext("2d");drawHero(g,4,6,72,"d","",c.dataset.c)});el.querySelectorAll(".rk").forEach(r=>r.onclick=()=>{SFX.ui();showRkd(+r.dataset.i)})}
   show("rank");$("rank").scrollTop=0}
 function show(id){document.querySelectorAll(".scr").forEach(s=>s.classList.toggle("on",s.id===id));if(id==="game"){resize();hud();drawLog()}if(id==="title")titleInfo()}
 function checkSave(){try{const s=localStorage.getItem("rogue-save");if(!s)return;const g=JSON.parse(s);if(!g||!g.p||!Array.isArray(g.map)||!Array.isArray(g.map[0])||!Array.isArray(g.seen)||typeof g.floor!=="number")throw 0;if(!(g.sv>=5)){clearSave();oldReset=true;return}migrate(g)}catch(e){clearSave();loadErr=true}}
@@ -1763,6 +1787,7 @@ $("bZoom").onclick=e=>{e.stopPropagation();SFX.ui();setZoom(ZL+1)};$("bZoom").in
 $("bBow").onclick=()=>{showMap=false;if(now()<lockUntil)return;interrupt=false;shootBow()};
 $("bFoot").onclick=()=>{SFX.ui();showMap=false;openFoot()};
 $("bObs").onclick=()=>{showMap=false;if(now()<lockUntil||busy)return;observe()};
+$("rkdClose").onclick=()=>{SFX.ui();$("rkd").classList.remove("on")};
 $("obsClose").onclick=()=>{SFX.ui();$("obs").classList.remove("on")};
 $("mapWrap").addEventListener("click",()=>{if(showMap)showMap=false});
 $("bDown").onclick=()=>{showMap=false;descend()};
