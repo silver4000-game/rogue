@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<meta name="rogue-rev" content="20261102k">
+<meta name="rogue-rev" content="20261102l">
 <meta name="theme-color" content="#9fe0ff">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <script>try{if(navigator.standalone||matchMedia("(display-mode: standalone)").matches){document.documentElement.classList.add("sa");const st=()=>{const g=document.querySelector(".scr");if(!g)return;const r=g.getBoundingClientRect(),d=document.documentElement.style;d.setProperty("--gt",r.top+"px");d.setProperty("--gb",Math.max(0,innerHeight-r.bottom)+"px")};addEventListener("resize",st);addEventListener("load",st);setTimeout(st,300)}}catch(e){}</script>
 <meta name="apple-mobile-web-app-title" content="ふしぎな地下">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261102k">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261102k">
-<link rel="manifest" href="manifest.webmanifest?v=20261102k">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261102l">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261102l">
+<link rel="manifest" href="manifest.webmanifest?v=20261102l">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800;900&display=swap" rel="stylesheet">
 <title>ふしぎな地下ダンジョン</title>
 <style>
@@ -237,6 +237,15 @@ button{font-family:var(--F)}
 #side{gap:8px}
 #pad button.wait{font-size:14px}
 #stat2 .st{display:inline-flex;gap:3px}#stat2 .st i{font-style:normal;padding:0 5px;border-radius:8px;color:#fff;font-weight:900}
+#obs{position:fixed;inset:0;z-index:56;display:none;align-items:center;justify-content:center;background:rgba(60,40,110,.45);padding:12px}#obs.on{display:flex}
+#obs .lvBox{width:100%;max-width:360px;padding:12px 14px 14px;text-align:center;max-height:100%;overflow:auto}
+#obsT{font-size:22px;font-weight:900;color:#fff;text-shadow:2px 2px 0 var(--ink),-2px 2px 0 var(--ink),2px -2px 0 var(--ink),-2px -2px 0 var(--ink);margin-bottom:4px}
+#obsC{width:120px;height:120px;display:block;margin:0 auto;background:radial-gradient(#fff8e8,#f0e6ff);border:3px solid var(--ink);border-radius:18px}
+#obsN{font-size:20px;font-weight:900;color:var(--ink);margin:6px 0 4px}#obsN small{font-size:13px;color:#7a6aa8;margin-left:6px}
+#obsS{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:8px}#obsS div{border:2.5px solid var(--ink);border-radius:12px;background:#fff;padding:4px 2px;font-weight:900;color:var(--ink);line-height:1.15}#obsS small{display:block;font-size:10.5px;color:#7a6aa8}#obsS b{font-size:16px}
+#obsD{border:2.5px solid #f28ab8;border-radius:12px;background:linear-gradient(#fff0f6,#ffe0ee);padding:7px 10px;text-align:left;font-size:13px;line-height:1.5;font-weight:800;color:var(--ink);margin-bottom:10px}
+#obsClose{display:flex;align-items:center;justify-content:center;margin:0 auto;min-height:46px;width:70%;border:3px solid var(--ink);border-radius:24px;background:linear-gradient(#ffe0f0,#ffb0d8);box-shadow:0 4px 0 var(--ink);color:var(--ink);font-weight:900;font-size:17px;font-family:inherit}
+html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
 #cls,#shop{position:fixed;inset:0;z-index:55;display:none;align-items:center;justify-content:center;background:rgba(60,40,110,.45);padding:12px}
 #cls.on,#shop.on{display:flex}
 #cls .lvBox,#shop .lvBox{width:100%;max-width:380px;padding:12px 12px 14px;text-align:center}
@@ -295,7 +304,7 @@ button{font-family:var(--F)}
   <button class="big" id="bCont">つづきから</button>
   <button class="big" id="bStart">はじめから</button>
   <div class="tRow"><button class="big sub" id="bHow">あそびかた</button><button class="big sub" id="bRank">ランキング</button></div>
-  <div class="ver">rev 20261102k</div>
+  <div class="ver">rev 20261102l</div>
 </section>
 
 <section id="rank" class="scr">
@@ -323,7 +332,7 @@ button{font-family:var(--F)}
     <div id="side" class="side">
       <button id="bBag">持ち物</button>
       <button id="bFoot">足もと</button>
-      <button id="bMap">地図</button>
+      <button id="bObs">かんさつ</button>
     </div>
     <div id="pad">
       <button data-d="-1,-1"><svg viewBox="0 0 24 24"><path d="M5 5h10l-3 3 8 8-4 4-8-8-3 3z"/></svg></button>
@@ -351,6 +360,7 @@ button{font-family:var(--F)}
 <div id="lvup"><div class="lvBox"><div id="lvT">レベルアップ！</div><div id="lvSub"></div><div id="lvGrid"><button data-s="atk"><i>⚔️</i><b>こうげき</b><span></span></button><button data-s="def"><i>🛡️</i><b>ぼうぎょ</b><span></span></button><button data-s="hp"><i>❤️</i><b>HP</b><span></span></button></div></div></div>
 <div id="pop"></div>
 <div id="cls"><div class="lvBox"><div id="clsT">だれで あそぶ？</div><div id="clsGrid"></div><button id="clsBack" style="margin-top:10px;min-height:44px;width:60%;border:3px solid var(--ink);border-radius:22px;background:#fff;box-shadow:0 3px 0 var(--ink);color:var(--ink);font-weight:900;font-family:var(--F)">もどる</button></div></div>
+<div id="obs"><div class="lvBox"><div id="obsT">かんさつ</div><canvas id="obsC" width="240" height="240"></canvas><div id="obsN"></div><div id="obsS"></div><div id="obsD"></div><button id="obsClose">とじる</button></div></div>
 <div id="shop"><div class="lvBox"><div id="shopT">しょうにん</div><div id="shopG"></div><div id="shopTabs"><button data-m="buy" class="on">かう</button><button data-m="sell">うる</button></div><div id="shopInfo"></div><div id="shopList"></div><div id="shopBtns"><button id="shopAct">かう</button><button id="shopClose">とじる</button></div></div></div>
 <section id="result" class="scr">
   <div id="rT">やられてしまった…</div>
@@ -362,7 +372,7 @@ button{font-family:var(--F)}
 <script>
 "use strict";
 const $=id=>document.getElementById(id);
-const REV="20261102k";
+const REV="20261102l";
 /* ===== 音 ===== */
 let AC=null;
 function ac(){try{if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();if(AC.state==="suspended")AC.resume()}catch(e){}return AC}
@@ -629,6 +639,22 @@ function canStep(x,y,dx,dy){const nx=x+dx,ny=y+dy;if(wall(nx,ny))return false;if
 function msg(t,c){G.log.push({t,c:c||""});if(G.log.length>30)G.log.shift();drawLog()}
 function drawLog(){const L=G.log.slice(-1);$("log").innerHTML=L.map(m=>'<div class="'+m.c+'">'+m.t+'</div>').join("")}
 
+/* ===== かんさつ ===== */
+const BEHN={slow:"うごきが おそい。",fast:"1回に 2マス すすむ。",erratic:"ふらふら うごく。",ranged:"はなれた ところから こうげきする。",caster:"まほうの本を つかう。",summon:"なかまを よぶ。"};
+const ONN={psn:"こうげきで どくに することがある。",conf:"こうげきで こんらんさせることがある。",slow:"こうげきで どんそくに することがある。",steal:"お金を ぬすんで にげる。"};
+const BKN={bolt:"いかずち",sleep:"ねむり",slow:"どんそく",conf:"こんらん",par:"しびれ",heal:"かいふく",summon:"なかまよび"};
+function observe(){if(!G||G.over)return;if(G.p.lvq>0){showLv();return}const p=G.p,[dx,dy]=p.dir;let x=p.x,y=p.y,e=null;
+  for(let i=0;i<10;i++){if(!canStep(x,y,dx,dy))break;x+=dx;y+=dy;const o=entAt(x,y);if(o){if(vis(o.x,o.y))e=o;break}}
+  if(!e){msg("そっちには てきが いない。");popMsg("そっちには てきが いない");SFX.ui();return}
+  const E=ENEMIES[e.k],f0=E.boss?E.bf:(E.f[0]>100?1:E.f[0]),lv=1+Math.max(0,G.floor-f0);SFX.ui();
+  const c=$("obsC"),g=c.getContext("2d");g.clearRect(0,0,240,240);drawEnemy(g,e.k,10,8,220,e.sleep>0);$("pop").classList.remove("go");
+  $("obsN").innerHTML=E.name+"<small>Lv"+lv+"</small>";
+  $("obsS").innerHTML='<div><small>HP</small><b>'+Math.max(0,e.hp)+"/"+e.mhp+'</b></div><div><small>こうげき</small><b>'+e.atk+'</b></div><div><small>まもり</small><b>'+e.def+'</b></div>';
+  const L=[];if(E.boss)L.push("👑 ボス。なかまを よぶことが ある。");if(E.two)L.push("1ターンに 2回 うごく。");if(BEHN[E.beh])L.push(BEHN[E.beh]);if(E.on&&ONN[E.on])L.push(ONN[E.on]);
+  if(E.books)L.push("まほう："+E.books.map(b=>BKN[b]||b).join("・"));if(E.shell)L.push("ときどき こうらに かくれて ぶきが きかない。");if(E.hard)L.push("とても かたい。ダメージは いつも 1。すぐ にげる。");if(E.boom)L.push("HPが へると ばくはつする（まわり3×3）。");if(E.ghost)L.push("ぶきは すりぬける。道具や つえは きく。");
+  const st=[];if(e.sleep>0)st.push("ねむっている");if(e.psn>0)st.push("どく");if(e.conf>0)st.push("こんらん");if(e.slow>0)st.push("どんそく");if(e.par>0)st.push("しびれ");if(e.hide)st.push("こうらに かくれている");if(e.fuse)st.push("ばくはつ しそう！");
+  L.push("いまの じょうたい："+(st.length?st.join("・"):"ふつう"));
+  $("obsD").innerHTML=L.map(t=>"・"+t).join("<br>");$("obs").classList.add("on")}
 /* ===== ゆみ（いつも もっている。や を つかう） ===== */
 function shootBow(){const p=G.p;if(!G||G.over||busy)return;if(p.lvq>0){showLv();return}
   if(!(p.arrows>0)){msg("や が ない。");popMsg("や が ない！");SFX.miss();return}
@@ -1699,7 +1725,8 @@ $("bBag").onclick=()=>{SFX.ui();showMap=false;openBag()};
 $("bZoom").onclick=e=>{e.stopPropagation();SFX.ui();setZoom(ZL+1)};$("bZoom").innerHTML="🔍<small>"+ZN[ZL]+"</small>";
 $("bBow").onclick=()=>{showMap=false;if(now()<lockUntil)return;interrupt=false;shootBow()};
 $("bFoot").onclick=()=>{SFX.ui();showMap=false;openFoot()};
-$("bMap").onclick=()=>{SFX.ui();showMap=!showMap};
+$("bObs").onclick=()=>{showMap=false;if(now()<lockUntil||busy)return;observe()};
+$("obsClose").onclick=()=>{SFX.ui();$("obs").classList.remove("on")};
 $("mapWrap").addEventListener("click",()=>{if(showMap)showMap=false});
 $("bDown").onclick=()=>{showMap=false;descend()};
 $("bTurn").onclick=()=>{SFX.ui();turnMode=!turnMode;$("bTurn").classList.toggle("on",turnMode)};
