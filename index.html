@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<meta name="rogue-rev" content="20261102s">
+<meta name="rogue-rev" content="20261102t">
 <meta name="theme-color" content="#9fe0ff">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <script>try{if(navigator.standalone||matchMedia("(display-mode: standalone)").matches){document.documentElement.classList.add("sa");const st=()=>{const g=document.querySelector(".scr");if(!g)return;const r=g.getBoundingClientRect(),d=document.documentElement.style;d.setProperty("--gt",r.top+"px");d.setProperty("--gb",Math.max(0,innerHeight-r.bottom)+"px")};addEventListener("resize",st);addEventListener("load",st);setTimeout(st,300)}}catch(e){}</script>
 <meta name="apple-mobile-web-app-title" content="ふしぎな地下">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261102s">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261102s">
-<link rel="manifest" href="manifest.webmanifest?v=20261102s">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261102t">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261102t">
+<link rel="manifest" href="manifest.webmanifest?v=20261102t">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800;900&display=swap" rel="stylesheet">
 <title>ふしぎな地下ダンジョン</title>
 <style>
@@ -328,7 +328,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
   <button class="big" id="bCont">つづきから</button>
   <button class="big" id="bStart">はじめから</button>
   <div class="tRow"><button class="big sub" id="bHow">あそびかた</button><button class="big sub" id="bRank">ランキング</button></div>
-  <div class="ver">rev 20261102s</div>
+  <div class="ver">rev 20261102t</div>
 </section>
 
 <section id="rank" class="scr">
@@ -340,7 +340,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
 <section id="howto" class="scr">
   <h2>あそびかた</h2>
   <div class="hw">ダンジョンは <b>どこまでも</b> つづくよ。どこまで もぐれるかな？<br><b>10階ごと</b>に ボスの階。ボスを たおすと 階段が出る。<br>自分が1歩うごくと、敵も1歩うごくよ。<br>やられたら、<b>1階からやり直し</b>。</div>
-  <div class="hw"><b>主人公</b>：はじめに 4人から えらぶ。<br>せんし＝ひろう 剣・たての レベルが 高め／まほうつかい＝つえの回数 +3／しょうにん＝持ち物 +4、ひろう お金 1.5倍、はじめから 50G／あそびにん＝いい道具が 出やすい。</div>
+  <div class="hw"><b>主人公</b>：はじめに 4人から えらぶ。<br>せんし＝ひろう 剣・たての レベルが 高め／まほうつかい＝つえの回数 +3／しょうにん＝持ち物 +4、ひろう お金 1.5倍／あそびにん＝いい道具が 出やすい。</div>
   <div class="hw"><b>うごく</b>：十字ボタン（ななめもOK）。押しっぱなしで 続けて歩く。<br><b>むき</b>：光っている間は 矢印で むきだけ かわる。<br><b>こうげき</b>：むいている方向へ こうげき。敵がいなければ からぶり（休むかわりにもなる）。<br><b>足もと</b>：足もとの道具を ひろう・つかう・なげる・いれかえ できる。<br><b>おりる</b>：階段の上で押す。<br><b>ゆみ</b>：いつも もっている。や を 1本つかって むいている方向へ うつ。や は ダンジョンで ひろえる。<br><b>像</b>：こうげきすると こわれて 力が 出る。<br><b>なげる</b>：むいている方向へ 7マスまで。<br><b>むきで とぶ道具</b>：つえ・なげる道具は むいている方向へ。「目の前だけ」「7マス」「どこまでも」の しゅるいが ある。まきものは 向きに かんけいなし。</div>
   <div class="hw" id="howList"></div>
   <div class="hw"><b>おなか</b>：1回うごくと 1へる（さいしょ 500）。0になると HPがへる（でも 1より下には へらない）。塩むすび＝+150、シャケおむすび＝+300、ジャンボおむすび＝おなか ぜんぶ回ふく、まんがにく＝おなかも HPも ぜんぶ回ふく。いぶくろのたね＝最大おなか +100。<br><b>レベル</b>：<b>こうげき・ぼうぎょ・HP</b>から1つえらぶ。どれでも だいじょうぶ。<br><b>ぶき・たての Lv</b>：Lvが高いほど 強い。深い階ほど 高いLvが 出やすい。<br><b>お金</b>：ひろったり 敵が 落としたり。<b>しょうにん</b>が いる階では 買い物が できる（ぶつかると 話せる）。<br><b>状態異常</b>：<b style="color:#5ab030">どく</b>＝HPがへる／<b style="color:#e050c0">こんらん</b>＝思った方へ 歩けない／<b style="color:#d09020">どんそく</b>＝敵が 2回うごく／<b style="color:#8a70e0">ねむり</b>・<b style="color:#d0b000">しびれ</b>＝うごけない。敵にも きく。なおりぐさで なおる。<br><b>会心の一撃</b>：ときどき ダメージ1.5倍。<br><b>★レア度</b>：★が多いほど 強くて めずらしい。<br><b>ゆびわ</b>：1つだけ。つけている間 ずっと効く。<br><b>〇〇の証</b>：敵を たおすと たまに（1%）手に入る。+1ごとに その敵の EXPが 10%ふえる。持ち物画面で 見られる。<br><b>ボスの階</b>：10階ごと。ボスを たおすと 階段が出る。ボスは なかまを よぶことも ある。</div>
@@ -398,7 +398,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
 <script>
 "use strict";
 const $=id=>document.getElementById(id);
-const REV="20261102s";
+const REV="20261102t";
 /* ===== 音 ===== */
 let AC=null;
 function ac(){try{if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();if(AC.state==="suspended")AC.resume()}catch(e){}return AC}
@@ -469,7 +469,7 @@ const BOOKS={bolt:{n:"まほうだんの本",c:"#ffb0e0"},sleep:{n:"ねむりの
 /* 状態異常 */
 const STS={psn:{n:"どく",c:"#5ab030",ic:"☠"},conf:{n:"こんらん",c:"#e050c0",ic:"💫"},slow:{n:"どんそく",c:"#d09020",ic:"🐌"},slp:{n:"ねむり",c:"#8a70e0",ic:"💤"},par:{n:"しびれ",c:"#d0b000",ic:"⚡"},bind:{n:"こうそく",c:"#7a7a90",ic:"⛓️"},haste:{n:"ばいそく",c:"#30a8e0",ic:"💨"},inv:{n:"むてき",c:"#e0a000",ic:"⭐"}};
 /* 主人公 */
-const CLS={warrior:{n:"せんし",d:["剣・たての レベルが 高め"]},mage:{n:"まほうつかい",d:["つえの 回数 +3"]},merchant:{n:"しょうにん",d:["持ち物 +4","ひろう お金 1.5倍","はじめから 50G"]},joker:{n:"あそびにん",d:["いい道具が","見つかりやすい"]}};
+const CLS={warrior:{n:"せんし",d:["剣・たての レベルが 高め"]},mage:{n:"まほうつかい",d:["つえの 回数 +3"]},merchant:{n:"しょうにん",d:["持ち物 +4","ひろう お金 1.5倍"]},joker:{n:"あそびにん",d:["いい道具が","見つかりやすい"]}};
 /* せんしは レベルアップの こうげき・まもりが 1.5倍 */
 const atkG=()=>BAL.atkG,defG=()=>BAL.defG;
 const ITEMS={
@@ -578,7 +578,7 @@ const OBJS={
 /* ===== 状態 ===== */
 let G=null;   /* 1回の冒険 */
 function newRun(cls){cls=CLS[cls]?cls:"warrior";
-  G={floor:1,turn:0,sv:5,p:{x:0,y:0,arrows:5,hp:30,mhp:30,lv:1,exp:0,atk:4,def:1,food:500,fmax:500,wep:null,shd:null,dir:[0,1],psn:0,slp:0,conf:0,slow:0,par:0,regen:0,kills:0,sv:5,lvq:0,atkP:0,defP:0,hpP:0,cls,gold:cls==="merchant"?50:0,iluck:cls==="joker"?2:0,ring:null,buf:{atk:0,def:0,regen:0}},
+  G={floor:1,turn:0,sv:5,p:{x:0,y:0,arrows:5,hp:30,mhp:30,lv:1,exp:0,atk:4,def:1,food:500,fmax:500,wep:null,shd:null,dir:[0,1],psn:0,slp:0,conf:0,slow:0,par:0,regen:0,kills:0,sv:5,lvq:0,atkP:0,defP:0,hpP:0,cls,gold:0,iluck:cls==="joker"?2:0,ring:null,buf:{atk:0,def:0,regen:0}},
      bag:[],log:[],map:null,seen:null,ents:[],items:[],stairs:null,rooms:[],spawnT:0,objs:[],boss:0};
   genFloor();msg("ふしぎな地下ダンジョンに入った。","y");msg("どこまで もぐれるかな？ 10階ごとに ボスがいるよ！");
 }
@@ -1468,7 +1468,7 @@ function drawHeroMoe(g,x,y,s,f,wid,cls){f=f||"d";cls=cls||(G&&G.p&&G.p.cls)||"wa
 /* ---- 主人公（rev s: まんまる フラット スタイル。線なし・おちついた目） ---- */
 const PUNI={warrior:{sk:"#f4c49a",hr:"#7a3e1a",bd:"#3c6cc0",bd2:"#2c5096",ac:"#ffc83a",sl:"#3c6cc0"},
   merchant:{sk:"#f8d0a8",hr:"#4a3020",bd:"#f08a2a",bd2:"#c86a1a",ac:"#3a9a5a",sl:"#f08a2a"},
-  mage:{sk:"#fde0cc",hr:"#2c2a4a",bd:"#1f6f78",bd2:"#164e56",ac:"#ffd86a",sl:"#1f6f78"},
+  mage:{sk:"#fde0cc",hr:"#7a4a26",bd:"#1f6f78",bd2:"#164e56",ac:"#ffd86a",sl:"#1f6f78"},
   joker:{sk:"#ffe2d0",hr:"#ffd25a",bd:"#26222e",bd2:"#111018",ac:"#ffffff",sl:null}};
 function puniHero(g,x,y,s,F,wid,cls){
   const C=PUNI[cls]||PUNI.warrior,u=s/32,X=a=>x+a*u,Y=b=>y+b*u;
@@ -1481,8 +1481,9 @@ function puniHero(g,x,y,s,F,wid,cls){
   const headPath=()=>{g.beginPath();if(sq)rr(g,X(hx-8.4),Y(hy-7.6),16.8*u,15.6*u,6.4*u);else g.ellipse(X(hx),Y(hy),8.2*u,7.8*u,0,0,7)};
   E(16,29.2,7,1.5,"rgba(30,10,40,.25)");
   /* うしろの もの */
-  if(cls==="joker"&&!back){E(hx-fo*6.5,hy+2,2.6,5.4,C.hr,fo*.3)}/* ポニーテール */
-  if(cls==="mage"){E(hx-fo*.8,hy+2.6,8.8,7.2,C.hr)}/* ボブの うしろがみ */
+  const lh=cls==="joker"||cls==="mage";/* ロングヘア（遊び人＝金・魔法使い＝茶） */
+  const longH=()=>{RR(hx-fo*1.2-8.8+t*1.2,hy-3,17.6-t*1.6,cls==="mage"?14.6:13.6,5.6,C.hr)};
+  if(lh&&!back)longH();
   if(back&&t>0&&wid)heldWeapon(g,x,y,u,wid,cx+5,22.4);
   /* あし */
   const legC=cls==="joker"?"#f2c8b4":cls==="mage"?"#16343a":"#5a3a2a",shoe=cls==="joker"?"#111018":cls==="mage"?"#2a1a2a":"#3a2418";
@@ -1494,6 +1495,7 @@ function puniHero(g,x,y,s,F,wid,cls){
   else{/* バニースーツ */RR(cx-3.6*wf,17.8,7.2*wf,8.4,3,C.sk);g.beginPath();g.moveTo(X(cx-3.8*wf),Y(19.6));g.lineTo(X(cx+3.8*wf),Y(19.6));g.lineTo(X(cx+3.8*wf),Y(25));g.lineTo(X(cx+1.6*wf),Y(26.6));g.lineTo(X(cx-1.6*wf),Y(26.6));g.lineTo(X(cx-3.8*wf),Y(25));g.closePath();g.fillStyle=C.bd;g.fill();
     if(!back){RR(cx-2*wf+fo*2,17.6,4*wf,1.4,.6,"#fff");PL([hx+fo*2-2.2,18.2,hx+fo*2,18.9,hx+fo*2-2.2,19.6],"#e0284a");PL([hx+fo*2+2.2,18.2,hx+fo*2,18.9,hx+fo*2+2.2,19.6],"#e0284a");E(hx+fo*2,18.9,.6,.6,"#b01838")}
     else E(cx-fo*1,25.4,1.9,1.8,"#fff")}/* しっぽ */
+  if(lh&&back)longH();
   if(cls==="warrior"&&back)RR(cx-5.4*wf,17.4,10.8*wf,10,3,"#d83a3a");/* マント */
   /* うで */
   const arm=(ax,hx2,hy2)=>{if(C.sl)LN(ax,19.4,hx2,hy2,C.sl,2.8);else LN(ax,19.4,hx2,hy2,C.sk,2.2);if(cls==="joker")E(hx2,hy2-.6,1.2,.7,"#fff");E(hx2,hy2,1.3,1.3,C.sk)};
@@ -1510,7 +1512,7 @@ function puniHero(g,x,y,s,F,wid,cls){
   if(back)E(hx,hy,10,10,C.hr);
   else{E(hx-fo*3.6,hy-4.8+t*1.2,9.6+t,5.2+t*1.6,C.hr);if(cls!=="warrior"){for(const k of [-4.4,-1.2,2])E(hx+fo*1.4+k*(1-t*.5),hy-2.2,2.2,1.6,C.hr)}else{for(const k of [-5,-2,1,4])PL([hx+fo*1.4+k-1.6,hy-3,hx+fo*1.4+k+1.6,hy-3,hx+fo*1.4+k+.2,hy-.6],C.hr)}}
   g.restore();
-  if(cls==="mage"&&!back){for(const d of (t===1?[-1]:[-1,1]))RR(hx+d*(7.4-t*.8)-(d<0?1.4:0)-fo*.4,hy-3,1.6,9.2,.8,C.hr)}/* ボブの よこがみ */
+  if(lh&&!back){for(const d of (t===1?[-1]:[-1,1]))RR(hx+d*(7.4-t*.8)-(d<0?1.6:0)-fo*.4,hy-3,1.8,12.4,.9,C.hr)}/* ながい よこがみ */
   /* かお */
   if(!back){const ex=t===1?[hx+3.4]:[hx+fo*2.4-2.9*(1-.4*t),hx+fo*2.4+2.9*(1-.4*t)],ey=hy+1.6;
     for(const e of ex){E(e,ey,.95,1.3,"#2a1e2a");E(e+.7,ey+2.4,1.3,.7,"rgba(255,120,140,.45)")}
