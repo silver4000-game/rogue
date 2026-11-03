@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<meta name="rogue-rev" content="20261103q">
+<meta name="rogue-rev" content="20261103r">
 <meta name="theme-color" content="#9fe0ff">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <script>try{if(navigator.standalone||matchMedia("(display-mode: standalone)").matches){document.documentElement.classList.add("sa");const st=()=>{const g=document.querySelector(".scr");if(!g)return;const r=g.getBoundingClientRect(),d=document.documentElement.style;d.setProperty("--gt",r.top+"px");d.setProperty("--gb",Math.max(0,innerHeight-r.bottom)+"px")};addEventListener("resize",st);addEventListener("load",st);setTimeout(st,300)}}catch(e){}</script>
 <meta name="apple-mobile-web-app-title" content="ふしぎな地下">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261103q">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261103q">
-<link rel="manifest" href="manifest.webmanifest?v=20261103q">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261103r">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261103r">
+<link rel="manifest" href="manifest.webmanifest?v=20261103r">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800;900&display=swap" rel="stylesheet">
 <title>ふしぎな地下ダンジョン</title>
 <style>
@@ -332,7 +332,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
   <button class="big" id="bCont">つづきから</button>
   <button class="big" id="bStart">はじめから</button>
   <div class="tRow"><button class="big sub" id="bHow">あそびかた</button><button class="big sub" id="bRank">ランキング</button></div>
-  <div class="ver">rev 20261103q</div>
+  <div class="ver">rev 20261103r</div>
 </section>
 
 <section id="rank" class="scr">
@@ -402,7 +402,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
 <script>
 "use strict";
 const $=id=>document.getElementById(id);
-const REV="20261103q";
+const REV="20261103r";
 /* ===== 音 ===== */
 let AC=null;
 function ac(){try{if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();if(AC.state==="suspended")AC.resume()}catch(e){}return AC}
@@ -661,12 +661,12 @@ function genFloor(){
   /* しかけ */
   const nO=Math.min(12,RI(2,4)+Math.floor(G.floor/6)+(BF?3:0));for(let i=0;i<nO;i++){const k=randObjKind(),r=pick(rooms);if(OBJS[k].trap&&r===rooms[ri])continue;const pos=freeIn(r);if(!pos)continue;G.objs.push({x:pos.x,y:pos.y,k,hid:OBJS[k].trap?1:0});
     if(k==="ice"){const n=RI(2,5);for(let j=0;j<n;j++){const b=pick(G.objs.filter(o=>o.k==="ice"&&G.roomMap[o.y][o.x]===G.roomMap[pos.y][pos.x]));const nx=b.x+pick([-1,0,1]),ny=b.y+pick([-1,0,1]),key=nx+","+ny;if(G.roomMap[ny]&&G.roomMap[ny][nx]===G.roomMap[pos.y][pos.x]&&!used.has(key)){used.add(key);G.objs.push({x:nx,y:ny,k:"ice",hid:0})}}}}
-  if(BF){G.boss=1;G.stairs.hide=1;const bk=BOSSES[(Math.floor(G.floor/10)-1)%BOSSES.length],sr=rooms[si];let pos=null;for(let k=0;k<60&&!pos;k++){const c=freeIn(sr);if(c&&Math.max(Math.abs(c.x-G.stairs.x),Math.abs(c.y-G.stairs.y))<=3)pos=c}pos=pos||freeIn(sr);if(pos){const b=mkEnemy(bk,pos.x,pos.y,false);G.ents.push(b)}}
+  if(BF){G.boss=1;G.stairs.hide=1;const bk=BOSSES[(Math.floor(G.floor/10)-1)%BOSSES.length],sr=rooms[si];let pos=null;for(let k=0;k<60&&!pos;k++){const c=freeIn(sr);if(c&&Math.max(Math.abs(c.x-G.stairs.x),Math.abs(c.y-G.stairs.y))<=3)pos=c}pos=pos||freeIn(sr);if(pos){const b=mkEnemy(bk,pos.x,pos.y,false);G.ents.push(b)}for(let j=0;j<2;j++){const q=freeIn(sr);if(q)G.objs.push({x:q.x,y:q.y,k:statueKind(),hid:0})}}
   if(!BF&&G.floor>=2&&Math.random()<.3){const r=pick(rooms.filter(x=>x!==rooms[ri])),pos=freeIn(r);if(pos)G.objs.push({x:pos.x,y:pos.y,k:"shop",hid:0,stock:shopStock()})}
   /* とくべつな部屋（1階に 1つまで。2階から 20%）: モンスターハウス 80%・宝物庫 20% */
   G.sp=null;if(!BF&&G.floor>=2&&Math.random()<.2){const cand=rooms.map((r,i)=>i).filter(i=>i!==ri&&i!==si&&rooms[i].w*rooms[i].h>=12&&!G.objs.some(o=>o.k==="shop"&&roomMap[o.y][o.x]===i));
     if(cand.length){const i=pick(cand),r=rooms[i],q=Math.random(),k=q<.8?"mh":"tr";G.sp={r:i,k,on:0};const area=r.w*r.h;
-      if(k==="mh"){const n=Math.min(Math.round(area*.3),6+Math.floor(G.floor/2));for(let j=0;j<n;j++){const pos=freeIn(r);if(!pos)break;const e=mkEnemy(randEnemyKind(),pos.x,pos.y,true);e.mh=1;G.ents.push(e)}for(let j=0;j<3;j++){const pos=freeIn(r);if(pos)G.items.push({...pos,...randItem()})}}
+      if(k==="mh"){const n=Math.min(Math.round(area*.3),6+Math.floor(G.floor/2));for(let j=0;j<n;j++){const pos=freeIn(r);if(!pos)break;const e=mkEnemy(randEnemyKind(),pos.x,pos.y,true);e.mh=1;G.ents.push(e)}{const q=freeIn(r);if(q)G.objs.push({x:q.x,y:q.y,k:statueKind(),hid:0})}for(let j=0;j<3;j++){const pos=freeIn(r);if(pos)G.items.push({...pos,...randItem()})}}
       else if(k==="tr"){const n=Math.min(Math.round(area*.35),9);for(let j=0;j<n;j++){const pos=freeIn(r);if(!pos)break;const it=Math.random()<.3?{k:"gold",amt:goldAmt()*2}:randItem();G.items.push({...pos,...it})}for(let j=0;j<2;j++){const pos=freeIn(r);if(!pos)break;const e=mkEnemy(randEnemyKind(),pos.x,pos.y,true);e.mh=1;G.ents.push(e)}}}}
   /* ジャグラー（2階から 15%。ボスの階・スタートの部屋には 出ない） */
   if(!BF&&G.floor>=2&&Math.random()<.15){const cr=rooms.filter((x,i)=>i!==ri&&!(G.sp&&G.sp.r===i));if(cr.length){const pos=freeIn(pick(cr));if(pos)G.objs.push({x:pos.x,y:pos.y,k:"jug",hid:0})}}
@@ -873,7 +873,8 @@ function afterStep(dx,dy){const p=G.p;
     const o=objAt(p.x,p.y);if(!o)return;if(OBJS[o.k].statue)return;const r=triggerObj(o,dx,dy);if(G.over||r==="fell")return;
     if(r==="slide"){if((dx||dy)&&canStep(p.x,p.y,dx,dy)&&!entAt(p.x+dx,p.y+dy)){p.x+=dx;p.y+=dy;if(n===0)msg("こおりの ゆかで つるっと すべった！");continue}return}
     if(o.k==="warp"||o.k==="tele"){const j=G.items.findIndex(i=>i.x===p.x&&i.y===p.y);if(j>=0)pickUp(j)}return}}
-function randObjKind(){const f=G.floor,list=Object.entries(OBJS).filter(([k,o])=>f>=o.f);let s=list.reduce((a,[k,o])=>a+o.w,0),r=Math.random()*s;for(const [k,o] of list){r-=o.w;if(r<0)return k}return "spike"}
+/* 像は モンスターハウスと ボスの階 だけ（rev r） */function statueKind(){const list=Object.entries(OBJS).filter(([k,o])=>o.statue&&G.floor>=o.f);let s=list.reduce((a,[k,o])=>a+o.w,0),r=Math.random()*s;for(const [k,o] of list){r-=o.w;if(r<0)return k}return "sheal"}
+function randObjKind(){const f=G.floor,list=Object.entries(OBJS).filter(([k,o])=>f>=o.f&&!o.statue);let s=list.reduce((a,[k,o])=>a+o.w,0),r=Math.random()*s;for(const [k,o] of list){r-=o.w;if(r<0)return k}return "spike"}
 const stOK=()=>G.stairs&&!G.stairs.hide;
 function bossMsg(){const b=G.ents.find(e=>ENEMIES[e.k].boss);if(b){msg("ボスの階だ！ "+ENEMIES[b.k].name+"を たおすと 階段が出る！","w");popMsg("⚠️ ボスの階！")}}
 function genBoss(){const map=[],seen=[];for(let y=0;y<MH;y++){map.push(new Array(MW).fill(1));seen.push(new Array(MW).fill(0))}
@@ -897,7 +898,7 @@ function lvMotion(n){const p=G.p,T=now();const dz=DYING.reduce((m,d)=>Math.max(m
   setTimeout(()=>{if(!G)return;SFX.lvl();FX.push({type:"lvup",x:G.p.x,y:G.p.y,t0:now(),dur:1050,n:G.p.lvq})},Math.max(0,st-T))}
 /* レベルアップ: 攻撃・防御・運・空腹・アイテム運 から1つえらぶ（えらぶまで止まる。何回分もたまる）
    どれも「たくさん上げるほど1回で上がる量が少しずつへる」ので、いろいろ上げた方が強くなる */
-const BAL={fw:2.3,hpG:26,dm:1,fl:.25,ds:.6,dk:.9,atkG:2,defG:2.1,il:.6,ilb:.3,ilf:7,lvH:10,crit:.10,dodge:.08,drop:.08,gh:.06,ga:.035,bh:1,ba:1,eh:1.25,ea:1.12,ni0:5};
+const BAL={fw:1,hpG:26,dm:1,fl:.25,ds:.6,dk:.9,atkG:2,defG:2.1,il:.6,ilb:.3,ilf:7,lvH:10,crit:.10,dodge:.08,drop:.08,gh:.06,ga:.035,bh:1,ba:1,eh:1.25,ea:1.12,ni0:5};
 const geo=(n,a,r)=>a*(1-Math.pow(r,n))/(1-r);
 const luckOf=()=>0;
 const r1=v=>Math.round(v*10)/10;
@@ -2132,7 +2133,7 @@ function drawMini(W,H){const s=Math.floor(Math.min((W-12)/MW,(H-40)/MH)),ox=Math
 /* ===== 入力 ===== */
 let holdT=null,holdDir=null;
 function stopHold(){clearTimeout(holdT);holdT=null;if(holdDir)holdDir.classList.remove("on");holdDir=null}
-function doMove(dx,dy){if($("bag").classList.contains("on")||$("lvup").classList.contains("on")||$("shop").classList.contains("on")||$("jug").classList.contains("on"))return;if(now()<lockUntil)return;interrupt=false;if(!dx&&!dy){if(G&&!G.over&&!(G.p.slp>0)&&!busy&&!(G.p.lvq>0)){whiff();hud()}return}playerAct(dx,dy);hud()}
+function doMove(dx,dy){if($("bag").classList.contains("on")||$("lvup").classList.contains("on")||$("shop").classList.contains("on")||$("jug").classList.contains("on"))return;if(now()<lockUntil)return;interrupt=false;if(!dx&&!dy){if(G&&!G.over&&G.p.slp>0&&!busy&&!(G.p.lvq>0)){playerAct(0,0);hud();return}/* ねむっている ときは 1ターン すすむ */if(G&&!G.over&&!(G.p.slp>0)&&!busy&&!(G.p.lvq>0)){whiff();hud()}return}playerAct(dx,dy);hud()}
 $("pad").addEventListener("pointerdown",e=>{const b=e.target.closest("button");if(!b)return;e.preventDefault();stopHold();if(showMap){showMap=false;return}
   const [dx,dy]=b.dataset.d.split(",").map(Number);holdDir=b;b.classList.add("on");doMove(dx,dy);
   if(dx||dy){const rep=()=>{if(!holdDir||interrupt||!G||G.over)return stopHold();doMove(dx,dy);holdT=setTimeout(rep,130)};holdT=setTimeout(rep,320)}});
