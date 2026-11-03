@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<meta name="rogue-rev" content="20261103m">
+<meta name="rogue-rev" content="20261103n">
 <meta name="theme-color" content="#9fe0ff">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <script>try{if(navigator.standalone||matchMedia("(display-mode: standalone)").matches){document.documentElement.classList.add("sa");const st=()=>{const g=document.querySelector(".scr");if(!g)return;const r=g.getBoundingClientRect(),d=document.documentElement.style;d.setProperty("--gt",r.top+"px");d.setProperty("--gb",Math.max(0,innerHeight-r.bottom)+"px")};addEventListener("resize",st);addEventListener("load",st);setTimeout(st,300)}}catch(e){}</script>
 <meta name="apple-mobile-web-app-title" content="ふしぎな地下">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261103m">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261103m">
-<link rel="manifest" href="manifest.webmanifest?v=20261103m">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261103n">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261103n">
+<link rel="manifest" href="manifest.webmanifest?v=20261103n">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800;900&display=swap" rel="stylesheet">
 <title>ふしぎな地下ダンジョン</title>
 <style>
@@ -330,7 +330,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
   <button class="big" id="bCont">つづきから</button>
   <button class="big" id="bStart">はじめから</button>
   <div class="tRow"><button class="big sub" id="bHow">あそびかた</button><button class="big sub" id="bRank">ランキング</button></div>
-  <div class="ver">rev 20261103m</div>
+  <div class="ver">rev 20261103n</div>
 </section>
 
 <section id="rank" class="scr">
@@ -400,7 +400,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
 <script>
 "use strict";
 const $=id=>document.getElementById(id);
-const REV="20261103m";
+const REV="20261103n";
 /* ===== 音 ===== */
 let AC=null;
 function ac(){try{if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();if(AC.state==="suspended")AC.resume()}catch(e){}return AC}
@@ -830,9 +830,16 @@ function removeObj(o){G.objs=G.objs.filter(x=>x!==o)}
 function freeNear(x,y){const ds=[[0,1],[1,0],[0,-1],[-1,0],[1,1],[-1,1],[1,-1],[-1,-1]];const out=[];for(const [dx,dy] of ds){const nx=x+dx,ny=y+dy;if(!wall(nx,ny)&&!entAt(nx,ny)&&!(nx===G.p.x&&ny===G.p.y)&&!G.items.some(i=>i.x===nx&&i.y===ny)&&!(G.stairs&&G.stairs.x===nx&&G.stairs.y===ny))out.push([nx,ny])}return out}
 function warpRandom(){const p=G.p;for(let k=0;k<200;k++){const r=pick(G.rooms),x=r.x+R(r.w),y=r.y+R(r.h);if(wall(x,y))continue;if(!entAt(x,y)&&!objAt(x,y)){p.x=x;p.y=y;break}}updateSight()}
 const WATC=[["#4aa8e8","#2a78c0","#bfe8ff"],["#b8ecff","#78c4f0","#ffffff"],["#ff7a20","#c83a10","#ffe080"],["#3aa8a0","#1a7068","#c0fff0"],["#5a4aa0","#2a2060","#b8a8ff"]];
-function drawWater(g,x,y,sx,sy,S,t){const C=WATC[thI()],u=S/32,W=(a,b)=>isPil(a,b),l=W(x-1,y)?0:3,r=W(x+1,y)?0:3,tp=W(x,y-1)?0:3,bt=W(x,y+1)?0:3;
-  g.save();g.fillStyle=LG(g,sx,sy,sx,sy+S,[C[0],C[1]]);g.beginPath();rr(g,sx+l*u,sy+tp*u,S-(l+r)*u,S-(tp+bt)*u,(l||tp||r||bt)?7*u:0);g.fill();g.clip();
-  g.strokeStyle=C[2];g.globalAlpha=.55;g.lineWidth=1.2*u;for(let k=0;k<2;k++){const ph=(t/600+x*.7+y*1.3+k*1.7)%3,yy=sy+(9+k*11)*u,xx=sx+((ph*9)%18+3)*u;g.beginPath();g.moveTo(xx,yy);g.quadraticCurveTo(xx+3*u,yy-1.6*u,xx+6*u,yy);g.stroke()}g.restore()}
+function drawWater(g,x,y,sx,sy,S,t){/* rev n: 池ではなく ふちが でこぼこの 穴 */const u=S/32,P=(a,b)=>isPil(a,b),h=(a,b)=>{let v=Math.sin(a*127.1+b*311.7+x*17.3+y*29.1)*43758.5;return v-Math.floor(v)},tint=["#000000","#0a1a2a","#2a0a04","#0a1a0a","#120820"][thI()];
+  const L=!P(x-1,y),Rt=!P(x+1,y),T=!P(x,y-1),B=!P(x,y+1),pts=[],N=6;
+  const edge=(x0,y0,x1,y1,open,k)=>{for(let i=0;i<N;i++){const f=i/N,px=x0+(x1-x0)*f,py=y0+(y1-y0)*f;if(!open){pts.push([px,py]);continue}const d=2+h(i,k)*4.5,nx=y1-y0?(x1>x0?0:(y1>y0?-1:1)):0,ny=x1-x0?(x1>x0?1:-1):0;pts.push([px+(-ny?0:0)+(k===1?-0:0),py]);const last=pts[pts.length-1];if(k===0)last[1]+=d;else if(k===1)last[0]-=d;else if(k===2)last[1]-=d;else last[0]+=d}};
+  edge(0,0,32,0,T,0);edge(32,0,32,32,Rt,1);edge(32,32,0,32,B,2);edge(0,32,0,0,L,3);
+  g.save();g.beginPath();pts.forEach(([a,b],i)=>{const X=sx+a*u,Y=sy+b*u;i?g.lineTo(X,Y):g.moveTo(X,Y)});g.closePath();
+  g.fillStyle="rgba(90,70,60,.55)";g.save();g.translate(0,-1.2*u);g.fill();g.restore();/* ふちの くずれた 土 */
+  g.fillStyle=LG(g,sx,sy,sx,sy+S,["#1a1418",tint==="#000000"?"#050406":tint]);g.fill();
+  g.clip();g.fillStyle="rgba(0,0,0,.55)";g.fillRect(sx,sy,S,T?7*u:0);/* 上の ふちの 影 */
+  for(let k=0;k<3;k++){const a=h(k,9)*28+2,b=h(k,7)*10+(T?3:0);g.fillStyle="rgba(120,100,90,.35)";g.fillRect(sx+a*u,sy+b*u,1.6*u,1.2*u)}g.restore();
+  for(let k=0;k<5;k++){if(!(T||B||L||Rt))break;const a=h(k,3)*30+1,b=h(k,5)*30+1;const nearEdge=(T&&b<8)||(B&&b>24)||(L&&a<8)||(Rt&&a>24);if(!nearEdge)continue;g.fillStyle="#6a5a52";g.beginPath();g.ellipse(sx+a*u,sy+b*u,(1+h(k,1))*u,(.7+h(k,2)*.6)*u,h(k,4)*3,0,7);g.fill()}/* こいし */}
 function themeMsg(){const n=TH().n;msg("ここは "+n+"だ。","y");popMsg("🏔️ "+n)}
 function fallDown(){G.floor++;SFX.stairs();genFloor();setBest(G.floor);msg(G.floor+"階に おちてきた。","y");if(G.floor%10===1)themeMsg();if(G.boss)bossMsg();hurtPlayer(3,"おとしあな")}
 function triggerObj(o,dx,dy){const p=G.p,O=OBJS[o.k];if(O.trap)o.hid=0;interrupt=true;
@@ -2106,7 +2113,7 @@ function frame(t){requestAnimationFrame(frame);if(!$("game").classList.contains(
 let HXY=null;
 function drawOverlay(W,H,t){const s=Math.min((W-16)/MW,(H-16)/MH)/2,ox=8,oy=8;cx.save();if(HXY&&HXY[0]+TS*.2<ox+s*MW&&HXY[1]+TS*.2<oy+s*MH)cx.globalAlpha=.35;
   rr(cx,ox-4,oy-4,s*MW+8,s*MH+8,6);cx.fillStyle="rgba(255,250,240,.14)";cx.fill();cx.strokeStyle="rgba(255,255,255,.55)";cx.lineWidth=2;cx.stroke();
-  for(let y=0;y<MH;y++)for(let x=0;x<MW;x++){if(G.seen[y][x]&&isPil(x,y)){cx.fillStyle="rgba(90,170,255,.85)";cx.fillRect(ox+x*s,oy+y*s,s+.5,s+.5);continue}if(!G.seen[y][x]||G.map[y][x]===1)continue;cx.fillStyle=G.roomMap[y][x]>=0?"rgba(220,210,255,.6)":"rgba(220,210,255,.4)";cx.fillRect(ox+x*s,oy+y*s,s+.3,s+.3)}
+  for(let y=0;y<MH;y++)for(let x=0;x<MW;x++){if(G.seen[y][x]&&isPil(x,y)){cx.fillStyle="rgba(20,14,24,.9)";cx.fillRect(ox+x*s,oy+y*s,s+.5,s+.5);continue}if(!G.seen[y][x]||G.map[y][x]===1)continue;cx.fillStyle=G.roomMap[y][x]>=0?"rgba(220,210,255,.6)":"rgba(220,210,255,.4)";cx.fillRect(ox+x*s,oy+y*s,s+.3,s+.3)}
   if(stOK()&&G.seen[G.stairs.y][G.stairs.x]){cx.fillStyle=G.boss?"rgba(255,215,110,.85)":"rgba(130,185,255,.85)";rr(cx,ox+G.stairs.x*s,oy+G.stairs.y*s,s,s,s*.3);cx.fill()}
   for(const o of G.objs||[])if(!o.hid&&G.seen[o.y][o.x]){cx.fillStyle=OBJS[o.k].trap?"rgba(255,140,90,.8)":o.k==="ice"?"rgba(170,225,255,.55)":"rgba(255,230,140,.75)";cx.fillRect(ox+o.x*s+s*.25,oy+o.y*s+s*.25,s*.5,s*.5)}
   cx.fillStyle="rgba(140,240,170,.8)";for(const it of G.items)if(vis(it.x,it.y)||G.mapRevealed||it.shown){cx.beginPath();cx.arc(ox+it.x*s+s/2,oy+it.y*s+s/2,s*.42,0,7);cx.fill()}
@@ -2114,7 +2121,7 @@ function drawOverlay(W,H,t){const s=Math.min((W-16)/MW,(H-16)/MH)/2,ox=8,oy=8;cx
   const px=ox+G.p.x*s+s/2,py=oy+G.p.y*s+s/2;glow(cx,px,py,s*(2.2+.3*Math.sin(t/300)),"rgba(255,215,130,.45)");cx.fillStyle="rgba(255,228,150,1)";cx.beginPath();cx.arc(px,py,s*.62,0,7);cx.fill();cx.restore()}
 function drawMini(W,H){const s=Math.floor(Math.min((W-12)/MW,(H-40)/MH)),ox=Math.floor((W-s*MW)/2),oy=Math.floor((H-s*MH)/2)+10;
   cx.fillStyle="#fff";cx.font="900 15px "+PF;cx.textAlign="center";cx.fillText(G.floor+"階の地図（タップでもどる）",W/2,22);
-  for(let y=0;y<MH;y++)for(let x=0;x<MW;x++){if(G.seen[y][x]&&isPil(x,y)){cx.fillStyle="#3a8ae0";cx.fillRect(ox+x*s,oy+y*s,s,s);continue}if(!G.seen[y][x]||G.map[y][x]===1)continue;cx.fillStyle=G.roomMap[y][x]>=0?"#4a5288":"#323a66";cx.fillRect(ox+x*s,oy+y*s,s,s)}
+  for(let y=0;y<MH;y++)for(let x=0;x<MW;x++){if(G.seen[y][x]&&isPil(x,y)){cx.fillStyle="#120c16";cx.fillRect(ox+x*s,oy+y*s,s,s);continue}if(!G.seen[y][x]||G.map[y][x]===1)continue;cx.fillStyle=G.roomMap[y][x]>=0?"#4a5288":"#323a66";cx.fillRect(ox+x*s,oy+y*s,s,s)}
   if(stOK()&&G.seen[G.stairs.y][G.stairs.x]){cx.fillStyle="#7fb8ff";rr(cx,ox+G.stairs.x*s-1,oy+G.stairs.y*s-1,s+2,s+2,2);cx.fill()}
   for(const it of G.items)if(vis(it.x,it.y)||G.mapRevealed||it.shown){cx.fillStyle="#8ff0a8";cx.beginPath();cx.arc(ox+it.x*s+s/2,oy+it.y*s+s/2,s*.4,0,7);cx.fill()}
   for(const e of G.ents)if(vis(e.x,e.y)){cx.fillStyle="#ff6b7a";cx.beginPath();cx.arc(ox+e.x*s+s/2,oy+e.y*s+s/2,s*.5,0,7);cx.fill()}
