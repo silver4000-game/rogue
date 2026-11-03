@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<meta name="rogue-rev" content="20261103i">
+<meta name="rogue-rev" content="20261103j">
 <meta name="theme-color" content="#9fe0ff">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <script>try{if(navigator.standalone||matchMedia("(display-mode: standalone)").matches){document.documentElement.classList.add("sa");const st=()=>{const g=document.querySelector(".scr");if(!g)return;const r=g.getBoundingClientRect(),d=document.documentElement.style;d.setProperty("--gt",r.top+"px");d.setProperty("--gb",Math.max(0,innerHeight-r.bottom)+"px")};addEventListener("resize",st);addEventListener("load",st);setTimeout(st,300)}}catch(e){}</script>
 <meta name="apple-mobile-web-app-title" content="ふしぎな地下">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261103i">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261103i">
-<link rel="manifest" href="manifest.webmanifest?v=20261103i">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261103j">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261103j">
+<link rel="manifest" href="manifest.webmanifest?v=20261103j">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800;900&display=swap" rel="stylesheet">
 <title>ふしぎな地下ダンジョン</title>
 <style>
@@ -330,7 +330,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
   <button class="big" id="bCont">つづきから</button>
   <button class="big" id="bStart">はじめから</button>
   <div class="tRow"><button class="big sub" id="bHow">あそびかた</button><button class="big sub" id="bRank">ランキング</button></div>
-  <div class="ver">rev 20261103i</div>
+  <div class="ver">rev 20261103j</div>
 </section>
 
 <section id="rank" class="scr">
@@ -400,7 +400,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
 <script>
 "use strict";
 const $=id=>document.getElementById(id);
-const REV="20261103i";
+const REV="20261103j";
 /* ===== 音 ===== */
 let AC=null;
 function ac(){try{if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();if(AC.state==="suspended")AC.resume()}catch(e){}return AC}
@@ -614,7 +614,7 @@ function shapeRooms(map,roomMap,rooms){const pil=[];
     let left=0;for(let y=Y;y<Y+H;y++)for(let x=X;x<X+W;x++)if(!map[y][x])left++;
     if(left<8||!conn()){for(const [x,y,v] of back)map[y][x]=v;cut=[];r.shape="rect"}
     for(const [x,y] of cut)roomMap[y][x]=-1;
-    if(W>=6&&H>=5&&Math.random()<.4){const want=RI(1,Math.min(4,Math.floor(W*H/12)));let n=0;for(let t=0;t<40&&n<want;t++){const x=X+1+R(W-2),y=Y+1+R(H-2);if(map[y][x]||roomMap[y][x]!==i||nearCor(x,y,2))continue;let bad=false;for(let dy=-1;dy<=1&&!bad;dy++)for(let dx=-1;dx<=1;dx++){if((dx||dy)&&(map[y+dy][x+dx]||roomMap[y+dy][x+dx]!==i)){bad=true;break}}if(bad)continue;map[y][x]=1;if(!conn()){map[y][x]=0;continue}roomMap[y][x]=-1;pil.push(x+","+y);n++}}
+    if(W>=5&&H>=5&&Math.random()<.75){/* はなれた 1マスの 柱（まわり8マス ぜんぶ ゆか） */const want=RI(1,Math.max(1,Math.min(4,Math.floor(W*H/10))));let n=0;for(let t=0;t<120&&n<want;t++){const x=X+1+R(W-2),y=Y+1+R(H-2);if(map[y][x]||roomMap[y][x]!==i||nearCor(x,y,2))continue;let bad=false;for(let dy=-1;dy<=1&&!bad;dy++)for(let dx=-1;dx<=1;dx++){if((dx||dy)&&(map[y+dy][x+dx]||roomMap[y+dy][x+dx]!==i)){bad=true;break}}if(bad)continue;map[y][x]=1;if(!conn()){map[y][x]=0;continue}roomMap[y][x]=-1;pil.push(x+","+y);n++}}
   });return pil}
 let PILS=null;const isPil=(x,y)=>{if(!G||!G.pil||!G.pil.length)return false;if(!PILS||PILS.f!==G.pil){PILS=new Set(G.pil);PILS.f=G.pil}return PILS.has(x+","+y)};
 function genFloor(){
