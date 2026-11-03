@@ -752,8 +752,8 @@ function pickUp(i){const it=G.items[i];
   if(G.bag.length>=bagCap()){msg(nameOf(it)+"がある。持ち物がいっぱいだ。","w");interrupt=true;return}
   G.items.splice(i,1);it.x=undefined;
   delete it.x;delete it.y;delete it.shown;
-  if(ITEMS[it.k]&&ITEMS[it.k].c==="ring"&&!G.p.ring){G.p.ring=it.k;msg(ITEMS[it.k].name+" "+rarTag(it)+"をつけた！","g")}
-  else{G.bag.push(it);const tr=tierOf(it);msg((tr>=2?'<span style="color:'+RAR[tr].c+'">'+nameOf(it)+'</span>':nameOf(it))+"をひろった。"+(tr>=2?rarTag(it)+(tr===4?"！":""):""),"g")}
+  /* ゆびわも 自動では つけない（持ち物に 入る） */
+  {G.bag.push(it);const tr=tierOf(it);msg((tr>=2?'<span style="color:'+RAR[tr].c+'">'+nameOf(it)+'</span>':nameOf(it))+"をひろった。"+(tr>=2?rarTag(it)+(tr===4?"！":""):""),"g")}
   SFX.pick();interrupt=true;
 }
 const nameOf=it=>it.k==="proof"?"モンスターの証":it.k==="gold"?it.amt+"ゴールド":it.k==="arrow"?"や "+it.amt+"本":(it.eq&&it.eq.cur&&it.eq.cv?"💀":"")+(it.k==="wep"?wdef(it.eq).n+" Lv"+(it.eq.lv||1):it.k==="shd"?it.eq.name+" Lv"+(it.eq.lv||1):"")+(it.eq&&it.eq.cur&&it.eq.cv?"（のろい）":"")+(it.eq?"":ITEMS[it.k].name+(it.n!=null?"（あと"+it.n+"回）":""));
