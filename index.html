@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<meta name="rogue-rev" content="20261103y">
+<meta name="rogue-rev" content="20261103z">
 <meta name="theme-color" content="#9fe0ff">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <script>try{if(navigator.standalone||matchMedia("(display-mode: standalone)").matches){document.documentElement.classList.add("sa");const st=()=>{const g=document.querySelector(".scr");if(!g)return;const r=g.getBoundingClientRect(),d=document.documentElement.style;d.setProperty("--gt",r.top+"px");d.setProperty("--gb",Math.max(0,innerHeight-r.bottom)+"px")};addEventListener("resize",st);addEventListener("load",st);setTimeout(st,300)}}catch(e){}</script>
 <meta name="apple-mobile-web-app-title" content="ふしぎな地下">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261103y">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261103y">
-<link rel="manifest" href="manifest.webmanifest?v=20261103y">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261103z">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261103z">
+<link rel="manifest" href="manifest.webmanifest?v=20261103z">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800;900&display=swap" rel="stylesheet">
 <title>ふしぎな地下ダンジョン</title>
 <style>
@@ -333,7 +333,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
   <button class="big" id="bCont">つづきから</button>
   <button class="big" id="bStart">はじめから</button>
   <div class="tRow"><button class="big sub" id="bHow">あそびかた</button><button class="big sub" id="bRank">ランキング</button></div>
-  <div class="ver">rev 20261103y</div>
+  <div class="ver">rev 20261103z</div>
 </section>
 
 <section id="rank" class="scr">
@@ -403,7 +403,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
 <script>
 "use strict";
 const $=id=>document.getElementById(id);
-const REV="20261103y";
+const REV="20261103z";
 /* ===== 音 ===== */
 let AC=null;
 function ac(){try{if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();if(AC.state==="suspended")AC.resume()}catch(e){}return AC}
@@ -1064,7 +1064,7 @@ function descend(){
   if(!G||G.over||busy)return;
   if(G.p.lvq>0){showLv();return}
   if(!(stOK()&&G.p.x===G.stairs.x&&G.p.y===G.stairs.y)){msg(G.boss&&!stOK()?"ボスを たおすと 階段が あらわれる。":"ここには階段がない。");return}
-  {const p=G.p;p.psn=0;p.conf=0;p.slow=0;p.par=0;p.slp=0;p.bind=0}/* 階段を 下りると わるい じょうたいが なおる */
+  {const p=G.p;p.psn=0;p.conf=0;p.slow=0;p.par=0;p.slp=0;p.bind=0;p.haste=0;p.inv=0;p.buf={atk:0,def:0,regen:0}}/* 階段を 下りると じょうたいが ぜんぶ もどる（わるいのも いいのも） */
   G.floor++;SFX.stairs();genFloor();msg(G.floor+"階に下りた。"+(G.floor%10===9?"…次の階から 大きな けはいがする。":""),"y");if(G.floor%10===1)themeMsg();if(G.boss)bossMsg();
   setBest(G.floor);hud();save();
 }
