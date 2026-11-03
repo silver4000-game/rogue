@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<meta name="rogue-rev" content="20261103t">
+<meta name="rogue-rev" content="20261103u">
 <meta name="theme-color" content="#9fe0ff">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <script>try{if(navigator.standalone||matchMedia("(display-mode: standalone)").matches){document.documentElement.classList.add("sa");const st=()=>{const g=document.querySelector(".scr");if(!g)return;const r=g.getBoundingClientRect(),d=document.documentElement.style;d.setProperty("--gt",r.top+"px");d.setProperty("--gb",Math.max(0,innerHeight-r.bottom)+"px")};addEventListener("resize",st);addEventListener("load",st);setTimeout(st,300)}}catch(e){}</script>
 <meta name="apple-mobile-web-app-title" content="ふしぎな地下">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261103t">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261103t">
-<link rel="manifest" href="manifest.webmanifest?v=20261103t">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261103u">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261103u">
+<link rel="manifest" href="manifest.webmanifest?v=20261103u">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800;900&display=swap" rel="stylesheet">
 <title>ふしぎな地下ダンジョン</title>
 <style>
@@ -332,7 +332,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
   <button class="big" id="bCont">つづきから</button>
   <button class="big" id="bStart">はじめから</button>
   <div class="tRow"><button class="big sub" id="bHow">あそびかた</button><button class="big sub" id="bRank">ランキング</button></div>
-  <div class="ver">rev 20261103t</div>
+  <div class="ver">rev 20261103u</div>
 </section>
 
 <section id="rank" class="scr">
@@ -344,7 +344,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
 <section id="howto" class="scr">
   <h2>あそびかた</h2>
   <div class="hw">ダンジョンは <b>どこまでも</b> つづくよ。どこまで もぐれるかな？<br><b>10階ごと</b>に ボスの階。ボスを たおすと 階段が出る。<br>自分が1歩うごくと、敵も1歩うごくよ。<br>やられたら、<b>1階からやり直し</b>。</div>
-  <div class="hw"><b>主人公</b>：はじめに 4人から えらぶ。<br>せんし＝ひろう剣・盾のレベルがたかめ／まほうつかい＝杖をふれる回数＋3／しょうにん＝ポーチ＋4、ひろうお金1.5倍／あそびにん＝いいアイテムをひろいやすい。</div>
+  <div class="hw"><b>主人公</b>：はじめに 4人から えらぶ。<br>せんし＝ひろう剣・盾のレベルが高め／まほうつかい＝杖をふれる回数＋3／しょうにん＝ポーチ＋4、ひろうお金1.5倍／あそびにん＝いいアイテムをひろいやすい。</div>
   <div class="hw"><b>うごく</b>：十字ボタン（ななめもOK）。押しっぱなしで 続けて歩く。<br><b>むき</b>：光っている間は 矢印で むきだけ かわる。<br><b>こうげき</b>：むいている方向へ こうげき。敵がいなければ からぶり（休むかわりにもなる）。<br><b>足もと</b>：足もとの道具を ひろう・つかう・なげる・いれかえ できる。<br><b>おりる</b>：階段の上で押す。<br><b>ゆみ</b>：いつも もっている。や を 1本つかって むいている方向へ うつ。や は ダンジョンで ひろえる。<br><b>像</b>：こうげきすると こわれて 力が 出る。<br><b>なげる</b>：むいている方向へ 7マスまで。<br><b>むきで とぶ道具</b>：つえ・なげる道具は むいている方向へ。「目の前だけ」「7マス」「どこまでも」の しゅるいが ある。まきものは 向きに かんけいなし。</div>
   <div class="hw" id="howList"></div>
   <div class="hw"><b>おなか</b>：1回うごくと 1へる（さいしょ 500）。0になると HPがへる（でも 1より下には へらない）。塩むすび＝+150、シャケおむすび＝+300、ジャンボおむすび＝おなか ぜんぶ回ふく、まんがにく＝おなかも HPも ぜんぶ回ふく。いぶくろのたね＝最大おなか +100。<br><b>レベル</b>：<b>こうげき・ぼうぎょ・HP</b>から1つえらぶ。どれでも だいじょうぶ。<br><b>ぶき・たての Lv</b>：Lvが高いほど 強い。深い階ほど 高いLvが 出やすい。<br><b>お金</b>：ひろったり 敵が 落としたり。<b>しょうにん</b>が いる階では 買い物が できる（ぶつかると 話せる）。<br><b>状態異常</b>：<b style="color:#5ab030">どく</b>＝HPがへる／<b style="color:#e050c0">こんらん</b>＝思った方へ 歩けない／<b style="color:#d09020">どんそく</b>＝敵が 2回うごく／<b style="color:#8a70e0">ねむり</b>・<b style="color:#d0b000">しびれ</b>＝うごけない。敵にも きく。なおりぐさで なおる。<br><b>会心の一撃</b>：ときどき ダメージ1.5倍。<br><b>★レア度</b>：★が多いほど 強くて めずらしい。<br><b>ゆびわ</b>：1つだけ。つけている間 ずっと効く。<br><b>モンスターの証</b>：敵を たおすと たまに（1%）ゆかに おちる。ひろうと +1（持ち物の わくは つかわない）。+1ごとに すべての敵の EXPが 10%ふえる。持ち物画面で 見られる。<br><b>ボスの階</b>：10階ごと。ボスを たおすと 階段が出る。ボスは なかまを よぶことも ある。</div>
@@ -402,7 +402,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
 <script>
 "use strict";
 const $=id=>document.getElementById(id);
-const REV="20261103t";
+const REV="20261103u";
 /* ===== 音 ===== */
 let AC=null;
 function ac(){try{if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();if(AC.state==="suspended")AC.resume()}catch(e){}return AC}
@@ -476,7 +476,7 @@ const BOOKS={bolt:{n:"まほうだんの本",c:"#ffb0e0"},sleep:{n:"ねむりの
 /* 状態異常 */
 const STS={psn:{n:"どく",c:"#5ab030",ic:"☠"},conf:{n:"こんらん",c:"#e050c0",ic:"💫"},slow:{n:"どんそく",c:"#d09020",ic:"🐌"},slp:{n:"ねむり",c:"#8a70e0",ic:"💤"},par:{n:"しびれ",c:"#d0b000",ic:"⚡"},bind:{n:"こうそく",c:"#7a7a90",ic:"⛓️"},haste:{n:"ばいそく",c:"#30a8e0",ic:"💨"},inv:{n:"むてき",c:"#e0a000",ic:"⭐"}};
 /* 主人公 */
-const CLS={warrior:{n:"せんし",d:["ひろう剣・盾のレベルがたかめ"]},mage:{n:"まほうつかい",d:["杖をふれる回数＋3"]},merchant:{n:"しょうにん",d:["ポーチ＋4","ひろうお金1.5倍"]},joker:{n:"あそびにん",d:["いいアイテムをひろいやすい"]}};
+const CLS={warrior:{n:"せんし",d:["ひろう剣・盾のレベルが高め"]},mage:{n:"まほうつかい",d:["杖をふれる回数＋3"]},merchant:{n:"しょうにん",d:["ポーチ＋4","ひろうお金1.5倍"]},joker:{n:"あそびにん",d:["いいアイテムをひろいやすい"]}};
 /* せんしは レベルアップの こうげき・まもりが 1.5倍 */
 const atkG=()=>BAL.atkG,defG=()=>BAL.defG;
 const ITEMS={
@@ -1806,10 +1806,13 @@ function drawObj(g,k,x,y,s,used){const u=s/32;
     /* おみせの人（シンプル） */ell(g,x+11*u,y+22*u,6.5*u,6*u,"#5aa060");g.fillStyle="#f4ead0";rr(g,x+7.5*u,y+18*u,7*u,6*u,2*u);g.fill();ell(g,x+11*u,y+12*u,6*u,5.8*u,"#ffe0c4");g.fillStyle="#2f7a3a";g.beginPath();g.ellipse(x+11*u,y+9.4*u,6.2*u,3.6*u,0,Math.PI,0);g.fill();g.fillRect(x+4.8*u,y+9*u,12.4*u,1.4*u);ell(g,x+9*u,y+12.6*u,.7*u,.8*u,"#3a2a2a");ell(g,x+13*u,y+12.6*u,.7*u,.8*u,"#3a2a2a");g.strokeStyle="#a0503a";g.lineWidth=.8*u;g.beginPath();g.arc(x+11*u,y+14*u,1.5*u,.2,Math.PI-.2);g.stroke();
     g.fillStyle="#fff";g.strokeStyle="#4a2a86";g.lineWidth=1.4*u;rr(g,x+19*u,y+1*u,12*u,8*u,3*u);g.fill();g.stroke();g.fillStyle="#c86a00";g.font="900 "+Math.round(6.5*u)+"px "+PF;g.textAlign="center";g.fillText("SHOP",x+25*u,y+7*u);return}
   if(OBJS[k]&&OBJS[k].statue){const O=OBJS[k];ell(g,x+16*u,y+28*u,10*u,2.6*u,"rgba(0,0,0,.3)");g.fillStyle=LG(g,x,y+20*u,x,y+29*u,["#d8d4e8","#8a86a0"]);rr(g,x+7*u,y+21*u,18*u,7*u,2*u);g.fill();g.fillStyle=LG(g,x,y+6*u,x,y+22*u,["#f0eef8","#a8a4c0"]);rr(g,x+10*u,y+9*u,12*u,13*u,4*u);g.fill();glow(g,x+16*u,y+9*u,8*u,O.c+"88");g.font=Math.round(11*u)+"px sans-serif";g.textAlign="center";g.textBaseline="middle";g.fillText(O.ic,x+16*u,y+10*u);g.textBaseline="alphabetic";return}
-  if(k==="lvdown"||k==="bind"){g.fillStyle=LG(g,x,y+4*u,x,y+28*u,["#5a5670","#34324a"]);rr(g,x+4*u,y+4*u,24*u,24*u,5*u);g.fill();g.font=Math.round(14*u)+"px sans-serif";g.textAlign="center";g.textBaseline="middle";g.fillText(OBJS[k].ic,x+16*u,y+17*u);g.textBaseline="alphabetic";return}
-  if(k==="conf"||k==="slowt"){g.fillStyle=LG(g,x,y+4*u,x,y+28*u,["#5a5670","#34324a"]);rr(g,x+4*u,y+4*u,24*u,24*u,5*u);g.fill();g.font=Math.round(14*u)+"px sans-serif";g.textAlign="center";g.textBaseline="middle";g.fillText(k==="conf"?"💫":"🐌",x+16*u,y+17*u);g.textBaseline="alphabetic";return}
   const plate=(col)=>{g.fillStyle=LG(g,x,y+4*u,x,y+28*u,["#5a5670","#34324a"]);rr(g,x+4*u,y+4*u,24*u,24*u,5*u);g.fill();g.strokeStyle=col||"rgba(255,255,255,.18)";g.lineWidth=1*u;rr(g,x+5*u,y+5*u,22*u,22*u,4*u);g.stroke()};
   switch(k){
+  case "lvdown":{plate("rgba(255,120,120,.45)");/* 下むきの 赤い矢じるし と Lv */g.fillStyle=LG(g,x,y+8*u,x,y+26*u,["#ff9a9a","#d0304a"]);g.beginPath();g.moveTo(x+12.5*u,y+8*u);g.lineTo(x+19.5*u,y+8*u);g.lineTo(x+19.5*u,y+16*u);g.lineTo(x+24*u,y+16*u);g.lineTo(x+16*u,y+25*u);g.lineTo(x+8*u,y+16*u);g.lineTo(x+12.5*u,y+16*u);g.closePath();g.fill();g.fillStyle="#fff";g.font="900 "+Math.round(6*u)+"px "+PF;g.textAlign="center";g.fillText("Lv",x+16*u,y+15*u);break}
+  case "conf":{plate("rgba(255,138,216,.45)");/* ぐるぐる うずまき */g.strokeStyle="#ff8ad8";g.lineWidth=2*u;g.lineCap="round";g.beginPath();for(let i=0;i<=40;i++){const a=i*.42,r=(1+i*.22)*u;const px=x+16*u+Math.cos(a)*r,py=y+16*u+Math.sin(a)*r;i?g.lineTo(px,py):g.moveTo(px,py)}g.stroke();star(g,x+9*u,y+9*u,1.6*u,"#fff");star(g,x+23*u,y+23*u,1.4*u,"#ffe08a");break}
+  case "bind":{plate("rgba(200,200,220,.4)");/* くさりの わ */g.lineWidth=2.2*u;for(const [cx2,cy2,rot,col] of [[10,22,-.6,"#c8c8d8"],[16,16,.9,"#9a9ab0"],[22,10,-.6,"#c8c8d8"]]){g.strokeStyle=col;g.beginPath();g.ellipse(x+cx2*u,y+cy2*u,4.6*u,2.8*u,rot,0,7);g.stroke()}g.fillStyle="#7a7a90";ell(g,x+24*u,y+24*u,2.4*u,2.4*u,"#7a7a90");break}
+  case "slowt":{plate("rgba(255,210,122,.45)");/* かたつむり */ell(g,x+15*u,y+24*u,10*u,2.6*u,"#a0d070");ell(g,x+24*u,y+21*u,3*u,3.2*u,"#b8e088");g.strokeStyle="#8ab060";g.lineWidth=1*u;g.beginPath();g.moveTo(x+23*u,y+18*u);g.lineTo(x+22*u,y+14*u);g.moveTo(x+25.5*u,y+18*u);g.lineTo(x+27*u,y+14.5*u);g.stroke();ell(g,x+22*u,y+14*u,.9*u,.9*u,"#3a2a2a");ell(g,x+27*u,y+14.5*u,.9*u,.9*u,"#3a2a2a");
+    g.fillStyle=RG(g,x+14*u,y+17*u,1,7*u,["#ffe0a0","#e0a030","#a06010"]);g.beginPath();g.arc(x+14*u,y+17*u,6.6*u,0,7);g.fill();g.strokeStyle="#8a5010";g.lineWidth=1.2*u;g.beginPath();for(let i=0;i<=24;i++){const a=i*.45,r=(.5+i*.22)*u;const px=x+14*u+Math.cos(a)*r,py=y+17*u+Math.sin(a)*r;i?g.lineTo(px,py):g.moveTo(px,py)}g.stroke();break}
   case "fountain":{ell(g,x+16*u,y+25*u,12*u,3*u,"rgba(0,0,0,.3)");g.fillStyle=LG(g,x,y+12*u,x,y+27*u,["#d8d4e8","#8a86a0"]);g.beginPath();g.ellipse(x+16*u,y+19*u,12*u,7*u,0,0,7);g.fill();
     g.fillStyle=used?"#5a5670":RG(g,x+16*u,y+18*u,1,10*u,["#e0fbff","#5ac8ff","#2a6ad8"]);g.beginPath();g.ellipse(x+16*u,y+18*u,9.5*u,4.8*u,0,0,7);g.fill();
     g.fillStyle="#b8b4cc";rr(g,x+14.4*u,y+8*u,3.2*u,10*u,1.4*u);g.fill();ell(g,x+16*u,y+8*u,4*u,1.6*u,"#d8d4e8");
