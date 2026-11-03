@@ -494,7 +494,7 @@ const ITEMS={
   sleep:{name:"ねむりのまきもの",d:"見えている敵をねむらせる",w:3,f:2,c:"scroll",sd:"見える敵を ねむらせる"},
   warp:{name:"ワープのまきもの",d:"どこかへワープする",w:3,f:1,c:"scroll",sd:"どこかへ ワープ"},
   mapsc:{name:"ちずのまきもの",d:"この階の地図がわかる",w:3,f:1,c:"scroll",sd:"地図が わかる"},
-  fire:{name:"こうげきのまきもの",d:"いちばん近い敵に 大ダメージ",w:3,f:1,c:"scroll",art:["scroll","#ffd0a0","#ff6a2a"],sd:"近い敵に 大ダメージ"},
+  fire:{name:"こうげきのまきもの",d:"見えている敵 1たいに ランダムで 大ダメージ",w:3,f:1,c:"scroll",art:["scroll","#ffd0a0","#ff6a2a"],sd:"見える敵1たいに 大ダメージ"},
   uncurse:{name:"のろいときの巻物",d:"そうびしている ぶきと たての のろいを とく",w:2,f:2,c:"scroll",art:["scroll","#f6eaff","#a060e0"],sd:"のろいを とく"},
   wepup:{name:"ぶきのまきもの",d:"そうびしている ぶきの Lvが 1上がる",w:2,f:2,c:"scroll",art:["scroll","#e8f0ff","#6f9cff"],sd:"ぶき Lv+1"},
   shdup:{name:"たてのまきもの",d:"そうびしている たての Lvが 1上がる",w:2,f:2,c:"scroll",art:["scroll","#fff0c8","#d9a030"],sd:"たて Lv+1"},
@@ -1217,7 +1217,7 @@ function useItem(i){const it=G.bag[i],p=G.p;let consume=true;if(!p.buf)p.buf={at
     case "wepup":{if(!p.wep){msg("ぶきを そうびしていない…");popMsg("…何もおこらない");break}p.wep.lv=(p.wep.lv||1)+1;SFX.lvl();aura(p,"#ffe08a",1100);popMsg("⚔️ ぶき Lv"+p.wep.lv+"！");msg(wdef(p.wep).n+"が Lv"+p.wep.lv+"に なった！（こうげき"+Math.round(atkOf())+"）","y");break}
     case "shdup":{if(!p.shd){msg("たてを そうびしていない…");popMsg("…何もおこらない");break}p.shd.lv=(p.shd.lv||1)+1;SFX.lvl();aura(p,"#9ad0ff",1100);popMsg("🛡️ たて Lv"+p.shd.lv+"！");msg(p.shd.name+"が Lv"+p.shd.lv+"に なった！（まもり"+Math.round(defOf())+"）","y");break}
     case "rstr":case "rdef":case "rheal":case "rfood":case "rluck":case "rexp":{const old=p.ring;p.ring=it.k;if(old){G.bag[i]={k:old};consume=false}msg(ITEMS[it.k].name+"をつけた！","g");aura(p,"#ffd0ff",800);SFX.pick();break}
-    case "fire":{const e=nearestEnemy();if(!e){msg("見えるところに敵がいない。");SFX.miss();popMsg("…敵がいない");return}beam(p,e,"#ffb070");SFX.magic();popMsg("💥 こうげき！");const d=30+G.floor*4;setTimeout(()=>{if(G.ents.includes(e))boomFx(e.x,e.y)},350);msg(ENEMIES[e.k].name+"に"+d+"のダメージ！","y");dmgE(e,d);break}
+    case "fire":{const vs=G.ents.filter(e=>vis(e.x,e.y)),e=vs.length?pick(vs):null;if(!e){msg("見えるところに敵がいない。");SFX.miss();popMsg("…敵がいない");return}beam(p,e,"#ffb070");SFX.magic();popMsg("💥 こうげき！");const d=30+G.floor*4;setTimeout(()=>{if(G.ents.includes(e))boomFx(e.x,e.y)},350);msg(ENEMIES[e.k].name+"に"+d+"のダメージ！","y");dmgE(e,d);break}
     default:{
       if(!I.rng)break;
       if(I.n!=null){it.n=(it.n==null?I.n:it.n)-1;consume=it.n<=0;msg(I.name+"をふった。"+(consume?"":"（あと"+it.n+"回）"))}
