@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<meta name="rogue-rev" content="20261103g">
+<meta name="rogue-rev" content="20261103h">
 <meta name="theme-color" content="#9fe0ff">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <script>try{if(navigator.standalone||matchMedia("(display-mode: standalone)").matches){document.documentElement.classList.add("sa");const st=()=>{const g=document.querySelector(".scr");if(!g)return;const r=g.getBoundingClientRect(),d=document.documentElement.style;d.setProperty("--gt",r.top+"px");d.setProperty("--gb",Math.max(0,innerHeight-r.bottom)+"px")};addEventListener("resize",st);addEventListener("load",st);setTimeout(st,300)}}catch(e){}</script>
 <meta name="apple-mobile-web-app-title" content="ふしぎな地下">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261103g">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261103g">
-<link rel="manifest" href="manifest.webmanifest?v=20261103g">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261103h">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261103h">
+<link rel="manifest" href="manifest.webmanifest?v=20261103h">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800;900&display=swap" rel="stylesheet">
 <title>ふしぎな地下ダンジョン</title>
 <style>
@@ -279,7 +279,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
 #clsGrid button{display:flex;flex-direction:column;align-items:center;gap:2px;border:3px solid var(--ink);border-radius:20px;box-shadow:0 4px 0 var(--ink);padding:6px 4px 8px;color:var(--ink);font-family:var(--F)}
 #clsGrid button:active{transform:translateY(3px);box-shadow:0 1px 0 var(--ink)}
 #clsGrid canvas{width:84px;height:84px}
-#clsGrid b{font-size:17px;font-weight:900;color:var(--ink);font-family:var(--F)}#clsGrid b{display:flex;justify-content:center}/* しょくぎょう名を まん中に（.lvBox button b の はば84pxで 左よせに なっていた） */#clsGrid small{font-size:11px;line-height:1.35;font-weight:800;color:#6a4ab0}#clsGrid small{text-align:center}#clsGrid small span{display:block;white-space:nowrap}
+#clsGrid b{font-size:17px;font-weight:900;color:var(--ink);font-family:var(--F)}#clsGrid b{display:flex;justify-content:center}/* しょくぎょう名を まん中に（.lvBox button b の はば84pxで 左よせに なっていた） */#clsGrid small{font-size:11px;line-height:1.35;font-weight:800;color:#6a4ab0}#clsGrid small{text-align:center}#clsGrid small span{display:block;white-space:normal;word-break:keep-all;overflow-wrap:normal}#clsGrid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}#clsGrid button{min-width:0}
 #clsGrid [data-c=warrior]{background:linear-gradient(#ffe0e6,#ffb0c0)}#clsGrid [data-c=mage]{background:linear-gradient(#efe0ff,#c8a8ff)}#clsGrid [data-c=merchant]{background:linear-gradient(#e0ffe8,#9ae8b8)}#clsGrid [data-c=joker]{background:linear-gradient(#fff6c8,#ffd84a)}
 #shopG{font-weight:900;color:#c86a00;margin-bottom:6px}
 #shopList button{display:flex;align-items:center;gap:8px;width:100%;margin:0 0 7px;padding:5px 10px;border:3px solid var(--ink);border-radius:16px;background:linear-gradient(#fff,#f0eaff);box-shadow:0 3px 0 var(--ink);color:var(--ink);text-align:left;font-family:var(--F);font-weight:800}
@@ -329,7 +329,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
   <button class="big" id="bCont">つづきから</button>
   <button class="big" id="bStart">はじめから</button>
   <div class="tRow"><button class="big sub" id="bHow">あそびかた</button><button class="big sub" id="bRank">ランキング</button></div>
-  <div class="ver">rev 20261103g</div>
+  <div class="ver">rev 20261103h</div>
 </section>
 
 <section id="rank" class="scr">
@@ -341,7 +341,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
 <section id="howto" class="scr">
   <h2>あそびかた</h2>
   <div class="hw">ダンジョンは <b>どこまでも</b> つづくよ。どこまで もぐれるかな？<br><b>10階ごと</b>に ボスの階。ボスを たおすと 階段が出る。<br>自分が1歩うごくと、敵も1歩うごくよ。<br>やられたら、<b>1階からやり直し</b>。</div>
-  <div class="hw"><b>主人公</b>：はじめに 4人から えらぶ。<br>せんし＝ひろう 剣・たての レベルが 高め／まほうつかい＝つえの回数 +3／しょうにん＝持ち物 +4、ひろう お金 1.5倍／あそびにん＝いい道具が 出やすい。</div>
+  <div class="hw"><b>主人公</b>：はじめに 4人から えらぶ。<br>せんし＝ひろう剣・盾のレベルがたかめ／まほうつかい＝杖をふれる回数＋3／しょうにん＝ポーチ＋4、ひろうお金1.5倍／あそびにん＝いいアイテムをひろいやすい。</div>
   <div class="hw"><b>うごく</b>：十字ボタン（ななめもOK）。押しっぱなしで 続けて歩く。<br><b>むき</b>：光っている間は 矢印で むきだけ かわる。<br><b>こうげき</b>：むいている方向へ こうげき。敵がいなければ からぶり（休むかわりにもなる）。<br><b>足もと</b>：足もとの道具を ひろう・つかう・なげる・いれかえ できる。<br><b>おりる</b>：階段の上で押す。<br><b>ゆみ</b>：いつも もっている。や を 1本つかって むいている方向へ うつ。や は ダンジョンで ひろえる。<br><b>像</b>：こうげきすると こわれて 力が 出る。<br><b>なげる</b>：むいている方向へ 7マスまで。<br><b>むきで とぶ道具</b>：つえ・なげる道具は むいている方向へ。「目の前だけ」「7マス」「どこまでも」の しゅるいが ある。まきものは 向きに かんけいなし。</div>
   <div class="hw" id="howList"></div>
   <div class="hw"><b>おなか</b>：1回うごくと 1へる（さいしょ 500）。0になると HPがへる（でも 1より下には へらない）。塩むすび＝+150、シャケおむすび＝+300、ジャンボおむすび＝おなか ぜんぶ回ふく、まんがにく＝おなかも HPも ぜんぶ回ふく。いぶくろのたね＝最大おなか +100。<br><b>レベル</b>：<b>こうげき・ぼうぎょ・HP</b>から1つえらぶ。どれでも だいじょうぶ。<br><b>ぶき・たての Lv</b>：Lvが高いほど 強い。深い階ほど 高いLvが 出やすい。<br><b>お金</b>：ひろったり 敵が 落としたり。<b>しょうにん</b>が いる階では 買い物が できる（ぶつかると 話せる）。<br><b>状態異常</b>：<b style="color:#5ab030">どく</b>＝HPがへる／<b style="color:#e050c0">こんらん</b>＝思った方へ 歩けない／<b style="color:#d09020">どんそく</b>＝敵が 2回うごく／<b style="color:#8a70e0">ねむり</b>・<b style="color:#d0b000">しびれ</b>＝うごけない。敵にも きく。なおりぐさで なおる。<br><b>会心の一撃</b>：ときどき ダメージ1.5倍。<br><b>★レア度</b>：★が多いほど 強くて めずらしい。<br><b>ゆびわ</b>：1つだけ。つけている間 ずっと効く。<br><b>モンスターの証</b>：敵を たおすと たまに（1%）ゆかに おちる。ひろうと +1（持ち物の わくは つかわない）。+1ごとに すべての敵の EXPが 10%ふえる。持ち物画面で 見られる。<br><b>ボスの階</b>：10階ごと。ボスを たおすと 階段が出る。ボスは なかまを よぶことも ある。</div>
@@ -399,7 +399,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
 <script>
 "use strict";
 const $=id=>document.getElementById(id);
-const REV="20261103g";
+const REV="20261103h";
 /* ===== 音 ===== */
 let AC=null;
 function ac(){try{if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();if(AC.state==="suspended")AC.resume()}catch(e){}return AC}
@@ -470,7 +470,7 @@ const BOOKS={bolt:{n:"まほうだんの本",c:"#ffb0e0"},sleep:{n:"ねむりの
 /* 状態異常 */
 const STS={psn:{n:"どく",c:"#5ab030",ic:"☠"},conf:{n:"こんらん",c:"#e050c0",ic:"💫"},slow:{n:"どんそく",c:"#d09020",ic:"🐌"},slp:{n:"ねむり",c:"#8a70e0",ic:"💤"},par:{n:"しびれ",c:"#d0b000",ic:"⚡"},bind:{n:"こうそく",c:"#7a7a90",ic:"⛓️"},haste:{n:"ばいそく",c:"#30a8e0",ic:"💨"},inv:{n:"むてき",c:"#e0a000",ic:"⭐"}};
 /* 主人公 */
-const CLS={warrior:{n:"せんし",d:["剣・たての レベルが 高め"]},mage:{n:"まほうつかい",d:["つえの 回数 +3"]},merchant:{n:"しょうにん",d:["持ち物 +4","ひろう お金 1.5倍"]},joker:{n:"あそびにん",d:["いい道具が","見つかりやすい"]}};
+const CLS={warrior:{n:"せんし",d:["ひろう剣・盾のレベルがたかめ"]},mage:{n:"まほうつかい",d:["杖をふれる回数＋3"]},merchant:{n:"しょうにん",d:["ポーチ＋4","ひろうお金1.5倍"]},joker:{n:"あそびにん",d:["いいアイテムをひろいやすい"]}};
 /* せんしは レベルアップの こうげき・まもりが 1.5倍 */
 const atkG=()=>BAL.atkG,defG=()=>BAL.defG;
 const ITEMS={
@@ -2096,7 +2096,7 @@ window.addEventListener("keydown",e=>{if(!$("game").classList.contains("on"))ret
   if(KEYS[e.key]){e.preventDefault();doMove(...KEYS[e.key])}else if(e.key==="i"){openBag()}else if(e.key==="m"){showMap=!showMap}else if(e.key===">"||e.key==="Enter"){descend()}});
 const startNew=()=>{$("cls").classList.add("on")};
 function pickCls(c){SFX.ui();$("cls").classList.remove("on");clearSave();newRun(c);show("game")}
-(function(){const g=$("clsGrid");g.innerHTML=Object.entries(CLS).map(([k,c])=>'<button data-c="'+k+'"><b>'+c.n+'</b><canvas width="168" height="168"></canvas><small>'+c.d.map(t=>'<span>'+t+'</span>').join('')+'</small></button>').join("");
+(function(){const g=$("clsGrid");g.innerHTML=Object.entries(CLS).map(([k,c])=>'<button data-c="'+k+'"><b>'+c.n+'</b><canvas width="168" height="168"></canvas><small>'+c.d.map(t=>'<span>'+t.replace('盾の','盾の<wbr>').replace('アイテムを','アイテムを<wbr>')+'</span>').join('')+'</small></button>').join("");
   g.querySelectorAll("button").forEach(b=>{const x=b.querySelector("canvas").getContext("2d");drawHero(x,4,4,160,"d",{warrior:"bronze",mage:"",merchant:"",joker:"dagger"}[b.dataset.c],b.dataset.c)});
   g.addEventListener("click",e=>{const b=e.target.closest("button[data-c]");if(b)pickCls(b.dataset.c)});$("clsBack").onclick=()=>{SFX.ui();$("cls").classList.remove("on")}})();
 $("bStart").onclick=()=>{SFX.ui();if(localStorage.getItem("rogue-save"))$("ask").classList.add("on");else startNew()};
