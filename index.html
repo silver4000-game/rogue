@@ -731,8 +731,7 @@ function playerAct(dx,dy){
   if(p.conf>0&&(dx||dy)&&!turnMode&&Math.random()<.6){[dx,dy]=confDir();fx(p.x,p.y,"💫","#ff8ad8")}
   if(turnMode&&(dx||dy)){p.dir=[dx,dy];return false}
   if(dx||dy){
-    p.dir=[dx,dy];
-    if(tryAttack(dx,dy)){endTurn();return true}
+    p.dir=[dx,dy];/* やじるしでは こうげきしない（こうげきボタンだけ） */
     const nx=p.x+dx,ny=p.y+dy;
     {const so=objAt(nx,ny);if(so&&so.k==="shop"&&canStep(p.x,p.y,dx,dy)){openShop(so);interrupt=true;return false}if(so&&so.k==="jug"&&canStep(p.x,p.y,dx,dy)){openJug(so);interrupt=true;return false}if(so&&OBJS[so.k].statue&&canStep(p.x,p.y,dx,dy)){hitStatue(so,dx,dy);return true}}
     if(p.bind>0&&canStep(p.x,p.y,dx,dy)&&!entAt(nx,ny)){p.bind--;msg(p.bind?"うごけない！（こうそく）":"こうそくが とれた！","w");fx(p.x,p.y,"⛓️","#ccc");endTurn();return true}
@@ -766,7 +765,9 @@ function arcTiles(dx,dy){if(dx&&dy)return [[dx,0],[0,dy]];if(dx)return [[dx,-1],
 function tryAttack(dx,dy){const p=G.p,W=p.wep?wdef(p.wep):{t:"fist"},t=W.t;
   const ax=p.x+dx,ay=p.y+dy,ok1=canStep(p.x,p.y,dx,dy),e1=ok1?entAt(ax,ay):null;
   if(t==="spear"){let e2=null;if(ok1&&canStep(ax,ay,dx,dy)){e2=entAt(ax+dx,ay+dy);if(e2&&!vis(e2.x,e2.y))e2=null}
-    if(!e1&&!e2)return false;swing(dx,dy);if(e1)hitEnemy(e1,1);if(e2&&G.ents.includes(e2))hitEnemy(e2,e1?.8:1);return true}
+    if(!e1&&!e2)return false;swing(dx,dy);FX.push({type:"thrust",x:p.x,y:p.y,dx,dy,t0:now(),dur:300});/* やりが 2マス のびる */
+    const late=(e,d)=>{for(const f of FX)if(f.type==="slash"&&f.x===e.x&&f.y===e.y&&f.t0>=now()-5)f.t0=now()+(FAST?0:d)};
+    if(e1){hitEnemy(e1,1);late(e1,70)}if(e2&&G.ents.includes(e2)){hitEnemy(e2,e1?.8:1);late(e2,130)}return true}
   if(t==="bow"){if(e1){swing(dx,dy);hitEnemy(e1,.6);return true}
     let x=p.x,y=p.y;for(let i=0;i<7;i++){if(!canStep(x,y,dx,dy))break;x+=dx;y+=dy;const o=entAt(x,y);if(o){if(!vis(x,y))break;swing(dx,dy);FX.push({type:"arrow",x:p.x,y:p.y,x2:x,y2:y,a:0});hitEnemy(o,1,1);return true}}return false}
   if(!e1)return false;swing(dx,dy);
@@ -1261,7 +1262,7 @@ window.addEventListener("resize",()=>{if($("game").classList.contains("on"))resi
 /* こうかの えんしゅつが とどくまでの 時間（ダメージ数字・たおれる動きは そのあと） */
 function impactWait(){const T=now();let m=T;for(const f of FX){let a=0;
   if(f.type==="sig")a=f.t0+f.dur*(["proj","spin","zig","wave","lance","chain","swap"].includes(f.p)?.6:.35);else if(f.type==="throw")a=f.t0+f.dur;else if(f.type==="beam")a=f.t0+f.dur*.8;else if(f.type==="zap")a=f.t0+f.dur*.3;
-  else if(f.type==="arrow"&&f.a<7)a=T+(7-f.a)*17;else if(f.type==="bolt"&&f.a<10)a=T+(10-f.a)*17;else if(f.type==="slash")a=f.t0+90;if(a>m)m=a}return FAST?0:m-T}
+  else if(f.type==="arrow"&&f.a<7)a=T+(7-f.a)*17;else if(f.type==="bolt"&&f.a<10)a=T+(10-f.a)*17;else if(f.type==="slash")a=f.t0+90;else if(f.type==="thrust")a=f.t0+150;if(a>m)m=a}return FAST?0:m-T}
 function fx(x,y,t,c){const w=impactWait();FX.push({x,y,t,c,a:0,type:"txt",st:w>0?now()+w:0})}
 function bolt(a,b){FX.push({x:a.x,y:a.y,x2:b.x,y2:b.y,a:0,type:"bolt"})}
 function boomFx(x,y){FX.push({x,y,a:0,type:"boom"})}
@@ -2007,7 +2008,10 @@ function frame(t){requestAnimationFrame(frame);if(!$("game").classList.contains(
       else if(f.type==="zap"){cx.globalAlpha=1-pr;cx.strokeStyle="#fff8a0";cx.lineWidth=TS*.1;cx.shadowColor="#ffe040";cx.shadowBlur=TS*.5;cx.beginPath();let zx=cxp,zy=cyp-TS*2;cx.moveTo(zx,zy);for(let j=0;j<5;j++){zx=cxp+(j%2?1:-1)*TS*.18;zy+=TS*.42;cx.lineTo(zx,zy)}cx.stroke()}
       cx.restore();continue}
     if(f.type==="txt"){if(f.st&&T<f.st){f.a=0;continue}const sl=f.slow?.45:1,life=f.big?55:(f.slow?90:40),sx=ox+f.x*TS+TS/2,sy=oy+f.y*TS+TS*(f.big?0.62:0.3)-f.a*0.8*sl;cx.globalAlpha=Math.max(0,1-f.a/life);cx.font="900 "+Math.round(TS*(f.big?0.78:0.5))+"px "+PF;cx.textAlign="center";cx.lineWidth=4;cx.lineJoin="round";cx.strokeStyle="rgba(20,10,30,.9)";cx.strokeText(f.t,sx,sy);cx.fillStyle=f.c;cx.fillText(f.t,sx,sy);cx.globalAlpha=1;if(f.a>life)FX.splice(i,1)}
-    else if(f.type==="slash"){const pr=(T-f.t0)/200;if(pr>=1){FX.splice(i,1);continue}const cxp=ox+f.x*TS+TS/2,cyp=oy+f.y*TS+TS/2,base=Math.atan2(f.dy,f.dx)+Math.PI/2,a0=base-1.3+pr*0.6,a1=a0+1.6*Math.min(1,pr*2.2);
+    else if(f.type==="thrust"){const pr=(T-f.t0)/f.dur;if(pr>=1){FX.splice(i,1);continue}const ext=pr<.45?pr/.45:pr<.7?1:1-(pr-.7)/.3,sx=ox+f.x*TS+TS/2,sy=oy+f.y*TS+TS/2,L=TS*(.35+1.75*ext),an=Math.atan2(f.dy,f.dx),dl=Math.hypot(f.dx,f.dy);
+      cx.save();cx.translate(sx,sy);cx.rotate(an);const LL=L*dl;cx.strokeStyle="rgba(255,255,255,"+(.5*ext)+")";cx.lineWidth=TS*.22;cx.lineCap="round";cx.beginPath();cx.moveTo(TS*.2,0);cx.lineTo(LL-TS*.2,0);cx.stroke();cx.strokeStyle="#9a6a34";cx.lineWidth=TS*.09;cx.beginPath();cx.moveTo(TS*.15,0);cx.lineTo(LL-TS*.2,0);cx.stroke();
+      cx.fillStyle="#e8eef8";cx.beginPath();cx.moveTo(LL,0);cx.lineTo(LL-TS*.3,-TS*.11);cx.lineTo(LL-TS*.3,TS*.11);cx.closePath();cx.fill();cx.strokeStyle="#7a8aa8";cx.lineWidth=1;cx.stroke();cx.restore();continue}
+    else if(f.type==="slash"){const pr=(T-f.t0)/200;if(pr<0)continue;if(pr>=1){FX.splice(i,1);continue}const cxp=ox+f.x*TS+TS/2,cyp=oy+f.y*TS+TS/2,base=Math.atan2(f.dy,f.dx)+Math.PI/2,a0=base-1.3+pr*0.6,a1=a0+1.6*Math.min(1,pr*2.2);
       cx.save();cx.globalAlpha=1-pr;cx.lineCap="round";cx.strokeStyle=f.c;cx.lineWidth=TS*.16*(1-pr*.6);cx.shadowColor=f.c;cx.shadowBlur=TS*.3;cx.beginPath();cx.arc(cxp,cyp,TS*.42,a0,a1);cx.stroke();cx.strokeStyle="#fff";cx.lineWidth=TS*.05;cx.beginPath();cx.arc(cxp,cyp,TS*.42,a0,a1);cx.stroke();cx.restore();
       if(pr<.5){cx.save();cx.globalAlpha=1-pr*2;star(cx,cxp,cyp,TS*(.15+pr*.4),"#fff");cx.restore()}}
     else if(f.type==="hit"){if(T<f.t0)continue;const pr=(T-f.t0)/200;if(pr>=1){FX.splice(i,1);continue}const cxp=ox+f.x*TS+TS/2,cyp=oy+f.y*TS+TS/2;cx.save();cx.globalAlpha=1-pr;glow(cx,cxp,cyp,TS*(.3+pr*.4),f.c);star(cx,cxp,cyp,TS*(.12+pr*.35),"#fff");cx.restore()}
