@@ -117,7 +117,7 @@ button.big.off,button.big:disabled{opacity:.38;filter:grayscale(.8);pointer-even
 #bag #bagInfo{border:2.5px solid #f28ab8;border-radius:12px;padding:7px 10px!important;background:linear-gradient(#fff0f6,#ffe0ee);box-shadow:0 2px 0 #f28ab8;max-height:none!important;margin:0 0 6px!important;font-size:13px!important;line-height:1.4!important;min-height:46px}
 #bag #bagInfo .rar{font-size:12px;color:#c0508a}
 #bag h3 .bagR{display:flex;align-items:center;gap:8px}
-#bSort{font-weight:900;font-size:12px;line-height:1;font-family:inherit;padding:5px 10px;border-radius:999px;border:2px solid #b8a4ec;background:#f3edff;color:#5a3eb0;box-shadow:0 2px 0 #b8a4ec}
+#bSort,#bBagTtl{font-weight:900;font-size:12px;line-height:1;font-family:inherit;padding:5px 10px;border-radius:999px;border:2px solid #b8a4ec;background:#f3edff;color:#5a3eb0;box-shadow:0 2px 0 #b8a4ec}
 #bagList .it .nm{font-size:13px}
 .it.fl{border-color:#7ab0ff}
 /* レベルアップのえらぶ画面（上の帯の色はかえない） */
@@ -251,6 +251,7 @@ html.sa #rkd{top:var(--gt,0);bottom:var(--gb,0)}
 #rkdClose{display:flex;align-items:center;justify-content:center;margin:0 auto;min-height:46px;width:70%;border:3px solid var(--ink);border-radius:24px;background:linear-gradient(#ffe0f0,#ffb0d8);box-shadow:0 4px 0 var(--ink);color:var(--ink);font-weight:900;font-size:17px;font-family:inherit}
 .rk{cursor:pointer}
 @media(max-height:640px){#rkdC{width:60px;height:60px}#rkdT{font-size:18px;margin:0}#rkdN{font-size:17px;margin:3px 0}#rkdS{gap:4px;margin-bottom:6px}#rkdS b{font-size:14px}#rkdD{font-size:12px;line-height:1.45;padding:5px 8px;margin-bottom:8px}#rkdClose{min-height:40px}}
+#ttlAsk{position:fixed;inset:0;z-index:62;display:none;align-items:center;justify-content:center;background:rgba(40,30,80,.5);padding:12px}#ttlAsk.on{display:flex}html.sa #ttlAsk{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}#ttlAsk .lvBox{width:100%;max-width:320px;padding:14px;text-align:center}#ttlAskT{font-size:20px;font-weight:900;color:var(--ink);margin-bottom:8px}#ttlAskD{font-size:13px;font-weight:800;line-height:1.55;color:var(--ink);margin-bottom:12px}#ttlAskB{display:flex;gap:10px}#ttlAskB button{flex:1;display:flex;align-items:center;justify-content:center;min-height:48px;border:3px solid var(--ink);border-radius:24px;box-shadow:0 4px 0 var(--ink);color:var(--ink);font-weight:900;font-size:17px;font-family:inherit;background:#fff}#ttlAskB #ttlYes{background:linear-gradient(#ffe0f0,#ffb0d8)}
 #jug{position:fixed;inset:0;z-index:57;display:none;align-items:center;justify-content:center;background:rgba(60,40,110,.45);padding:12px}#jug.on{display:flex}
 html.sa #jug{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
 #jug .lvBox{width:100%;max-width:340px;padding:12px 14px 14px;text-align:center}
@@ -377,7 +378,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
   </div>
 </section>
 
-<div id="bag"><h3><span id="bagTitle">持ち物</span> <span class="bagR"><button id="bSort">ならべかえ</button><small id="bagN"></small></span></h3><div id="eqSlots"></div><div id="bagFloor"></div><div id="bagInfo"></div><div id="bagSt"></div><div id="bagList"></div>
+<div id="bag"><h3><span id="bagTitle">持ち物</span> <span class="bagR"><button id="bBagTtl">タイトル</button><button id="bSort">ならべかえ</button><small id="bagN"></small></span></h3><div id="eqSlots"></div><div id="bagFloor"></div><div id="bagInfo"></div><div id="bagSt"></div><div id="bagList"></div>
   <div id="bagAct"><button id="baUse" class="main">つかう</button><button id="baDrop">おく</button><button id="baThrow">なげる</button><button id="baSwap" style="display:none">いれかえ</button><button id="baClose">とじる</button></div></div>
 
 <div id="ask"><div class="lvBox"><div class="orn">◆</div><div id="askT">中断データがあります。<br>はじめからにしますか？</div><div class="askB"><button id="askYes">はい</button><button id="askNo">いいえ</button></div></div></div>
@@ -385,7 +386,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
 <div id="pop"></div>
 <div id="cls"><div class="lvBox"><div id="clsT">だれで あそぶ？</div><div id="clsGrid"></div><button id="clsBack" style="margin-top:10px;min-height:44px;width:60%;border:3px solid var(--ink);border-radius:22px;background:#fff;box-shadow:0 3px 0 var(--ink);color:var(--ink);font-weight:900;font-family:var(--F)">もどる</button></div></div>
 <div id="rkd"><div class="lvBox"><div id="rkdT">きろく</div><canvas id="rkdC" width="240" height="240"></canvas><div id="rkdN"></div><div id="rkdS"></div><div id="rkdD"></div><button id="rkdClose">とじる</button></div></div>
-<div id="jug"><div class="lvBox"><div id="caT">🤹 ジャグラー</div><div id="caG"></div><div id="caR"><span>✊</span><i>🔴</i><span>✊</span></div><div id="caM"></div><div id="caB"><button data-h="0">👈 ひだり</button><button data-h="1">みぎ 👉</button></div><div id="caD">あたると ゲームに出てくる アイテムの中から 1つ もらえる（みんな 同じ確率）。<br>1回だけ あそべる。あそぶと ジャグラーは さっていく。</div><button id="caClose">やめる</button></div></div>
+<div id="ttlAsk"><div class="lvBox"><div id="ttlAskT">タイトルに もどる？</div><div id="ttlAskD">ぼうけんは セーブされるよ。<br>「つづきから」で また あそべる。</div><div id="ttlAskB"><button id="ttlNo">いいえ</button><button id="ttlYes">はい</button></div></div></div><div id="jug"><div class="lvBox"><div id="caT">🤹 ジャグラー</div><div id="caG"></div><div id="caR"><span>✊</span><i>🔴</i><span>✊</span></div><div id="caM"></div><div id="caB"><button data-h="0">👈 ひだり</button><button data-h="1">みぎ 👉</button></div><div id="caD">あたると ゲームに出てくる アイテムの中から 1つ もらえる（みんな 同じ確率）。<br>1回だけ あそべる。あそぶと ジャグラーは さっていく。</div><button id="caClose">やめる</button></div></div>
 <div id="obs"><div class="lvBox"><div id="obsT">かんさつ</div><canvas id="obsC" width="240" height="240"></canvas><div id="obsN"></div><div id="obsS"></div><div id="obsD"></div><button id="obsClose">とじる</button></div></div>
 <div id="shop"><div class="lvBox"><div id="shopT">しょうにん</div><div id="shopG"></div><div id="shopTabs"><button data-m="buy" class="on">かう</button><button data-m="sell">うる</button></div><div id="shopInfo"></div><div id="shopList"></div><div id="shopBtns"><button id="shopAct">かう</button><button id="shopClose">とじる</button></div></div></div>
 <section id="result" class="scr">
@@ -633,9 +634,9 @@ function genFloor(){
     if(k==="ice"){const n=RI(2,5);for(let j=0;j<n;j++){const b=pick(G.objs.filter(o=>o.k==="ice"&&G.roomMap[o.y][o.x]===G.roomMap[pos.y][pos.x]));const nx=b.x+pick([-1,0,1]),ny=b.y+pick([-1,0,1]),key=nx+","+ny;if(G.roomMap[ny]&&G.roomMap[ny][nx]===G.roomMap[pos.y][pos.x]&&!used.has(key)){used.add(key);G.objs.push({x:nx,y:ny,k:"ice",hid:0})}}}}
   if(BF){G.boss=1;G.stairs.hide=1;const bk=BOSSES[(Math.floor(G.floor/10)-1)%BOSSES.length],sr=rooms[si];let pos=null;for(let k=0;k<60&&!pos;k++){const c=freeIn(sr);if(c&&Math.max(Math.abs(c.x-G.stairs.x),Math.abs(c.y-G.stairs.y))<=3)pos=c}pos=pos||freeIn(sr);if(pos){const b=mkEnemy(bk,pos.x,pos.y,false);G.ents.push(b)}}
   if(!BF&&G.floor>=2&&Math.random()<.3){const r=pick(rooms.filter(x=>x!==rooms[ri])),pos=freeIn(r);if(pos)G.objs.push({x:pos.x,y:pos.y,k:"shop",hid:0,stock:shopStock()})}
-  /* とくべつな部屋（1階に 1つまで。2階から 25%）: モンスターハウス 55%・宝物庫 45% */
-  G.sp=null;if(!BF&&G.floor>=2&&Math.random()<.25){const cand=rooms.map((r,i)=>i).filter(i=>i!==ri&&i!==si&&rooms[i].w*rooms[i].h>=12&&!G.objs.some(o=>o.k==="shop"&&roomMap[o.y][o.x]===i));
-    if(cand.length){const i=pick(cand),r=rooms[i],q=Math.random(),k=q<.55?"mh":"tr";G.sp={r:i,k,on:0};const area=r.w*r.h;
+  /* とくべつな部屋（1階に 1つまで。2階から 20%）: モンスターハウス 80%・宝物庫 20% */
+  G.sp=null;if(!BF&&G.floor>=2&&Math.random()<.2){const cand=rooms.map((r,i)=>i).filter(i=>i!==ri&&i!==si&&rooms[i].w*rooms[i].h>=12&&!G.objs.some(o=>o.k==="shop"&&roomMap[o.y][o.x]===i));
+    if(cand.length){const i=pick(cand),r=rooms[i],q=Math.random(),k=q<.8?"mh":"tr";G.sp={r:i,k,on:0};const area=r.w*r.h;
       if(k==="mh"){const n=Math.min(Math.round(area*.3),6+Math.floor(G.floor/2));for(let j=0;j<n;j++){const pos=freeIn(r);if(!pos)break;const e=mkEnemy(randEnemyKind(),pos.x,pos.y,true);e.mh=1;G.ents.push(e)}for(let j=0;j<3;j++){const pos=freeIn(r);if(pos)G.items.push({...pos,...randItem()})}}
       else if(k==="tr"){const n=Math.min(Math.round(area*.35),9);for(let j=0;j<n;j++){const pos=freeIn(r);if(!pos)break;const it=Math.random()<.3?{k:"gold",amt:goldAmt()*2}:randItem();G.items.push({...pos,...it})}for(let j=0;j<2;j++){const pos=freeIn(r);if(!pos)break;const e=mkEnemy(randEnemyKind(),pos.x,pos.y,true);e.mh=1;G.ents.push(e)}}}}
   /* ジャグラー（2階から 15%。ボスの階・スタートの部屋には 出ない） */
@@ -1059,6 +1060,9 @@ const SORD={wep:0,shd:1,ring:2,heal:3,cure:4,food:5,seed:6,buff:7,wand:8,scroll:
 function sortBag(){if(bagMode==="swap")return;const key=it=>it.k==="wep"?0:it.k==="shd"?1:(SORD[(ITEMS[it.k]||{}).c]??11);const lv=it=>it.eq?(it.eq.lv||1):0;
   const cur=typeof bagSel==="number"?G.bag[bagSel]:null;G.bag.sort((a,b)=>key(a)-key(b)||tierOf(b)-tierOf(a)||lv(b)-lv(a)||nameOf(a).localeCompare(nameOf(b),"ja"));if(cur)bagSel=G.bag.indexOf(cur);SFX.ui();drawBag()}
 $("bSort").onclick=sortBag;
+/* 持ち物の「タイトル」: たしかめてから セーブして タイトルへ */
+$("bBagTtl").onclick=()=>{SFX.ui();$("ttlAsk").classList.add("on")};$("ttlNo").onclick=()=>{SFX.ui();$("ttlAsk").classList.remove("on")};
+$("ttlYes").onclick=()=>{SFX.ui();$("ttlAsk").classList.remove("on");save();closeBag();show("title")};
 $("baClose").onclick=()=>{SFX.ui();const sw=bagMode==="swap";closeBag();if(sw){msg("そのままにした。");endTurn()}};
 $("baDrop").onclick=()=>{const p=G.p;
   if(bagMode==="swap"){const fi=floorIdx(),b=G.bag[bagSel];if(fi<0||!b)return;const f=G.items[fi];G.items[fi]={x:p.x,y:p.y,...b};delete f.x;delete f.y;delete f.shown;G.bag[bagSel]=f;msg(nameOf(b)+"を おいて、"+nameOf(f)+"を ひろった。","g");SFX.pick();closeBag();endTurn();return}
