@@ -464,6 +464,8 @@ const ENEMIES={
   arch:{name:"だいまどう",hp:30,atk:8,def:3,exp:46,f:[12,999],beh:"caster",w:2,shot:12,books:["bolt","conf","slow","par","heal","summon"],base:"mage",tint:"#e04070",acc:"crown",d:"いろいろな まほうの本を つかう。"},
   knight:{name:"やみのきし",hp:48,atk:14,def:6,exp:56,f:[13,999],beh:"chase",w:3},
   dknight:{name:"はやぶさのきし",hp:44,atk:13,def:5,exp:70,f:[16,999],beh:"chase",w:2,two:1,base:"knight",tint:"#40a0ff",acc:"ears",d:"1ターンに 2回 こうげきする。"},
+  vamp:{name:"いのちすいコウモリ",hp:22,atk:8,def:2,exp:28,f:[9,999],beh:"erratic",w:2,on:"mhp",base:"bat",tint:"#b02040",acc:"ears",d:"かまれると さいだいHPが へることがある。"},
+  hungry:{name:"はらぺこゴブリン",hp:18,atk:5,def:1,exp:14,f:[4,999],beh:"chase",w:3,on:"food",base:"goblin",tint:"#e0b040",acc:"bag",d:"なぐられると おなかが へることがある。"},
   dragon:{name:"ドラゴン",hp:110,atk:15,def:6,exp:120,f:[999,999],beh:"ranged",w:0,shot:14,boss:1,bf:10},
   kslime:{name:"キングスライム",hp:230,atk:21,def:6,exp:260,f:[999,999],beh:"summon",w:0,boss:1,bf:20},
   mino:{name:"ミノタウロス",hp:280,atk:28,def:10,exp:380,f:[999,999],beh:"fast",w:0,boss:1,bf:30},
@@ -716,7 +718,7 @@ function drawLog(){const L=G.log.slice(-1);$("log").innerHTML=L.map(m=>'<div cla
 
 /* ===== かんさつ ===== */
 const BEHN={slow:"うごきが おそい。",fast:"1回に 2マス すすむ。",erratic:"ふらふら うごく。",ranged:"はなれた ところから こうげきする。",archer:"弓矢を うつ。",caster:"まほうの本を つかう。",summon:"なかまを よぶ。"};
-const ONN={psn:"こうげきで どくに することがある。",conf:"こうげきで こんらんさせることがある。",slow:"こうげきで どんそくに することがある。",steal:"お金を ぬすんで にげる。"};
+const ONN={psn:"こうげきで どくに することがある。",conf:"こうげきで こんらんさせることがある。",slow:"こうげきで どんそくに することがある。",steal:"お金を ぬすんで にげる。",mhp:"かまれると さいだいHPが 2 へることがある。",food:"なぐられると おなかが 30 へることがある。"};
 const BKN={bolt:"いかずち",sleep:"ねむり",slow:"どんそく",conf:"こんらん",par:"しびれ",heal:"かいふく",summon:"なかまよび"};
 function observe(){if(!G||G.over)return;if(G.p.lvq>0){showLv();return}const p=G.p,[dx,dy]=p.dir;let x=p.x,y=p.y,e=null;
   for(let i=0;i<10;i++){if(!canStep(x,y,dx,dy))break;x+=dx;y+=dy;const o=entAt(x,y);if(o){if(vis(o.x,o.y))e=o;break}}
@@ -1020,7 +1022,9 @@ function castBook(e,E){const dist=Math.max(Math.abs(G.p.x-e.x),Math.abs(G.p.y-e.
   return true}
 function enemyAttack(e,E){if(Math.random()<dodgeRate()){msg(E.name+"のこうげき。ひらりとかわした！");SFX.miss();return}const d=dmgCalc(e.atk,defOf());msg(E.name+"のこうげき。"+d+"のダメージ。","w");lunge(e);hurtPlayer(d,E.name);if(G.over)return;
   if(E.on==="steal"&&(G.p.gold||0)>0){const g=Math.min(G.p.gold,15+G.floor*3);G.p.gold-=g;msg(E.name+"に "+g+"ゴールド ぬすまれた！","w");popMsg("💰 -"+g+"G");FX.push({type:"ring",x:e.x,y:e.y,c:"#ffd24a",t0:now(),dur:700});for(let k=0;k<200;k++){const r=pick(G.rooms),x=r.x+R(r.w),y=r.y+R(r.h);if(wall(x,y))continue;if(!entAt(x,y)&&!(x===G.p.x&&y===G.p.y)&&!objAt(x,y)){e.x=x;e.y=y;break}}e.loot=(e.loot||0)+g;return}
-  if(E.on&&E.on!=="steal"&&Math.random()<.35){const t={psn:8,slow:10,conf:6}[E.on];setSt(G.p,E.on,t,false)}}
+  if(E.on==="mhp"&&Math.random()<.3&&G.p.mhp>10){const v=Math.min(2,G.p.mhp-10);G.p.mhp-=v;G.p.hp=Math.min(G.p.hp,G.p.mhp);msg("さいだいHPが "+v+" へった！","w");popMsg("💔 さいだいHP -"+v);fx(G.p.x,G.p.y,"MAX-"+v,"#ff5a7a")}
+  if(E.on==="food"&&Math.random()<.4&&G.p.food>0){const v=Math.min(G.p.food,30);G.p.food-=v;msg("おなかが "+v+" へった！","w");popMsg("🍙 おなか -"+v);fx(G.p.x,G.p.y,"-"+v,"#ffc060")}
+  if(E.on&&!["steal","mhp","food"].includes(E.on)&&Math.random()<.35){const t={psn:8,slow:10,conf:6}[E.on];setSt(G.p,E.on,t,false)}}
 /* とくべつな部屋に 入ったとき */
 function spCheck(){const S=G.sp,p=G.p;if(!S||S.on)return;if(G.roomMap[p.y][p.x]!==S.r)return;S.on=1;interrupt=true;
   if(S.k==="mh"){let n=0;for(const e of G.ents)if(e.mh&&G.roomMap[e.y][e.x]===S.r){e.sleep=0;e.aware=20;n++}msg("モンスターハウスだ！ 敵が いっせいに 目を さました！","w");popMsg("😱 モンスターハウスだ！");SFX.boom();flashC="#ff5a5a";flash=6;scrShake=now()}
