@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<meta name="rogue-rev" content="20261102u">
+<meta name="rogue-rev" content="20261103a">
 <meta name="theme-color" content="#9fe0ff">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <script>try{if(navigator.standalone||matchMedia("(display-mode: standalone)").matches){document.documentElement.classList.add("sa");const st=()=>{const g=document.querySelector(".scr");if(!g)return;const r=g.getBoundingClientRect(),d=document.documentElement.style;d.setProperty("--gt",r.top+"px");d.setProperty("--gb",Math.max(0,innerHeight-r.bottom)+"px")};addEventListener("resize",st);addEventListener("load",st);setTimeout(st,300)}}catch(e){}</script>
 <meta name="apple-mobile-web-app-title" content="ふしぎな地下">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261102u">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261102u">
-<link rel="manifest" href="manifest.webmanifest?v=20261102u">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261103a">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261103a">
+<link rel="manifest" href="manifest.webmanifest?v=20261103a">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800;900&display=swap" rel="stylesheet">
 <title>ふしぎな地下ダンジョン</title>
 <style>
@@ -328,7 +328,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
   <button class="big" id="bCont">つづきから</button>
   <button class="big" id="bStart">はじめから</button>
   <div class="tRow"><button class="big sub" id="bHow">あそびかた</button><button class="big sub" id="bRank">ランキング</button></div>
-  <div class="ver">rev 20261102u</div>
+  <div class="ver">rev 20261103a</div>
 </section>
 
 <section id="rank" class="scr">
@@ -343,7 +343,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
   <div class="hw"><b>主人公</b>：はじめに 4人から えらぶ。<br>せんし＝ひろう 剣・たての レベルが 高め／まほうつかい＝つえの回数 +3／しょうにん＝持ち物 +4、ひろう お金 1.5倍／あそびにん＝いい道具が 出やすい。</div>
   <div class="hw"><b>うごく</b>：十字ボタン（ななめもOK）。押しっぱなしで 続けて歩く。<br><b>むき</b>：光っている間は 矢印で むきだけ かわる。<br><b>こうげき</b>：むいている方向へ こうげき。敵がいなければ からぶり（休むかわりにもなる）。<br><b>足もと</b>：足もとの道具を ひろう・つかう・なげる・いれかえ できる。<br><b>おりる</b>：階段の上で押す。<br><b>ゆみ</b>：いつも もっている。や を 1本つかって むいている方向へ うつ。や は ダンジョンで ひろえる。<br><b>像</b>：こうげきすると こわれて 力が 出る。<br><b>なげる</b>：むいている方向へ 7マスまで。<br><b>むきで とぶ道具</b>：つえ・なげる道具は むいている方向へ。「目の前だけ」「7マス」「どこまでも」の しゅるいが ある。まきものは 向きに かんけいなし。</div>
   <div class="hw" id="howList"></div>
-  <div class="hw"><b>おなか</b>：1回うごくと 1へる（さいしょ 500）。0になると HPがへる（でも 1より下には へらない）。塩むすび＝+150、シャケおむすび＝+300、ジャンボおむすび＝おなか ぜんぶ回ふく、まんがにく＝おなかも HPも ぜんぶ回ふく。いぶくろのたね＝最大おなか +100。<br><b>レベル</b>：<b>こうげき・ぼうぎょ・HP</b>から1つえらぶ。どれでも だいじょうぶ。<br><b>ぶき・たての Lv</b>：Lvが高いほど 強い。深い階ほど 高いLvが 出やすい。<br><b>お金</b>：ひろったり 敵が 落としたり。<b>しょうにん</b>が いる階では 買い物が できる（ぶつかると 話せる）。<br><b>状態異常</b>：<b style="color:#5ab030">どく</b>＝HPがへる／<b style="color:#e050c0">こんらん</b>＝思った方へ 歩けない／<b style="color:#d09020">どんそく</b>＝敵が 2回うごく／<b style="color:#8a70e0">ねむり</b>・<b style="color:#d0b000">しびれ</b>＝うごけない。敵にも きく。なおりぐさで なおる。<br><b>会心の一撃</b>：ときどき ダメージ1.5倍。<br><b>★レア度</b>：★が多いほど 強くて めずらしい。<br><b>ゆびわ</b>：1つだけ。つけている間 ずっと効く。<br><b>〇〇の証</b>：敵を たおすと たまに（1%）手に入る。+1ごとに その敵の EXPが 10%ふえる。持ち物画面で 見られる。<br><b>ボスの階</b>：10階ごと。ボスを たおすと 階段が出る。ボスは なかまを よぶことも ある。</div>
+  <div class="hw"><b>おなか</b>：1回うごくと 1へる（さいしょ 500）。0になると HPがへる（でも 1より下には へらない）。塩むすび＝+150、シャケおむすび＝+300、ジャンボおむすび＝おなか ぜんぶ回ふく、まんがにく＝おなかも HPも ぜんぶ回ふく。いぶくろのたね＝最大おなか +100。<br><b>レベル</b>：<b>こうげき・ぼうぎょ・HP</b>から1つえらぶ。どれでも だいじょうぶ。<br><b>ぶき・たての Lv</b>：Lvが高いほど 強い。深い階ほど 高いLvが 出やすい。<br><b>お金</b>：ひろったり 敵が 落としたり。<b>しょうにん</b>が いる階では 買い物が できる（ぶつかると 話せる）。<br><b>状態異常</b>：<b style="color:#5ab030">どく</b>＝HPがへる／<b style="color:#e050c0">こんらん</b>＝思った方へ 歩けない／<b style="color:#d09020">どんそく</b>＝敵が 2回うごく／<b style="color:#8a70e0">ねむり</b>・<b style="color:#d0b000">しびれ</b>＝うごけない。敵にも きく。なおりぐさで なおる。<br><b>会心の一撃</b>：ときどき ダメージ1.5倍。<br><b>★レア度</b>：★が多いほど 強くて めずらしい。<br><b>ゆびわ</b>：1つだけ。つけている間 ずっと効く。<br><b>モンスターの証</b>：敵を たおすと たまに（1%）ゆかに おちる。ひろうと +1（持ち物の わくは つかわない）。+1ごとに すべての敵の EXPが 3%ふえる。持ち物画面で 見られる。<br><b>ボスの階</b>：10階ごと。ボスを たおすと 階段が出る。ボスは なかまを よぶことも ある。</div>
   <button class="big" id="bHowBack" style="flex:none">もどる</button>
 </section>
 
@@ -398,7 +398,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
 <script>
 "use strict";
 const $=id=>document.getElementById(id);
-const REV="20261102u";
+const REV="20261103a";
 /* ===== 音 ===== */
 let AC=null;
 function ac(){try{if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();if(AC.state==="suspended")AC.resume()}catch(e){}return AC}
@@ -746,6 +746,7 @@ function playerAct(dx,dy){
 }
 function pickUp(i){const it=G.items[i];
   if(it.k==="arrow"){G.items.splice(i,1);G.p.arrows=(G.p.arrows||0)+it.amt;msg("や を "+it.amt+"本 ひろった。","y");fx(G.p.x,G.p.y,"+"+it.amt+"本","#fff");SFX.pick();interrupt=true;hud();return}
+  if(it.k==="proof"){G.items.splice(i,1);G.p.proofs=(G.p.proofs||0)+1;msg("モンスターの証を ひろった！ モンスターの証 +"+G.p.proofs+"（EXP +"+Math.round(PROOF_EXP*100*G.p.proofs)+"%）","y");popMsg("🏅 モンスターの証 +"+G.p.proofs);fx(G.p.x,G.p.y,"🏅","#ffd24a");SFX.lvl();interrupt=true;return}
   if(it.k==="gold"){G.items.splice(i,1);const a=Math.round(it.amt*(G.p.cls==="merchant"?1.5:1));G.p.gold=(G.p.gold||0)+a;msg(a+"ゴールド ひろった。","y");fx(G.p.x,G.p.y,"+"+a+"G","#ffd24a");SFX.coin();interrupt=true;return}
   if(G.bag.length>=bagCap()){msg(nameOf(it)+"がある。持ち物がいっぱいだ。","w");interrupt=true;return}
   G.items.splice(i,1);it.x=undefined;
@@ -754,7 +755,7 @@ function pickUp(i){const it=G.items[i];
   else{G.bag.push(it);const tr=tierOf(it);msg((tr>=2?'<span style="color:'+RAR[tr].c+'">'+nameOf(it)+'</span>':nameOf(it))+"をひろった。"+(tr>=2?rarTag(it)+(tr===4?"！":""):""),"g")}
   SFX.pick();interrupt=true;
 }
-const nameOf=it=>it.k==="gold"?it.amt+"ゴールド":it.k==="arrow"?"や "+it.amt+"本":(it.eq&&it.eq.cur&&it.eq.cv?"💀":"")+(it.k==="wep"?wdef(it.eq).n+" Lv"+(it.eq.lv||1):it.k==="shd"?it.eq.name+" Lv"+(it.eq.lv||1):"")+(it.eq&&it.eq.cur&&it.eq.cv?"（のろい）":"")+(it.eq?"":ITEMS[it.k].name+(it.n!=null?"（あと"+it.n+"回）":""));
+const nameOf=it=>it.k==="proof"?"モンスターの証":it.k==="gold"?it.amt+"ゴールド":it.k==="arrow"?"や "+it.amt+"本":(it.eq&&it.eq.cur&&it.eq.cv?"💀":"")+(it.k==="wep"?wdef(it.eq).n+" Lv"+(it.eq.lv||1):it.k==="shd"?it.eq.name+" Lv"+(it.eq.lv||1):"")+(it.eq&&it.eq.cur&&it.eq.cv?"（のろい）":"")+(it.eq?"":ITEMS[it.k].name+(it.n!=null?"（あと"+it.n+"回）":""));
 function dmgCalc(atk,def){atk=Math.max(1,atk);def=Math.max(0,def);const a=atk*(0.85+Math.random()*0.3);return Math.max(1,Math.round(BAL.dm?Math.max(a*BAL.fl,a-def*BAL.ds):a*atk/(atk+def*BAL.dk)))}
 const now=()=>performance.now();let lockUntil=0;
 function whiff(){const p=G.p,[dx,dy]=p.dir;if(tryAttack(dx,dy)){endTurn();return}{const so=objAt(p.x+dx,p.y+dy);if(so&&OBJS[so.k].statue&&canStep(p.x,p.y,dx,dy)){hitStatue(so,dx,dy);return}}swing(dx,dy);SFX.miss();msg("からぶり！");endTurn()}
@@ -836,8 +837,9 @@ function genBoss(){const map=[],seen=[];for(let y=0;y<MH;y++){map.push(new Array
   G.p.x=rx+2;G.p.y=ry+(rh>>1);G.p.dir=[1,0];G.stairs={x:rx+rw-3,y:ry+(rh>>1),hide:1};G.stairsRoom=0;
   const bk=BOSSES[(Math.floor(G.floor/10)-1)%BOSSES.length],b=mkEnemy(bk,rx+rw-4,ry+(rh>>1),false);b.aware=30;G.ents.push(b);updateSight()}
 
-function killEnemy(e,E){G.ents=G.ents.filter(x=>x!==e);DYING.push({k:e.k,x:e.x,y:e.y,fl:e.fl,t0:now()+impactWait()+(FAST?0:130)});if(e.loot&&!G.items.some(i=>i.x===e.x&&i.y===e.y))G.items.push({x:e.x,y:e.y,k:"gold",amt:e.loot});G.p.kills++;const ex1=(e.exp||E.exp)*(1+.1*((G.p.proofs||{})[e.k]||0)),ex0=Math.round(ex1),ex=G.p.ring==="rexp"?Math.round(ex0*1.5):ex0;msg(E.name+"をたおした！"+(E.lv3?"":" ("+ex+"EXP)"),"g");SFX.kill();
-  if(Math.random()<.01){const P=G.p.proofs||(G.p.proofs={});P[e.k]=(P[e.k]||0)+1;msg(E.name+"の証 +"+P[e.k]+" を 手に入れた！","y");popMsg("🏅 "+E.name+"の証 +"+P[e.k]);SFX.lvl()}
+const PROOF_EXP=.03;/* モンスターの証 +1ごとに EXP +3% */
+function killEnemy(e,E){G.ents=G.ents.filter(x=>x!==e);DYING.push({k:e.k,x:e.x,y:e.y,fl:e.fl,t0:now()+impactWait()+(FAST?0:130)});if(e.loot&&!G.items.some(i=>i.x===e.x&&i.y===e.y))G.items.push({x:e.x,y:e.y,k:"gold",amt:e.loot});G.p.kills++;const ex1=(e.exp||E.exp)*(1+PROOF_EXP*(G.p.proofs||0)),ex0=Math.round(ex1),ex=G.p.ring==="rexp"?Math.round(ex0*1.5):ex0;msg(E.name+"をたおした！"+(E.lv3?"":" ("+ex+"EXP)"),"g");SFX.kill();
+  if(Math.random()<.01){/* モンスターの証: その場に おちる */let pos=null;for(const [dx,dy] of [[0,0],[1,0],[-1,0],[0,1],[0,-1],[1,1],[-1,1],[1,-1],[-1,-1]]){const x=e.x+dx,y=e.y+dy;if(!wall(x,y)&&!objAt(x,y)&&!(x===G.p.x&&y===G.p.y)&&!G.items.some(i=>i.x===x&&i.y===y)){pos={x,y};break}}if(pos){G.items.push({...pos,k:"proof"});msg("なにかが おちた…！","y")}}
   gainExp(ex);if(E.lv3){for(let k=0;k<3;k++)lvOne();msg("レベルが 3つ 上がった！ レベル"+G.p.lv+"！","y");lvMotion(3)}
   if(E.boss){G.stairs.hide=0;G.seen[G.stairs.y][G.stairs.x]=1;popMsg("🎉 階段が あらわれた！");
     msg(E.name+"を たおした！ 階段が あらわれた！","y");SFX.lvl()}}
@@ -1029,7 +1031,7 @@ function throwItem(it){const p=G.p,d=p.dir||[0,1],E0=null;let x=p.x,y=p.y,hit=nu
   if(hit.hp<=0)killEnemy(hit,E);
   if(isPot(it.k))msg(nm+"は われてしまった。");else msg(nm+"は 消えてしまった。")}
 function closeBag(){$("bag").classList.remove("on")}
-function cellName(it){if(it.eq&&it.eq.cur&&it.eq.cv)return "💀"+cellName({k:it.k,eq:{...it.eq,cv:0}});if(it.k==="wep")return wdef(it.eq).n+" Lv"+(it.eq.lv||1);if(it.k==="shd")return it.eq.name+" Lv"+(it.eq.lv||1);const I=ITEMS[it.k];return I.name+(it.n!=null?" ["+it.n+"]":"")}
+function cellName(it){if(it.k==="proof")return "モンスターの証";if(it.eq&&it.eq.cur&&it.eq.cv)return "💀"+cellName({k:it.k,eq:{...it.eq,cv:0}});if(it.k==="wep")return wdef(it.eq).n+" Lv"+(it.eq.lv||1);if(it.k==="shd")return it.eq.name+" Lv"+(it.eq.lv||1);const I=ITEMS[it.k];return I.name+(it.n!=null?" ["+it.n+"]":"")}
 function shortDesc(it){if(it.k==="wep")return "こうげき "+wv(it.eq);if(it.k==="shd")return "まもり "+sv(it.eq);const I=ITEMS[it.k];return I.sd||I.d}
 function itemDesc(it){if(it.k==="wep"){const W=wdef(it.eq);return W.d+"（こうげき "+wv(it.eq)+"）"}if(it.k==="shd")return "まもり "+sv(it.eq);return ITEMS[it.k].d}
 function slotItem(s){const p=G.p;return s==="wep"?(p.wep?{k:"wep",eq:p.wep}:null):s==="shd"?(p.shd?{k:"shd",eq:p.shd}:null):(p.ring?{k:p.ring}:null)}
@@ -1039,7 +1041,7 @@ function drawBag(){const L=$("bagList"),p=G.p,swap=bagMode==="swap";$("bagTitle"
   $("bagFloor").innerHTML=fl?'<button class="it fl'+(bagSel==="floor"?" sel":"")+'" data-f="1"><canvas width="60" height="60" data-k="'+skey(fl)+'"></canvas><span><span class="nm" style="color:'+RAR[tierOf(fl)].c+'">'+cellName(fl)+'</span></span><b class="eq">足もと</b></button>':"";if(bagSel==="floor"&&!fl)bagSel=G.bag.length?0:"wep";
   const si=typeof bagSel==="string"&&bagSel!=="floor"?slotItem(bagSel):null;
   $("bagInfo").innerHTML=swap?"持ち物を えらんで「いれかえ」。足もとや 持ち物を えらんで「つかう」も できる。":bagSel==="floor"?infoOf(fl)+"<br><b>足もと</b>："+(G.bag.length>=bagCap()?"持ち物が いっぱい。持ち物を えらぶと「いれかえ」できる。":"ひろう・つかう・なげる が できる。"):typeof bagSel==="number"&&fl?"持ち物を えらんで「いれかえ」すると 足もとの道具と こうかんできる。":typeof bagSel==="string"?(si?infoOf(si):"何も そうびしていない。"):(bagSel===-1?(G.bag.length?"道具を タップすると せつめいが 出るよ。":"何も 持っていない。"):"");
-  $("bagSt").innerHTML=((Object.keys(p.proofs||{}).length?"🏅 "+Object.entries(p.proofs).map(([k,n])=>ENEMIES[k].name+"の証+"+n).join("・"):"")+(bufOf("atk")?"　<b style=color:#e06a00>ちから"+p.buf.atk+"</b>":"")+(bufOf("def")?"　<b style=color:#1586d0>まもり"+p.buf.def+"</b>":"")+(bufOf("regen")?"　<b style=color:#11966a>めぐみ"+p.buf.regen+"</b>":"")+(p.psn?"　<b style=color:#3a9a10>どく"+p.psn+"</b>":"")).replace(/^　/,"");
+  $("bagSt").innerHTML=((p.proofs?"🏅 モンスターの証+"+p.proofs+"（EXP +"+Math.round(PROOF_EXP*100*p.proofs)+"%）":"")+(bufOf("atk")?"　<b style=color:#e06a00>ちから"+p.buf.atk+"</b>":"")+(bufOf("def")?"　<b style=color:#1586d0>まもり"+p.buf.def+"</b>":"")+(bufOf("regen")?"　<b style=color:#11966a>めぐみ"+p.buf.regen+"</b>":"")+(p.psn?"　<b style=color:#3a9a10>どく"+p.psn+"</b>":"")).replace(/^　/,"");
   if(!G.bag.length){L.innerHTML='<div style="color:#a9a8b8;padding:20px;text-align:center">何も持っていない。</div>'}
   else L.innerHTML=G.bag.map((it,i)=>{const r=RAR[tierOf(it)];return '<button class="it r'+tierOf(it)+(i===bagSel?" sel":"")+'" data-i="'+i+'"><canvas width="48" height="48" data-k="'+skey(it)+'"></canvas><span><span class="nm" style="color:'+r.c+'">'+cellName(it)+'</span></span></button>'}).join("");
   L.style.gridTemplateRows="repeat("+Math.ceil(bagCap()/2)+",minmax(0,1fr))";
@@ -1202,7 +1204,7 @@ function getBest(){const b=+localStorage.getItem("rogue-best")||0;return {n:b,tx
 /* 中断データ（ホーム画面アプリが閉じても続きから） */
 function save(){try{if(G&&!G.over)localStorage.setItem("rogue-save",JSON.stringify(G))}catch(e){}}
 function clearSave(){try{localStorage.removeItem("rogue-save")}catch(e){}}
-function migrate(G){const p=G.p;p.hf=0;p.lu=null;(G.ents||[]).forEach(e=>{e.hf=0;e.lu=null});(G.objs||[]).forEach(o=>{delete o.crack});p.arrows=p.arrows||0;p.proofs=p.proofs||{};p.haste=p.haste||0;p.inv=p.inv||0;p.bind=p.bind||0;p.fmax=p.fmax||500;p.conf=p.conf||0;p.slow=p.slow||0;p.par=p.par||0;p.gold=p.gold||0;p.cls=CLS[p.cls]?p.cls:"warrior";G.ents.forEach(e=>{e.conf=e.conf||0;e.slow=e.slow||0;e.par=e.par||0});
+function migrate(G){const p=G.p;p.hf=0;p.lu=null;(G.ents||[]).forEach(e=>{e.hf=0;e.lu=null});(G.objs||[]).forEach(o=>{delete o.crack});p.arrows=p.arrows||0;p.proofs=typeof p.proofs==="number"?p.proofs:Object.values(p.proofs||{}).reduce((a,b)=>a+(+b||0),0);p.haste=p.haste||0;p.inv=p.inv||0;p.bind=p.bind||0;p.fmax=p.fmax||500;p.conf=p.conf||0;p.slow=p.slow||0;p.par=p.par||0;p.gold=p.gold||0;p.cls=CLS[p.cls]?p.cls:"warrior";G.ents.forEach(e=>{e.conf=e.conf||0;e.slow=e.slow||0;e.par=e.par||0});
   if(!p.sv){/* 20261101c: 運・空腹は なくなった → そのポイントを えらびなおし。こうげき・ぼうぎょは 新しい上がり方に そろえる（へらさない） */
     const og=(n,a,r)=>a*(1-Math.pow(r,n))/(1-r),aP=p.atkP||0,dP=p.defP||0,ref=(p.luck||0)+(p.hung||0);
     p.atk=r1((p.atk||3)+Math.max(0,aP*BAL.atkG-og(aP,2.6,.45)));p.def=r1((p.def||0)+Math.max(0,dP*BAL.defG-og(dP,1.8,.45)));
@@ -1222,13 +1224,13 @@ function addRank(src){try{const p=G.p,d=new Date(),e={c:p.cls||"warrior",f:G.flo
 /* ランキングの くわしい記録（その時の ようす） */
 function rkDetail(src,d){const p=G.p,nm=it=>{if(!it)return "";const c=it.eq&&it.eq.cur?{...it,eq:{...it.eq,cv:1}}:it;return nameOf(c)};
   return {src:String(src||""),hp:p.mhp,atk:Math.round(atkOf()),def:Math.round(defOf()),wep:nm(slotItem("wep")),shd:nm(slotItem("shd")),ring:p.ring&&ITEMS[p.ring]?ITEMS[p.ring].name:"",bag:G.bag.map(nm),gold:p.gold||0,turn:G.turn||0,food:Math.max(0,Math.round(p.food||0)),fmax:p.fmax||500,arrows:p.arrows||0,
-    pr:Object.values(p.proofs||{}).reduce((a,b)=>a+b,0),date:d.getFullYear()+"/"+(d.getMonth()+1)+"/"+d.getDate()+" "+d.getHours()+":"+String(d.getMinutes()).padStart(2,"0")}}
+    pr:p.proofs||0,date:d.getFullYear()+"/"+(d.getMonth()+1)+"/"+d.getDate()+" "+d.getHours()+":"+String(d.getMinutes()).padStart(2,"0")}}
 function showRkd(i){const e=getRank()[i];if(!e)return;const x=e.x,c=$("rkdC").getContext("2d");c.clearRect(0,0,240,240);drawHero(c,24,20,192,"d","",e.c);
   $("rkdN").innerHTML=(CLSN[e.c]||"")+"<small>Lv"+e.lv+"</small>";
   const cell=(l,v)=>"<div><small>"+l+"</small><b>"+v+"</b></div>";
   if(!x){$("rkdS").innerHTML=cell("とうたつ",e.f+"F")+cell("レベル",e.lv)+cell("たおした",e.k);$("rkdD").innerHTML="・日づけ："+e.d+"<br>・この記録は 前の バージョンなので、くわしい ようすは のこっていないよ。"}
   else{$("rkdS").innerHTML=cell("とうたつ",e.f+"F")+cell("さいだいHP",x.hp)+cell("ターン",x.turn)+cell("こうげき",x.atk)+cell("まもり",x.def)+cell("たおした",e.k);
-    const L=["😵 やられた原因："+(x.src||"？"),"⚔️ ぶき："+(x.wep||"なし"),"🛡️ たて："+(x.shd||"なし"),"💍 ゆびわ："+(x.ring||"なし"),"💰 ゴールド："+x.gold+"G　🏹 や："+x.arrows+"本","🍙 おなか："+x.food+" / "+x.fmax+(x.pr?"　🏅 証："+x.pr+"こ":""),"🎒 持ち物（"+x.bag.length+"こ）："+(x.bag.length?x.bag.join("、"):"なし"),"📅 "+x.date];
+    const L=["😵 やられた原因："+(x.src||"？"),"⚔️ ぶき："+(x.wep||"なし"),"🛡️ たて："+(x.shd||"なし"),"💍 ゆびわ："+(x.ring||"なし"),"💰 ゴールド："+x.gold+"G　🏹 や："+x.arrows+"本","🍙 おなか："+x.food+" / "+x.fmax+(x.pr?"　🏅 モンスターの証："+x.pr:""),"🎒 持ち物（"+x.bag.length+"こ）："+(x.bag.length?x.bag.join("、"):"なし"),"📅 "+x.date];
     $("rkdD").innerHTML=L.map(t=>"・"+t).join("<br>")}
   $("rkd").classList.add("on")}
 const CLSN={warrior:"せんし",mage:"まほうつかい",merchant:"しょうにん",joker:"あそびにん"};
@@ -1490,13 +1492,13 @@ function puniHero(g,x,y,s,F,wid,cls){
   if(lh&&!back)longH();
   if(back&&t>0&&wid)heldWeapon(g,x,y,u,wid,cx+5,22.4);
   /* あし */
-  const legC=cls==="joker"?"#f2c8b4":cls==="mage"?"#16343a":"#5a3a2a",shoe=cls==="joker"?"#111018":cls==="mage"?"#2a1a2a":"#3a2418";
-  for(const d of [-1,1]){const lx=cx+d*2.3*wf+fo*.4;RR(lx-1.4,25.4,2.8,3.6,1.2,legC);E(lx+fo*.5,28.7,1.8,1,shoe)}
+  const legC=cls==="joker"?"#f2c8b4":cls==="mage"?"#fde0cc":"#5a3a2a",shoe=cls==="joker"?"#111018":cls==="mage"?"#2a1a2a":"#3a2418";
+  for(const d of [-1,1]){const lx=cx+d*2.3*wf+fo*.4;RR(lx-1.4,25.4,2.8,3.6,1.2,legC);E(lx+fo*.5,28.7,1.8,1,shoe);if(cls==="mage")RR(lx-1.5,27.9,3,1,.5,shoe)}
   /* からだ */
   if(cls==="warrior"){RR(cx-6.2*wf,17.6,12.4*wf,9,3.8,C.bd);RR(cx-6.2*wf,23.2,12.4*wf,1.8,.6,C.ac);if(!back)E(cx+fo*2.6,24.1,1,0.8,"#c8901a");if(!back)PL([cx-3*wf+fo*2,17.6,cx+3*wf+fo*2,17.6,cx+fo*2,20.4],"#d83a3a")}
   else if(cls==="merchant"){E(cx+fo*.6,22.6,6.4*wf+.4,5.4,C.bd);if(!back){RR(cx-2.6*wf+fo*2,18,5.2*wf,7.6,2,"#fff3dc");E(cx+fo*4.6+3.6*(1-t),25,1.9,1.7,"#c89a4a");E(cx+fo*4.6+3.6*(1-t),23.6,1,.5,"#8a5a28")}}
-  else if(cls==="mage"){RR(cx-3.8*wf,17.8,7.6*wf,8.2,3,C.bd);PL([cx-4.4*wf,24.4,cx+4.4*wf,24.4,cx+5.2*wf,26.6,cx-5.2*wf,26.6],C.bd2);RR(cx-3.8*wf,22.6,7.6*wf,1.2,.5,C.ac)}
-  else{/* バニースーツ */RR(cx-3.6*wf,17.8,7.2*wf,8.4,3,C.sk);g.beginPath();g.moveTo(X(cx-3.8*wf),Y(19.6));g.lineTo(X(cx+3.8*wf),Y(19.6));g.lineTo(X(cx+3.8*wf),Y(25));g.lineTo(X(cx+1.6*wf),Y(26.6));g.lineTo(X(cx-1.6*wf),Y(26.6));g.lineTo(X(cx-3.8*wf),Y(25));g.closePath();g.fillStyle=C.bd;g.fill();
+  else if(cls==="mage"){/* まほうつかいの いしょう（ミニスカート） */RR(cx-3.6*wf,17.8,7.2*wf,5.6,2.6,C.bd);PL([cx-3.8*wf,22.6,cx+3.8*wf,22.6,cx+5.6*wf,25.8,cx-5.6*wf,25.8],C.bd);RR(cx-5.6*wf,25.2,11.2*wf,.8,.4,C.ac);RR(cx-3.8*wf,22.2,7.6*wf,1.1,.5,C.ac);if(!back){PL([cx-1.6*wf+fo*2,17.8,cx+1.6*wf+fo*2,17.8,cx+fo*2,19.6],"#fff");E(cx+fo*2,20.6,.8,.8,C.ac)}}
+  else{/* バニースーツ */RR(cx-3.6*wf,17.8,7.2*wf,8.4,3,C.sk);g.beginPath();g.moveTo(X(cx-3.8*wf),Y(19.2));if(!back)g.lineTo(X(cx+fo*2),Y(21));/* Vネック（あさめ） */g.lineTo(X(cx+3.8*wf),Y(19.2));g.lineTo(X(cx+3.8*wf),Y(25));g.lineTo(X(cx+1.6*wf),Y(26.6));g.lineTo(X(cx-1.6*wf),Y(26.6));g.lineTo(X(cx-3.8*wf),Y(25));g.closePath();g.fillStyle=C.bd;g.fill();
     if(!back){RR(cx-2*wf+fo*2,17.6,4*wf,1.4,.6,"#fff");PL([hx+fo*2-2.2,18.2,hx+fo*2,18.9,hx+fo*2-2.2,19.6],"#e0284a");PL([hx+fo*2+2.2,18.2,hx+fo*2,18.9,hx+fo*2+2.2,19.6],"#e0284a");E(hx+fo*2,18.9,.6,.6,"#b01838")}
     else E(cx-fo*1,25.4,1.9,1.8,"#fff")}/* しっぽ */
   if(lh&&back)longH();
@@ -1529,7 +1531,7 @@ function puniHero(g,x,y,s,F,wid,cls){
   if(cls==="warrior"){g.save();headPath();g.clip();E(hx,hy-6.6,9.4,4.6,"#b8c2d6");RR(hx-9,hy-4.2,18,1.6,.6,"#8a96ae");g.restore();
     for(const d of [-1,1]){if(t===1&&d<0)continue;const bx=hx+d*(7.4-t*1.4)+fo*(d>0?0:0);g.beginPath();g.moveTo(X(bx),Y(hy-6.4));g.quadraticCurveTo(X(bx+d*4.4),Y(hy-7.6),X(bx+d*3.4),Y(hy-13.6));g.quadraticCurveTo(X(bx+d*2),Y(hy-9.6),X(bx-d*1),Y(hy-8.6));g.closePath();g.fillStyle="#fff6e0";g.fill()}}
   if(cls==="merchant"){PL([hx-4.6,hy-6.6,hx+4.6,hy-6.6,hx+3.6,hy-12.4,hx-3.6,hy-12.4],"#d0303a");E(hx,hy-12.4,3.6,.9,"#e8484a");LN(hx,hy-12.6,hx-fo*1+3.6,hy-10.4,"#2a1a10",.8);E(hx-fo+3.8,hy-9.8,.9,1.2,"#2a1a10")}
-  if(cls==="mage"){E(hx-fo*1.4+.6,hy-7.4,7.6,2.6,C.bd,-.12);E(hx-fo*1.4+.8,hy-9.6,1,1,C.bd2);if(!back){const sx=hx+fo*2+4,sy=hy-7;star(g,X(sx),Y(sy),1.5*u,C.ac)}}
+  if(cls==="mage"){/* とんがりぼうし */const bx=hx-fo*.6;E(bx,hy-6.4,10,2.3,C.bd2);g.beginPath();g.moveTo(X(bx-5.6),Y(hy-6.6));g.quadraticCurveTo(X(bx-2.6),Y(hy-11),X(bx+1.2-fo*1.5),Y(hy-16.4));g.quadraticCurveTo(X(bx+4.6-fo*3),Y(hy-15.2),X(bx+3.6-fo*2.2),Y(hy-13.6));g.quadraticCurveTo(X(bx+3.4),Y(hy-10),X(bx+5.6),Y(hy-6.6));g.closePath();g.fillStyle=C.bd;g.fill();RR(bx-5.6,hy-8.4,11.2,1.5,.6,C.ac);if(!back)star(g,X(bx+fo*2+1.4),Y(hy-11),1.3*u,C.ac)}
   if(cls==="joker"){for(const [d,tl] of [[-1,-.16],[1,.2]]){if(t===1&&d<0&&!back)continue;g.save();g.translate(X(hx+d*3-fo*.6),Y(hy-6.6));g.rotate(tl*(back?-1:1));g.beginPath();g.ellipse(0,-4.8*u,1.9*u,5.2*u,0,0,7);g.fillStyle=C.bd;g.fill();if(!back){g.beginPath();g.ellipse(0,-4.6*u,.9*u,3.8*u,0,0,7);g.fillStyle="#ff9ac0";g.fill()}g.restore()}RR(hx-6,hy-7.4,12,1.4,.7,C.bd)}
 }
 function drawHero(g,x,y,s,f,wid,cls){f=f||"d";cls=cls||(G&&G.p&&G.p.cls)||"warrior";HPAL=HPALS[cls]||HPALS.warrior;
@@ -1854,6 +1856,7 @@ function drawRing(g,c1,c2,x,y,u){glow(g,x+16*u,y+15*u,11*u,c2+"55");
   g.fillStyle=LG(g,x+12*u,y+5*u,x+20*u,y+13*u,["#ffffff",c1,c2]);g.beginPath();g.moveTo(x+16*u,y+5*u);g.lineTo(x+20.5*u,y+9*u);g.lineTo(x+16*u,y+13.2*u);g.lineTo(x+11.5*u,y+9*u);g.closePath();g.fill();
   star(g,x+22.5*u,y+6*u,1.6*u,"#fff")}
 function drawItemExtra(g,k,x,y,s){const u=s/32,it=ITEMS[k];
+  if(k==="proof"){g.fillStyle="#3a7ae0";g.beginPath();g.moveTo(x+12*u,y+5*u);g.lineTo(x+16*u,y+14*u);g.lineTo(x+20*u,y+5*u);g.closePath();g.fill();g.fillStyle="#e0284a";g.beginPath();g.moveTo(x+16*u,y+5*u);g.lineTo(x+13.5*u,y+12*u);g.lineTo(x+18.5*u,y+12*u);g.closePath();g.fill();g.fillStyle=RG(g,x+16*u,y+19*u,1,7*u,["#fff6b0","#ffc830","#c88a10"],x+14*u,y+17*u);g.beginPath();g.arc(x+16*u,y+19*u,6.5*u,0,7);g.fill();g.strokeStyle="#a06a00";g.lineWidth=.9*u;g.stroke();star(g,x+16*u,y+19*u,3.4*u,"#fff2b0");return true}
   if(k==="arrow"){g.save();g.translate(x+16*u,y+16*u);for(const [dx2,a] of [[-4,-.5],[0,-.35],[4,-.2]]){g.save();g.translate(dx2*u,0);g.rotate(a+.6);g.strokeStyle="#a0703a";g.lineWidth=1.6*u;g.beginPath();g.moveTo(0,10*u);g.lineTo(0,-8*u);g.stroke();g.fillStyle="#d8dce8";g.beginPath();g.moveTo(0,-11*u);g.lineTo(-2.4*u,-7*u);g.lineTo(2.4*u,-7*u);g.fill();g.fillStyle="#ff7aa8";g.beginPath();g.moveTo(0,8*u);g.lineTo(-2.4*u,11*u);g.lineTo(0,10*u);g.lineTo(2.4*u,11*u);g.fill();g.restore()}g.restore();return true}
   if(k==="gold"){for(const [cx0,cy0] of [[12,22],[20,22],[16,17]]){g.fillStyle=RG(g,x+cx0*u,y+cy0*u,1,6*u,["#fff6b0","#ffc830","#c88a10"],x+(cx0-2)*u,y+(cy0-2)*u);g.beginPath();g.ellipse(x+cx0*u,y+cy0*u,6*u,4.2*u,0,0,7);g.fill();g.strokeStyle="#a06a00";g.lineWidth=.8*u;g.stroke()}star(g,x+23*u,y+11*u,2*u,"#fff");return true}
   if(it&&it.art){const a=it.art;if(a[0]==="pot")drawPot(g,a[1],a[2],x,y,u);else if(a[0]==="scroll")drawScrollArt(g,[a[1],a[2]],x,y,u);else if(a[0]==="staff")drawStaff(g,a[1],a[2],x,y,u);else if(a[0]==="ring")drawRing(g,a[1],a[2],x,y,u);return true}
