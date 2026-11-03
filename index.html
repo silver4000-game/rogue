@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<meta name="rogue-rev" content="20261103e">
+<meta name="rogue-rev" content="20261103f">
 <meta name="theme-color" content="#9fe0ff">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <script>try{if(navigator.standalone||matchMedia("(display-mode: standalone)").matches){document.documentElement.classList.add("sa");const st=()=>{const g=document.querySelector(".scr");if(!g)return;const r=g.getBoundingClientRect(),d=document.documentElement.style;d.setProperty("--gt",r.top+"px");d.setProperty("--gb",Math.max(0,innerHeight-r.bottom)+"px")};addEventListener("resize",st);addEventListener("load",st);setTimeout(st,300)}}catch(e){}</script>
 <meta name="apple-mobile-web-app-title" content="ふしぎな地下">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261103e">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261103e">
-<link rel="manifest" href="manifest.webmanifest?v=20261103e">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261103f">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261103f">
+<link rel="manifest" href="manifest.webmanifest?v=20261103f">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800;900&display=swap" rel="stylesheet">
 <title>ふしぎな地下ダンジョン</title>
 <style>
@@ -279,7 +279,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
 #clsGrid button{display:flex;flex-direction:column;align-items:center;gap:2px;border:3px solid var(--ink);border-radius:20px;box-shadow:0 4px 0 var(--ink);padding:6px 4px 8px;color:var(--ink);font-family:var(--F)}
 #clsGrid button:active{transform:translateY(3px);box-shadow:0 1px 0 var(--ink)}
 #clsGrid canvas{width:84px;height:84px}
-#clsGrid b{font-size:17px;font-weight:900;color:var(--ink);font-family:var(--F)}#clsGrid small{font-size:11px;line-height:1.35;font-weight:800;color:#6a4ab0}#clsGrid small{text-align:center}#clsGrid small span{display:block;white-space:nowrap}
+#clsGrid b{font-size:17px;font-weight:900;color:var(--ink);font-family:var(--F)}#clsGrid b{display:flex;justify-content:center}/* しょくぎょう名を まん中に（.lvBox button b の はば84pxで 左よせに なっていた） */#clsGrid small{font-size:11px;line-height:1.35;font-weight:800;color:#6a4ab0}#clsGrid small{text-align:center}#clsGrid small span{display:block;white-space:nowrap}
 #clsGrid [data-c=warrior]{background:linear-gradient(#ffe0e6,#ffb0c0)}#clsGrid [data-c=mage]{background:linear-gradient(#efe0ff,#c8a8ff)}#clsGrid [data-c=merchant]{background:linear-gradient(#e0ffe8,#9ae8b8)}#clsGrid [data-c=joker]{background:linear-gradient(#fff6c8,#ffd84a)}
 #shopG{font-weight:900;color:#c86a00;margin-bottom:6px}
 #shopList button{display:flex;align-items:center;gap:8px;width:100%;margin:0 0 7px;padding:5px 10px;border:3px solid var(--ink);border-radius:16px;background:linear-gradient(#fff,#f0eaff);box-shadow:0 3px 0 var(--ink);color:var(--ink);text-align:left;font-family:var(--F);font-weight:800}
@@ -329,7 +329,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
   <button class="big" id="bCont">つづきから</button>
   <button class="big" id="bStart">はじめから</button>
   <div class="tRow"><button class="big sub" id="bHow">あそびかた</button><button class="big sub" id="bRank">ランキング</button></div>
-  <div class="ver">rev 20261103e</div>
+  <div class="ver">rev 20261103f</div>
 </section>
 
 <section id="rank" class="scr">
@@ -399,7 +399,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
 <script>
 "use strict";
 const $=id=>document.getElementById(id);
-const REV="20261103e";
+const REV="20261103f";
 /* ===== 音 ===== */
 let AC=null;
 function ac(){try{if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();if(AC.state==="suspended")AC.resume()}catch(e){}return AC}
@@ -1542,7 +1542,7 @@ const pony=(ph)=>{/* 遊び人の ポニーテール（赤い ゴム） */const 
   if(lh&&!back){for(const d of (t===1?[-1]:[-1,1])){const sx=hx+d*(7.3-t*.8)-fo*.4,tip=hy+(cls==="mage"?9.6:8.8);g.beginPath();g.moveTo(X(sx-d*1.2),Y(hy-3.4));g.bezierCurveTo(X(sx+d*1.6),Y(hy-1),X(sx+d*1.4),Y(tip-3),X(sx+d*.6),Y(tip));g.quadraticCurveTo(X(sx-d*.3),Y(tip-1.4),X(sx-d*.8),Y(tip-.6));g.bezierCurveTo(X(sx-d*.2),Y(tip-4),X(sx-d*.6),Y(hy+1),X(sx-d*1.2),Y(hy-3.4));g.closePath();g.fillStyle=C.hr;g.fill()}}/* ながい よこがみ（曲線） */
   /* かお */
   if(!back){const ex=t===1?[hx+3.4]:[hx+fo*2.4-2.9*(1-.4*t),hx+fo*2.4+2.9*(1-.4*t)],ey=hy+1.6;
-    for(const e of ex){E(e,ey,.95,1.3,"#2a1e2a");E(e+.7,ey+2.4,1.3,.7,"rgba(255,120,140,.45)")}
+    for(const e of ex){E(e,ey,.95,1.3,"#2a1e2a");E(e+(t===1?.3:(e<hx+fo*2.4?-.35:.35)),ey+2.3,1.3,.7,"rgba(255,120,140,.45)")}/* ほっぺは 目の 真下（少し 外がわ） */
     if(cls==="warrior")for(const e of ex)LN(e-1.4,ey-2.6,e+1.4,ey-2.1,"#4a2410",1.1);
     const mx=hx+fo*2.6+(t===1?1.4:0);
     if(cls==="merchant"){for(const d of (t===1?[1]:[-1,1])){g.beginPath();g.moveTo(X(mx),Y(hy+4.2));g.quadraticCurveTo(X(mx+d*2.4),Y(hy+5.4),X(mx+d*3.2),Y(hy+3.6));g.quadraticCurveTo(X(mx+d*2),Y(hy+4.2),X(mx),Y(hy+3.6));g.closePath();g.fillStyle="#2a1a10";g.fill()}
