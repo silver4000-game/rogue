@@ -508,7 +508,7 @@ const ITEMS={
   stone1:{name:"石ころ",d:"なげると まっすぐ とび、さいしょの敵に 20ダメージ（7マス）",w:1,f:1,c:"atk",art:["stone","#b8b0a4","#6a6258",.75],sd:"なげて 20ダメージ"},
   stone2:{name:"ふつうの石",d:"なげると まっすぐ とび、さいしょの敵に 40ダメージ（7マス）",w:2,f:3,c:"atk",art:["stone","#a8a8b4","#585868",.9],sd:"なげて 40ダメージ"},
   stone3:{name:"ごつい石",d:"なげると まっすぐ とび、さいしょの敵に 80ダメージ（7マス）",w:3,f:6,c:"atk",art:["stone","#8a8278","#3a342c",1.08],sd:"なげて 80ダメージ"},
-  ice:{name:"しびれだま",d:"むいている方向の 敵を しびれさせる（7マス）",w:3,f:2,c:"atk",rng:7,sd:"前の敵を しびれ 7マス"},
+  ice:{name:"ねむりだま",d:"むいている方向の 敵を ねむらせる（7マス）",w:3,f:2,c:"atk",rng:7,sd:"前の敵を ねむり 7マス"},
   pstr:{name:"ちからのくすり",d:"50ターンのあいだ こうげき+5",w:3,f:2,c:"buff",art:["pot","#ffe0b0","#ff8a2a"],sd:"こうげき+5 しばらく"},
   pdef:{name:"まもりのくすり",d:"50ターンのあいだ まもり+5",w:3,f:2,c:"buff",art:["pot","#cfe0ff","#3a6cff"],sd:"まもり+5 しばらく"},
   /* つえ（何回か使える） */
@@ -718,7 +718,7 @@ function msg(t,c){G.log.push({t,c:c||""});if(G.log.length>30)G.log.shift();drawL
 function drawLog(){const L=G.log.slice(-1);$("log").innerHTML=L.map(m=>'<div class="'+m.c+'">'+m.t+'</div>').join("")}
 
 /* ===== かんさつ ===== */
-const BEHN={slow:"うごきが おそい。",fast:"1回に 2マス すすむ。",erratic:"ふらふら うごく。",ranged:"はなれた ところから こうげきする。",archer:"弓矢を うつ。",caster:"まほうの本を つかう。",summon:"なかまを よぶ。"};
+const BEHN={fast:"1回に 2マス すすむ。",erratic:"ふらふら うごく。",ranged:"はなれた ところから こうげきする。",archer:"弓矢を うつ。",caster:"まほうの本を つかう。",summon:"なかまを よぶ。"};
 const ONN={psn:"こうげきで どくに することがある。",conf:"こうげきで こんらんさせることがある。",slow:"こうげきで どんそくに することがある。",steal:"お金を ぬすんで にげる。",mhp:"かまれると さいだいHPが 2 へることがある。",food:"なぐられると おなかが 30 へることがある。"};
 const BKN={bolt:"いかずち",sleep:"ねむり",slow:"どんそく",conf:"こんらん",par:"しびれ",heal:"かいふく",summon:"なかまよび"};
 function observe(){if(!G||G.over)return;if(G.p.lvq>0){showLv();return}const p=G.p,[dx,dy]=p.dir;let x=p.x,y=p.y,e=null;
@@ -995,7 +995,7 @@ function actE(e,E){
     if(E.shell){e.hide=e.tick%3===0?0:(e.tick%3===1?1:0)}
     if(E.boom&&e.fuse){if(e.fuse++>=2){explodeE(e,E);return}return}
     if(E.boom&&!e.fuse&&e.hp<e.mhp*.4){e.fuse=1;msg(E.name+"が ふくらんだ！ 爆発しそう！","w");fx(e.x,e.y,"!!","#ff7040");return}
-    if(E.beh==="slow"&&e.tick%2===0)return;
+    /* うまれつき おそい 敵は ふつうの はやさに した（rev y） */
     if(e.k==="silver"){silverAct(e,E,seesP);return}
     if(e.conf>0&&Math.random()<.6){const [dx,dy]=confDir();if(e.x+dx===G.p.x&&e.y+dy===G.p.y&&canStep(e.x,e.y,dx,dy)){enemyAttack(e,E);return}const o=entAt(e.x+dx,e.y+dy);if(o&&o!==e){const d=ENEMIES[o.k].one?1:Math.max(1,Math.round(e.atk*.6));o.hp-=d;fx(o.x,o.y,""+d,"#ff8ad8");msg(E.name+"は こんらんして なかまを たたいた！","y");if(o.hp<=0)killEnemy(o,ENEMIES[o.k]);return}moveE(e,dx,dy);return}
     if((E.beh==="summon"&&e.tick%5===0&&G.ents.length<7)){const sp=freeNear(e.x,e.y);if(sp.length){const [x,y]=pick(sp);const m=mkEnemy("slime",x,y,false);m.aware=20;m.exp=Math.round(m.exp/2);G.ents.push(m);msg(E.name+"は なかまを よんだ！","w");return}}
@@ -1064,6 +1064,7 @@ function descend(){
   if(!G||G.over||busy)return;
   if(G.p.lvq>0){showLv();return}
   if(!(stOK()&&G.p.x===G.stairs.x&&G.p.y===G.stairs.y)){msg(G.boss&&!stOK()?"ボスを たおすと 階段が あらわれる。":"ここには階段がない。");return}
+  {const p=G.p;p.psn=0;p.conf=0;p.slow=0;p.par=0;p.slp=0;p.bind=0}/* 階段を 下りると わるい じょうたいが なおる */
   G.floor++;SFX.stairs();genFloor();msg(G.floor+"階に下りた。"+(G.floor%10===9?"…次の階から 大きな けはいがする。":""),"y");if(G.floor%10===1)themeMsg();if(G.boss)bossMsg();
   setBest(G.floor);hud();save();
 }
@@ -1094,7 +1095,7 @@ function throwItem(it){const p=G.p,d=p.dir||[0,1],E0=null;let x=p.x,y=p.y,hit=nu
   else if(it.k==="shd")dmg=Math.round(sv(it.eq)+2);
   else if(it.k==="knife"){dmg=15+G.floor*2;gone=true}
   else if(STD[it.k]){dmg=STD[it.k];gone=true;fixed=true;col="#ffd24a"}
-  else if(it.k==="ice"){dmg=8+G.floor;gone=true;col="#fff06a";setTimeout(()=>{},0);if(hit.hp-dmg>0)setSt(hit,"par",5)}
+  else if(it.k==="ice"){dmg=8+G.floor;gone=true;col="#fff06a";setTimeout(()=>{},0);if(hit.hp-dmg>0)hit.sleepQ=1}
   else if(it.k==="fire"){dmg=30+G.floor*4;gone=true;col="#ffb44a";msg("まきものが はじけた！","y")}
   else if(it.k==="bomb"){SFX.boom();boomFx(hit.x,hit.y);msg("ばくだんが 爆発した！","y");for(const e of G.ents.slice()){if(Math.abs(e.x-hit.x)<=1&&Math.abs(e.y-hit.y)<=1){const dd=ENEMIES[e.k].one?1:25+G.floor*2;e.hp-=dd;e.sleep=0;e.aware=20;fx(e.x,e.y,""+dd,"#ffb44a");if(e.hp<=0)killEnemy(e,ENEMIES[e.k])}}return}
   else if(["herb","herb2","pred"].includes(it.k)){const h=it.k==="herb"?30:it.k==="pred"?60:hit.mhp;const hh=Math.min(h,hit.mhp-hit.hp);hit.hp+=hh;fx(hit.x,hit.y,"+"+hh,"#7dff9a");msg(E.name+"の HPが 回ふくしてしまった…","w");gone=true}
@@ -1105,7 +1106,7 @@ function throwItem(it){const p=G.p,d=p.dir||[0,1],E0=null;let x=p.x,y=p.y,hit=nu
   else if(ITEMS[it.k]&&ITEMS[it.k].c==="food"){dmg=2;msg(E.name+"に "+nm+"が ぶつかった。","")}
   else dmg=isWand(it.k)?4:2;
   if(dmg>0){if(!fixed)dmg=Math.max(1,dmg-Math.floor((hit.def||0)*.3));if(fixed)FX.push({type:"hit",x:hit.x,y:hit.y,t0:now()+impactWait(),c:col});if(ENEMIES[hit.k].one)dmg=1;hit.hp-=dmg;hit.hf=now();shake(hit);fx(hit.x,hit.y,""+dmg,col);SFX.hit();msg(E.name+"に "+dmg+"の ダメージ！")}
-  if(hit.hp<=0)killEnemy(hit,E);
+  if(hit.hp<=0)killEnemy(hit,E);else if(hit.sleepQ){delete hit.sleepQ;hit.sleep=E.boss?3:8;fx(hit.x,hit.y,"Zz","#b9a7ff");msg(E.name+"は ねむってしまった。","y")}
   if(isPot(it.k))msg(nm+"は われてしまった。");else msg(nm+"は 消えてしまった。")}
 function closeBag(){$("bag").classList.remove("on")}
 function cellName(it){if(it.k==="proof")return "モンスターの証";if(it.eq&&it.eq.cur&&it.eq.cv)return "💀"+cellName({k:it.k,eq:{...it.eq,cv:0}});if(it.k==="wep")return wdef(it.eq).n+" Lv"+(it.eq.lv||1);if(it.k==="shd")return it.eq.name+" Lv"+(it.eq.lv||1);const I=ITEMS[it.k];return I.name+(it.n!=null?" ["+it.n+"]":"")}
@@ -1173,7 +1174,7 @@ const SIG={
  thunder:["shock","⚡","#fff07a"],sleep:["rain","💤","#b8a8ff"],holy:["pillar","✨","#fff2b0"],warp:["vortex","🌀","#b890ff"],stairsc:["rise","🔼","#8fe0ff"],
  mapsc:["radar","🗺️","#80d0ff"],wanasc:["radar","🪤","#ff8080"],fire:["proj","🔥","#ff8040"],uncurse:["pillar","🕊️","#e8d0ff"],wepup:["fall","⚔️","#ffd060"],shdup:["fall","🛡️","#7ab8ff"],treasure:["burst","💎","#80f0ff"],
  rstr:["orbit","💪","#ff9060"],rdef:["orbit","🔰","#70b0ff"],rheal:["orbit","💚","#70e090"],rfood:["orbit","🍙","#ffc080"],rluck:["orbit","🍀","#80e070"],rexp:["orbit","📘","#a0a0ff"],
- knife:["spin","🔪","#e0e8f0"],ice:["spin","🟡","#ffe040"],bomb:["burst","💥","#ff9040"],
+ knife:["spin","🔪","#e0e8f0"],ice:["spin","💤","#b9a7ff"],bomb:["burst","💥","#ff9040"],
  wbolt:["zig","⚡","#ffe860"],wsleep:["wave","💤","#b8a8ff"],wpush:["proj","💨","#c0f0ff"],wdrain:["chain","💗","#ff7ab0"],wsmash:["proj","☄️","#ff6a3a"],
  wpar:["zig","💛","#ffd000"],wpierce:["lance","🔹","#70d0ff"],wpull:["chain","🧲","#d080ff"],wswap:["swap","🔄","#70f0b0"],wconf:["wave","💫","#ff8ad8"],wslow:["proj","🐌","#a0d070"]};
 function sigSnd(k){let h=0;for(const ch of k)h=(h*31+ch.charCodeAt(0))%9973;const sc=[392,440,494,523,587,659,698,784,880,988],ty=["sine","triangle","square","sine"][h%4],a=sc[h%10],b=sc[(h>>2)%10],c=sc[(h>>4)%10];
@@ -1239,7 +1240,8 @@ function useItem(i){const it=G.bag[i],p=G.p;let consume=true;if(!p.buf)p.buf={at
       const after=fn=>setTimeout(()=>{if(G&&!G.over)fn()},FAST?0:300);
       if(it.k==="knife"||it.k==="wbolt"||it.k==="wsmash"){const d=it.k==="wsmash"?40+G.floor*5:it.k==="wbolt"?25+G.floor*3:15+G.floor*2;msg(E.name+"に"+d+"のダメージ！","y");popMsg(it.k==="wsmash"?"💥 ひっさつ！":"💥 "+d+"ダメージ");dmgE(e,d,it.k==="knife"?"#fff":"#ffb44a")}
       else if(it.k==="wpierce"){popMsg("⚡ つらぬけ！");for(const h of hits){msg(ENEMIES[h.k].name+"に"+(18+G.floor*2)+"のダメージ！","y");dmgE(h,18+G.floor*2,"#9ac0ff")}}
-      else if(it.k==="ice"||it.k==="wpar"){const d=it.k==="ice"?8+G.floor:0;if(d)dmgE(e,d,"#fff06a");if(G.ents.includes(e)){setSt(e,"par",it.k==="wpar"?10:5);popMsg("⚡ しびれた！")}}
+      else if(it.k==="ice"){dmgE(e,8+G.floor,"#b9a7ff");if(G.ents.includes(e)){e.sleep=ENEMIES[e.k].boss?3:8;fx(e.x,e.y,"Zz","#b9a7ff");msg(ENEMIES[e.k].name+"は ねむってしまった。","y");popMsg("💤 ねむった！")}}
+      else if(it.k==="wpar"){if(G.ents.includes(e)){setSt(e,"par",10);popMsg("⚡ しびれた！")}}
       else if(it.k==="wsleep"){e.sleep=E.boss?4:14;stFX(e,"slp");msg(E.name+"はねむってしまった。","y");popMsg("💤 ねむった！")}
       else if(it.k==="wconf"){setSt(e,"conf",12);popMsg("💫 こんらん！")}
       else if(it.k==="wslow"){setSt(e,"slow",16);popMsg("🐌 どんそく！")}
@@ -1991,7 +1993,7 @@ function drawItemExtra(g,k,x,y,s){const u=s/32,it=ITEMS[k];
   case "meat":{g.strokeStyle="#f3ead8";g.lineWidth=3*u;g.lineCap="round";g.beginPath();g.moveTo(x+7*u,y+24*u);g.lineTo(x+25*u,y+9*u);g.stroke();for(const [bx,by] of [[6,25],[26,8]]){ell(g,x+bx*u,y+(by-1.4)*u,1.9*u,1.9*u,"#fbf6ea");ell(g,x+(bx+1.4)*u,y+(by+.6)*u,1.9*u,1.9*u,"#fbf6ea")}
     g.fillStyle=RG(g,x+16*u,y+16.5*u,1,9*u,["#e8805a","#b0442a","#7a2a18"],x+14*u,y+14*u);g.beginPath();g.ellipse(x+16*u,y+16.5*u,8.6*u,6.6*u,-.7,0,7);g.fill();ell(g,x+13*u,y+14*u,2.4*u,1.4*u,"rgba(255,220,190,.55)");return true}
   case "knife":{for(const [a,dx] of [[-.5,-3],[.5,3]]){g.save();g.translate(x+(16+dx)*u,y+17*u);g.rotate(a);g.fillStyle=LG(g,-1.4*u,0,1.4*u,0,["#ffffff","#9fb2cf"]);g.beginPath();g.moveTo(-1.4*u,0);g.lineTo(0,-10*u);g.lineTo(1.4*u,0);g.fill();g.fillStyle="#6a3e20";rr(g,-1.2*u,0,2.4*u,6*u,1*u);g.fill();g.fillStyle="#c9932a";rr(g,-3*u,-.6*u,6*u,1.6*u,.8*u);g.fill();g.restore()}return true}
-  case "ice":{glow(g,x+16*u,y+17*u,11*u,"rgba(150,220,255,.6)");for(const [cx2,cy2,r] of [[12,19,5],[20,18,4.2],[16,12.5,3.6]]){g.fillStyle=LG(g,x+(cx2-r)*u,y+(cy2-r)*u,x+(cx2+r)*u,y+(cy2+r)*u,["#ffffff","#a8e4ff","#4aa8e8"]);g.beginPath();for(let i=0;i<6;i++){const an=i*Math.PI/3+.3;g.lineTo(x+(cx2+Math.cos(an)*r)*u,y+(cy2+Math.sin(an)*r)*u)}g.closePath();g.fill()}star(g,x+23*u,y+10*u,1.8*u,"#fff");return true}
+  case "ice":{glow(g,x+16*u,y+17*u,11*u,"rgba(185,167,255,.6)");for(const [cx2,cy2,r] of [[12,20,5],[20,19,4.2],[16,13,3.6]]){g.fillStyle=RG(g,x+cx2*u,y+cy2*u,.5,r*u,["#f4eeff","#b9a7ff","#6a4ac8"],x+(cx2-1.4)*u,y+(cy2-1.4)*u);g.beginPath();g.arc(x+cx2*u,y+cy2*u,r*u,0,7);g.fill()}g.fillStyle="#fff";g.font="900 "+Math.round(6*u)+"px "+PF;g.textAlign="center";g.fillText("z",x+22*u,y+11*u);g.font="900 "+Math.round(4.5*u)+"px "+PF;g.fillText("z",x+26*u,y+7*u);return true}
   case "dseed":{const col=["#d8e8ff","#4a8cff","#1a3a9a"];glow(g,x+16*u,y+16*u,12*u,"#4a8cff55");g.fillStyle=LG(g,x+10*u,y+8*u,x+22*u,y+25*u,col);g.beginPath();g.moveTo(x+16*u,y+6.5*u);g.lineTo(x+23*u,y+13*u);g.lineTo(x+16*u,y+25.5*u);g.lineTo(x+9*u,y+13*u);g.closePath();g.fill();g.fillStyle="rgba(255,255,255,.55)";g.beginPath();g.moveTo(x+16*u,y+6.5*u);g.lineTo(x+19*u,y+13*u);g.lineTo(x+13*u,y+13*u);g.closePath();g.fill();star(g,x+23.5*u,y+8*u,1.8*u,"#fff");return true}
   case "hseed":{glow(g,x+16*u,y+16*u,13*u,"rgba(255,220,120,.7)");g.fillStyle=LG(g,x,y+6*u,x,y+26*u,["#fff6c8","#ffc83d","#e08a1a"]);g.beginPath();for(let i=0;i<10;i++){const an=-Math.PI/2+i*Math.PI/5,r=i%2?4.4:10;g.lineTo(x+16*u+Math.cos(an)*r*u,y+17*u+Math.sin(an)*r*u)}g.closePath();g.fill();ell(g,x+13.5*u,y+15*u,1*u,1.3*u,"#7a4a10");ell(g,x+18.5*u,y+15*u,1*u,1.3*u,"#7a4a10");g.strokeStyle="#7a4a10";g.lineWidth=.8*u;g.beginPath();g.arc(x+16*u,y+18*u,2*u,.2,Math.PI-.2);g.stroke();return true}
   }
@@ -2211,7 +2213,7 @@ document.addEventListener("gesturestart",e=>e.preventDefault());
   g.save();g.globalAlpha=.9;drawEnemy(g,"dragon",W/2-62,6,124,false);g.restore();
   g.fillStyle=LG(g,0,110,0,150,["#7fe8c0","#3fc090"]);g.beginPath();g.moveTo(0,150);g.lineTo(0,122);g.quadraticCurveTo(W/2,104,W,122);g.lineTo(W,150);g.fill();
   drawStairs(g,W-70,96,40,false);drawHero(g,W/2-30,86,58);drawEnemy(g,"slime",34,104,40,false);drawItemSprite(g,"herb2",W/2+30,108,30);})();
-(function(){const ED={slime:"おそい。2回に1回だけうごく。",bat:"ふらふら飛びまわる。",goblin:"まっすぐ追いかけてくる。",skel:"強い。",golem:"とても固い。おそい。",knight:"強くて こわい。"};const rows=Object.entries(ENEMIES).filter(([k,e])=>!e.boss).map(([k,e])=>[k,e.name,e.d||ED[k]||""]);
+(function(){const ED={slime:"いちばん よわい。",bat:"ふらふら飛びまわる。",goblin:"まっすぐ追いかけてくる。",skel:"強い。",golem:"とても固い。",knight:"強くて こわい。"};const rows=Object.entries(ENEMIES).filter(([k,e])=>!e.boss).map(([k,e])=>[k,e.name,e.d||ED[k]||""]);
   const bosses=[["dragon","ドラゴン","10階のボス。ブレスを はく。"],["kslime","キングスライム","20階のボス。スライムを よぶ。"],["mino","ミノタウロス","30階のボス。2歩ずつ せまってくる。"],["lich","リッチ","40階のボス。まほうの本を たくさん つかう。"]];
   const objD={lvdown:"ふむと レベルが 1さがる。",spike:"ふむと HPが 3わり へる。",conf:"こんらん する。",poison:"どくに なる。",bind:"5ターン その場から うごけない。",slowt:"10ターン、まわりが 2回ずつ うごく。",sheal:"こうげきで こわすと HPが 半分 回ふく。",shaste:"こわすと しばらく 2回ずつ うごける。",sinv:"こわすと 10ターン むてき。",sfood:"こわすと おなかが いっぱいに なる。",swarp:"こわすと どこかへ ワープ。",shop:"お金で 道具を 買える。"};
   const wrows=[["bronze","つるぎ","ふつうの ぶき。深い階ほど 強い。"],["spear","やり","2マス先まで とどく。"],["axe","おの","前の3マスを まとめて きる。"],["dagger","たんけん","1回で 2回 こうげき。会心の一撃も 出やすい。"],["giant","おおきな ハンマー","とても強いが たまに はずれる。"],["maze","まどわしのけん","敵を こんらん させる。"],["venom","どくの けん","敵を どくにする。"],["vamp","ちすいの けん","あたえたダメージで HPが ふえる。"],["knock","ふっとばし ハンマー","敵を うしろへ とばす。"],["dream","ねむりの けん","敵を ねむらせる。"],["slayer","ボスごろし","ボスに 2ばいの ダメージ。"]];
