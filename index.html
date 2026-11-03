@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<meta name="rogue-rev" content="20261103j">
+<meta name="rogue-rev" content="20261103k">
 <meta name="theme-color" content="#9fe0ff">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <script>try{if(navigator.standalone||matchMedia("(display-mode: standalone)").matches){document.documentElement.classList.add("sa");const st=()=>{const g=document.querySelector(".scr");if(!g)return;const r=g.getBoundingClientRect(),d=document.documentElement.style;d.setProperty("--gt",r.top+"px");d.setProperty("--gb",Math.max(0,innerHeight-r.bottom)+"px")};addEventListener("resize",st);addEventListener("load",st);setTimeout(st,300)}}catch(e){}</script>
 <meta name="apple-mobile-web-app-title" content="ふしぎな地下">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261103j">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261103j">
-<link rel="manifest" href="manifest.webmanifest?v=20261103j">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261103k">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261103k">
+<link rel="manifest" href="manifest.webmanifest?v=20261103k">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800;900&display=swap" rel="stylesheet">
 <title>ふしぎな地下ダンジョン</title>
 <style>
@@ -330,7 +330,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
   <button class="big" id="bCont">つづきから</button>
   <button class="big" id="bStart">はじめから</button>
   <div class="tRow"><button class="big sub" id="bHow">あそびかた</button><button class="big sub" id="bRank">ランキング</button></div>
-  <div class="ver">rev 20261103j</div>
+  <div class="ver">rev 20261103k</div>
 </section>
 
 <section id="rank" class="scr">
@@ -400,7 +400,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
 <script>
 "use strict";
 const $=id=>document.getElementById(id);
-const REV="20261103j";
+const REV="20261103k";
 /* ===== 音 ===== */
 let AC=null;
 function ac(){try{if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();if(AC.state==="suspended")AC.resume()}catch(e){}return AC}
@@ -1555,7 +1555,8 @@ const pony=(ph)=>{/* 遊び人の ポニーテール（赤い ゴム） */const 
     const d=t===1?-1:1,bx=hx+d*(5.6-t*1)-fo*1.6,by=hy-6.4;hp(()=>{g.moveTo(X(bx-d*1.6),Y(by));g.bezierCurveTo(X(bx+d*6.4),Y(by-1.6),X(bx+d*6.8),Y(by+8),X(bx+d*4),Y(by+15));g.quadraticCurveTo(X(bx+d*3.2),Y(by+13),X(bx+d*2.4),Y(by+14.4));g.bezierCurveTo(X(bx+d*3.8),Y(by+8),X(bx+d*2.4),Y(by+3),X(bx-d*.4),Y(by+2.4))},C.hr);g.beginPath();g.ellipse(X(bx+d*.6),Y(by+.6),1.3*u,1.3*u,0,0,7);g.fillStyle="#e0284a";g.fill()};
   if(cls==="joker"&&!back)pony("behind");
   if(lh&&!back)longH();
-  if(back&&t>0&&wid&&cls!=="joker")heldWeapon(g,x,y,u,wid,cx+5,22.4);
+  if(back&&wid)heldWeapon(g,x,y,u,wid,cls==="joker"?cx+3.8:cx+5,22.4);
+  if(t===1&&!back)heldShield(g,x,y,u,cx-fo*2.4,22.6,true);/* よこ: たては むこうがわ */
   /* あし */
   const legC=cls==="joker"?"#f2c8b4":cls==="mage"?"#fde0cc":"#5a3a2a",shoe=cls==="joker"?"#111018":cls==="mage"?"#2a1a2a":"#3a2418";
   for(const d of [-1,1]){const lx=cx+d*(cls==="joker"?1.6:2.3)*wf+fo*.4;RR(lx-1.4,25.4,2.8,3.6,1.2,legC);E(lx+fo*(dg?.9:.5),28.7,1.8,1,shoe,dg?fo*.45:0);if(cls==="mage")RR(lx-1.5,27.9,3,1,.5,shoe)}
@@ -1577,11 +1578,12 @@ const pony=(ph)=>{/* 遊び人の ポニーテール（赤い ゴム） */const 
   /* うで */
   const arm=(ax,hx2,hy2)=>{if(C.sl)LN(ax,19.4,hx2,hy2,C.sl,2.8);else LN(ax,19.4,hx2,hy2,C.sk,2.2);if(cls==="joker")E(hx2,hy2-.6,1.2,.7,"#fff");E(hx2,hy2,1.3,1.3,C.sk)};
   const sw=cls==="warrior"?6:cls==="merchant"?6.4:4.4,hR=[cx+sw*wf+.6+t*.6,22.8];
-  if(cls==="joker"){if(t===1)jArms()}
+  if(cls==="joker"){if(t===1)jArms();if(!back&&wid){if(t===1)heldWeapon(g,x,y,u,wid,cx+fo*2.2+.4,24.2);else heldWeapon(g,x,y,u,wid,cx+4.1*wf+fo*.5+.4,24.2)}}
   else{  if(!back){if(t<1)arm(cx-(sw-1.4)*wf,cx-(sw+.4)*wf,23);
     if(wid)heldWeapon(g,x,y,u,wid,hR[0]+.4,hR[1]-.2);else if(cls==="mage"){LN(hR[0]+.2,hR[1]+2.4,hR[0]+2.6,hR[1]-9,"#a8784a",.9);E(hR[0]+2.8,hR[1]-9.6,1.5,1.5,"#9ae0e8");E(hR[0]+2.4,hR[1]-10,.5,.5,"#fff")}
     arm(cx+(sw-1.4)*wf,hR[0],hR[1])}
   else{arm(cx-(sw-1.4)*wf,cx-(sw+.4)*wf,23);arm(cx+(sw-1.4)*wf,cx+(sw+.4)*wf,23)}}
+  if(t<1)heldShield(g,x,y,u,cls==="joker"?cx-4.6*wf+fo*.4:cx-(sw+.6)*wf,22.8,back);
   if(cls==="warrior"){for(const d of (t===1?[1]:[-1,1]))E(cx+d*5.6*wf+t*.4,18.6,2.6,1.8,"#c8d0e0")}/* かたあて */
   /* あたま */
   headPath();g.fillStyle=C.sk;g.fill();
@@ -1608,7 +1610,7 @@ const pony=(ph)=>{/* 遊び人の ポニーテール（赤い ゴム） */const 
     for(const [d,tl] of [[-1,-.38],[1,.38]]){if(t===1&&d<0&&!back)continue;const ex=bx+d*brx*Math.sin(ea),ey=bcy-bry*Math.cos(ea)+.3;g.save();g.translate(X(ex),Y(ey));g.rotate(tl+(t===1?.12:0));g.beginPath();g.ellipse(0,-4.6*u,1.9*u,5.2*u,0,0,7);g.fillStyle=C.bd;g.fill();if(!back){g.beginPath();g.ellipse(0,-4.4*u,.9*u,3.8*u,0,0,7);g.fillStyle="#ff9ac0";g.fill()}g.restore()}
     g.beginPath();if(t===1){const sg=fo>0?-1:1;/* よこ: 頭の上から 耳の高さまで 1本 */g.ellipse(X(bx),Y(bcy),brx*u,bry*u,0,sg<0?Math.PI*1.3:Math.PI*1.46,sg<0?Math.PI*1.54:Math.PI*1.7)}else g.ellipse(X(bx),Y(bcy),brx*u,bry*u,0,Math.PI*1.25,Math.PI*1.75);g.strokeStyle="#111018";g.lineWidth=1*u;g.lineCap="round";g.stroke();g.beginPath();g.ellipse(X(bx),Y(bcy)-.5*u,brx*u,bry*u,0,Math.PI*1.3,Math.PI*1.55);g.strokeStyle="rgba(255,255,255,.35)";g.lineWidth=.5*u;g.stroke()}
 }
-function drawHero(g,x,y,s,f,wid,cls){f=f||"d";cls=cls||(G&&G.p&&G.p.cls)||"warrior";HPAL=HPALS[cls]||HPALS.warrior;
+function drawHero(g,x,y,s,f,wid,cls,sh){HSHD=sh||"";f=f||"d";cls=cls||(G&&G.p&&G.p.cls)||"warrior";HPAL=HPALS[cls]||HPALS.warrior;
   const M={d:["d",0],u:["u",0],r:["r",0],l:["r",1],dr:["q",0],dl:["q",1],ur:["b",0],ul:["b",1]}[f]||["d",0];
   const u=s/32;g.save();if(M[1]){g.translate(2*x+s,0);g.scale(-1,1)}g.translate(x+16*u,y+29.5*u);g.scale(.82,.82);g.translate(-(x+16*u),-(y+29.5*u));try{puniHero(g,x,y,s,M[0],wid,cls)}finally{g.restore()}}
 function drawHero3(g,x,y,s,f,wid,cls){cls=cls||(G&&G.p&&G.p.cls)||"warrior";HPAL=HPALS[cls]||HPALS.warrior;const u=s/32,girl=cls==="mage"||cls==="joker";if(girl)mageGirl(g,x,y,s,f,wid,cls);else{heroBody(g,x,y,s,f,wid);heroHat(g,x,y,s,f,cls)}
@@ -1686,6 +1688,16 @@ function heroHat(g,x,y,s,f,cls){const u=s/32,back=f==="u"||f==="b";
     if(!back){g.fillStyle=LG(g,x,y+16*u,x,y+26*u,["#c89048","#8a5a20"]);rr(g,x+3.5*u,y+17*u,6*u,8*u,2*u);g.fill();g.fillStyle="#ffd24a";g.beginPath();g.arc(x+6.5*u,y+21*u,1.3*u,0,7);g.fill()}}
   else if(cls==="joker"){const hat=(a,col)=>{g.fillStyle=col;g.beginPath();g.moveTo(x+16*u,y+5.5*u);g.quadraticCurveTo(x+(16+a*4)*u,y-3*u,x+(16+a*10)*u,y+1*u);g.quadraticCurveTo(x+(16+a*6)*u,y+2*u,x+(16+a*7.5)*u,y+6.5*u);g.closePath();g.fill();g.fillStyle="#ffe060";g.beginPath();g.arc(x+(16+a*10)*u,y+1*u,1.6*u,0,7);g.fill()};
     hat(-1,"#ff5fa8");hat(1,"#ffc83a");g.fillStyle=LG(g,x,y+3*u,x,y+7*u,["#ff8ac8","#e04090"]);g.beginPath();g.ellipse(x+16*u,y+6*u,8.4*u,2.6*u,0,Math.PI,0);g.fill();g.fillStyle="#ffe060";g.beginPath();g.arc(x+16*u,y-1*u,1.6*u,0,7);g.fill();g.fillStyle="#ff5fa8";g.beginPath();g.moveTo(x+16*u,y+5.5*u);g.quadraticCurveTo(x+14*u,y+1*u,x+16*u,y-1*u);g.quadraticCurveTo(x+18*u,y+1*u,x+16*u,y+5.5*u);g.fill()}}
+/* そうびした たて（たての しゅるいで 色と かたちが かわる） */
+let HSHD="";const SHCOL={"木のたて":["#c08a4a","#7a5228"],"かわのたて":["#d8a868","#8a5a2a"],"どうのたて":["#e09a50","#9a5a20"],"てつのたて":["#b0b8c8","#5a6278"],"はがねのたて":["#d8e0ec","#6a7488"],"ミスリルのたて":["#b0f0ff","#3a90b0"],"ドラゴンのたて":["#e05050","#7a1a1a"],"ひかりのたて":["#fff4b0","#c8a030"],"せいれいのたて":["#b0ffd0","#30a070"],"ゆうしゃのたて":["#6aa0ff","#1a3a9a"],"かみのたて":["#ffe060","#a07010"]};
+function heldShield(g,x,y,u,cx0,cy0,back){const nm=HSHD;if(!nm)return;const S=SHIELDS.find(q=>q.name===nm)||SHIELDS[0],c=SHCOL[nm]||SHCOL["木のたて"],v=S.v,X=a=>x+a*u,Y=b=>y+b*u;g.save();g.beginPath();
+  if(v<=2){g.ellipse(X(cx0),Y(cy0),3.3*u,3.5*u,0,0,7)}else{const w=v>=7?3.5:3.3,h=v>=7?4.6:4.1;g.moveTo(X(cx0-w),Y(cy0-h*.75));g.quadraticCurveTo(X(cx0),Y(cy0-h*1.05),X(cx0+w),Y(cy0-h*.75));g.lineTo(X(cx0+w),Y(cy0));g.quadraticCurveTo(X(cx0+w*.8),Y(cy0+h*.7),X(cx0),Y(cy0+h));g.quadraticCurveTo(X(cx0-w*.8),Y(cy0+h*.7),X(cx0-w),Y(cy0));g.closePath()}
+  g.fillStyle=back?c[1]:c[0];g.fill();g.strokeStyle=c[1];g.lineWidth=.8*u;g.stroke();
+  if(back){g.strokeStyle="rgba(40,24,10,.7)";g.lineWidth=.9*u;g.beginPath();g.moveTo(X(cx0-2),Y(cy0-.6));g.lineTo(X(cx0+2),Y(cy0-.6));g.moveTo(X(cx0-2),Y(cy0+1.4));g.lineTo(X(cx0+2),Y(cy0+1.4));g.stroke()}
+  else if(v<=2){g.fillStyle=c[1];g.beginPath();g.arc(X(cx0),Y(cy0),.9*u,0,7);g.fill();if(v===1){g.strokeStyle="rgba(90,60,30,.5)";g.lineWidth=.5*u;g.beginPath();g.moveTo(X(cx0-1.6),Y(cy0-3));g.lineTo(X(cx0-1.6),Y(cy0+3));g.moveTo(X(cx0+1.6),Y(cy0-3));g.lineTo(X(cx0+1.6),Y(cy0+3));g.stroke()}}
+  else if(v<7){g.strokeStyle=c[1];g.lineWidth=.7*u;g.beginPath();g.moveTo(X(cx0),Y(cy0-3.2));g.lineTo(X(cx0),Y(cy0+3.4));g.moveTo(X(cx0-2.6),Y(cy0-.6));g.lineTo(X(cx0+2.6),Y(cy0-.6));g.stroke()}
+  else{g.fillStyle=v>=17?"#fff":c[1];g.beginPath();for(let k=0;k<10;k++){const a=-Math.PI/2+k*Math.PI/5,r=(k%2?.9:2)*u;g.lineTo(X(cx0)+Math.cos(a)*r,Y(cy0-.3)+Math.sin(a)*r)}g.closePath();g.fill()}
+  g.beginPath();g.ellipse(X(cx0-1.2),Y(cy0-1.8),1*u,.6*u,-.4,0,7);g.fillStyle="rgba(255,255,255,.4)";g.fill();g.restore()}
 function heldWeapon(g,x,y,u,wid,hx,hy){const S=19*u;drawWeapon(g,wid||"bronze",x+hx*u-9*S/32,y+hy*u-23*S/32,S)}
 function heroBody(g,x,y,s,f,wid){const u=s/32;softShadow(g,x,y,s,.28);const back=f==="u"||f==="b",fo=f==="r"?1.7:f==="q"?.9:f==="b"?-.9:0;
   if(back&&wid)heldWeapon(g,x,y,u,wid,10,21.5);
@@ -1990,8 +2002,8 @@ function frame(t){requestAnimationFrame(frame);if(!$("game").classList.contains(
   const x0=Math.max(0,Math.floor(-ox/TS)),x1=Math.min(MW-1,Math.ceil((W-ox)/TS)),y0=Math.max(0,Math.floor(-oy/TS)),y1=Math.min(MH-1,Math.ceil((H-oy)/TS));
   const torches=[],OM={};for(const o of G.objs||[])OM[o.x+","+o.y]=o;
   for(let y=y0;y<=y1;y++)for(let x=x0;x<=x1;x++){if(!G.seen[y][x])continue;const sx=ox+x*TS,sy=oy+y*TS,v=vis(x,y);
-    if(G.map[y][x]===1&&isPil(x,y)){const vv=TV(x,y)%5;const k=vv===0?1:vv===1?2:vv===2?3:0;blit(tcached("floor"+k,"fl",(g,a,b,s)=>tileFloor(g,a,b,s,k)),sx,sy);blit(tcached("pillar","pl",tilePillar),sx,sy)}
-    else if(G.map[y][x]===1){const face=!wall(x,y+1);blit(tcached(face?"wallF":"wall","wl",(g,a,b,s)=>tileWall(g,a,b,s,face)),sx,sy);if(v&&torchAt(x,y))torches.push([sx,sy])}
+    /* 柱は ふつうの かべと 同じ絵で かく（rev k） */
+    if(G.map[y][x]===1){const face=!wall(x,y+1);blit(tcached(face?"wallF":"wall","wl",(g,a,b,s)=>tileWall(g,a,b,s,face)),sx,sy);if(v&&torchAt(x,y))torches.push([sx,sy])}
     else if(G.roomMap[y][x]>=0){const vv=TV(x,y)%5;const k=vv===0?1:vv===1?2:vv===2?3:0;blit(tcached("floor"+k,"fl",(g,a,b,s)=>tileFloor(g,a,b,s,k)),sx,sy)}
     else blit(tcached("road","rd",tileRoad),sx,sy);
     {const o=OM[x+","+y];if(o&&!o.hid){if(v&&(o.k==="warp"||o.k==="tele"||(o.k==="fountain"&&!o.used)||(o.k==="shrine"&&!o.used)))glow(cx,sx+TS/2,sy+TS/2,TS*(.6+.06*Math.sin(t/280+x)),o.k==="tele"?"rgba(255,80,90,.25)":o.k==="fountain"?"rgba(110,200,255,.25)":o.k==="shrine"?"rgba(255,220,120,.25)":"rgba(160,110,255,.28)");{const sh=o.crack?Math.sin(t/16)*TS*.05:0;blit(cached("o_"+o.k+(o.used?"u":""),TS,1,(g,a,b,s)=>drawObj(g,o.k,a,b,s,o.used)),sx+sh,sy);if(o.crack){const u=TS/32;cx.strokeStyle="#2e2a44";cx.lineWidth=1.4*u;cx.lineCap="round";cx.beginPath();cx.moveTo(sx+sh+14*u,sy+9*u);cx.lineTo(sx+sh+17.5*u,sy+14*u);cx.lineTo(sx+sh+14*u,sy+18*u);cx.lineTo(sx+sh+18*u,sy+24*u);cx.moveTo(sx+sh+17.5*u,sy+14*u);cx.lineTo(sx+sh+21.5*u,sy+15.5*u);cx.moveTo(sx+sh+14*u,sy+18*u);cx.lineTo(sx+sh+10.5*u,sy+20*u);cx.stroke()}}}}
@@ -2007,7 +2019,7 @@ function frame(t){requestAnimationFrame(frame);if(!$("game").classList.contains(
     {const ic=[];if(e.psn>0)ic.push("☠");if(e.conf>0)ic.push("💫");if(e.slow>0)ic.push("🐌");if(e.par>0)ic.push("⚡");if(e.sleep>0&&e.sleep<99)ic.push("💤");if(e.hide)ic.push("🛡️");if(e.fuse)ic.push("💢");
       if(ic.length){cx.font=Math.round(TS*.3)+"px sans-serif";cx.textAlign="center";const bob=Math.sin(t/200)*TS*.04;ic.forEach((c,j)=>cx.fillText(c,sx+TS*(.5+(j-(ic.length-1)/2)*.32),sy-TS*.02+bob))}}
     if(e.hp<e.mhp){rr(cx,sx+4,sy+TS-5,TS-8,4,2);cx.fillStyle="rgba(40,0,10,.8)";cx.fill();rr(cx,sx+4,sy+TS-5,Math.max(3,(TS-8)*e.hp/e.mhp),4,2);cx.fillStyle="#ff6b7a";cx.fill()}}
-  {const hf=heroFace(),wid=p.wep?p.wep.id:"",hc=cached("hero_"+(p.cls||"warrior")+hf+"_"+wid,TS,1.3,(g,a,b,s)=>drawHero(g,a,b,s,hf,wid,p.cls)),lo=luOff(p),hx=ox+PV.x*TS+lo[0],hy=oy+PV.y*TS+Math.sin(t/330)*TS*0.02+lo[1]-PV.b*TS*.07;HXY=[hx,hy];blit(hc,hx,hy);
+  {const hf=heroFace(),wid=p.wep?p.wep.id:"",shn=p.shd?p.shd.name:"",hc=cached("hero_"+(p.cls||"warrior")+hf+"_"+wid+"_"+shn,TS,1.3,(g,a,b,s)=>drawHero(g,a,b,s,hf,wid,p.cls,shn)),lo=luOff(p),hx=ox+PV.x*TS+lo[0],hy=oy+PV.y*TS+Math.sin(t/330)*TS*0.02+lo[1]-PV.b*TS*.07;HXY=[hx,hy];blit(hc,hx,hy);
     if(p.hf&&T>=p.hf&&T-p.hf<160){cx.save();cx.globalCompositeOperation="lighter";cx.globalAlpha=.6*(1-(T-p.hf)/160);blit(hc,hx,hy);cx.restore()}
     {const ic=[];if(p.psn>0)ic.push("☠");if(p.conf>0)ic.push("💫");if(p.slow>0)ic.push("🐌");if(p.par>0)ic.push("⚡");if(p.slp>0)ic.push("💤");
       if(ic.length){cx.font=Math.round(TS*.32)+"px sans-serif";cx.textAlign="center";const bob=Math.sin(t/200)*TS*.04;ic.forEach((c,j)=>cx.fillText(c,hx+TS*(.5+(j-(ic.length-1)/2)*.34),hy-TS*.12+bob))}}}
@@ -2141,7 +2153,7 @@ window.addEventListener("keydown",e=>{if(!$("game").classList.contains("on"))ret
 const startNew=()=>{$("cls").classList.add("on")};
 function pickCls(c){SFX.ui();$("cls").classList.remove("on");clearSave();newRun(c);show("game")}
 (function(){const g=$("clsGrid");g.innerHTML=Object.entries(CLS).map(([k,c])=>'<button data-c="'+k+'"><b>'+c.n+'</b><canvas width="168" height="168"></canvas><small>'+c.d.map(t=>'<span>'+t.replace('盾の','盾の<wbr>').replace('アイテムを','アイテムを<wbr>')+'</span>').join('')+'</small></button>').join("");
-  g.querySelectorAll("button").forEach(b=>{const x=b.querySelector("canvas").getContext("2d");drawHero(x,4,4,160,"d",{warrior:"bronze",mage:"",merchant:"",joker:"dagger"}[b.dataset.c],b.dataset.c)});
+  g.querySelectorAll("button").forEach(b=>{const x=b.querySelector("canvas").getContext("2d");drawHero(x,4,4,160,"d",{warrior:"bronze",mage:"",merchant:"",joker:""}[b.dataset.c],b.dataset.c)});
   g.addEventListener("click",e=>{const b=e.target.closest("button[data-c]");if(b)pickCls(b.dataset.c)});$("clsBack").onclick=()=>{SFX.ui();$("cls").classList.remove("on")}})();
 $("bStart").onclick=()=>{SFX.ui();if(localStorage.getItem("rogue-save"))$("ask").classList.add("on");else startNew()};
 $("askYes").onclick=()=>{SFX.ui();$("ask").classList.remove("on");startNew()};
