@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<meta name="rogue-rev" content="20261103b">
+<meta name="rogue-rev" content="20261103c">
 <meta name="theme-color" content="#9fe0ff">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <script>try{if(navigator.standalone||matchMedia("(display-mode: standalone)").matches){document.documentElement.classList.add("sa");const st=()=>{const g=document.querySelector(".scr");if(!g)return;const r=g.getBoundingClientRect(),d=document.documentElement.style;d.setProperty("--gt",r.top+"px");d.setProperty("--gb",Math.max(0,innerHeight-r.bottom)+"px")};addEventListener("resize",st);addEventListener("load",st);setTimeout(st,300)}}catch(e){}</script>
 <meta name="apple-mobile-web-app-title" content="ふしぎな地下">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261103b">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261103b">
-<link rel="manifest" href="manifest.webmanifest?v=20261103b">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261103c">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261103c">
+<link rel="manifest" href="manifest.webmanifest?v=20261103c">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800;900&display=swap" rel="stylesheet">
 <title>ふしぎな地下ダンジョン</title>
 <style>
@@ -329,7 +329,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
   <button class="big" id="bCont">つづきから</button>
   <button class="big" id="bStart">はじめから</button>
   <div class="tRow"><button class="big sub" id="bHow">あそびかた</button><button class="big sub" id="bRank">ランキング</button></div>
-  <div class="ver">rev 20261103b</div>
+  <div class="ver">rev 20261103c</div>
 </section>
 
 <section id="rank" class="scr">
@@ -399,7 +399,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
 <script>
 "use strict";
 const $=id=>document.getElementById(id);
-const REV="20261103b";
+const REV="20261103c";
 /* ===== 音 ===== */
 let AC=null;
 function ac(){try{if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();if(AC.state==="suspended")AC.resume()}catch(e){}return AC}
@@ -1499,7 +1499,7 @@ function puniHero(g,x,y,s,F,wid,cls){
     g.save();g.clip();g.strokeStyle="rgba(0,0,0,.13)";g.lineWidth=.55*u;g.lineCap="round";for(const k of [-.55,-.15,.25,.6]){g.beginPath();g.moveTo(X(hc+k*W*.7),Y(hy+(back?-4:3)));g.quadraticCurveTo(X(hc+k*W*1.05),Y((hy+B)/2+2),X(hc+k*W*.9),Y(B-1.2));g.stroke()}
     g.strokeStyle="rgba(255,255,255,.25)";g.lineWidth=.7*u;g.beginPath();g.moveTo(X(hc-W*.5),Y(hy+(back?-5:4)));g.quadraticCurveTo(X(hc-W*.75),Y(hy+8),X(hc-W*.6),Y(B-2));g.stroke();g.restore()};
   if(lh&&!back)longH();
-  if(back&&t>0&&wid)heldWeapon(g,x,y,u,wid,cx+5,22.4);
+  if(back&&t>0&&wid&&cls!=="joker")heldWeapon(g,x,y,u,wid,cx+5,22.4);
   /* あし */
   const legC=cls==="joker"?"#f2c8b4":cls==="mage"?"#fde0cc":"#5a3a2a",shoe=cls==="joker"?"#111018":cls==="mage"?"#2a1a2a":"#3a2418";
   for(const d of [-1,1]){const lx=cx+d*(cls==="joker"?1.6:2.3)*wf+fo*.4;RR(lx-1.4,25.4,2.8,3.6,1.2,legC);E(lx+fo*.5,28.7,1.8,1,shoe);if(cls==="mage")RR(lx-1.5,27.9,3,1,.5,shoe)}
@@ -1516,10 +1516,11 @@ function puniHero(g,x,y,s,F,wid,cls){
   /* うで */
   const arm=(ax,hx2,hy2)=>{if(C.sl)LN(ax,19.4,hx2,hy2,C.sl,2.8);else LN(ax,19.4,hx2,hy2,C.sk,2.2);if(cls==="joker")E(hx2,hy2-.6,1.2,.7,"#fff");E(hx2,hy2,1.3,1.3,C.sk)};
   const sw=cls==="warrior"?6:cls==="merchant"?6.4:4.4,hR=[cx+sw*wf+.6+t*.6,22.8];
-  if(!back){if(t<1)arm(cx-(sw-1.4)*wf,cx-(sw+.4)*wf,23);
+  if(cls==="joker"){/* 遊び人: かたから 出る うで。なにも もたない */const ds=t===1?[back?-1:1]:[-1,1];for(const d of ds){const side=t===1,sx=side?cx+fo*.5:cx+d*2.7*wf+fo*.3,sy=21,ex=side?cx+fo*2.4:cx+d*4.2*wf+fo*.5,ey=24.6;E(sx,sy,1.15,1.15,C.sk);LN(sx,sy,ex,ey,C.sk,2);E(ex,ey-.7,1.1,.6,"#fff");E(ex,ey,1.15,1.15,C.sk)}}
+  else{  if(!back){if(t<1)arm(cx-(sw-1.4)*wf,cx-(sw+.4)*wf,23);
     if(wid)heldWeapon(g,x,y,u,wid,hR[0]+.4,hR[1]-.2);else if(cls==="mage"){LN(hR[0]+.2,hR[1]+2.4,hR[0]+2.6,hR[1]-9,"#a8784a",.9);E(hR[0]+2.8,hR[1]-9.6,1.5,1.5,"#9ae0e8");E(hR[0]+2.4,hR[1]-10,.5,.5,"#fff")}
     arm(cx+(sw-1.4)*wf,hR[0],hR[1])}
-  else{arm(cx-(sw-1.4)*wf,cx-(sw+.4)*wf,23);arm(cx+(sw-1.4)*wf,cx+(sw+.4)*wf,23)}
+  else{arm(cx-(sw-1.4)*wf,cx-(sw+.4)*wf,23);arm(cx+(sw-1.4)*wf,cx+(sw+.4)*wf,23)}}
   if(cls==="warrior"){for(const d of (t===1?[1]:[-1,1]))E(cx+d*5.6*wf+t*.4,18.6,2.6,1.8,"#c8d0e0")}/* かたあて */
   /* あたま */
   headPath();g.fillStyle=C.sk;g.fill();
