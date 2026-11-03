@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<meta name="rogue-rev" content="20261103aa">
+<meta name="rogue-rev" content="20261103ab">
 <meta name="theme-color" content="#9fe0ff">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <script>try{if(navigator.standalone||matchMedia("(display-mode: standalone)").matches){document.documentElement.classList.add("sa");const st=()=>{const g=document.querySelector(".scr");if(!g)return;const r=g.getBoundingClientRect(),d=document.documentElement.style;d.setProperty("--gt",r.top+"px");d.setProperty("--gb",Math.max(0,innerHeight-r.bottom)+"px")};addEventListener("resize",st);addEventListener("load",st);setTimeout(st,300)}}catch(e){}</script>
 <meta name="apple-mobile-web-app-title" content="ふしぎな地下">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261103aa">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261103aa">
-<link rel="manifest" href="manifest.webmanifest?v=20261103aa">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261103ab">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261103ab">
+<link rel="manifest" href="manifest.webmanifest?v=20261103ab">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800;900&display=swap" rel="stylesheet">
 <title>ふしぎな地下ダンジョン</title>
 <style>
@@ -333,7 +333,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
   <button class="big" id="bCont">つづきから</button>
   <button class="big" id="bStart">はじめから</button>
   <div class="tRow"><button class="big sub" id="bHow">あそびかた</button><button class="big sub" id="bRank">ランキング</button></div>
-  <div class="ver">rev 20261103aa</div>
+  <div class="ver">rev 20261103ab</div>
 </section>
 
 <section id="rank" class="scr">
@@ -403,7 +403,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
 <script>
 "use strict";
 const $=id=>document.getElementById(id);
-const REV="20261103aa";
+const REV="20261103ab";
 /* ===== 音 ===== */
 let AC=null;
 function ac(){try{if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();if(AC.state==="suspended")AC.resume()}catch(e){}return AC}
@@ -669,7 +669,7 @@ function genFloor(){
   if(!BF&&G.floor>=2&&Math.random()<.3){const r=pick(rooms.filter(x=>x!==rooms[ri])),pos=freeIn(r);if(pos)G.objs.push({x:pos.x,y:pos.y,k:"shop",hid:0,stock:shopStock()})}
   /* とくべつな部屋（1階に 1つまで。2階から 20%）: モンスターハウス 80%・宝物庫 20% */
   G.sp=null;if(!BF&&G.floor>=2&&Math.random()<.2){const cand=rooms.map((r,i)=>i).filter(i=>i!==ri&&i!==si&&rooms[i].w*rooms[i].h>=12&&!G.objs.some(o=>o.k==="shop"&&roomMap[o.y][o.x]===i));
-    if(cand.length){const i=pick(cand),r=rooms[i],q=Math.random(),k=q<.8?"mh":"tr";G.sp={r:i,k,on:0};const area=r.w*r.h;
+    if(cand.length){const q=Math.random(),k=q<.8?"mh":"tr",i=k==="mh"?cand.reduce((a,b)=>rooms[b].w*rooms[b].h>rooms[a].w*rooms[a].h?b:a):pick(cand),r=rooms[i];/* モンスターハウスは いちばん 広い 部屋 */G.sp={r:i,k,on:0};const area=r.w*r.h;
       if(k==="mh"){const n=Math.min(Math.round(area*.3),6+Math.floor(G.floor/2));for(let j=0;j<n;j++){const pos=freeIn(r);if(!pos)break;const e=mkEnemy(randEnemyKind(),pos.x,pos.y,true);e.mh=1;G.ents.push(e)}for(let j=RI(0,2);j>0;j--){const q=freeIn(r);if(q)G.objs.push({x:q.x,y:q.y,k:statueKind(),hid:0})}/* モンスターハウスの 像は 0〜2こ */for(let j=0;j<3;j++){const pos=freeIn(r);if(pos)G.items.push({...pos,...randItem()})}}
       else if(k==="tr"){const n=Math.min(Math.round(area*.35),9);for(let j=0;j<n;j++){const pos=freeIn(r);if(!pos)break;const it=Math.random()<.3?{k:"gold",amt:goldAmt()*2}:randItem();G.items.push({...pos,...it})}for(let j=0;j<2;j++){const pos=freeIn(r);if(!pos)break;const e=mkEnemy(randEnemyKind(),pos.x,pos.y,true);e.mh=1;G.ents.push(e)}}}}
   /* ジャグラー（2階から 15%。ボスの階・スタートの部屋には 出ない） */
