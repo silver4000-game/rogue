@@ -385,7 +385,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
   <div id="bagAct"><button id="baUse" class="main">つかう</button><button id="baDrop">おく</button><button id="baThrow">なげる</button><button id="baSwap" style="display:none">いれかえ</button><button id="baClose">とじる</button></div></div>
 
 <div id="ask"><div class="lvBox"><div class="orn">◆</div><div id="askT">中断データがあります。<br>はじめからにしますか？</div><div class="askB"><button id="askYes">はい</button><button id="askNo">いいえ</button></div></div></div>
-<div id="lvup"><div class="lvBox"><div id="lvT">レベルアップ！</div><div id="lvSub"></div><div id="lvGrid"><button data-s="atk"><i>⚔️</i><b>こうげき</b><span></span></button><button data-s="def"><i>🛡️</i><b>ぼうぎょ</b><span></span></button><button data-s="hp"><i>❤️</i><b>HP</b><span></span></button><button data-s="full"><i>🍙</i><b>まんぷく</b><span></span></button></div></div></div>
+<div id="lvup"><div class="lvBox"><div id="lvT">レベルアップ！</div><div id="lvSub"></div><div id="lvGrid"><button data-s="atk"><i>⚔️</i><b>こうげき</b><span></span></button><button data-s="def"><i>🛡️</i><b>ぼうぎょ</b><span></span></button><button data-s="hp"><i>❤️</i><b>HP</b><span></span></button><button data-s="full"><i><canvas id="lvFoodC" width="72" height="72" style="width:34px;height:34px;display:block"></canvas></i><b>まんぷく</b><span></span></button></div></div></div>
 <div id="pop"></div>
 <div id="cls"><div class="lvBox"><div id="clsT">だれで あそぶ？</div><div id="clsGrid"></div><button id="clsBack" style="margin-top:10px;min-height:44px;width:60%;border:3px solid var(--ink);border-radius:22px;background:#fff;box-shadow:0 3px 0 var(--ink);color:var(--ink);font-weight:900;font-family:var(--F)">もどる</button></div></div>
 <div id="rkd"><div class="lvBox"><div id="rkdT">きろく</div><canvas id="rkdC" width="240" height="240"></canvas><div id="rkdN"></div><div id="rkdS"></div><div id="rkdD"></div><button id="rkdClose">とじる</button></div></div>
@@ -928,7 +928,7 @@ function lvDesc(k){const p=G.p;
   if(k==="atk")return "こうげき +"+atkG()+"（いつも同じ）";
   if(k==="def")return "まもり +"+defG()+"（いつも同じ）";
   if(k==="item"){const n=p.iluck||0;return "★の多い 強い道具が 見つかりやすくなる"+(n?"（いま"+n+"）":"")}}
-function showLv(){if(!G||!(G.p.lvq>0))return;if(!FAST&&now()<lvHold){clearTimeout(showLv.tm);showLv.tm=setTimeout(showLv,lvHold-now()+20);return}$("lvT").textContent="レベルアップ！"+(G.p.lvq>1?"×"+G.p.lvq:"");$("lvup").classList.add("on")}
+function showLv(){if(!G||!(G.p.lvq>0))return;if(!FAST&&now()<lvHold){clearTimeout(showLv.tm);showLv.tm=setTimeout(showLv,lvHold-now()+20);return}$("lvT").textContent="レベルアップ！"+(G.p.lvq>1?"×"+G.p.lvq:"");$("lvup").classList.add("on");{const c=$("lvFoodC");if(c&&!c.dataset.d){c.dataset.d=1;drawItemSprite(c.getContext("2d"),"food",-16,-22,104)}}/* まんぷくの 絵は ダンジョンの おにぎり */}
 let noPop=false;
 function popMsg(s){if(noPop)return;const P=$("pop");P.textContent=s;P.classList.remove("go");void P.offsetWidth;P.classList.add("go")}
 function chooseStat(k){const p=G.p;if(!(p.lvq>0))return;let m;
