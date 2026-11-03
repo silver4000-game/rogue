@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<meta name="rogue-rev" content="20261103c">
+<meta name="rogue-rev" content="20261103d">
 <meta name="theme-color" content="#9fe0ff">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <script>try{if(navigator.standalone||matchMedia("(display-mode: standalone)").matches){document.documentElement.classList.add("sa");const st=()=>{const g=document.querySelector(".scr");if(!g)return;const r=g.getBoundingClientRect(),d=document.documentElement.style;d.setProperty("--gt",r.top+"px");d.setProperty("--gb",Math.max(0,innerHeight-r.bottom)+"px")};addEventListener("resize",st);addEventListener("load",st);setTimeout(st,300)}}catch(e){}</script>
 <meta name="apple-mobile-web-app-title" content="ふしぎな地下">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261103c">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261103c">
-<link rel="manifest" href="manifest.webmanifest?v=20261103c">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261103d">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261103d">
+<link rel="manifest" href="manifest.webmanifest?v=20261103d">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800;900&display=swap" rel="stylesheet">
 <title>ふしぎな地下ダンジョン</title>
 <style>
@@ -329,7 +329,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
   <button class="big" id="bCont">つづきから</button>
   <button class="big" id="bStart">はじめから</button>
   <div class="tRow"><button class="big sub" id="bHow">あそびかた</button><button class="big sub" id="bRank">ランキング</button></div>
-  <div class="ver">rev 20261103c</div>
+  <div class="ver">rev 20261103d</div>
 </section>
 
 <section id="rank" class="scr">
@@ -399,7 +399,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
 <script>
 "use strict";
 const $=id=>document.getElementById(id);
-const REV="20261103c";
+const REV="20261103d";
 /* ===== 音 ===== */
 let AC=null;
 function ac(){try{if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();if(AC.state==="suspended")AC.resume()}catch(e){}return AC}
@@ -1252,11 +1252,11 @@ function hud(){const p=G.p;$("hFloor").textContent=G.floor+"F";{const pe=hPend&&
 
 /* ===== 描画（やわらかいイラスト風） ===== */
 const cv=$("map"),cx=cv.getContext("2d");let TS=32,COLS=11,ROWS=11,DPR=1,showMap=false,scrShake=0,flash=0,flashC="#ff2a2a";const FX=[];
-let ZL=1;try{const z=+localStorage.getItem("rogue_zoom");if(z>=0&&z<=2&&localStorage.getItem("rogue_zoom")!==null)ZL=z}catch(e){}
-const ZN=["とおく","ふつう","ちかく"];
-function setZoom(z){ZL=(z+3)%3;try{localStorage.setItem("rogue_zoom",ZL)}catch(e){}$("bZoom").innerHTML="🔍<small>"+ZN[ZL]+"</small>";resize()}
+let ZL=2;try{const z5=localStorage.getItem("rogue_zoom5"),z=localStorage.getItem("rogue_zoom");if(z5!==null&&+z5>=0&&+z5<=4)ZL=+z5;else if(z!==null&&+z>=0&&+z<=2)ZL=[0,2,4][+z]/* 前の3だんかいを 5だんかいに */}catch(e){}
+const ZN=["とおく","ややとおく","ふつう","ややちかく","ちかく"];/* 15・13・11・9・7マス */
+function setZoom(z){ZL=(z+5)%5;try{localStorage.setItem("rogue_zoom5",ZL)}catch(e){}$("bZoom").innerHTML="🔍<small>"+ZN[ZL]+"</small>";resize()}
 function resize(){const w=$("mapWrap").clientWidth,h=$("mapWrap").clientHeight;DPR=Math.min(3,window.devicePixelRatio||1);cv.width=Math.round(w*DPR);cv.height=Math.round(h*DPR);
-  COLS=(w<360?[13,9,7]:[15,11,7])[ZL];TS=Math.floor(w/COLS);ROWS=Math.ceil(h/TS)+1;if(ROWS%2===0)ROWS++}
+  COLS=[15,13,11,9,7][ZL];TS=Math.floor(w/COLS);ROWS=Math.ceil(h/TS)+1;if(ROWS%2===0)ROWS++}
 window.addEventListener("resize",()=>{if($("game").classList.contains("on"))resize()});
 /* こうかの えんしゅつが とどくまでの 時間（ダメージ数字・たおれる動きは そのあと） */
 function impactWait(){const T=now();let m=T;for(const f of FX){let a=0;
@@ -1491,18 +1491,27 @@ function puniHero(g,x,y,s,F,wid,cls){
   const headPath=()=>{g.beginPath();if(sq)rr(g,X(hx-8.4),Y(hy-7.6),16.8*u,15.6*u,6.4*u);else g.ellipse(X(hx),Y(hy),8.2*u,7.8*u,0,0,7)};
   E(16,29.2,7,1.5,"rgba(30,10,40,.25)");
   /* うしろの もの */
-  const lh=cls==="joker"||cls==="mage";/* ロングヘア（遊び人＝金・魔法使い＝茶） */
+  const lh=cls==="mage";/* ロングヘアは 魔法使いだけ（遊び人は ポニーテール） *//* ロングヘア（遊び人＝金・魔法使い＝茶） */
   const longH=()=>{/* なめらかな ロングヘア（曲線・毛先あり） */const hc=hx-fo*1.4,W=8.9-t*.9,B=hy+(cls==="mage"?11.8:10.8),sh=0;
     g.beginPath();g.moveTo(X(hc-W+.6),Y(hy-3));g.bezierCurveTo(X(hc-W-1.2),Y(hy+3),X(hc-W-.6),Y(B-4),X(hc-W+.8+sh),Y(B));
     const n=4;for(let i=0;i<n;i++){const x0=hc-W+.8+(2*W-1.6)*i/n,x1=hc-W+.8+(2*W-1.6)*(i+1)/n,xm=(x0+x1)/2;g.quadraticCurveTo(X(xm),Y(B-(i%2?1.2:1.8)),X(x1+(i===n-1?-sh:0)),Y(B+(i===n-1?0:.4)))}
     g.bezierCurveTo(X(hc+W+.6),Y(B-4),X(hc+W+1.2),Y(hy+3),X(hc+W-.6),Y(hy-3));g.bezierCurveTo(X(hc+W),Y(hy-11.5),X(hc-W),Y(hy-11.5),X(hc-W+.6),Y(hy-3));g.closePath();g.fillStyle=C.hr;g.fill();
     g.save();g.clip();g.strokeStyle="rgba(0,0,0,.13)";g.lineWidth=.55*u;g.lineCap="round";for(const k of [-.55,-.15,.25,.6]){g.beginPath();g.moveTo(X(hc+k*W*.7),Y(hy+(back?-4:3)));g.quadraticCurveTo(X(hc+k*W*1.05),Y((hy+B)/2+2),X(hc+k*W*.9),Y(B-1.2));g.stroke()}
     g.strokeStyle="rgba(255,255,255,.25)";g.lineWidth=.7*u;g.beginPath();g.moveTo(X(hc-W*.5),Y(hy+(back?-5:4)));g.quadraticCurveTo(X(hc-W*.75),Y(hy+8),X(hc-W*.6),Y(B-2));g.stroke();g.restore()};
+const pony=(ph)=>{/* 遊び人の ポニーテール（赤い ゴム） */const hp=(f,col)=>{g.beginPath();f();g.closePath();g.fillStyle=col;g.fill()};
+    if(ph==="top"){const px=hx-fo*.6,py=hy-1;hp(()=>{g.moveTo(X(px-2.4),Y(py-1));g.bezierCurveTo(X(px-4),Y(py+5),X(px-2.6),Y(py+12),X(px-.6),Y(py+15.4));g.quadraticCurveTo(X(px+.3),Y(py+14),X(px+1.2),Y(py+15));g.bezierCurveTo(X(px+3),Y(py+11),X(px+4),Y(py+5),X(px+2.4),Y(py-1))},"rgba(0,0,0,.08)");hp(()=>{g.moveTo(X(px-2),Y(py-1.4));g.bezierCurveTo(X(px-3.6),Y(py+5),X(px-2.3),Y(py+12),X(px-.6),Y(py+15));g.quadraticCurveTo(X(px+.3),Y(py+13.6),X(px+1),Y(py+14.6));g.bezierCurveTo(X(px+2.6),Y(py+11),X(px+3.6),Y(py+5),X(px+2),Y(py-1.4))},C.hr);g.beginPath();g.ellipse(X(px),Y(py-1.2),2.2*u,1.3*u,0,0,7);g.fillStyle="#e0284a";g.fill();return}
+    const d=t===1?-1:1,bx=hx+d*(5.6-t*1)-fo*1.6,by=hy-6.4;hp(()=>{g.moveTo(X(bx-d*1.6),Y(by));g.bezierCurveTo(X(bx+d*6.4),Y(by-1.6),X(bx+d*6.8),Y(by+8),X(bx+d*4),Y(by+15));g.quadraticCurveTo(X(bx+d*3.2),Y(by+13),X(bx+d*2.4),Y(by+14.4));g.bezierCurveTo(X(bx+d*3.8),Y(by+8),X(bx+d*2.4),Y(by+3),X(bx-d*.4),Y(by+2.4))},C.hr);g.beginPath();g.ellipse(X(bx+d*.6),Y(by+.6),1.3*u,1.3*u,0,0,7);g.fillStyle="#e0284a";g.fill()};
+  if(cls==="joker"&&!back)pony("behind");
   if(lh&&!back)longH();
   if(back&&t>0&&wid&&cls!=="joker")heldWeapon(g,x,y,u,wid,cx+5,22.4);
   /* あし */
   const legC=cls==="joker"?"#f2c8b4":cls==="mage"?"#fde0cc":"#5a3a2a",shoe=cls==="joker"?"#111018":cls==="mage"?"#2a1a2a":"#3a2418";
   for(const d of [-1,1]){const lx=cx+d*(cls==="joker"?1.6:2.3)*wf+fo*.4;RR(lx-1.4,25.4,2.8,3.6,1.2,legC);E(lx+fo*.5,28.7,1.8,1,shoe);if(cls==="mage")RR(lx-1.5,27.9,3,1,.5,shoe)}
+  /* 遊び人の うで: ほそく 先が すぼまる。前・ななめ・うしろは 体の うしろに かく（かたが 服の下に かくれる） */
+  const jArms=()=>{const side=t===1,ds=side?[back?-1:1]:[-1,1];for(const d of ds){const sx=side?cx+fo*.6:cx+d*2.5*wf+fo*.3,sy=side?20.4:19.8,ex=side?cx+fo*2.2:cx+d*4.1*wf+fo*.5,ey=24.4;
+      const ang=Math.atan2(ey-sy,ex-sx),nx=-Math.sin(ang),ny=Math.cos(ang),w1=side?.75:.85,w2=.5;g.beginPath();g.moveTo(X(sx+nx*w1),Y(sy+ny*w1));g.quadraticCurveTo(X((sx+ex)/2+nx*(w1+w2)/2*1.05),Y((sy+ey)/2+ny*(w1+w2)/2*1.05),X(ex+nx*w2),Y(ey+ny*w2));g.lineTo(X(ex-nx*w2),Y(ey-ny*w2));g.quadraticCurveTo(X((sx+ex)/2-nx*(w1+w2)/2*1.05),Y((sy+ey)/2-ny*(w1+w2)/2*1.05),X(sx-nx*w1),Y(sy-ny*w1));g.closePath();g.fillStyle=C.sk;g.fill();
+      if(side)E(sx,sy,w1,w1,C.sk);E(ex,ey-.5,.85,.45,"#fff");E(ex+(ex-sx)*.04,ey+.35,.8,.85,C.sk)}};
+  if(cls==="joker"&&t<1)jArms();
   /* からだ */
   if(cls==="warrior"){RR(cx-6.2*wf,17.6,12.4*wf,9,3.8,C.bd);RR(cx-6.2*wf,23.2,12.4*wf,1.8,.6,C.ac);if(!back)E(cx+fo*2.6,24.1,1,0.8,"#c8901a");if(!back)PL([cx-3*wf+fo*2,17.6,cx+3*wf+fo*2,17.6,cx+fo*2,20.4],"#d83a3a")}
   else if(cls==="merchant"){E(cx+fo*.6,22.6,6.4*wf+.4,5.4,C.bd);if(!back){RR(cx-2.6*wf+fo*2,18,5.2*wf,7.6,2,"#fff3dc");E(cx+fo*4.6+3.6*(1-t),25,1.9,1.7,"#c89a4a");E(cx+fo*4.6+3.6*(1-t),23.6,1,.5,"#8a5a28")}}
@@ -1516,7 +1525,7 @@ function puniHero(g,x,y,s,F,wid,cls){
   /* うで */
   const arm=(ax,hx2,hy2)=>{if(C.sl)LN(ax,19.4,hx2,hy2,C.sl,2.8);else LN(ax,19.4,hx2,hy2,C.sk,2.2);if(cls==="joker")E(hx2,hy2-.6,1.2,.7,"#fff");E(hx2,hy2,1.3,1.3,C.sk)};
   const sw=cls==="warrior"?6:cls==="merchant"?6.4:4.4,hR=[cx+sw*wf+.6+t*.6,22.8];
-  if(cls==="joker"){/* 遊び人: かたから 出る うで。なにも もたない */const ds=t===1?[back?-1:1]:[-1,1];for(const d of ds){const side=t===1,sx=side?cx+fo*.5:cx+d*2.7*wf+fo*.3,sy=21,ex=side?cx+fo*2.4:cx+d*4.2*wf+fo*.5,ey=24.6;E(sx,sy,1.15,1.15,C.sk);LN(sx,sy,ex,ey,C.sk,2);E(ex,ey-.7,1.1,.6,"#fff");E(ex,ey,1.15,1.15,C.sk)}}
+  if(cls==="joker"){if(t===1)jArms()}
   else{  if(!back){if(t<1)arm(cx-(sw-1.4)*wf,cx-(sw+.4)*wf,23);
     if(wid)heldWeapon(g,x,y,u,wid,hR[0]+.4,hR[1]-.2);else if(cls==="mage"){LN(hR[0]+.2,hR[1]+2.4,hR[0]+2.6,hR[1]-9,"#a8784a",.9);E(hR[0]+2.8,hR[1]-9.6,1.5,1.5,"#9ae0e8");E(hR[0]+2.4,hR[1]-10,.5,.5,"#fff")}
     arm(cx+(sw-1.4)*wf,hR[0],hR[1])}
@@ -1543,7 +1552,7 @@ function puniHero(g,x,y,s,F,wid,cls){
     for(const d of [-1,1]){if(t===1&&d<0)continue;const bx=hx+d*(7.4-t*1.4)+fo*(d>0?0:0);g.beginPath();g.moveTo(X(bx),Y(hy-6.4));g.quadraticCurveTo(X(bx+d*4.4),Y(hy-7.6),X(bx+d*3.4),Y(hy-13.6));g.quadraticCurveTo(X(bx+d*2),Y(hy-9.6),X(bx-d*1),Y(hy-8.6));g.closePath();g.fillStyle="#fff6e0";g.fill()}}
   if(cls==="merchant"){PL([hx-4.6,hy-6.6,hx+4.6,hy-6.6,hx+3.6,hy-12.4,hx-3.6,hy-12.4],"#d0303a");E(hx,hy-12.4,3.6,.9,"#e8484a");LN(hx,hy-12.6,hx-fo*1+3.6,hy-10.4,"#2a1a10",.8);E(hx-fo+3.8,hy-9.8,.9,1.2,"#2a1a10")}
   if(cls==="mage"){/* とんがりぼうし */const bx=hx-fo*.6;E(bx,hy-6.4,10,2.3,C.bd2);g.beginPath();g.moveTo(X(bx-5.6),Y(hy-6.6));g.quadraticCurveTo(X(bx-2.6),Y(hy-11),X(bx+1.2-fo*1.5),Y(hy-16.4));g.quadraticCurveTo(X(bx+4.6-fo*3),Y(hy-15.2),X(bx+3.6-fo*2.2),Y(hy-13.6));g.quadraticCurveTo(X(bx+3.4),Y(hy-10),X(bx+5.6),Y(hy-6.6));g.closePath();g.fillStyle=C.bd;g.fill();RR(bx-5.6,hy-8.4,11.2,1.5,.6,C.ac);if(!back)star(g,X(bx+fo*2+1.4),Y(hy-11),1.3*u,C.ac)}
-  if(cls==="joker"){for(const [d,tl] of [[-1,-.16],[1,.2]]){if(t===1&&d<0&&!back)continue;g.save();g.translate(X(hx+d*3-fo*.6),Y(hy-6.6));g.rotate(tl);/* うしろでも 前と同じく ひらく */g.beginPath();g.ellipse(0,-4.8*u,1.9*u,5.2*u,0,0,7);g.fillStyle=C.bd;g.fill();if(!back){g.beginPath();g.ellipse(0,-4.6*u,.9*u,3.8*u,0,0,7);g.fillStyle="#ff9ac0";g.fill()}g.restore()}RR(hx-6,hy-7.4,12,1.4,.7,C.bd)}
+  if(cls==="joker"&&back)pony("top");if(cls==="joker"){for(const [d,tl] of [[-1,-.16],[1,.2]]){if(t===1&&d<0&&!back)continue;g.save();g.translate(X(hx+d*3-fo*.6),Y(hy-6.6));g.rotate(tl);/* うしろでも 前と同じく ひらく */g.beginPath();g.ellipse(0,-4.8*u,1.9*u,5.2*u,0,0,7);g.fillStyle=C.bd;g.fill();if(!back){g.beginPath();g.ellipse(0,-4.6*u,.9*u,3.8*u,0,0,7);g.fillStyle="#ff9ac0";g.fill()}g.restore()}RR(hx-6,hy-7.4,12,1.4,.7,C.bd)}
 }
 function drawHero(g,x,y,s,f,wid,cls){f=f||"d";cls=cls||(G&&G.p&&G.p.cls)||"warrior";HPAL=HPALS[cls]||HPALS.warrior;
   const M={d:["d",0],u:["u",0],r:["r",0],l:["r",1],dr:["q",0],dl:["q",1],ur:["b",0],ul:["b",1]}[f]||["d",0];
@@ -2068,7 +2077,7 @@ window.addEventListener("keydown",e=>{if(!$("game").classList.contains("on"))ret
   if(KEYS[e.key]){e.preventDefault();doMove(...KEYS[e.key])}else if(e.key==="i"){openBag()}else if(e.key==="m"){showMap=!showMap}else if(e.key===">"||e.key==="Enter"){descend()}});
 const startNew=()=>{$("cls").classList.add("on")};
 function pickCls(c){SFX.ui();$("cls").classList.remove("on");clearSave();newRun(c);show("game")}
-(function(){const g=$("clsGrid");g.innerHTML=Object.entries(CLS).map(([k,c])=>'<button data-c="'+k+'"><canvas width="168" height="168"></canvas><b>'+c.n+'</b><small>'+c.d.map(t=>'<span>'+t+'</span>').join('')+'</small></button>').join("");
+(function(){const g=$("clsGrid");g.innerHTML=Object.entries(CLS).map(([k,c])=>'<button data-c="'+k+'"><b>'+c.n+'</b><canvas width="168" height="168"></canvas><small>'+c.d.map(t=>'<span>'+t+'</span>').join('')+'</small></button>').join("");
   g.querySelectorAll("button").forEach(b=>{const x=b.querySelector("canvas").getContext("2d");drawHero(x,4,4,160,"d",{warrior:"bronze",mage:"",merchant:"",joker:"dagger"}[b.dataset.c],b.dataset.c)});
   g.addEventListener("click",e=>{const b=e.target.closest("button[data-c]");if(b)pickCls(b.dataset.c)});$("clsBack").onclick=()=>{SFX.ui();$("cls").classList.remove("on")}})();
 $("bStart").onclick=()=>{SFX.ui();if(localStorage.getItem("rogue-save"))$("ask").classList.add("on");else startNew()};
