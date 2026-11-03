@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<meta name="rogue-rev" content="20261103o">
+<meta name="rogue-rev" content="20261103p">
 <meta name="theme-color" content="#9fe0ff">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <script>try{if(navigator.standalone||matchMedia("(display-mode: standalone)").matches){document.documentElement.classList.add("sa");const st=()=>{const g=document.querySelector(".scr");if(!g)return;const r=g.getBoundingClientRect(),d=document.documentElement.style;d.setProperty("--gt",r.top+"px");d.setProperty("--gb",Math.max(0,innerHeight-r.bottom)+"px")};addEventListener("resize",st);addEventListener("load",st);setTimeout(st,300)}}catch(e){}</script>
 <meta name="apple-mobile-web-app-title" content="ふしぎな地下">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261103o">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261103o">
-<link rel="manifest" href="manifest.webmanifest?v=20261103o">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261103p">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261103p">
+<link rel="manifest" href="manifest.webmanifest?v=20261103p">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800;900&display=swap" rel="stylesheet">
 <title>ふしぎな地下ダンジョン</title>
 <style>
@@ -320,6 +320,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
 #bagList .it .d{font-size:9.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #bagAct{margin-top:5px!important}#bagAct button{height:42px!important}
 /* rev o: Safari（ブラウザ）で 下に 白い すきまが 出ないように、背景を 画面ぜんぶに */html{background-color:#ffd0ea;min-height:100%;min-height:-webkit-fill-available}html:not(.sa),html:not(.sa) body{min-height:100vh;min-height:100lvh;background:linear-gradient(#9fe0ff,#d6c8ff 60%,#ffd0ea) fixed #ffd0ea}
+/* rev p: せつめいの わくは 高さ こてい（いちばん長い 3行ぶん） */#bag #bagInfo{box-sizing:border-box;height:73px!important;min-height:73px!important;max-height:73px!important;overflow:hidden}
 </style>
 </head>
 <body><div id="iosTopStrip" aria-hidden="true"></div>
@@ -331,7 +332,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
   <button class="big" id="bCont">つづきから</button>
   <button class="big" id="bStart">はじめから</button>
   <div class="tRow"><button class="big sub" id="bHow">あそびかた</button><button class="big sub" id="bRank">ランキング</button></div>
-  <div class="ver">rev 20261103o</div>
+  <div class="ver">rev 20261103p</div>
 </section>
 
 <section id="rank" class="scr">
@@ -401,7 +402,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
 <script>
 "use strict";
 const $=id=>document.getElementById(id);
-const REV="20261103o";
+const REV="20261103p";
 /* ===== 音 ===== */
 let AC=null;
 function ac(){try{if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();if(AC.state==="suspended")AC.resume()}catch(e){}return AC}
@@ -1101,7 +1102,7 @@ function drawBag(){const L=$("bagList"),p=G.p,swap=bagMode==="swap";$("bagTitle"
   const fi=floorIdx(),fl=fi>=0?G.items[fi]:null;
   $("bagFloor").innerHTML=fl?'<button class="it fl'+(bagSel==="floor"?" sel":"")+'" data-f="1"><canvas width="60" height="60" data-k="'+skey(fl)+'"></canvas><span><span class="nm" style="color:'+RAR[tierOf(fl)].c+'">'+cellName(fl)+'</span></span><b class="eq">足もと</b></button>':"";if(bagSel==="floor"&&!fl)bagSel=G.bag.length?0:"wep";
   const si=typeof bagSel==="string"&&bagSel!=="floor"?slotItem(bagSel):null;
-  $("bagInfo").innerHTML=swap?"持ち物を えらんで「いれかえ」。足もとや 持ち物を えらんで「つかう」も できる。":bagSel==="floor"?infoOf(fl)+"<br><b>足もと</b>："+(G.bag.length>=bagCap()?"持ち物が いっぱい。持ち物を えらぶと「いれかえ」できる。":"ひろう・つかう・なげる が できる。"):typeof bagSel==="number"&&fl?"持ち物を えらんで「いれかえ」すると 足もとの道具と こうかんできる。":typeof bagSel==="string"?(si?infoOf(si):"何も そうびしていない。"):(bagSel===-1?(G.bag.length?"道具を タップすると せつめいが 出るよ。":"何も 持っていない。"):"");
+  $("bagInfo").innerHTML=swap?"持ち物を えらんで「いれかえ」。足もとや 持ち物を えらんで「つかう」も できる。":bagSel==="floor"?infoOf(fl):typeof bagSel==="number"&&fl?"持ち物を えらんで「いれかえ」すると 足もとの道具と こうかんできる。":typeof bagSel==="string"?(si?infoOf(si):"何も そうびしていない。"):(bagSel===-1?(G.bag.length?"道具を タップすると せつめいが 出るよ。":"何も 持っていない。"):"");
   $("bagSt").innerHTML=((p.proofs?"🏅 モンスターの証+"+p.proofs+"（EXP +"+Math.round(PROOF_EXP*100*p.proofs)+"%）":"")+(bufOf("atk")?"　<b style=color:#e06a00>ちから"+p.buf.atk+"</b>":"")+(bufOf("def")?"　<b style=color:#1586d0>まもり"+p.buf.def+"</b>":"")+(bufOf("regen")?"　<b style=color:#11966a>めぐみ"+p.buf.regen+"</b>":"")+(p.psn?"　<b style=color:#3a9a10>どく"+p.psn+"</b>":"")).replace(/^　/,"");
   L.innerHTML=G.bag.map((it,i)=>{const r=RAR[tierOf(it)];return '<button class="it r'+tierOf(it)+(i===bagSel?" sel":"")+'" data-i="'+i+'"><canvas width="48" height="48" data-k="'+skey(it)+'"></canvas><span><span class="nm" style="color:'+r.c+'">'+cellName(it)+'</span></span></button>'}).join("");
   {let h="";for(let i=G.bag.length;i<bagCap();i++)h+='<div class="emp" aria-hidden="true"></div>';L.insertAdjacentHTML("beforeend",h)}/* あいている わくも 見せる */
