@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<meta name="rogue-rev" content="20261103w">
+<meta name="rogue-rev" content="20261103x">
 <meta name="theme-color" content="#9fe0ff">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <script>try{if(navigator.standalone||matchMedia("(display-mode: standalone)").matches){document.documentElement.classList.add("sa");const st=()=>{const g=document.querySelector(".scr");if(!g)return;const r=g.getBoundingClientRect(),d=document.documentElement.style;d.setProperty("--gt",r.top+"px");d.setProperty("--gb",Math.max(0,innerHeight-r.bottom)+"px")};addEventListener("resize",st);addEventListener("load",st);setTimeout(st,300)}}catch(e){}</script>
 <meta name="apple-mobile-web-app-title" content="ふしぎな地下">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261103w">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261103w">
-<link rel="manifest" href="manifest.webmanifest?v=20261103w">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261103x">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261103x">
+<link rel="manifest" href="manifest.webmanifest?v=20261103x">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800;900&display=swap" rel="stylesheet">
 <title>ふしぎな地下ダンジョン</title>
 <style>
@@ -333,7 +333,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
   <button class="big" id="bCont">つづきから</button>
   <button class="big" id="bStart">はじめから</button>
   <div class="tRow"><button class="big sub" id="bHow">あそびかた</button><button class="big sub" id="bRank">ランキング</button></div>
-  <div class="ver">rev 20261103w</div>
+  <div class="ver">rev 20261103x</div>
 </section>
 
 <section id="rank" class="scr">
@@ -403,7 +403,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
 <script>
 "use strict";
 const $=id=>document.getElementById(id);
-const REV="20261103w";
+const REV="20261103x";
 /* ===== 音 ===== */
 let AC=null;
 function ac(){try{if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();if(AC.state==="suspended")AC.resume()}catch(e){}return AC}
@@ -497,8 +497,8 @@ const ITEMS={
   mapsc:{name:"ちずのまきもの",d:"この階の地図がわかる",w:3,f:1,c:"scroll",sd:"地図が わかる"},
   fire:{name:"こうげきのまきもの",d:"見えている敵 1たいに ランダムで 大ダメージ",w:3,f:1,c:"scroll",art:["scroll","#ffd0a0","#ff6a2a"],sd:"見える敵1たいに 大ダメージ"},
   uncurse:{name:"のろいときの巻物",d:"そうびしている ぶきと たての のろいを とく",w:2,f:2,c:"scroll",art:["scroll","#f6eaff","#a060e0"],sd:"のろいを とく"},
-  wepup:{name:"ぶきのまきもの",d:"そうびしている ぶきの Lvが 1上がる",w:2,f:2,c:"scroll",art:["scroll","#e8f0ff","#6f9cff"],sd:"ぶき Lv+1"},
-  shdup:{name:"たてのまきもの",d:"そうびしている たての Lvが 1上がる",w:2,f:2,c:"scroll",art:["scroll","#fff0c8","#d9a030"],sd:"たて Lv+1"},
+  wepup:{name:"ぶきのまきもの",d:"そうびしている ぶきの Lvが 1上がる。のろいも とける",w:2,f:2,c:"scroll",art:["scroll","#e8f0ff","#6f9cff"],sd:"ぶき Lv+1"},
+  shdup:{name:"たてのまきもの",d:"そうびしている たての Lvが 1上がる。のろいも とける",w:2,f:2,c:"scroll",art:["scroll","#fff0c8","#d9a030"],sd:"たて Lv+1"},
   wanasc:{name:"わなみえのまきもの",d:"この階の わなが ぜんぶ 見える",w:2,f:1,c:"scroll",art:["scroll","#ffe4e4","#e04848"],sd:"わなが 見える"},
   stairsc:{name:"かいだんのまきもの",d:"階段のとなりへワープする",w:2,f:2,c:"scroll",art:["scroll","#d8e4ff","#3a5cff"],sd:"階段のそばへ"},
   holy:{name:"せいなるまきもの",d:"見えている敵のHPを半分にする",w:2,f:4,c:"scroll",art:["scroll","#ffffff","#ffe27a"],rare:1,sd:"見える敵の HP半分"},
@@ -1223,8 +1223,8 @@ function useItem(i){const it=G.bag[i],p=G.p;let consume=true;if(!p.buf)p.buf={at
     case "wanasc":{let n=0;(G.objs||[]).forEach(o=>{if(OBJS[o.k]&&OBJS[o.k].trap){if(o.hid)n++;o.hid=0;G.seen[o.y][o.x]=1}});SFX.magic();ringFx(p.x,p.y,"#ff9a9a");const all=(G.objs||[]).filter(o=>OBJS[o.k]&&OBJS[o.k].trap).length;popMsg(all?"🪤 わなが 見えた！":"…わなは ない");msg(all?"この階の わなが ぜんぶ 見えるように なった！（"+all+"こ）":"この階には わなが ない みたいだ。","y");break}
     case "treasure":{let n=0;for(let k=0;k<200&&n<3;k++){const r=pick(G.rooms),x=r.x+R(r.w),y=r.y+R(r.h);if(wall(x,y))continue;if(G.items.some(i=>i.x===x&&i.y===y)||(G.stairs.x===x&&G.stairs.y===y)||(x===p.x&&y===p.y)||objAt(x,y))continue;G.items.push({x,y,...randItem(),shown:1});G.seen[y][x]=1;n++}SFX.magic();ringFx(p.x,p.y,"#ffd0f0");popMsg("🎁 たからが ふえた！");msg("この階に たからが あらわれた！（地図を見よう）","y");break}
     case "uncurse":{const L=[p.wep,p.shd].filter(q=>q&&q.cur);if(!L.length){msg("のろわれた そうびは ない。");popMsg("…何もおこらない");break}for(const q of L){q.cur=0;q.cv=0}SFX.heal();FX.push({type:"aura",x:p.x,y:p.y,c:"#f4e8ff",t0:now()+300,dur:1000});msg("のろいが とけた！","g");popMsg("🕊️ のろいが とけた！");break}
-    case "wepup":{if(!p.wep){msg("ぶきを そうびしていない…");popMsg("…何もおこらない");break}p.wep.lv=(p.wep.lv||1)+1;SFX.lvl();aura(p,"#ffe08a",1100);popMsg("⚔️ ぶき Lv"+p.wep.lv+"！");msg(wdef(p.wep).n+"が Lv"+p.wep.lv+"に なった！（こうげき"+Math.round(atkOf())+"）","y");break}
-    case "shdup":{if(!p.shd){msg("たてを そうびしていない…");popMsg("…何もおこらない");break}p.shd.lv=(p.shd.lv||1)+1;SFX.lvl();aura(p,"#9ad0ff",1100);popMsg("🛡️ たて Lv"+p.shd.lv+"！");msg(p.shd.name+"が Lv"+p.shd.lv+"に なった！（まもり"+Math.round(defOf())+"）","y");break}
+    case "wepup":{if(!p.wep){msg("ぶきを そうびしていない。");popMsg("…ぶきが ない");SFX.miss();return}p.wep.lv=(p.wep.lv||1)+1;if(p.wep.cur){p.wep.cur=0;p.wep.cv=0;msg("ぶきの のろいが とけた！","g")}SFX.lvl();aura(p,"#ffe08a",1100);popMsg("⚔️ ぶき Lv"+p.wep.lv+"！");msg(wdef(p.wep).n+"が Lv"+p.wep.lv+"に なった！（こうげき"+Math.round(atkOf())+"）","y");break}
+    case "shdup":{if(!p.shd){msg("たてを そうびしていない。");popMsg("…たてが ない");SFX.miss();return}p.shd.lv=(p.shd.lv||1)+1;if(p.shd.cur){p.shd.cur=0;p.shd.cv=0;msg("たての のろいが とけた！","g")}SFX.lvl();aura(p,"#9ad0ff",1100);popMsg("🛡️ たて Lv"+p.shd.lv+"！");msg(p.shd.name+"が Lv"+p.shd.lv+"に なった！（まもり"+Math.round(defOf())+"）","y");break}
     case "rstr":case "rdef":case "rheal":case "rfood":case "rluck":case "rexp":{const old=p.ring;p.ring=it.k;if(old){G.bag[i]={k:old};consume=false}msg(ITEMS[it.k].name+"をつけた！","g");aura(p,"#ffd0ff",800);SFX.pick();break}
     case "fire":{const vs=G.ents.filter(e=>vis(e.x,e.y)),e=vs.length?pick(vs):null;if(!e){msg("見えるところに敵がいない。");SFX.miss();popMsg("…敵がいない");return}beam(p,e,"#ffb070");SFX.magic();popMsg("💥 こうげき！");const d=30+G.floor*4;setTimeout(()=>{if(G.ents.includes(e))boomFx(e.x,e.y)},350);msg(ENEMIES[e.k].name+"に"+d+"のダメージ！","y");dmgE(e,d);break}
     default:{
