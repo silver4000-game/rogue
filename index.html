@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<meta name="rogue-rev" content="20261103x">
+<meta name="rogue-rev" content="20261103y">
 <meta name="theme-color" content="#9fe0ff">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <script>try{if(navigator.standalone||matchMedia("(display-mode: standalone)").matches){document.documentElement.classList.add("sa");const st=()=>{const g=document.querySelector(".scr");if(!g)return;const r=g.getBoundingClientRect(),d=document.documentElement.style;d.setProperty("--gt",r.top+"px");d.setProperty("--gb",Math.max(0,innerHeight-r.bottom)+"px")};addEventListener("resize",st);addEventListener("load",st);setTimeout(st,300)}}catch(e){}</script>
 <meta name="apple-mobile-web-app-title" content="ふしぎな地下">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261103x">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261103x">
-<link rel="manifest" href="manifest.webmanifest?v=20261103x">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261103y">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261103y">
+<link rel="manifest" href="manifest.webmanifest?v=20261103y">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800;900&display=swap" rel="stylesheet">
 <title>ふしぎな地下ダンジョン</title>
 <style>
@@ -333,7 +333,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
   <button class="big" id="bCont">つづきから</button>
   <button class="big" id="bStart">はじめから</button>
   <div class="tRow"><button class="big sub" id="bHow">あそびかた</button><button class="big sub" id="bRank">ランキング</button></div>
-  <div class="ver">rev 20261103x</div>
+  <div class="ver">rev 20261103y</div>
 </section>
 
 <section id="rank" class="scr">
@@ -403,7 +403,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
 <script>
 "use strict";
 const $=id=>document.getElementById(id);
-const REV="20261103x";
+const REV="20261103y";
 /* ===== 音 ===== */
 let AC=null;
 function ac(){try{if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();if(AC.state==="suspended")AC.resume()}catch(e){}return AC}
@@ -983,7 +983,7 @@ function silverAct(e,E,seesP){const RM=G.roomMap,p=G.p;
   const near=RM[p.y][p.x]===H||seesP;
   if(near){const d0=dist(e.x,e.y);let best=null,bv=d0;for(const [dx,dy] of ok){const v=dist(e.x+dx,e.y+dy)+Math.random()*.001;if(v>bv){bv=v;best=[dx,dy]}}
     if(best){moveE(e,best[0],best[1]);return}
-    if(adjacent(e)){enemyAttack(e,E);return}/* にげられない ときだけ こうげき */
+    /* 銀色スライムは こうげきしない（にげるだけ） */
     const side=ok.filter(([dx,dy])=>Math.abs(dist(e.x+dx,e.y+dy)-d0)<.5);if(side.length&&Math.random()<.5){const d=pick(side);moveE(e,d[0],d[1])}return}
   /* 主人公が いない: 部屋の中で うろうろ */
   if(ok.length&&Math.random()<.5){const d=pick(ok);moveE(e,d[0],d[1])}}
