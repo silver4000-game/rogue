@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<meta name="rogue-rev" content="20261103n">
+<meta name="rogue-rev" content="20261103o">
 <meta name="theme-color" content="#9fe0ff">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <script>try{if(navigator.standalone||matchMedia("(display-mode: standalone)").matches){document.documentElement.classList.add("sa");const st=()=>{const g=document.querySelector(".scr");if(!g)return;const r=g.getBoundingClientRect(),d=document.documentElement.style;d.setProperty("--gt",r.top+"px");d.setProperty("--gb",Math.max(0,innerHeight-r.bottom)+"px")};addEventListener("resize",st);addEventListener("load",st);setTimeout(st,300)}}catch(e){}</script>
 <meta name="apple-mobile-web-app-title" content="ふしぎな地下">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261103n">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261103n">
-<link rel="manifest" href="manifest.webmanifest?v=20261103n">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261103o">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261103o">
+<link rel="manifest" href="manifest.webmanifest?v=20261103o">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800;900&display=swap" rel="stylesheet">
 <title>ふしぎな地下ダンジョン</title>
 <style>
@@ -301,7 +301,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
 #shopList button>span{text-align:left;line-height:1.25}#shopList button>b{margin-left:auto;text-align:right;white-space:nowrap}
 @media (max-height:600px){#shopList button{padding:2px 10px;margin-bottom:5px}#shopList button canvas{width:34px;height:34px}#shopT{font-size:20px!important;margin-bottom:2px!important}}
 #shopClose{margin-top:4px;min-height:48px;width:70%;border:3px solid var(--ink);border-radius:24px;background:linear-gradient(#ffe0f0,#ffb0d8);box-shadow:0 4px 0 var(--ink);color:var(--ink);font-weight:900;font-size:17px;font-family:var(--F)}
-#lvGrid{grid-template-columns:1fr 1fr 1fr!important}
+#lvGrid{grid-template-columns:1fr 1fr!important}#lvGrid [data-s=full]{background:linear-gradient(#fff4b0,#ffd84a)}
 #sideR{gap:8px}#bBow small{display:block;font-size:11px;line-height:1;margin-top:1px}#bBow{line-height:1.1}
 @media (max-width:340px){#clsGrid canvas{width:66px;height:66px}#clsGrid small{font-size:10px}.side button{font-size:14px}}
 
@@ -319,6 +319,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
 #bagList .it .nm{font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:12px}
 #bagList .it .d{font-size:9.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #bagAct{margin-top:5px!important}#bagAct button{height:42px!important}
+/* rev o: Safari（ブラウザ）で 下に 白い すきまが 出ないように、背景を 画面ぜんぶに */html{background-color:#ffd0ea;min-height:100%;min-height:-webkit-fill-available}html:not(.sa),html:not(.sa) body{min-height:100vh;min-height:100lvh;background:linear-gradient(#9fe0ff,#d6c8ff 60%,#ffd0ea) fixed #ffd0ea}
 </style>
 </head>
 <body><div id="iosTopStrip" aria-hidden="true"></div>
@@ -330,7 +331,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
   <button class="big" id="bCont">つづきから</button>
   <button class="big" id="bStart">はじめから</button>
   <div class="tRow"><button class="big sub" id="bHow">あそびかた</button><button class="big sub" id="bRank">ランキング</button></div>
-  <div class="ver">rev 20261103n</div>
+  <div class="ver">rev 20261103o</div>
 </section>
 
 <section id="rank" class="scr">
@@ -383,7 +384,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
   <div id="bagAct"><button id="baUse" class="main">つかう</button><button id="baDrop">おく</button><button id="baThrow">なげる</button><button id="baSwap" style="display:none">いれかえ</button><button id="baClose">とじる</button></div></div>
 
 <div id="ask"><div class="lvBox"><div class="orn">◆</div><div id="askT">中断データがあります。<br>はじめからにしますか？</div><div class="askB"><button id="askYes">はい</button><button id="askNo">いいえ</button></div></div></div>
-<div id="lvup"><div class="lvBox"><div id="lvT">レベルアップ！</div><div id="lvSub"></div><div id="lvGrid"><button data-s="atk"><i>⚔️</i><b>こうげき</b><span></span></button><button data-s="def"><i>🛡️</i><b>ぼうぎょ</b><span></span></button><button data-s="hp"><i>❤️</i><b>HP</b><span></span></button></div></div></div>
+<div id="lvup"><div class="lvBox"><div id="lvT">レベルアップ！</div><div id="lvSub"></div><div id="lvGrid"><button data-s="atk"><i>⚔️</i><b>こうげき</b><span></span></button><button data-s="def"><i>🛡️</i><b>ぼうぎょ</b><span></span></button><button data-s="hp"><i>❤️</i><b>HP</b><span></span></button><button data-s="full"><i>🍙</i><b>まんぷく</b><span></span></button></div></div></div>
 <div id="pop"></div>
 <div id="cls"><div class="lvBox"><div id="clsT">だれで あそぶ？</div><div id="clsGrid"></div><button id="clsBack" style="margin-top:10px;min-height:44px;width:60%;border:3px solid var(--ink);border-radius:22px;background:#fff;box-shadow:0 3px 0 var(--ink);color:var(--ink);font-weight:900;font-family:var(--F)">もどる</button></div></div>
 <div id="rkd"><div class="lvBox"><div id="rkdT">きろく</div><canvas id="rkdC" width="240" height="240"></canvas><div id="rkdN"></div><div id="rkdS"></div><div id="rkdD"></div><button id="rkdClose">とじる</button></div></div>
@@ -400,7 +401,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
 <script>
 "use strict";
 const $=id=>document.getElementById(id);
-const REV="20261103n";
+const REV="20261103o";
 /* ===== 音 ===== */
 let AC=null;
 function ac(){try{if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();if(AC.state==="suspended")AC.resume()}catch(e){}return AC}
@@ -895,7 +896,7 @@ function lvMotion(n){const p=G.p,T=now();const dz=DYING.reduce((m,d)=>Math.max(m
   setTimeout(()=>{if(!G)return;SFX.lvl();FX.push({type:"lvup",x:G.p.x,y:G.p.y,t0:now(),dur:1050,n:G.p.lvq})},Math.max(0,st-T))}
 /* レベルアップ: 攻撃・防御・運・空腹・アイテム運 から1つえらぶ（えらぶまで止まる。何回分もたまる）
    どれも「たくさん上げるほど1回で上がる量が少しずつへる」ので、いろいろ上げた方が強くなる */
-const BAL={fw:3,hpG:26,dm:1,fl:.25,ds:.6,dk:.9,atkG:2,defG:2.1,il:.6,ilb:.3,ilf:7,lvH:10,crit:.10,dodge:.08,drop:.08,gh:.06,ga:.035,bh:1,ba:1,eh:1.25,ea:1.12,ni0:5};
+const BAL={fw:2.3,hpG:26,dm:1,fl:.25,ds:.6,dk:.9,atkG:2,defG:2.1,il:.6,ilb:.3,ilf:7,lvH:10,crit:.10,dodge:.08,drop:.08,gh:.06,ga:.035,bh:1,ba:1,eh:1.25,ea:1.12,ni0:5};
 const geo=(n,a,r)=>a*(1-Math.pow(r,n))/(1-r);
 const luckOf=()=>0;
 const r1=v=>Math.round(v*10)/10;
@@ -932,6 +933,7 @@ function chooseStat(k){const p=G.p;if(!(p.lvq>0))return;let m;
   if(k==="atk"){p.atk=r1(p.atk+atkG());p.atkP=(p.atkP||0)+1;m="こうげきが上がった！"}
   else if(k==="def"){p.def=r1(p.def+defG());p.defP=(p.defP||0)+1;m="ぼうぎょが上がった！"}
   else if(k==="hp"){p.mhp+=BAL.hpG;p.hp+=BAL.hpG;p.hpP=(p.hpP||0)+1;m="HPが上がった！"}
+  else if(k==="full"){p.food=p.fmax||500;m="おなかが いっぱいに なった！"}/* まんぷく: おなかを 今の最大まで */
     else return;
   msg(m,"g");popMsg(m);p.lvq--;SFX.lvl();if(p.lvq>0)showLv();else $("lvup").classList.remove("on");hud();save()}
 function hurtPlayer(d,src){const p=G.p;if(p.inv>0){fx(p.x,p.y,"むてき","#ffe060");return}p.hp-=d;p.hf=now();fx(p.x,p.y,""+d,"#ff6b6b");flash=6;SFX.hurt();interrupt=true;if(p.hp<=0){p.hp=0;gameOver(src)}}
