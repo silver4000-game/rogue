@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<meta name="rogue-rev" content="20261103f">
+<meta name="rogue-rev" content="20261103g">
 <meta name="theme-color" content="#9fe0ff">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <script>try{if(navigator.standalone||matchMedia("(display-mode: standalone)").matches){document.documentElement.classList.add("sa");const st=()=>{const g=document.querySelector(".scr");if(!g)return;const r=g.getBoundingClientRect(),d=document.documentElement.style;d.setProperty("--gt",r.top+"px");d.setProperty("--gb",Math.max(0,innerHeight-r.bottom)+"px")};addEventListener("resize",st);addEventListener("load",st);setTimeout(st,300)}}catch(e){}</script>
 <meta name="apple-mobile-web-app-title" content="ふしぎな地下">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261103f">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261103f">
-<link rel="manifest" href="manifest.webmanifest?v=20261103f">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261103g">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261103g">
+<link rel="manifest" href="manifest.webmanifest?v=20261103g">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800;900&display=swap" rel="stylesheet">
 <title>ふしぎな地下ダンジョン</title>
 <style>
@@ -329,7 +329,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
   <button class="big" id="bCont">つづきから</button>
   <button class="big" id="bStart">はじめから</button>
   <div class="tRow"><button class="big sub" id="bHow">あそびかた</button><button class="big sub" id="bRank">ランキング</button></div>
-  <div class="ver">rev 20261103f</div>
+  <div class="ver">rev 20261103g</div>
 </section>
 
 <section id="rank" class="scr">
@@ -399,7 +399,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
 <script>
 "use strict";
 const $=id=>document.getElementById(id);
-const REV="20261103f";
+const REV="20261103g";
 /* ===== 音 ===== */
 let AC=null;
 function ac(){try{if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();if(AC.state==="suspended")AC.resume()}catch(e){}return AC}
@@ -918,6 +918,18 @@ function* enemyTurn(){
     for(let k=0;k<n;k++){if(G.over||!G.ents.includes(e))break;if(sigE(e,E)){const t=now(),w=lastSig?GAP_E-(t-lastSig):GAP_HERO-(t-heroT);if(w>30)yield w;lastSig=now();DIST=distMap()}if(!G.ents.includes(e))break;actE(e,E);if(G.over)return}
   }
 }
+/* 銀色スライム: 自分の部屋から 出ずに 主人公から にげる */
+function silverAct(e,E,seesP){const RM=G.roomMap,p=G.p;
+  if(e.home==null||e.home<0){const r=RM[e.y][e.x];if(r>=0)e.home=r;else{/* 通路で 生まれたら: となりの 部屋マスへ 入る。なければ ふらふら */const ds=[[-1,-1],[0,-1],[1,-1],[-1,0],[1,0],[-1,1],[0,1],[1,1]].filter(([dx,dy])=>canStep(e.x,e.y,dx,dy)&&!entAt(e.x+dx,e.y+dy)&&!(e.x+dx===p.x&&e.y+dy===p.y));const rd=ds.filter(([dx,dy])=>RM[e.y+dy][e.x+dx]>=0);const d=rd.length?pick(rd):ds.length?pick(ds):null;if(d){moveE(e,d[0],d[1]);if(RM[e.y][e.x]>=0)e.home=RM[e.y][e.x]}return}}
+  const H=e.home,dist=(x,y)=>Math.max(Math.abs(x-p.x),Math.abs(y-p.y))+Math.hypot(x-p.x,y-p.y)*.01;
+  const ok=[[-1,-1],[0,-1],[1,-1],[-1,0],[1,0],[-1,1],[0,1],[1,1]].filter(([dx,dy])=>{const nx=e.x+dx,ny=e.y+dy;return RM[ny]&&RM[ny][nx]===H&&canStep(e.x,e.y,dx,dy)&&!entAt(nx,ny)&&!(nx===p.x&&ny===p.y)&&!(objAt(nx,ny)&&(objAt(nx,ny).k==="shop"||objAt(nx,ny).k==="jug"||OBJS[objAt(nx,ny).k].statue))});
+  const near=RM[p.y][p.x]===H||seesP;
+  if(near){const d0=dist(e.x,e.y);let best=null,bv=d0;for(const [dx,dy] of ok){const v=dist(e.x+dx,e.y+dy)+Math.random()*.001;if(v>bv){bv=v;best=[dx,dy]}}
+    if(best){moveE(e,best[0],best[1]);return}
+    if(adjacent(e)){enemyAttack(e,E);return}/* にげられない ときだけ こうげき */
+    const side=ok.filter(([dx,dy])=>Math.abs(dist(e.x+dx,e.y+dy)-d0)<.5);if(side.length&&Math.random()<.5){const d=pick(side);moveE(e,d[0],d[1])}return}
+  /* 主人公が いない: 部屋の中で うろうろ */
+  if(ok.length&&Math.random()<.5){const d=pick(ok);moveE(e,d[0],d[1])}}
 function actE(e,E){
     const seesP=vis(e.x,e.y);
     if(e.sleep>0){if(e.sleep<99){e.sleep--;return}if(seesP&&Math.random()<.33)e.sleep=0;else return}
@@ -927,6 +939,7 @@ function actE(e,E){
     if(E.boom&&e.fuse){if(e.fuse++>=2){explodeE(e,E);return}return}
     if(E.boom&&!e.fuse&&e.hp<e.mhp*.4){e.fuse=1;msg(E.name+"が ふくらんだ！ 爆発しそう！","w");fx(e.x,e.y,"!!","#ff7040");return}
     if(E.beh==="slow"&&e.tick%2===0)return;
+    if(e.k==="silver"){silverAct(e,E,seesP);return}
     if(e.conf>0&&Math.random()<.6){const [dx,dy]=confDir();if(e.x+dx===G.p.x&&e.y+dy===G.p.y&&canStep(e.x,e.y,dx,dy)){enemyAttack(e,E);return}const o=entAt(e.x+dx,e.y+dy);if(o&&o!==e){const d=ENEMIES[o.k].one?1:Math.max(1,Math.round(e.atk*.6));o.hp-=d;fx(o.x,o.y,""+d,"#ff8ad8");msg(E.name+"は こんらんして なかまを たたいた！","y");if(o.hp<=0)killEnemy(o,ENEMIES[o.k]);return}moveE(e,dx,dy);return}
     if((E.beh==="summon"&&e.tick%5===0&&G.ents.length<7)){const sp=freeNear(e.x,e.y);if(sp.length){const [x,y]=pick(sp);const m=mkEnemy("slime",x,y,false);m.aware=20;m.exp=Math.round(m.exp/2);G.ents.push(m);msg(E.name+"は なかまを よんだ！","w");return}}
     if(E.boss&&e.aware&&seesP&&e.tick%7===0&&G.ents.length<10){const sp=freeNear(e.x,e.y);let n=0;for(let k=0;k<RI(2,3)&&sp.length;k++){const [x,y]=sp.splice(R(sp.length),1)[0];const m=mkEnemy(randEnemyKind(),x,y,false);m.aware=20;m.exp=Math.round(m.exp/2);G.ents.push(m);n++}if(n){msg(E.name+"は なかまを よんだ！","w");popMsg("📣 なかまを よんだ！");FX.push({type:"ring",x:e.x,y:e.y,c:"#ff8090",t0:now(),dur:800});SFX.book();return}}
