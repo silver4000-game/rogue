@@ -1114,11 +1114,11 @@ function heal(n){const p=G.p,h=Math.min(n,p.mhp-p.hp);p.hp+=h;return h}
 function lineTargets(rng,pierce){const p=G.p,[dx,dy]=p.dir;let x=p.x,y=p.y;const hits=[];for(let k=0;k<rng;k++){if(!canStep(x,y,dx,dy))break;x+=dx;y+=dy;const o=entAt(x,y);if(o){hits.push(o);if(!pierce)break}}return {hits,end:{x,y}}}
 function dmgE(e,d,col){const E=ENEMIES[e.k];if(E.hard)d=1;e.hp-=d;e.sleep=0;e.aware=20;e.hf=now();shake(e);lfx(e.x,e.y,""+d,col||"#ffb44a");if(e.hp<=0){killEnemy(e,E);return true}return false}
 function useItem(i){const it=G.bag[i],p=G.p;let consume=true;if(!p.buf)p.buf={atk:0,def:0,regen:0};const I=ITEMS[it.k]||{};
-  {const sk=it.k;if(I.rng){const {hits,end}=lineTargets(I.rng,I.pierce),t=hits[0]||end;sigFx(sk,p.x,p.y,t.x,t.y)}else if(sk==="fire"){const e=nearestEnemy();if(e)sigFx(sk,p.x,p.y,e.x,e.y)}else if(!(it.k==="warp"&&G.boss)&&!(it.k==="stairsc"&&!stOK())&&!((sk==="wepup"&&!p.wep)||(sk==="shdup"&&!p.shd)))sigFx(sk,p.x,p.y)}
+  {const sk=it.k;if(it.k==="wep"||it.k==="shd"||I.c==="ring"){/* そうびの ときは エフェクト なし */}else if(I.rng){const {hits,end}=lineTargets(I.rng,I.pierce),t=hits[0]||end;sigFx(sk,p.x,p.y,t.x,t.y)}else if(sk==="fire"){const e=nearestEnemy();if(e)sigFx(sk,p.x,p.y,e.x,e.y)}else if(!(it.k==="warp"&&G.boss)&&!(it.k==="stairsc"&&!stOK())&&!((sk==="wepup"&&!p.wep)||(sk==="shdup"&&!p.shd)))sigFx(sk,p.x,p.y)}
   const aura=()=>{},beam=()=>{};
   switch(it.k){
-    case "wep":{if(p.wep&&p.wep.cur){cursedNo(p.wep,"ぶき");consume=false;break}const old=p.wep;p.wep=it.eq;if(old){G.bag[i]={k:"wep",eq:old};consume=false}msg(nameOf(it)+"をそうびした。（こうげき"+Math.round(atkOf())+"）","g");popMsg("⚔️ そうび！");aura(p,"#ffe08a",700);SFX.pick();revealCurse(it);break}
-    case "shd":{if(p.shd&&p.shd.cur){cursedNo(p.shd,"たて");consume=false;break}const old=p.shd;p.shd=it.eq;if(old){G.bag[i]={k:"shd",eq:old};consume=false}msg(nameOf(it)+"をそうびした。（まもり"+Math.round(defOf())+"）","g");popMsg("🛡️ そうび！");aura(p,"#9ad0ff",700);SFX.pick();revealCurse(it);break}
+    case "wep":{if(p.wep&&p.wep.cur){cursedNo(p.wep,"ぶき");consume=false;break}const old=p.wep;p.wep=it.eq;if(old){G.bag[i]={k:"wep",eq:old};consume=false}msg(nameOf(it)+"をそうびした。（こうげき"+Math.round(atkOf())+"）","g");aura(p,"#ffe08a",700);SFX.pick();revealCurse(it);break}
+    case "shd":{if(p.shd&&p.shd.cur){cursedNo(p.shd,"たて");consume=false;break}const old=p.shd;p.shd=it.eq;if(old){G.bag[i]={k:"shd",eq:old};consume=false}msg(nameOf(it)+"をそうびした。（まもり"+Math.round(defOf())+"）","g");aura(p,"#9ad0ff",700);SFX.pick();revealCurse(it);break}
     case "herb":case "pred":{const n=it.k==="herb"?30:100,up=it.k==="herb"?1:3,h=heal(n);if(!h){p.mhp+=up;p.hp+=up}
       if(it.k==="herb"&&!FAST){const pe={G,h,up:h?0:up};hPend=pe;setTimeout(()=>{if(hPend===pe)hPend=null;if(G!==pe.G)return;msg(h?"HPが"+h+"回ふくした。":"最大HPが"+up+"ふえた。","g");fx(p.x,p.y,"+"+(h||up),"#7dff9a");popMsg(h?"💚 HP +"+h:"❤️ 最大HP +"+up);aura(p,"#7dff9a");SFX.heal();hud()},950);break}
       msg(h?"HPが"+h+"回ふくした。":"最大HPが"+up+"ふえた。","g");lfx(p.x,p.y,"+"+(h||up),"#7dff9a");popMsg(h?"💚 HP +"+h:"❤️ 最大HP +"+up);aura(p,"#7dff9a");SFX.heal();break}
@@ -1147,7 +1147,7 @@ function useItem(i){const it=G.bag[i],p=G.p;let consume=true;if(!p.buf)p.buf={at
     case "uncurse":{const L=[p.wep,p.shd].filter(q=>q&&q.cur);if(!L.length){msg("のろわれた そうびは ない。");popMsg("…何もおこらない");break}for(const q of L){q.cur=0;q.cv=0}SFX.heal();FX.push({type:"aura",x:p.x,y:p.y,c:"#f4e8ff",t0:now()+300,dur:1000});msg("のろいが とけた！","g");popMsg("🕊️ のろいが とけた！");break}
     case "wepup":{if(!p.wep){msg("ぶきを そうびしていない…");popMsg("…何もおこらない");break}p.wep.lv=(p.wep.lv||1)+1;SFX.lvl();aura(p,"#ffe08a",1100);popMsg("⚔️ ぶき Lv"+p.wep.lv+"！");msg(wdef(p.wep).n+"が Lv"+p.wep.lv+"に なった！（こうげき"+Math.round(atkOf())+"）","y");break}
     case "shdup":{if(!p.shd){msg("たてを そうびしていない…");popMsg("…何もおこらない");break}p.shd.lv=(p.shd.lv||1)+1;SFX.lvl();aura(p,"#9ad0ff",1100);popMsg("🛡️ たて Lv"+p.shd.lv+"！");msg(p.shd.name+"が Lv"+p.shd.lv+"に なった！（まもり"+Math.round(defOf())+"）","y");break}
-    case "rstr":case "rdef":case "rheal":case "rfood":case "rluck":case "rexp":{const old=p.ring;p.ring=it.k;if(old){G.bag[i]={k:old};consume=false}msg(ITEMS[it.k].name+"をつけた！","g");popMsg("💍 そうび！");aura(p,"#ffd0ff",800);SFX.pick();break}
+    case "rstr":case "rdef":case "rheal":case "rfood":case "rluck":case "rexp":{const old=p.ring;p.ring=it.k;if(old){G.bag[i]={k:old};consume=false}msg(ITEMS[it.k].name+"をつけた！","g");aura(p,"#ffd0ff",800);SFX.pick();break}
     case "fire":{const e=nearestEnemy();if(!e){msg("見えるところに敵がいない。");SFX.miss();popMsg("…敵がいない");return}beam(p,e,"#ffb070");SFX.magic();popMsg("💥 こうげき！");const d=30+G.floor*4;setTimeout(()=>{if(G.ents.includes(e))boomFx(e.x,e.y)},350);msg(ENEMIES[e.k].name+"に"+d+"のダメージ！","y");dmgE(e,d);break}
     default:{
       if(!I.rng)break;
