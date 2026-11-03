@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<meta name="rogue-rev" content="20261103l">
+<meta name="rogue-rev" content="20261103m">
 <meta name="theme-color" content="#9fe0ff">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <script>try{if(navigator.standalone||matchMedia("(display-mode: standalone)").matches){document.documentElement.classList.add("sa");const st=()=>{const g=document.querySelector(".scr");if(!g)return;const r=g.getBoundingClientRect(),d=document.documentElement.style;d.setProperty("--gt",r.top+"px");d.setProperty("--gb",Math.max(0,innerHeight-r.bottom)+"px")};addEventListener("resize",st);addEventListener("load",st);setTimeout(st,300)}}catch(e){}</script>
 <meta name="apple-mobile-web-app-title" content="ふしぎな地下">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261103l">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261103l">
-<link rel="manifest" href="manifest.webmanifest?v=20261103l">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261103m">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261103m">
+<link rel="manifest" href="manifest.webmanifest?v=20261103m">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800;900&display=swap" rel="stylesheet">
 <title>ふしぎな地下ダンジョン</title>
 <style>
@@ -330,7 +330,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
   <button class="big" id="bCont">つづきから</button>
   <button class="big" id="bStart">はじめから</button>
   <div class="tRow"><button class="big sub" id="bHow">あそびかた</button><button class="big sub" id="bRank">ランキング</button></div>
-  <div class="ver">rev 20261103l</div>
+  <div class="ver">rev 20261103m</div>
 </section>
 
 <section id="rank" class="scr">
@@ -400,7 +400,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
 <script>
 "use strict";
 const $=id=>document.getElementById(id);
-const REV="20261103l";
+const REV="20261103m";
 /* ===== 音 ===== */
 let AC=null;
 function ac(){try{if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();if(AC.state==="suspended")AC.resume()}catch(e){}return AC}
@@ -706,7 +706,7 @@ const entAt=(x,y)=>G.ents.find(e=>e.x===x&&e.y===y);
 /* ななめは角をすりぬけない */
 /* 矢・石・つえの まほうは 池の 上を とんでいく */
 function flyStep(x,y,dx,dy){const nx=x+dx,ny=y+dy,sol=(a,b)=>wall(a,b)&&!isPil(a,b);if(sol(nx,ny))return false;if(dx&&dy&&(sol(x+dx,y)||sol(x,y+dy)))return false;return true}
-function canStep(x,y,dx,dy){const nx=x+dx,ny=y+dy;if(wall(nx,ny))return false;if(dx&&dy&&(wall(x+dx,y)||wall(x,y+dy)))return false;return true}
+function canStep(x,y,dx,dy){const nx=x+dx,ny=y+dy;if(wall(nx,ny))return false;if(dx&&dy&&((wall(x+dx,y)&&!isPil(x+dx,y))||(wall(x,y+dy)&&!isPil(x,y+dy))))return false;/* 池の かどは ななめに とおれる */return true}
 
 /* ===== メッセージ ===== */
 function msg(t,c){G.log.push({t,c:c||""});if(G.log.length>30)G.log.shift();drawLog()}
