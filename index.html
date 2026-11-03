@@ -1069,9 +1069,9 @@ const isWand=k=>ITEMS[k]&&ITEMS[k].c==="wand",isPot=k=>["pred","pregen","pstr","
 function throwItem(it){const p=G.p,d=p.dir||[0,1],E0=null;let x=p.x,y=p.y,hit=null,n=0;
   for(n=1;n<=7;n++){if(!flyStep(x,y,d[0],d[1]))break;x+=d[0];y+=d[1];const e=entAt(x,y);if(e){hit=e;break}}
   if(!hit)n--;const ex=p.x+d[0]*n,ey=p.y+d[1]*n;
-  FX.push({type:"throw",k:skey(it),x:p.x,y:p.y,x2:hit?hit.x:ex,y2:hit?hit.y:ey,t0:now(),dur:70+Math.max(1,n)*55});SFX.miss();swing(d[0],d[1]);
+  const tEnd=now()+70+Math.max(1,n)*55;FX.push({type:"throw",k:skey(it),x:p.x,y:p.y,x2:hit?hit.x:ex,y2:hit?hit.y:ey,t0:now(),dur:70+Math.max(1,n)*55});SFX.miss();swing(d[0],d[1]);
   const nm=nameOf(it);msg(nm+"を なげた。");
-  const land=()=>{if(isPot(it.k)){msg(nm+"は われてしまった。");return}const s=placeItem(it,hit?hit.x:ex,hit?hit.y:ey);if(!s)msg(nm+"は どこかへ 消えてしまった。")};
+  const land=()=>{if(isPot(it.k)){msg(nm+"は われてしまった。");return}const s=placeItem(it,hit?hit.x:ex,hit?hit.y:ey);if(s&&!FAST)G.items[G.items.length-1].ap=tEnd;/* とんでいる あいだは ゆかに 見せない */if(!s)msg(nm+"は どこかへ 消えてしまった。")};
   if(!hit){land();return}
   const E=ENEMIES[hit.k];hit.aware=20;hit.sleep=0;let dmg=0,col="#fff",gone=false,fixed=false;const STD={stone1:20,stone2:40,stone3:80};
   if(it.k==="wep")dmg=Math.round(wv(it.eq)*1.2+3+G.floor*.5);
@@ -2027,7 +2027,7 @@ function frame(t){requestAnimationFrame(frame);if(!$("game").classList.contains(
     if(!v){cx.fillStyle="rgba(59,47,110,.55)";cx.fillRect(sx,sy,TS,TS)}}
   for(const [sx,sy] of torches)drawTorch(sx,sy,TS,t);
   if(stOK()&&G.seen[G.stairs.y][G.stairs.x]){const sx=ox+G.stairs.x*TS,sy=oy+G.stairs.y*TS;if(vis(G.stairs.x,G.stairs.y))glow(cx,sx+TS/2,sy+TS/2,TS*(0.85+0.08*Math.sin(t/300)),G.boss?"rgba(255,210,100,.35)":"rgba(110,170,255,.32)");blit(cached("stairs"+(G.boss?1:0),TS,1,(g,a,b,s)=>drawStairs(g,a,b,s,G.boss)),sx,sy)}
-  for(const it of G.items)if(vis(it.x,it.y)||G.mapRevealed||it.shown){const bob=Math.sin(t/400+it.x+it.y)*TS*0.03;{const sk=skey(it);blit(cached("i_"+sk,TS,1,(g,a,b,s)=>drawItemSprite(g,sk,a,b,s)),ox+it.x*TS,oy+it.y*TS+bob)}}
+  for(const it of G.items)if(!(it.ap>now())&&(vis(it.x,it.y)||G.mapRevealed||it.shown)){const bob=Math.sin(t/400+it.x+it.y)*TS*0.03;{const sk=skey(it);blit(cached("i_"+sk,TS,1,(g,a,b,s)=>drawItemSprite(g,sk,a,b,s)),ox+it.x*TS,oy+it.y*TS+bob)}}
   const T=now();
   for(const e of G.ents){if(!vis(e.x,e.y))continue;const EV=vpos(e);let sx=ox+EV.x*TS,sy=oy+EV.y*TS-EV.b*TS*.07;if(e.sh&&!(e.shAt&&T<e.shAt)){sx+=(e.sh%2?3:-3);e.sh--}const lo=luOff(e);sx+=lo[0];sy+=lo[1];
     const breathe=e.sleep>0?0:Math.sin(t/260+e.x*1.7)*TS*0.025;const big=ENEMIES[e.k].boss?1.55:1.25;if(e.fl==null||e.x!==G.p.x)e.fl=G.p.x<e.x;
