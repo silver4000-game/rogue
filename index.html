@@ -452,6 +452,7 @@ const ENEMIES={
   turtle:{name:"カチコチガメ",hp:22,atk:7,def:3,exp:20,f:[6,999],beh:"chase",w:3,shell:1,base:"golem",tint:"#3fb07a",acc:"shell",d:"こうらに かくれている間は ダメージが 通らない。"},
   shroom:{name:"まどわしキノコ",hp:18,atk:6,def:2,exp:16,f:[7,999],beh:"slow",w:3,on:"conf",base:"slime",tint:"#ff5fa0",acc:"cap",d:"ほうしで こんらん させてくる。"},
   golem:{name:"ゴーレム",hp:48,atk:12,def:5,exp:32,f:[8,999],beh:"slow",w:3},
+  archer:{name:"ゴブリンアーチャー",hp:14,atk:4,def:1,exp:16,f:[4,14],beh:"archer",w:3,shot:4,base:"goblin",tint:"#58b050",acc:"bow",d:"はなれた ところから 弓矢を うつ（まっすぐ 6マス）。となりでは なぐる。"},
   wolf:{name:"はやてウルフ",hp:20,atk:7,def:2,exp:22,f:[8,999],beh:"chase",w:3,two:1,base:"goblin",tint:"#8890c0",acc:"ears",d:"1ターンに 2回 うごく。"},
   metal:{name:"メタルスライム",hp:5,atk:6,def:0,exp:90,f:[9,999],beh:"erratic",w:1,hard:1,base:"slime",tint:"#c8d0e8",acc:"shine",d:"かたくて 1ダメージずつしか 通らない。"},
   silver:{name:"銀色スライム",hp:5,atk:3,def:0,exp:0,f:[1,999],beh:"erratic",w:0,hard:1,one:1,two:1,lv3:1,base:"slime",tint:"#eef2fa",acc:"shine",d:"とても めずらしい。どんな こうげきも 1ダメージ。たおすと レベルが 3つ 上がる。"},
@@ -492,12 +493,12 @@ const ITEMS={
   uncurse:{name:"のろいときの巻物",d:"そうびしている ぶきと たての のろいを とく",w:2,f:2,c:"scroll",art:["scroll","#f6eaff","#a060e0"],sd:"のろいを とく"},
   wepup:{name:"ぶきのまきもの",d:"そうびしている ぶきの Lvが 1上がる",w:2,f:2,c:"scroll",art:["scroll","#e8f0ff","#6f9cff"],sd:"ぶき Lv+1"},
   shdup:{name:"たてのまきもの",d:"そうびしている たての Lvが 1上がる",w:2,f:2,c:"scroll",art:["scroll","#fff0c8","#d9a030"],sd:"たて Lv+1"},
+  wanasc:{name:"わなみえのまきもの",d:"この階の わなが ぜんぶ 見える",w:2,f:1,c:"scroll",art:["scroll","#ffe4e4","#e04848"],sd:"わなが 見える"},
   stairsc:{name:"かいだんのまきもの",d:"階段のとなりへワープする",w:2,f:2,c:"scroll",art:["scroll","#d8e4ff","#3a5cff"],sd:"階段のそばへ"},
   holy:{name:"せいなるまきもの",d:"見えている敵のHPを半分にする",w:2,f:4,c:"scroll",art:["scroll","#ffffff","#ffe27a"],rare:1,sd:"見える敵の HP半分"},
   treasure:{name:"たからのまきもの",d:"この階に道具が3つふえる（地図にのる）",w:1,f:3,c:"scroll",art:["scroll","#fff6c8","#ff9ad0"],rare:1,sd:"道具が 3つ出る"},
   /* なげる・こうげき */
   bomb:{name:"ばくだん",d:"まわりの敵にダメージ",w:4,f:1,c:"atk",sd:"まわりに ダメージ"},
-  knife:{name:"なげナイフ",d:"むいている方向の 敵に ダメージ（7マス）",w:4,f:1,c:"atk",rng:7,sd:"前へ ダメージ 7マス"},
   ice:{name:"しびれだま",d:"むいている方向の 敵を しびれさせる（7マス）",w:3,f:2,c:"atk",rng:7,sd:"前の敵を しびれ 7マス"},
   pstr:{name:"ちからのくすり",d:"50ターンのあいだ こうげき+5",w:3,f:2,c:"buff",art:["pot","#ffe0b0","#ff8a2a"],sd:"こうげき+5 しばらく"},
   pdef:{name:"まもりのくすり",d:"50ターンのあいだ まもり+5",w:3,f:2,c:"buff",art:["pot","#cfe0ff","#3a6cff"],sd:"まもり+5 しばらく"},
@@ -684,7 +685,7 @@ function msg(t,c){G.log.push({t,c:c||""});if(G.log.length>30)G.log.shift();drawL
 function drawLog(){const L=G.log.slice(-1);$("log").innerHTML=L.map(m=>'<div class="'+m.c+'">'+m.t+'</div>').join("")}
 
 /* ===== かんさつ ===== */
-const BEHN={slow:"うごきが おそい。",fast:"1回に 2マス すすむ。",erratic:"ふらふら うごく。",ranged:"はなれた ところから こうげきする。",caster:"まほうの本を つかう。",summon:"なかまを よぶ。"};
+const BEHN={slow:"うごきが おそい。",fast:"1回に 2マス すすむ。",erratic:"ふらふら うごく。",ranged:"はなれた ところから こうげきする。",archer:"弓矢を うつ。",caster:"まほうの本を つかう。",summon:"なかまを よぶ。"};
 const ONN={psn:"こうげきで どくに することがある。",conf:"こうげきで こんらんさせることがある。",slow:"こうげきで どんそくに することがある。",steal:"お金を ぬすんで にげる。"};
 const BKN={bolt:"いかずち",sleep:"ねむり",slow:"どんそく",conf:"こんらん",par:"しびれ",heal:"かいふく",summon:"なかまよび"};
 function observe(){if(!G||G.over)return;if(G.p.lvq>0){showLv();return}const p=G.p,[dx,dy]=p.dir;let x=p.x,y=p.y,e=null;
@@ -713,6 +714,7 @@ function shootBow(){const p=G.p;if(!G||G.over||busy)return;if(p.lvq>0){showLv();
 /* t: どれだけ続くか。magic=まほうで かかった（まほうつかいは かからない） */
 function setSt(o,k,t,magic){const isP=o===G.p,S=STS[k];
   if(false&&isP&&magic&&G.p.cls==="mage"){msg("まほうを はじいた！","g");fx(o.x,o.y,"ガード","#9ad0ff");SFX.ui();return false}
+  if(k==="psn"||k==="conf")t*=2;/* どく・こんらんは 2ばい 長く */
   if(!isP&&ENEMIES[o.k].boss)t=Math.max(1,Math.ceil(t/3));
   if(k==="slp"){if(isP)o.slp=Math.max(o.slp||0,t);else o.sleep=Math.max(o.sleep<99?o.sleep:0,t)}else o[k]=Math.max(o[k]||0,t);
   const nm=isP?"":ENEMIES[o.k].name+"は ";
@@ -866,8 +868,8 @@ const pct=v=>Math.round(v*100)+"%";
 /* レア度: 1ふつう 2めずらしい 3とてもめずらしい 4でんせつ。強いものほど出にくい */
 const RAR=[null,{n:"ふつう",s:"★",c:"#6a5a90"},{n:"めずらしい",s:"★★",c:"#1586d0"},{n:"とてもめずらしい",s:"★★★",c:"#a03fe0"},{n:"でんせつ",s:"★★★★",c:"#e07800"}];
 const TW=[0,100,30,9,2.5];
-const ITIER={uncurse:2,food2:2,food3:3,fseed:3,cure:2,wsmash:2,wpar:2,wpull:2,wswap:2,wconf:2,wslow:2,wpierce:3,herb:1,food:1,bomb:1,knife:1,warp:1,mapsc:1,fire:1,pred:2,thunder:2,sleep:2,ice:2,pstr:2,pdef:2,wsleep:2,wpush:2,stairsc:2,life:2,herb2:3,pregen:3,wbolt:3,holy:3,wepup:3,shdup:3,power:3,dseed:3,rheal:3,rfood:3,meat:3,hseed:4,treasure:4,wdrain:4,rstr:4,rdef:4,rluck:4,rexp:4};
-const ISHARE={herb:1.5,food:2.1,bomb:.8,knife:.8,warp:.7,mapsc:.7,fire:.8};
+const ITIER={uncurse:2,food2:2,food3:3,fseed:3,cure:2,wsmash:2,wpar:2,wpull:2,wswap:2,wconf:2,wslow:2,wpierce:3,herb:1,food:1,bomb:1,warp:1,mapsc:1,wanasc:1,fire:1,pred:2,thunder:2,sleep:2,ice:2,pstr:2,pdef:2,wsleep:2,wpush:2,stairsc:2,life:2,herb2:3,pregen:3,wbolt:3,holy:3,wepup:3,shdup:3,power:3,dseed:3,rheal:3,rfood:3,meat:3,hseed:4,treasure:4,wdrain:4,rstr:4,rdef:4,rluck:4,rexp:4};
+const ISHARE={herb:1.5,food:2.1,bomb:.8,warp:.7,mapsc:.7,wanasc:.6,fire:.8};
 const WTM={sword:1,hammer:.85,spear:1.1,axe:1.15,bow:1.05,dagger:1.3};
 const wTier=id=>{const W=WDEF[id]||WDEF.bronze,pw=W.v*(WTM[W.t]||1)+(W.fx&&W.fx!=="heavy"?3:0);return pw<6?1:pw<11?2:pw<17?3:4};
 const sTier=v=>v<=3?1:v<=7?2:v<=14?3:4;
@@ -904,7 +906,7 @@ function moveE(e,dx,dy){if(!dx&&!dy)return false;const nx=e.x+dx,ny=e.y+dy;if(!c
 function lineShot(e,range){const dx=G.p.x-e.x,dy=G.p.y-e.y;if(!(dx===0||dy===0||Math.abs(dx)===Math.abs(dy)))return false;const n=Math.max(Math.abs(dx),Math.abs(dy));if(n<2||n>range)return false;const sx=Math.sign(dx),sy=Math.sign(dy);let x=e.x,y=e.y;for(let i=1;i<n;i++){if(!canStep(x,y,sx,sy)||entAt(x+sx,y+sy))return false;x+=sx;y+=sy}return true}
 /* じゅんばん: 自分 → 敵1 → 敵2 … */
 let heroT=0,lastSig=0;const GAP_HERO=420,GAP_E=320;
-function sigE(e,E){return adjacent(e)||!!e.fuse||(vis(e.x,e.y)&&e.aware>0&&(E.beh==="caster"||E.beh==="ranged"||E.boss))}
+function sigE(e,E){return adjacent(e)||!!e.fuse||(vis(e.x,e.y)&&e.aware>0&&(E.beh==="caster"||E.beh==="ranged"||E.beh==="archer"||E.boss))}
 function* enemyTurn(){
   DIST=distMap();
   for(const e of G.ents.slice()){
@@ -946,6 +948,7 @@ function actE(e,E){
     if(E.beh==="caster"&&e.aware&&seesP&&castBook(e,E))return;
     if(adjacent(e)){enemyAttack(e,E);return}
     if(E.beh==="ranged"&&e.aware&&seesP&&lineShot(e,5)&&Math.random()<.45){const d=dmgCalc((e.shot||E.shot)+(E.boss?0:G.floor),defOf());bolt(e,G.p);msg(E.name+(e.k==="dragon"?"のブレス！":"のまほう！")+d+"のダメージ。","w");hurtPlayer(d,E.name);return}
+    if(E.beh==="archer"&&e.aware&&seesP&&lineShot(e,6)&&Math.random()<.5){/* 矢が とぶ → あたる → ダメージ */const d=dmgCalc(E.shot+Math.floor(G.floor/2),defOf());FX.push({type:"arrow",x:e.x,y:e.y,x2:G.p.x,y2:G.p.y,a:0});SFX.miss&&SFX.miss();FX.push({type:"hit",x:G.p.x,y:G.p.y,t0:now()+impactWait(),c:"#ffffff"});msg(E.name+"の 弓矢！"+d+"のダメージ。","w");hurtPlayer(d,E.name);return}
     if(E.beh==="erratic"&&Math.random()<.5){const ds=[[-1,-1],[0,-1],[1,-1],[-1,0],[1,0],[-1,1],[0,1],[1,1]];const [dx,dy]=pick(ds);moveE(e,dx,dy);return}
     if(E.hard&&seesP&&Math.random()<.5){/* にげる */let best=null,bv=DIST[e.y][e.x];for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){if(!dx&&!dy)continue;const nx=e.x+dx,ny=e.y+dy;if(!canStep(e.x,e.y,dx,dy)||entAt(nx,ny))continue;if(DIST[ny][nx]>bv&&DIST[ny][nx]<999){bv=DIST[ny][nx];best=[dx,dy]}}if(best){moveE(e,best[0],best[1]);return}}
     if(e.aware&&DIST[e.y][e.x]<999){let best=null,bv=DIST[e.y][e.x];
@@ -1108,7 +1111,7 @@ const SIG={
  power:["rise","🔥","#ff7a40"],dseed:["fall","🪨","#a0a8c0"],life:["burst","❤️","#ff5a7a"],hseed:["shine","🌟","#ffe060"],
  pstr:["burst","💢","#ff6040"],pdef:["spiral","🔷","#60a0ff"],
  thunder:["shock","⚡","#fff07a"],sleep:["rain","💤","#b8a8ff"],holy:["pillar","✨","#fff2b0"],warp:["vortex","🌀","#b890ff"],stairsc:["rise","🔼","#8fe0ff"],
- mapsc:["radar","🗺️","#80d0ff"],fire:["proj","🔥","#ff8040"],uncurse:["pillar","🕊️","#e8d0ff"],wepup:["fall","⚔️","#ffd060"],shdup:["fall","🛡️","#7ab8ff"],treasure:["burst","💎","#80f0ff"],
+ mapsc:["radar","🗺️","#80d0ff"],wanasc:["radar","🪤","#ff8080"],fire:["proj","🔥","#ff8040"],uncurse:["pillar","🕊️","#e8d0ff"],wepup:["fall","⚔️","#ffd060"],shdup:["fall","🛡️","#7ab8ff"],treasure:["burst","💎","#80f0ff"],
  rstr:["orbit","💪","#ff9060"],rdef:["orbit","🔰","#70b0ff"],rheal:["orbit","💚","#70e090"],rfood:["orbit","🍙","#ffc080"],rluck:["orbit","🍀","#80e070"],rexp:["orbit","📘","#a0a0ff"],
  knife:["spin","🔪","#e0e8f0"],ice:["spin","🟡","#ffe040"],bomb:["burst","💥","#ff9040"],
  wbolt:["zig","⚡","#ffe860"],wsleep:["wave","💤","#b8a8ff"],wpush:["proj","💨","#c0f0ff"],wdrain:["chain","💗","#ff7ab0"],wsmash:["proj","☄️","#ff6a3a"],
@@ -1157,6 +1160,7 @@ function useItem(i){const it=G.bag[i],p=G.p;let consume=true;if(!p.buf)p.buf={at
       else{const s2=G.stairs;let ok=false;for(const [dx,dy] of [[0,1],[1,0],[0,-1],[-1,0],[1,1],[-1,1],[1,-1],[-1,-1]]){const x=s2.x+dx,y=s2.y+dy;if(!wall(x,y)&&!entAt(x,y)&&!objAt(x,y)){p.x=x;p.y=y;ok=true;break}}if(!ok){p.x=s2.x;p.y=s2.y}G.seen[s2.y][s2.x]=1}
       FX.push({type:"ring",x:p.x,y:p.y,c:"#ffffff",t0:now()+250,dur:800});aura(p,"#d8c8ff",1000);SFX.warp();updateSight();popMsg(it.k==="warp"?"🌀 ワープ！":"🌀 階段のそばへ！");msg(it.k==="warp"?"どこかへワープした！":"階段のそばへワープした！","y");if(it.k==="warp"){const ix=G.items.findIndex(t=>t.x===p.x&&t.y===p.y);if(ix>=0)pickUp(ix)}break}
     case "mapsc":{for(let y=0;y<MH;y++)for(let x=0;x<MW;x++)if(G.map[y][x]===0||!wall(x+1,y)||!wall(x-1,y)||!wall(x,y+1)||!wall(x,y-1))G.seen[y][x]=1;G.mapRevealed=true;(G.objs||[]).forEach(o=>o.hid=0);SFX.magic();ringFx(p.x,p.y,"#a0e0ff");popMsg("🗺️ ちずが わかった！");msg("この階の地図と わなが わかった！","y");break}
+    case "wanasc":{let n=0;(G.objs||[]).forEach(o=>{if(OBJS[o.k]&&OBJS[o.k].trap){if(o.hid)n++;o.hid=0;G.seen[o.y][o.x]=1}});SFX.magic();ringFx(p.x,p.y,"#ff9a9a");const all=(G.objs||[]).filter(o=>OBJS[o.k]&&OBJS[o.k].trap).length;popMsg(all?"🪤 わなが 見えた！":"…わなは ない");msg(all?"この階の わなが ぜんぶ 見えるように なった！（"+all+"こ）":"この階には わなが ない みたいだ。","y");break}
     case "treasure":{let n=0;for(let k=0;k<200&&n<3;k++){const r=pick(G.rooms),x=r.x+R(r.w),y=r.y+R(r.h);if(G.items.some(i=>i.x===x&&i.y===y)||(G.stairs.x===x&&G.stairs.y===y)||(x===p.x&&y===p.y)||objAt(x,y))continue;G.items.push({x,y,...randItem(),shown:1});G.seen[y][x]=1;n++}SFX.magic();ringFx(p.x,p.y,"#ffd0f0");popMsg("🎁 たからが ふえた！");msg("この階に たからが あらわれた！（地図を見よう）","y");break}
     case "uncurse":{const L=[p.wep,p.shd].filter(q=>q&&q.cur);if(!L.length){msg("のろわれた そうびは ない。");popMsg("…何もおこらない");break}for(const q of L){q.cur=0;q.cv=0}SFX.heal();FX.push({type:"aura",x:p.x,y:p.y,c:"#f4e8ff",t0:now()+300,dur:1000});msg("のろいが とけた！","g");popMsg("🕊️ のろいが とけた！");break}
     case "wepup":{if(!p.wep){msg("ぶきを そうびしていない…");popMsg("…何もおこらない");break}p.wep.lv=(p.wep.lv||1)+1;SFX.lvl();aura(p,"#ffe08a",1100);popMsg("⚔️ ぶき Lv"+p.wep.lv+"！");msg(wdef(p.wep).n+"が Lv"+p.wep.lv+"に なった！（こうげき"+Math.round(atkOf())+"）","y");break}
@@ -1222,7 +1226,7 @@ function getBest(){const b=+localStorage.getItem("rogue-best")||0;return {n:b,tx
 /* 中断データ（ホーム画面アプリが閉じても続きから） */
 function save(){try{if(G&&!G.over)localStorage.setItem("rogue-save",JSON.stringify(G))}catch(e){}}
 function clearSave(){try{localStorage.removeItem("rogue-save")}catch(e){}}
-function migrate(G){const p=G.p;p.hf=0;p.lu=null;(G.ents||[]).forEach(e=>{e.hf=0;e.lu=null});(G.objs||[]).forEach(o=>{delete o.crack});p.arrows=p.arrows||0;p.proofs=typeof p.proofs==="number"?p.proofs:Object.values(p.proofs||{}).reduce((a,b)=>a+(+b||0),0);p.haste=p.haste||0;p.inv=p.inv||0;p.bind=p.bind||0;p.fmax=p.fmax||500;p.conf=p.conf||0;p.slow=p.slow||0;p.par=p.par||0;p.gold=p.gold||0;p.cls=CLS[p.cls]?p.cls:"warrior";G.ents.forEach(e=>{e.conf=e.conf||0;e.slow=e.slow||0;e.par=e.par||0});
+function migrate(G){const p=G.p;/* なげナイフは はいし: 古いセーブから とりのぞく */G.bag=(G.bag||[]).filter(it=>it.k!=="knife");G.items=(G.items||[]).filter(it=>it.k!=="knife");G.objs=(G.objs||[]).filter(o=>!(o.it&&o.it.k==="knife")&&o.k!=="knife");p.hf=0;p.lu=null;(G.ents||[]).forEach(e=>{e.hf=0;e.lu=null});(G.objs||[]).forEach(o=>{delete o.crack});p.arrows=p.arrows||0;p.proofs=typeof p.proofs==="number"?p.proofs:Object.values(p.proofs||{}).reduce((a,b)=>a+(+b||0),0);p.haste=p.haste||0;p.inv=p.inv||0;p.bind=p.bind||0;p.fmax=p.fmax||500;p.conf=p.conf||0;p.slow=p.slow||0;p.par=p.par||0;p.gold=p.gold||0;p.cls=CLS[p.cls]?p.cls:"warrior";G.ents.forEach(e=>{e.conf=e.conf||0;e.slow=e.slow||0;e.par=e.par||0});
   if(!p.sv){/* 20261101c: 運・空腹は なくなった → そのポイントを えらびなおし。こうげき・ぼうぎょは 新しい上がり方に そろえる（へらさない） */
     const og=(n,a,r)=>a*(1-Math.pow(r,n))/(1-r),aP=p.atkP||0,dP=p.defP||0,ref=(p.luck||0)+(p.hung||0);
     p.atk=r1((p.atk||3)+Math.max(0,aP*BAL.atkG-og(aP,2.6,.45)));p.def=r1((p.def||0)+Math.max(0,dP*BAL.defG-og(dP,1.8,.45)));
@@ -1673,6 +1677,7 @@ function enemyAcc(g,a,x,y,u){
   if(a==="spots"){for(const [sx,sy] of [[11,18],[20,16],[16,22],[22,22]])ell(g,x+sx*u,y+sy*u,1.6*u,1.2*u,"rgba(255,240,120,.9)")}
   else if(a==="shell"){g.fillStyle=LG(g,x,y+8*u,x,y+20*u,["#ffe0a0","#b07020"]);g.beginPath();g.ellipse(x+19*u,y+12*u,7*u,6*u,0,0,7);g.fill();g.strokeStyle="#7a4a10";g.lineWidth=1.2*u;g.beginPath();g.arc(x+19*u,y+12*u,3.5*u,0,6);g.stroke()}
   else if(a==="cap"){g.fillStyle=LG(g,x,y+2*u,x,y+12*u,["#ff7ab8","#d0306a"]);g.beginPath();g.ellipse(x+16*u,y+10*u,12*u,6.5*u,0,Math.PI,0);g.fill();for(const [sx,sy] of [[10,7],[16,5],[22,7]])ell(g,x+sx*u,y+sy*u,1.8*u,1.4*u,"#fff")}
+  else if(a==="bow"){g.strokeStyle="#8a5a2a";g.lineWidth=1.6*u;g.beginPath();g.arc(x+23*u,y+18*u,7*u,-1.2,1.2);g.stroke();g.strokeStyle="#f3e6c4";g.lineWidth=.6*u;g.beginPath();g.moveTo(x+(23+7*Math.cos(1.2))*u,y+(18-7*Math.sin(1.2))*u);g.lineTo(x+(23+7*Math.cos(1.2))*u,y+(18+7*Math.sin(1.2))*u);g.stroke()}
   else if(a==="ears"){g.fillStyle="#5a6090";for(const sx of [9,23]){g.beginPath();g.moveTo(x+(sx-3)*u,y+8*u);g.lineTo(x+sx*u,y+1*u);g.lineTo(x+(sx+3)*u,y+8*u);g.fill()}}
   else if(a==="bag"){g.fillStyle=LG(g,x,y+16*u,x,y+28*u,["#e8c888","#a07838"]);g.beginPath();g.arc(x+24*u,y+22*u,5*u,0,7);g.fill();g.fillStyle="#ffd24a";g.font="900 "+Math.round(6*u)+"px sans-serif";g.textAlign="center";g.fillText("G",x+24*u,y+24.5*u)}
   else if(a==="shine"){star(g,x+11*u,y+12*u,2.6*u,"#fff");star(g,x+22*u,y+18*u,1.6*u,"#fff")}
