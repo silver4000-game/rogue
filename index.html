@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<meta name="rogue-rev" content="20261104d">
+<meta name="rogue-rev" content="20261104e">
 <meta name="theme-color" content="#9fe0ff">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <script>try{if(navigator.standalone||matchMedia("(display-mode: standalone)").matches){document.documentElement.classList.add("sa");const st=()=>{const g=document.querySelector(".scr");if(!g)return;const r=g.getBoundingClientRect(),d=document.documentElement.style;d.setProperty("--gt",r.top+"px");d.setProperty("--gb",Math.max(0,innerHeight-r.bottom)+"px")};addEventListener("resize",st);addEventListener("load",st);setTimeout(st,300)}}catch(e){}</script>
 <meta name="apple-mobile-web-app-title" content="ふしぎな地下">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261104d">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261104d">
-<link rel="manifest" href="manifest.webmanifest?v=20261104d">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261104e">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261104e">
+<link rel="manifest" href="manifest.webmanifest?v=20261104e">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800;900&display=swap" rel="stylesheet">
 <title>ふしぎな地下ダンジョン</title>
 <style>
@@ -335,7 +335,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
   <button class="big" id="bCont">つづきから</button>
   <button class="big" id="bStart">はじめから</button>
   <div class="tRow"><button class="big sub" id="bHow">あそびかた</button><button class="big sub" id="bRank">ランキング</button></div>
-  <div class="ver">rev 20261104d</div>
+  <div class="ver">rev 20261104e</div>
 </section>
 
 <section id="rank" class="scr">
@@ -406,7 +406,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
 <script>
 "use strict";
 const $=id=>document.getElementById(id);
-const REV="20261104d";
+const REV="20261104e";
 /* ===== 音 ===== */
 let AC=null;
 function ac(){try{if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();if(AC.state==="suspended")AC.resume()}catch(e){}return AC}
@@ -684,7 +684,14 @@ function mkEnemy(k,x,y,sleep){const e=ENEMIES[k],f0=e.boss?e.bf:(e.f[0]>100?1:e.
   const hp=Math.round(e.boss?e.hp*BAL.bh*(1+0.08*dd):e.hp*(1+BAL.gh*dd)*BAL.eh);
   const atk=Math.round(e.boss?e.atk*BAL.ba*(1+0.045*dd):e.atk*(1+BAL.ga*dd)*BAL.ea);
   return {k,x,y,lv:1+dd,hp,mhp:hp,atk,def:e.def+Math.floor(dd/(e.boss?5:6)),exp:Math.round(e.exp*(1+0.05*dd)),shot:e.shot?Math.round(e.shot*(1+0.045*dd)):0,sleep:sleep?99:0,conf:0,slow:0,par:0,psn:0,aware:0,tick:0,dir:[pick([-1,0,1]),pick([-1,0,1])]}}
-function rollLv(){const w=G.p.cls==="warrior";let lv=1;const n=Math.floor(G.floor/4)+(w?2:0),c=w?.42:.32;for(let i=0;i<n;i++)if(Math.random()<c)lv++;return Math.min(10,lv)}
+/* ひろう ぶき・たての Lv: 階の だんかいで きまる（rev 20261104e）
+   1-5階 Lv1-3 / 6-10階 Lv1-6 / 11-20階 Lv2-7 / 21-30階 Lv3-8 / 31-40階 Lv4-9 / 41階から 20階ごとに +1（Lv5-10, 6-11 …）
+   90%: その はんい。だんかいの おわりに 近いほど 高い Lvが 出やすい。10%: はんいの 上（+1〜+3）。
+   せんし: 高い ほうに +35% よりやすく、上の Lvが 15%。 */
+function lvBand(f){if(f<=5)return [1,3,1,5];if(f<=10)return [1,6,6,10];if(f<=20)return [2,7,11,20];if(f<=30)return [3,8,21,30];if(f<=40)return [4,9,31,40];const k=Math.floor((f-41)/20);return [5+k,10+k,41+k*20,60+k*20]}
+function rollLv(){const w=G.p.cls==="warrior",[lo,hi,a,b]=lvBand(G.floor);let t=b>a?(G.floor-a)/(b-a):1;if(w)t=Math.min(1,t+.35);
+  if(Math.random()<(w?.15:.10)){const r=Math.random();return hi+(r<.6?1:r<.9?2:3)}
+  const L=[];for(let v=lo;v<=hi;v++)L.push([v,(1-t)*(hi-v+1)+t*(v-lo+1)]);return wpick(L)}
 function arrowAmt(){return RI(4,9)}
 function goldAmt(){return Math.round(RI(8,20)*(1+G.floor*.18))}
 function eqBonus(){const c=.12+BAL.ilb*(G.p.iluck||0);let b=0;if(Math.random()<c){b++;if(Math.random()<Math.min(.7,c*.6))b++;if(Math.random()<Math.min(.5,c*.3))b++}return b}
