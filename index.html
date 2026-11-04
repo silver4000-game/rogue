@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<meta name="rogue-rev" content="20261104h">
+<meta name="rogue-rev" content="20261104i">
 <meta name="theme-color" content="#9fe0ff">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <script>try{if(navigator.standalone||matchMedia("(display-mode: standalone)").matches){document.documentElement.classList.add("sa");const st=()=>{const g=document.querySelector(".scr");if(!g)return;const r=g.getBoundingClientRect(),d=document.documentElement.style;d.setProperty("--gt",r.top+"px");d.setProperty("--gb",Math.max(0,innerHeight-r.bottom)+"px")};addEventListener("resize",st);addEventListener("load",st);setTimeout(st,300)}}catch(e){}</script>
 <meta name="apple-mobile-web-app-title" content="ふしぎな地下">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261104h">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261104h">
-<link rel="manifest" href="manifest.webmanifest?v=20261104h">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261104i">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261104i">
+<link rel="manifest" href="manifest.webmanifest?v=20261104i">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800;900&display=swap" rel="stylesheet">
 <title>ふしぎな地下ダンジョン</title>
 <style>
@@ -336,7 +336,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
   <button class="big" id="bCont">つづきから</button>
   <button class="big" id="bStart">はじめから</button>
   <div class="tRow"><button class="big sub" id="bHow">あそびかた</button><button class="big sub" id="bRank">ランキング</button></div>
-  <div class="ver">rev 20261104h</div>
+  <div class="ver">rev 20261104i</div>
 </section>
 
 <section id="rank" class="scr">
@@ -407,7 +407,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
 <script>
 "use strict";
 const $=id=>document.getElementById(id);
-const REV="20261104h";
+const REV="20261104i";
 /* ===== 音 ===== */
 let AC=null;
 function ac(){try{if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();if(AC.state==="suspended")AC.resume()}catch(e){}return AC}
@@ -514,8 +514,8 @@ const ITEMS={
   stone2:{name:"ふつうの石",d:"なげると まっすぐ とび、さいしょの敵に 40ダメージ（7マス）",w:2,f:3,c:"atk",art:["stone","#a8a8b4","#585868",.9],sd:"なげて 40ダメージ"},
   stone3:{name:"ごつい石",d:"なげると まっすぐ とび、さいしょの敵に 80ダメージ（7マス）",w:3,f:6,c:"atk",art:["stone","#8a8278","#3a342c",1.08],sd:"なげて 80ダメージ"},
   ice:{name:"ねむりだま",d:"むいている方向の 敵を ねむらせる（7マス）",w:3,f:2,c:"atk",rng:7,sd:"前の敵を ねむり 7マス"},
-  pstr:{name:"ちからのくすり",d:"50ターンのあいだ こうげき+5",w:3,f:2,c:"buff",art:["pot","#ffe0b0","#ff8a2a"],sd:"こうげき+5 しばらく"},
-  pdef:{name:"まもりのくすり",d:"50ターンのあいだ まもり+5",w:3,f:2,c:"buff",art:["pot","#cfe0ff","#3a6cff"],sd:"まもり+5 しばらく"},
+  pstr:{name:"ちからのくすり",d:"50ターンのあいだ こうげきが 1.5ばい",w:3,f:2,c:"buff",art:["pot","#ffe0b0","#ff8a2a"],sd:"こうげき1.5ばい しばらく"},
+  pdef:{name:"まもりのくすり",d:"50ターンのあいだ まもりが 1.5ばい",w:3,f:2,c:"buff",art:["pot","#cfe0ff","#3a6cff"],sd:"まもり1.5ばい しばらく"},
   /* 杖（何回か使える） */
   wbolt:{name:"いかずちの杖",d:"むいている方向の 敵1体に大ダメージ（どこまでも）",w:2,f:3,c:"wand",n:3,rng:99,art:["staff","#fff3a0","#ffc83d"],sd:"前へ 大ダメージ"},
   wsleep:{name:"ねむりの杖",d:"むいている方向の 敵1体を ねむらせる（どこまでも）",w:2,f:2,c:"wand",n:4,rng:99,art:["staff","#e6dcff","#9a7cff"],sd:"前の敵を ねむり"},
@@ -602,8 +602,8 @@ const bufOf=k=>(G.p.buf&&G.p.buf[k]>0)?1:0;
 const wst=W=>Math.max(1,Math.round(W.v*.22));const wv=eq=>{if(!eq)return 0;const W=wdef(eq);return W.v+((eq.lv||1)-1)*wst(W)};
 const shB=name=>{const s=SHIELDS.find(x=>x.name===name);return s?s.v:1};const sv=eq=>{if(!eq)return 0;const b=shB(eq.name);return b+((eq.lv||1)-1)*Math.max(1,Math.round(b*.25))};
 const bagCap=()=>14+(G&&G.p.cls==="merchant"?4:0);
-const atkOf=()=>G.p.atk+(G.p.wep?wv(G.p.wep)-(G.p.wep.cur?2:0):0)+(G.p.ring==="rstr"?3:0)+(bufOf("atk")?5:0);
-const defOf=()=>G.p.def+(G.p.shd?sv(G.p.shd)-(G.p.shd.cur?2:0):0)+(G.p.ring==="rdef"?3:0)+(bufOf("def")?5:0);
+const atkOf=()=>(bufOf("atk")?x=>Math.round(x*1.5):x=>x)(G.p.atk+(G.p.wep?wv(G.p.wep)-(G.p.wep.cur?2:0):0)+(G.p.ring==="rstr"?3:0));/* ちからのくすり: ぜんぶ こみで 1.5ばい（四捨五入） */
+const defOf=()=>(bufOf("def")?x=>Math.round(x*1.5):x=>x)(G.p.def+(G.p.shd?sv(G.p.shd)-(G.p.shd.cur?2:0):0)+(G.p.ring==="rdef"?3:0));
 const needExp=l=>Math.round(10*Math.pow(l,1.7));
 
 /* ===== ダンジョン生成（部屋と通路・必ずつながる） ===== */
@@ -1228,8 +1228,8 @@ function useItem(i){const it=G.bag[i],p=G.p;let consume=true;if(!p.buf)p.buf={at
     case "dseed":{p.def+=1;msg("体がじょうぶになった！まもり+1。","g");popMsg("🛡️ まもり +1");aura(p,"#7fc8ff",1100);SFX.lvl();break}
     case "life":{p.mhp+=5;p.hp+=5;msg("最大HPが5ふえた！","g");popMsg("❤️ 最大HP +5");aura(p,"#ff8fc7",1100);SFX.lvl();break}
     case "hseed":{SFX.lvl();msg("しあわせな気持ちになった！","y");popMsg("🌟 レベルアップ！");aura(p,"#ffe060",1200);gainExp(Math.max(1,needExp(p.lv)-p.exp));break}
-    case "pstr":{p.buf.atk=50;msg("ちからがみなぎる！こうげき+5（50ターン）","g");popMsg("💪 こうげき UP！");aura(p,"#ffa040",1100);SFX.lvl();break}
-    case "pdef":{p.buf.def=50;msg("体がかたくなった！まもり+5（50ターン）","g");popMsg("🛡️ まもり UP！");aura(p,"#60a0ff",1100);SFX.lvl();break}
+    case "pstr":{p.buf.atk=50;msg("ちからがみなぎる！こうげき1.5ばい（50ターン）","g");popMsg("💪 こうげき UP！");aura(p,"#ffa040",1100);SFX.lvl();break}
+    case "pdef":{p.buf.def=50;msg("体がかたくなった！まもり1.5ばい（50ターン）","g");popMsg("🛡️ まもり UP！");aura(p,"#60a0ff",1100);SFX.lvl();break}
     case "thunder":{const t=G.ents.filter(e=>seeE(e));SFX.thunder();flashC="#e8f4ff";flash=22;scrShake=now();popMsg("⚡ かみなり！");if(!t.length)msg("かみなりが落ちた。…でも敵はいない。");else{msg("かみなりが落ちた！","y");for(const e of t){FX.push({type:"zap",x:e.x,y:e.y,t0:now(),dur:600});dmgE(e,20+G.floor*3,"#ffe36b")}}break}
     case "bomb":{SFX.boom();boomFx(p.x,p.y);scrShake=now();popMsg("💥 どかーん！");let n=0;for(const e of G.ents.slice()){if(Math.abs(e.x-p.x)<=1&&Math.abs(e.y-p.y)<=1){n++;dmgE(e,25+G.floor*2,"#ffb44a")}}msg(n?"ばくだんが爆発した！":"ばくだんが爆発した！…まわりに敵はいなかった。",n?"y":"");break}
     case "sleep":{const t=G.ents.filter(e=>seeE(e));SFX.magic();flashC="#d8ccff";flash=14;popMsg(t.length?"💤 みんな ねむった！":"…何もおこらない");t.forEach(e=>{e.sleep=ENEMIES[e.k].boss?4:8;stFX(e,"slp")});msg(t.length?"敵はねむってしまった。":"…何もおこらなかった。","y");break}
