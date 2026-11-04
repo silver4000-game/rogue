@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<meta name="rogue-rev" content="20261104b">
+<meta name="rogue-rev" content="20261104c">
 <meta name="theme-color" content="#9fe0ff">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <script>try{if(navigator.standalone||matchMedia("(display-mode: standalone)").matches){document.documentElement.classList.add("sa");const st=()=>{const g=document.querySelector(".scr");if(!g)return;const r=g.getBoundingClientRect(),d=document.documentElement.style;d.setProperty("--gt",r.top+"px");d.setProperty("--gb",Math.max(0,innerHeight-r.bottom)+"px")};addEventListener("resize",st);addEventListener("load",st);setTimeout(st,300)}}catch(e){}</script>
 <meta name="apple-mobile-web-app-title" content="ふしぎな地下">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261104b">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261104b">
-<link rel="manifest" href="manifest.webmanifest?v=20261104b">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261104c">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261104c">
+<link rel="manifest" href="manifest.webmanifest?v=20261104c">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800;900&display=swap" rel="stylesheet">
 <title>ふしぎな地下ダンジョン</title>
 <style>
@@ -334,7 +334,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
   <button class="big" id="bCont">つづきから</button>
   <button class="big" id="bStart">はじめから</button>
   <div class="tRow"><button class="big sub" id="bHow">あそびかた</button><button class="big sub" id="bRank">ランキング</button></div>
-  <div class="ver">rev 20261104b</div>
+  <div class="ver">rev 20261104c</div>
 </section>
 
 <section id="rank" class="scr">
@@ -404,7 +404,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
 <script>
 "use strict";
 const $=id=>document.getElementById(id);
-const REV="20261104b";
+const REV="20261104c";
 /* ===== 音 ===== */
 let AC=null;
 function ac(){try{if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();if(AC.state==="suspended")AC.resume()}catch(e){}return AC}
@@ -944,7 +944,7 @@ function lvDesc(k){const p=G.p;
   if(k==="item"){const n=p.iluck||0;return "★の多い 強い道具が 見つかりやすくなる"+(n?"（いま"+n+"）":"")}}
 function showLv(){if(!G||!(G.p.lvq>0))return;if(!FAST&&now()<lvHold){clearTimeout(showLv.tm);showLv.tm=setTimeout(showLv,lvHold-now()+20);return}$("lvT").textContent="レベルアップ！"+(G.p.lvq>1?"×"+G.p.lvq:"");$("lvup").classList.add("on");{const c=$("lvFoodC");if(c&&!c.dataset.d){c.dataset.d=1;drawItemSprite(c.getContext("2d"),"food",-16,-22,104)}}/* まんぷくの 絵は ダンジョンの おにぎり */}
 let noPop=false;
-function popMsg(s){if(noPop)return;const P=$("pop");P.textContent=s;P.classList.remove("go");void P.offsetWidth;P.classList.add("go")}
+function popMsg(s){if(noPop)return;const P=$("pop");P.textContent=s;P.style.fontSize="";{/* はばに 入らない ときは 文字を 小さく して ぜんぶ 見せる */const mx=Math.min(innerWidth,document.documentElement.clientWidth||innerWidth)-24,w=P.offsetWidth*1.25;/* 1.25 = とびだす ときの 大きさ */if(w>mx){const f=parseFloat(getComputedStyle(P).fontSize);P.style.fontSize=Math.floor(f*mx/w*10)/10+"px"}}P.classList.remove("go");void P.offsetWidth;P.classList.add("go")}
 function chooseStat(k){const p=G.p;if(!(p.lvq>0))return;let m;
   if(k==="atk"){p.atk=r1(p.atk+atkG());p.atkP=(p.atkP||0)+1;m="こうげきが上がった！"}
   else if(k==="def"){p.def=r1(p.def+defG());p.defP=(p.defP||0)+1;m="ぼうぎょが上がった！"}
