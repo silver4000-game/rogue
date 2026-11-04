@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<meta name="rogue-rev" content="20261104j">
+<meta name="rogue-rev" content="20261104k">
 <meta name="theme-color" content="#9fe0ff">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <script>try{if(navigator.standalone||matchMedia("(display-mode: standalone)").matches){document.documentElement.classList.add("sa");const st=()=>{const g=document.querySelector(".scr");if(!g)return;const r=g.getBoundingClientRect(),d=document.documentElement.style;d.setProperty("--gt",r.top+"px");d.setProperty("--gb",Math.max(0,innerHeight-r.bottom)+"px")};addEventListener("resize",st);addEventListener("load",st);setTimeout(st,300)}}catch(e){}</script>
 <meta name="apple-mobile-web-app-title" content="ふしぎな地下">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261104j">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261104j">
-<link rel="manifest" href="manifest.webmanifest?v=20261104j">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261104k">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261104k">
+<link rel="manifest" href="manifest.webmanifest?v=20261104k">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800;900&display=swap" rel="stylesheet">
 <title>ふしぎな地下ダンジョン</title>
 <style>
@@ -325,6 +325,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
 #bagAct{margin-top:5px!important}#bagAct button{height:42px!important}
 /* rev o: Safari（ブラウザ）で 下に 白い すきまが 出ないように、背景を 画面ぜんぶに */html{background-color:#ffd0ea;min-height:100%;min-height:-webkit-fill-available}html:not(.sa),html:not(.sa) body{min-height:100vh;min-height:100lvh;background:linear-gradient(#9fe0ff,#d6c8ff 60%,#ffd0ea) fixed #ffd0ea}
 /* rev p: せつめいの わくは 高さ こてい（いちばん長い 3行ぶん） */#bag #bagInfo{box-sizing:border-box;height:73px!important;min-height:73px!important;max-height:73px!important;overflow:hidden}
+#logv{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:41;background:rgba(74,42,134,.45);padding:14px;padding-top:max(14px,env(safe-area-inset-top));padding-bottom:max(14px,env(safe-area-inset-bottom))}#logv.on{display:flex}#logv .lvBox{display:flex;flex-direction:column;max-height:100%;overflow:hidden}#logvT{font-weight:900;font-size:16px;color:var(--ink);margin:2px 0 8px}#logL{flex:1 1 auto;min-height:0;height:60vh;overflow-y:auto;-webkit-overflow-scrolling:touch;text-align:left;font-size:13px;line-height:1.5;font-weight:800;color:#5a4a80;background:rgba(255,255,255,.7);border:2px solid var(--ink);border-radius:12px;padding:6px 8px}#logL>div{padding:3px 0;border-bottom:1px dashed rgba(90,74,128,.25)}#logL .w{color:#e0303a}#logL .g{color:#11966a}#logL .y{color:#c86a00}#logv .askB{margin-top:10px}#log{cursor:pointer}
 </style>
 </head>
 <body><div id="iosTopStrip" aria-hidden="true"></div>
@@ -336,7 +337,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
   <button class="big" id="bCont">つづきから</button>
   <button class="big" id="bStart">はじめから</button>
   <div class="tRow"><button class="big sub" id="bHow">あそびかた</button><button class="big sub" id="bRank">ランキング</button></div>
-  <div class="ver">rev 20261104j</div>
+  <div class="ver">rev 20261104k</div>
 </section>
 
 <section id="rank" class="scr">
@@ -388,6 +389,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
 <div id="bag"><h3><span id="bagTitle">持ち物</span> <span class="bagR"><button id="bBagTtl">タイトル</button><button id="bSort">ならべかえ</button><small id="bagN"></small></span></h3><div id="eqSlots"></div><div id="bagFloor"></div><div id="bagInfo"></div><div id="bagSt"></div><div id="bagList"></div>
   <div id="bagAct"><button id="baUse" class="main">つかう</button><button id="baDrop">おく</button><button id="baThrow">なげる</button><button id="baSwap" style="display:none">いれかえ</button><button id="baClose">とじる</button></div></div>
 
+<div id="logv"><div class="lvBox"><div id="logvT">📜 これまでの ログ</div><div id="logL"></div><div class="askB"><button id="logX">とじる</button></div></div></div>
 <div id="ask"><div class="lvBox"><div class="orn">◆</div><div id="askT">中断データがあります。<br>はじめからにしますか？</div><div class="askB"><button id="askYes">はい</button><button id="askNo">いいえ</button></div></div></div>
 <div id="lvup"><div class="lvBox"><div id="lvT">レベルアップ！</div><div id="lvSub"></div><div id="lvGrid"><button data-s="atk"><i>⚔️</i><b>こうげき</b><span></span></button><button data-s="def"><i>🛡️</i><b>ぼうぎょ</b><span></span></button><button data-s="hp"><i>❤️</i><b>HP</b><span></span></button><button data-s="full"><i><canvas id="lvFoodC" width="72" height="72" style="width:34px;height:34px;display:block"></canvas></i><b>まんぷく</b><span></span></button></div></div></div>
 <div id="pop"></div>
@@ -407,7 +409,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
 <script>
 "use strict";
 const $=id=>document.getElementById(id);
-const REV="20261104j";
+const REV="20261104k";
 /* ===== 音 ===== */
 let AC=null;
 function ac(){try{if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();if(AC.state==="suspended")AC.resume()}catch(e){}return AC}
@@ -726,7 +728,10 @@ function flyStep(x,y,dx,dy){const nx=x+dx,ny=y+dy,sol=(a,b)=>wall(a,b);/* rev q:
 function canStep(x,y,dx,dy){const nx=x+dx,ny=y+dy;if(wall(nx,ny))return false;if(dx&&dy&&(wall(x+dx,y)||wall(x,y+dy)))return false;return true}
 
 /* ===== メッセージ ===== */
-function msg(t,c){G.log.push({t,c:c||""});if(G.log.length>30)G.log.shift();drawLog()}
+function msg(t,c){G.log.push({t,c:c||""});if(G.log.length>200)G.log.shift();drawLog();if($("logv").classList.contains("on"))drawLogV()}
+/* ログを タップ → いままでの ログ（さいご 200こ・下が あたらしい）。ターンは すすまない */
+function drawLogV(){const L=$("logL");L.innerHTML=G.log.map(m=>'<div class="'+m.c+'">'+m.t+'</div>').join("")||"<div>まだ ログは ないよ。</div>";L.scrollTop=L.scrollHeight}
+function openLogV(){if(!G||G.over)return;$("logv").classList.add("on");drawLogV()}
 function drawLog(){const L=G.log.slice(-1);$("log").innerHTML=L.map(m=>'<div class="'+m.c+'">'+m.t+'</div>').join("")}
 
 /* ===== かんさつ ===== */
@@ -1018,7 +1023,7 @@ function actE(e,E){
     if(E.boss&&e.aware&&seesP&&e.tick%7===0&&G.ents.length<10){const sp=freeNear(e.x,e.y);let n=0;for(let k=0;k<RI(2,3)&&sp.length;k++){const [x,y]=sp.splice(R(sp.length),1)[0];const m=mkEnemy(randEnemyKind(),x,y,false);m.aware=20;m.exp=Math.round(m.exp/2);G.ents.push(m);n++}if(n){msg(E.name+"は なかまを よんだ！","w");popMsg("📣 なかまを よんだ！");FX.push({type:"ring",x:e.x,y:e.y,c:"#ff8090",t0:now(),dur:800});SFX.book();return}}
     if(E.beh==="caster"&&e.aware&&seesP&&castBook(e,E))return;
     if(adjacent(e)){enemyAttack(e,E);return}
-    if(E.beh==="ranged"&&e.aware&&seesP&&lineShot(e,5)&&Math.random()<.45){const d=dmgCalc((e.shot||E.shot)+(E.boss?0:G.floor),defOf());bolt(e,G.p);msg(E.name+(e.k==="dragon"?"のブレス！":"のまほう！")+d+"のダメージ。","w");hurtPlayer(d,E.name);return}
+    if(E.beh==="ranged"&&e.aware&&seesP&&lineShot(e,5)&&Math.random()<.45){const d=dmgCalc(Math.round(((e.shot||E.shot)+(E.boss?0:G.floor))*(e.k==="dragon"?1.4:1)),defOf());/* ブレスは 1.4ばい */bolt(e,G.p);msg(E.name+(e.k==="dragon"?"のブレス！":"のまほう！")+d+"のダメージ。","w");hurtPlayer(d,E.name);return}
     if(E.beh==="archer"&&e.aware&&seesP&&lineShot(e,6)&&Math.random()<.5){/* 矢が とぶ → あたる → ダメージ */const d=dmgCalc(Math.round((E.shot+Math.floor(G.floor/2))*1.4),defOf());/* 弓矢は つよい: いままでの 1.4ばい */FX.push({type:"arrow",x:e.x,y:e.y,x2:G.p.x,y2:G.p.y,a:0});SFX.miss&&SFX.miss();FX.push({type:"hit",x:G.p.x,y:G.p.y,t0:now()+impactWait(),c:"#ffffff"});msg(E.name+"の 弓矢！"+d+"のダメージ。","w");hurtPlayer(d,E.name);return}
     if(E.beh==="erratic"&&Math.random()<.5){const ds=[[-1,-1],[0,-1],[1,-1],[-1,0],[1,0],[-1,1],[0,1],[1,1]];const [dx,dy]=pick(ds);moveE(e,dx,dy);return}
     if(E.hard&&seesP&&Math.random()<.5){/* にげる */let best=null,bv=DIST[e.y][e.x];for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){if(!dx&&!dy)continue;const nx=e.x+dx,ny=e.y+dy;if(!canStep(e.x,e.y,dx,dy)||entAt(nx,ny))continue;if(DIST[ny][nx]>bv&&DIST[ny][nx]<999){bv=DIST[ny][nx];best=[dx,dy]}}if(best){moveE(e,best[0],best[1]);return}}
@@ -2213,7 +2218,7 @@ $("mapWrap").addEventListener("click",()=>{if(showMap)showMap=false});
 $("bDown").onclick=()=>{showMap=false;descend()};
 $("bTurn").onclick=()=>{SFX.ui();turnMode=!turnMode;$("bTurn").classList.toggle("on",turnMode);$("pad").classList.toggle("turn",turnMode)};
 const KEYS={ArrowUp:[0,-1],ArrowDown:[0,1],ArrowLeft:[-1,0],ArrowRight:[1,0],k:[0,-1],j:[0,1],h:[-1,0],l:[1,0],y:[-1,-1],u:[1,-1],b:[-1,1],n:[1,1],Home:[-1,-1],PageUp:[1,-1],End:[-1,1],PageDown:[1,1]," ":[0,0],".":[0,0]};
-window.addEventListener("keydown",e=>{if(!$("game").classList.contains("on"))return;if($("lvup").classList.contains("on")){const m={"1":"atk","2":"def","3":"hp"}[e.key];if(m)chooseStat(m);return}if($("bag").classList.contains("on")){if(e.key==="Escape"||e.key==="i")closeBag();return}
+window.addEventListener("keydown",e=>{if(!$("game").classList.contains("on"))return;if($("logv").classList.contains("on")){if(e.key==="Escape"||e.key==="Enter")$("logv").classList.remove("on");e.preventDefault();return}if($("lvup").classList.contains("on")){const m={"1":"atk","2":"def","3":"hp"}[e.key];if(m)chooseStat(m);return}if($("bag").classList.contains("on")){if(e.key==="Escape"||e.key==="i")closeBag();return}
   if(KEYS[e.key]){e.preventDefault();doMove(...KEYS[e.key])}else if(e.key==="i"){openBag()}else if(e.key==="m"){showMap=!showMap}else if(e.key===">"||e.key==="Enter"){descend()}});
 const startNew=()=>{$("cls").classList.add("on")};
 function pickCls(c){SFX.ui();$("cls").classList.remove("on");clearSave();newRun(c);show("game")}
@@ -2222,6 +2227,7 @@ function pickCls(c){SFX.ui();$("cls").classList.remove("on");clearSave();newRun(
   g.addEventListener("click",e=>{const b=e.target.closest("button[data-c]");if(b)pickCls(b.dataset.c)});$("clsBack").onclick=()=>{SFX.ui();$("cls").classList.remove("on")}})();
 $("bStart").onclick=()=>{SFX.ui();if(localStorage.getItem("rogue-save"))$("ask").classList.add("on");else startNew()};
 $("askYes").onclick=()=>{SFX.ui();$("ask").classList.remove("on");startNew()};
+$("log").onclick=openLogV;$("logX").onclick=()=>$("logv").classList.remove("on");$("logv").onclick=ev=>{if(ev.target.id==="logv")$("logv").classList.remove("on")};
 $("askNo").onclick=()=>{SFX.ui();$("ask").classList.remove("on")};
 $("bCont").onclick=()=>{SFX.ui();if(load()){show("game");if(G.p.lvq>0)showLv()}};
 $("bHow").onclick=()=>{SFX.ui();show("howto");$("howto").scrollTop=0};
