@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<meta name="rogue-rev" content="20261104a">
+<meta name="rogue-rev" content="20261104b">
 <meta name="theme-color" content="#9fe0ff">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <script>try{if(navigator.standalone||matchMedia("(display-mode: standalone)").matches){document.documentElement.classList.add("sa");const st=()=>{const g=document.querySelector(".scr");if(!g)return;const r=g.getBoundingClientRect(),d=document.documentElement.style;d.setProperty("--gt",r.top+"px");d.setProperty("--gb",Math.max(0,innerHeight-r.bottom)+"px")};addEventListener("resize",st);addEventListener("load",st);setTimeout(st,300)}}catch(e){}</script>
 <meta name="apple-mobile-web-app-title" content="ふしぎな地下">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261104a">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261104a">
-<link rel="manifest" href="manifest.webmanifest?v=20261104a">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261104b">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261104b">
+<link rel="manifest" href="manifest.webmanifest?v=20261104b">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800;900&display=swap" rel="stylesheet">
 <title>ふしぎな地下ダンジョン</title>
 <style>
@@ -289,6 +289,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
 #shopTabs{display:flex;gap:8px;margin:0 0 8px}#shopTabs button{flex:1;min-height:38px;border:3px solid var(--ink);border-radius:14px;background:#f3edff;color:var(--ink);font-weight:900;font-size:16px;font-family:inherit;box-shadow:0 3px 0 var(--ink)}
 #shopTabs button.on{background:linear-gradient(#fff1a0,#ffc84a)}
 #shop #shopInfo{border:2.5px solid #f28ab8;border-radius:12px;padding:7px 10px;background:linear-gradient(#fff0f6,#ffe0ee);box-shadow:0 2px 0 #f28ab8;margin:0 0 8px;font-size:13px;line-height:1.4;min-height:46px;text-align:left;color:var(--ink);font-weight:800}
+#shop #shopInfo{box-sizing:border-box;height:74px!important;min-height:74px!important;max-height:74px!important;overflow:hidden}/* 説明が 2行でも ずれない */
 #shopInfo .rar{font-size:12px;color:#c0508a}
 #shopList{max-height:min(46vh,340px);overflow:auto;padding:2px 2px 0}
 #shopList button.sel{background:linear-gradient(#fff7c8,#ffe680)}
@@ -333,7 +334,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
   <button class="big" id="bCont">つづきから</button>
   <button class="big" id="bStart">はじめから</button>
   <div class="tRow"><button class="big sub" id="bHow">あそびかた</button><button class="big sub" id="bRank">ランキング</button></div>
-  <div class="ver">rev 20261104a</div>
+  <div class="ver">rev 20261104b</div>
 </section>
 
 <section id="rank" class="scr">
@@ -403,7 +404,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
 <script>
 "use strict";
 const $=id=>document.getElementById(id);
-const REV="20261104a";
+const REV="20261104b";
 /* ===== 音 ===== */
 let AC=null;
 function ac(){try{if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();if(AC.state==="suspended")AC.resume()}catch(e){}return AC}
@@ -513,17 +514,17 @@ const ITEMS={
   pstr:{name:"ちからのくすり",d:"50ターンのあいだ こうげき+5",w:3,f:2,c:"buff",art:["pot","#ffe0b0","#ff8a2a"],sd:"こうげき+5 しばらく"},
   pdef:{name:"まもりのくすり",d:"50ターンのあいだ まもり+5",w:3,f:2,c:"buff",art:["pot","#cfe0ff","#3a6cff"],sd:"まもり+5 しばらく"},
   /* つえ（何回か使える） */
-  wbolt:{name:"いかずちのつえ",d:"むいている方向の 敵1体に大ダメージ（7マス）",w:2,f:3,c:"wand",n:3,rng:7,art:["staff","#fff3a0","#ffc83d"],sd:"前へ 大ダメージ 7マス"},
-  wsleep:{name:"ねむりのつえ",d:"むいている方向の 敵1体を ねむらせる（7マス）",w:2,f:2,c:"wand",n:4,rng:7,art:["staff","#e6dcff","#9a7cff"],sd:"前の敵を ねむり 7マス"},
-  wpush:{name:"ふきとばしのつえ",d:"むいている方向の 敵1体を 遠くへとばす（7マス）",w:2,f:2,c:"wand",n:3,rng:7,art:["staff","#d8fbff","#3fd0f0"],sd:"前の敵を とばす 7マス"},
-  wdrain:{name:"いのちのつえ",d:"むいている方向の 敵からHPを15うばう（7マス）",w:1,f:5,c:"wand",n:3,rng:7,art:["staff","#ffd0e8","#ff4d8a"],rare:1,sd:"前の敵の HPを すう"},
-  wsmash:{name:"ひっさつのつえ",d:"目の前の 敵1体に とても大きなダメージ（目の前だけ）",w:2,f:2,c:"wand",n:3,rng:1,art:["staff","#ffd8b0","#ff7a2a"],sd:"目の前に 大ダメージ"},
-  wpar:{name:"しびれのつえ",d:"目の前の 敵を 長く しびれさせる（目の前だけ）",w:2,f:2,c:"wand",n:4,rng:1,art:["staff","#fff8b0","#e0c000"],sd:"目の前を しびれ"},
+  wbolt:{name:"いかずちのつえ",d:"むいている方向の 敵1体に大ダメージ（どこまでも）",w:2,f:3,c:"wand",n:3,rng:99,art:["staff","#fff3a0","#ffc83d"],sd:"前へ 大ダメージ"},
+  wsleep:{name:"ねむりのつえ",d:"むいている方向の 敵1体を ねむらせる（どこまでも）",w:2,f:2,c:"wand",n:4,rng:99,art:["staff","#e6dcff","#9a7cff"],sd:"前の敵を ねむり"},
+  wpush:{name:"ふきとばしのつえ",d:"むいている方向の 敵1体を 遠くへとばす（どこまでも）",w:2,f:2,c:"wand",n:3,rng:99,art:["staff","#d8fbff","#3fd0f0"],sd:"前の敵を とばす"},
+  wdrain:{name:"いのちのつえ",d:"むいている方向の 敵からHPを15うばう（どこまでも）",w:1,f:5,c:"wand",n:3,rng:99,art:["staff","#ffd0e8","#ff4d8a"],rare:1,sd:"前の敵の HPを すう"},
+  wsmash:{name:"ひっさつのつえ",d:"むいている方向の 敵1体に とても大きなダメージ（どこまでも）",w:2,f:2,c:"wand",n:3,rng:99,art:["staff","#ffd8b0","#ff7a2a"],sd:"前へ とても大ダメージ"},
+  wpar:{name:"しびれのつえ",d:"むいている方向の 敵を 長く しびれさせる（どこまでも）",w:2,f:2,c:"wand",n:4,rng:99,art:["staff","#fff8b0","#e0c000"],sd:"前の敵を しびれ"},
   wpierce:{name:"つらぬきのつえ",d:"むいている方向の 敵 みんなに ダメージ（どこまでも）",w:2,f:4,c:"wand",n:3,rng:99,pierce:1,art:["staff","#e0f0ff","#5a8aff"],sd:"前へ つらぬく どこまでも"},
   wpull:{name:"ひきよせのつえ",d:"むいている方向の 敵を 目の前まで ひきよせる（どこまでも）",w:2,f:3,c:"wand",n:4,rng:99,art:["staff","#f0e0ff","#a060ff"],sd:"前の敵を ひきよせ どこまでも"},
   wswap:{name:"いれかえのつえ",d:"むいている方向の 敵と 場所を いれかえる（どこまでも）",w:2,f:3,c:"wand",n:4,rng:99,art:["staff","#e0fff0","#30c080"],sd:"前の敵と いれかえ どこまでも"},
-  wconf:{name:"こんらんのつえ",d:"むいている方向の 敵を こんらん させる（7マス）",w:2,f:3,c:"wand",n:4,rng:7,art:["staff","#ffe0f4","#ff5fc0"],sd:"前の敵を こんらん 7マス"},
-  wslow:{name:"どんそくのつえ",d:"むいている方向の 敵を どんそく にする（7マス）",w:2,f:3,c:"wand",n:4,rng:7,art:["staff","#fff0d0","#d09020"],sd:"前の敵を どんそく 7マス"},
+  wconf:{name:"こんらんのつえ",d:"むいている方向の 敵を こんらん させる（どこまでも）",w:2,f:3,c:"wand",n:4,rng:99,art:["staff","#ffe0f4","#ff5fc0"],sd:"前の敵を こんらん"},
+  wslow:{name:"どんそくのつえ",d:"むいている方向の 敵を どんそく にする（どこまでも）",w:2,f:3,c:"wand",n:4,rng:99,art:["staff","#fff0d0","#d09020"],sd:"前の敵を どんそく"},
   /* ゆびわ（1つだけ つけられる。つけている間ずっと効く） */
   rstr:{name:"ちからのゆびわ",d:"つけると こうげき+3",w:1,f:3,c:"ring",art:["ring","#ffb0a0","#e8382a"],rare:1,sd:"こうげき+3"},
   rdef:{name:"まもりのゆびわ",d:"つけると まもり+3",w:1,f:3,c:"ring",art:["ring","#b8d4ff","#2a5ce8"],rare:1,sd:"まもり+3"},
@@ -1179,8 +1180,8 @@ const SIG={
  mapsc:["radar","🗺️","#80d0ff"],wanasc:["radar","🪤","#ff8080"],fire:["proj","🔥","#ff8040"],uncurse:["pillar","🕊️","#e8d0ff"],wepup:["fall","⚔️","#ffd060"],shdup:["fall","🛡️","#7ab8ff"],treasure:["burst","💎","#80f0ff"],
  rstr:["orbit","💪","#ff9060"],rdef:["orbit","🔰","#70b0ff"],rheal:["orbit","💚","#70e090"],rfood:["orbit","🍙","#ffc080"],rluck:["orbit","🍀","#80e070"],rexp:["orbit","📘","#a0a0ff"],
  knife:["spin","🔪","#e0e8f0"],ice:["spin","💤","#b9a7ff"],bomb:["burst","💥","#ff9040"],
- wbolt:["zig","⚡","#ffe860"],wsleep:["wave","💤","#b8a8ff"],wpush:["proj","💨","#c0f0ff"],wdrain:["chain","💗","#ff7ab0"],wsmash:["proj","☄️","#ff6a3a"],
- wpar:["zig","💛","#ffd000"],wpierce:["lance","🔹","#70d0ff"],wpull:["chain","🧲","#d080ff"],wswap:["swap","🔄","#70f0b0"],wconf:["wave","💫","#ff8ad8"],wslow:["proj","🐌","#a0d070"]};
+ wbolt:["proj","✨","#c8a8ff"],wsleep:["proj","✨","#c8a8ff"],wpush:["proj","✨","#c8a8ff"],wdrain:["proj","✨","#c8a8ff"],wsmash:["proj","✨","#c8a8ff"],
+ wpar:["proj","✨","#c8a8ff"],wpierce:["proj","✨","#c8a8ff"],wpull:["proj","✨","#c8a8ff"],wswap:["proj","✨","#c8a8ff"],wconf:["proj","✨","#c8a8ff"],wslow:["proj","✨","#c8a8ff"]};
 function sigSnd(k){let h=0;for(const ch of k)h=(h*31+ch.charCodeAt(0))%9973;const sc=[392,440,494,523,587,659,698,784,880,988],ty=["sine","triangle","square","sine"][h%4],a=sc[h%10],b=sc[(h>>2)%10],c=sc[(h>>4)%10];
   tone(a,.09,ty,.035);tone(b,.09,ty,.035,null,.08);tone(c*1.5,.14,ty,.03,null,.16)}
 function sigFx(k,x,y,x2,y2){const S=SIG[k];if(!S)return;const proj=["proj","spin","zig","wave","lance","chain","swap"].includes(S[0]);
@@ -1237,7 +1238,7 @@ case "shdup":{if(!p.shd){msg("たてを そうびしていない。");popMsg("�
       if(!I.rng)break;
       if(I.n!=null){it.n=(it.n==null?I.n:it.n)-1;consume=it.n<=0;msg(I.name+"をふった。"+(consume?"":"（あと"+it.n+"回）"))}
       const {hits,end}=lineTargets(I.rng,I.pierce);swing(p.dir[0],p.dir[1]);
-      const col=(I.art&&I.art[2])||"#ffffff";
+      const col=isWand(it.k)?"#c8a8ff":(I.art&&I.art[2])||"#ffffff";/* つえの まほうは みんな おなじ 見た目 */
       if(I.rng===1&&!hits.length){FX.push({type:"hit",x:end.x,y:end.y,t0:now(),c:col});SFX.miss();msg("目の前に 敵がいない。");popMsg("…目の前に いない");break}
       beam(p,end,col);
       if(!hits.length){SFX.miss();msg((it.k==="knife"||it.k==="ice"?I.name+"は":"まほうは")+" 何にも あたらなかった。");popMsg("…はずれ");break}
@@ -1819,8 +1820,14 @@ function drawObj(g,k,x,y,s,used){const u=s/32;
     g.fillStyle="#2a2040";rr(g,x+9.5*u,y+6.6*u,13*u,1.8*u,.9*u);g.fill();rr(g,x+12*u,y+1.5*u,8*u,5.6*u,1*u);g.fill();g.fillStyle="#e0284a";g.fillRect(x+12*u,y+5*u,8*u,1.2*u);
     ell(g,x+9*u,y+19*u,1.6*u,1.6*u,"#ffe0c4");ell(g,x+23*u,y+19*u,1.6*u,1.6*u,"#ffe0c4");
     const C=["#ff4a5a","#3aa0ff","#ffd24a"];for(let i=0;i<3;i++){const ph=(t*1.6+i/3)%1,bx=x+(9+14*ph)*u,by=y+(18-Math.sin(ph*Math.PI)*16)*u;ell(g,bx,by,1.7*u,1.7*u,C[i])}return}
-  if(k==="shop"){ell(g,x+16*u,y+28*u,13*u,3*u,"rgba(0,0,0,.25)");
-    /* おみせの人（シンプル） */ell(g,x+11*u,y+22*u,6.5*u,6*u,"#5aa060");g.fillStyle="#f4ead0";rr(g,x+7.5*u,y+18*u,7*u,6*u,2*u);g.fill();ell(g,x+11*u,y+12*u,6*u,5.8*u,"#ffe0c4");g.fillStyle="#2f7a3a";g.beginPath();g.ellipse(x+11*u,y+9.4*u,6.2*u,3.6*u,0,Math.PI,0);g.fill();g.fillRect(x+4.8*u,y+9*u,12.4*u,1.4*u);ell(g,x+9*u,y+12.6*u,.7*u,.8*u,"#3a2a2a");ell(g,x+13*u,y+12.6*u,.7*u,.8*u,"#3a2a2a");g.strokeStyle="#a0503a";g.lineWidth=.8*u;g.beginPath();g.arc(x+11*u,y+14*u,1.5*u,.2,Math.PI-.2);g.stroke();
+  if(k==="shop"){/* たびの しょうにん: 大きな せおいぶくろ・まえかけ・ぼうし・おかねぶくろ（かげ なし、まんなか） */const C=x+16*u;
+    /* せおいぶくろ（うしろ） */g.fillStyle=LG(g,x,y+6*u,x,y+26*u,["#c8905a","#8a5a30"]);rr(g,C-10*u,y+7*u,20*u,17*u,5*u);g.fill();g.strokeStyle="#6a4020";g.lineWidth=1*u;g.beginPath();g.moveTo(C-10*u,y+13*u);g.lineTo(C+10*u,y+13*u);g.stroke();ell(g,C,y+6.6*u,6*u,2.4*u,"#a87040");
+    /* からだ */g.fillStyle=LG(g,x,y+17*u,x,y+29*u,["#4a8ad8","#2a5aa8"]);rr(g,C-6*u,y+17*u,12*u,11.5*u,4*u);g.fill();
+    /* まえかけ */g.fillStyle="#f6eed8";rr(g,C-4*u,y+19.5*u,8*u,8.5*u,1.8*u);g.fill();g.strokeStyle="#d8c8a0";g.lineWidth=.7*u;g.beginPath();g.moveTo(C-4*u,y+22*u);g.lineTo(C+4*u,y+22*u);g.stroke();
+    /* おかねぶくろ */ell(g,C+6.2*u,y+24.5*u,2.6*u,2.8*u,"#e0b040");g.fillStyle="#a07010";g.fillRect(C+5*u,y+21.6*u,2.4*u,.9*u);g.fillStyle="#7a5008";g.font="900 "+Math.round(3.4*u)+"px "+PF;g.textAlign="center";g.fillText("G",C+6.2*u,y+25.8*u);
+    /* て */ell(g,C-6.6*u,y+22*u,1.7*u,1.7*u,"#ffe0c4");
+    /* かお */ell(g,C,y+12.5*u,5.8*u,5.4*u,"#ffe0c4");ell(g,C-2*u,y+12.8*u,.7*u,.8*u,"#3a2a2a");ell(g,C+2*u,y+12.8*u,.7*u,.8*u,"#3a2a2a");ell(g,C-3.6*u,y+14.4*u,1*u,.6*u,"rgba(255,120,120,.5)");ell(g,C+3.6*u,y+14.4*u,1*u,.6*u,"rgba(255,120,120,.5)");g.strokeStyle="#a0503a";g.lineWidth=.8*u;g.beginPath();g.arc(C,y+14.2*u,1.4*u,.2,Math.PI-.2);g.stroke();
+    /* ぼうし */g.fillStyle="#2f8a4a";g.beginPath();g.ellipse(C,y+9.6*u,6*u,4*u,0,Math.PI,0);g.fill();g.fillStyle="#256e3a";rr(g,C-7.6*u,y+8.8*u,15.2*u,1.8*u,.9*u);g.fill();g.fillStyle="#ffd24a";g.fillRect(C-6*u,y+7.6*u,12*u,1.2*u);
     return}
   if(OBJS[k]&&OBJS[k].statue){const O=OBJS[k];ell(g,x+16*u,y+28*u,10*u,2.6*u,"rgba(0,0,0,.3)");g.fillStyle=LG(g,x,y+20*u,x,y+29*u,["#d8d4e8","#8a86a0"]);rr(g,x+7*u,y+21*u,18*u,7*u,2*u);g.fill();g.fillStyle=LG(g,x,y+6*u,x,y+22*u,["#f0eef8","#a8a4c0"]);rr(g,x+10*u,y+9*u,12*u,13*u,4*u);g.fill();glow(g,x+16*u,y+9*u,8*u,O.c+"88");g.font=Math.round(11*u)+"px sans-serif";g.textAlign="center";g.textBaseline="middle";g.fillText(O.ic,x+16*u,y+10*u);g.textBaseline="alphabetic";return}
   const plate=(col)=>{g.fillStyle=LG(g,x,y+4*u,x,y+28*u,["#5a5670","#34324a"]);rr(g,x+4*u,y+4*u,24*u,24*u,5*u);g.fill();g.strokeStyle=col||"rgba(255,255,255,.18)";g.lineWidth=1*u;rr(g,x+5*u,y+5*u,22*u,22*u,4*u);g.stroke()};
