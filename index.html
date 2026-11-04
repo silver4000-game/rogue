@@ -715,7 +715,7 @@ function updateSight(){
   const mark=(x,y)=>{if(x>=0&&y>=0&&x<MW&&y<MH){VIS[y][x]=1;G.seen[y][x]=1}};
   if(ri>=0){const r=G.rooms[ri];for(let y=r.y-1;y<=r.y+r.h;y++)for(let x=r.x-1;x<=r.x+r.w;x++)mark(x,y)}
   for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++)mark(p.x+dx,p.y+dy);
-  if(G.objs)for(const o of G.objs)if(o.hid&&Math.max(Math.abs(o.x-p.x),Math.abs(o.y-p.y))===1&&Math.random()<0.08){o.hid=0;if(typeof msg==="function"&&G.log)msg(OBJS[o.k].n+"を 見つけた！","y")}
+  /* となりの わなは もう 自動で 見つからない（ふむ か こうげきで わかる） */
 }
 const vis=(x,y)=>VIS&&VIS[y]&&VIS[y][x]===1;
 const wall=(x,y)=>x<0||y<0||x>=MW||y>=MH||G.map[y][x]===1;
@@ -819,6 +819,7 @@ function arcTiles(dx,dy){if(dx&&dy)return [[dx,0],[0,dy]];if(dx)return [[dx,-1],
 /* 向いている方向にこうげき（ぶきのしゅるいで範囲がかわる）。こうげきしたら true */
 function tryAttack(dx,dy){const p=G.p,W=p.wep?wdef(p.wep):{t:"fist"},t=W.t;
   const ax=p.x+dx,ay=p.y+dy,ok1=canStep(p.x,p.y,dx,dy),e1=ok1?entAt(ax,ay):null;
+  {const to=(G.objs||[]).find(o=>o.hid&&o.x===ax&&o.y===ay&&OBJS[o.k]&&OBJS[o.k].trap);if(to){to.hid=0;G.seen[ay][ax]=1;msg(OBJS[to.k].n+"を 見つけた！","y")}}/* こうげきした マスの わなが わかる */
   if(t==="spear"){let e2=null;if(ok1&&canStep(ax,ay,dx,dy)){e2=entAt(ax+dx,ay+dy);}
     if(!e1&&!e2)return false;swing(dx,dy);FX.push({type:"thrust",x:p.x,y:p.y,dx,dy,t0:now(),dur:300});/* 槍が 2マス のびる */
     const late=(e,d)=>{for(const f of FX)if(f.type==="slash"&&f.x===e.x&&f.y===e.y&&f.t0>=now()-5)f.t0=now()+(FAST?0:d)};
