@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<meta name="rogue-rev" content="20261103ab">
+<meta name="rogue-rev" content="20261104a">
 <meta name="theme-color" content="#9fe0ff">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <script>try{if(navigator.standalone||matchMedia("(display-mode: standalone)").matches){document.documentElement.classList.add("sa");const st=()=>{const g=document.querySelector(".scr");if(!g)return;const r=g.getBoundingClientRect(),d=document.documentElement.style;d.setProperty("--gt",r.top+"px");d.setProperty("--gb",Math.max(0,innerHeight-r.bottom)+"px")};addEventListener("resize",st);addEventListener("load",st);setTimeout(st,300)}}catch(e){}</script>
 <meta name="apple-mobile-web-app-title" content="ふしぎな地下">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261103ab">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261103ab">
-<link rel="manifest" href="manifest.webmanifest?v=20261103ab">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261104a">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261104a">
+<link rel="manifest" href="manifest.webmanifest?v=20261104a">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800;900&display=swap" rel="stylesheet">
 <title>ふしぎな地下ダンジョン</title>
 <style>
@@ -333,7 +333,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
   <button class="big" id="bCont">つづきから</button>
   <button class="big" id="bStart">はじめから</button>
   <div class="tRow"><button class="big sub" id="bHow">あそびかた</button><button class="big sub" id="bRank">ランキング</button></div>
-  <div class="ver">rev 20261103ab</div>
+  <div class="ver">rev 20261104a</div>
 </section>
 
 <section id="rank" class="scr">
@@ -403,7 +403,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
 <script>
 "use strict";
 const $=id=>document.getElementById(id);
-const REV="20261103ab";
+const REV="20261104a";
 /* ===== 音 ===== */
 let AC=null;
 function ac(){try{if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();if(AC.state==="suspended")AC.resume()}catch(e){}return AC}
@@ -814,8 +814,9 @@ function tryAttack(dx,dy){const p=G.p,W=p.wep?wdef(p.wep):{t:"fist"},t=W.t;
     if(e1){hitEnemy(e1,1);late(e1,70)}if(e2&&G.ents.includes(e2)){hitEnemy(e2,e1?.8:1);late(e2,130)}return true}
   if(t==="bow"){if(e1){swing(dx,dy);hitEnemy(e1,.6);return true}
     let x=p.x,y=p.y;for(let i=0;i<7;i++){if(!canStep(x,y,dx,dy))break;x+=dx;y+=dy;const o=entAt(x,y);if(o){swing(dx,dy);FX.push({type:"arrow",x:p.x,y:p.y,x2:x,y2:y,a:0});hitEnemy(o,1,1);return true}}return false}
+  if(t==="axe"){/* おのは 前の 1マスに 敵が いなくても 横の 2マスも きる */const side=arcTiles(dx,dy).map(([tx,ty])=>canStep(p.x,p.y,tx,ty)?entAt(p.x+tx,p.y+ty):null).filter(o=>o&&o!==e1);
+    if(!e1&&!side.length)return false;swing(dx,dy);if(e1)hitEnemy(e1,1);for(const o of side)if(G.ents.includes(o))hitEnemy(o,.75);return true}
   if(!e1)return false;swing(dx,dy);
-  if(t==="axe"){hitEnemy(e1,1);for(const [tx,ty] of arcTiles(dx,dy)){const o=entAt(p.x+tx,p.y+ty);if(o&&o!==e1&&canStep(p.x,p.y,tx,ty))hitEnemy(o,.75)}return true}
   if(t==="dagger"){hitEnemy(e1,.62);if(G.ents.includes(e1)){const n=FX.length,snd=[],keep={};for(const k of ["hit","crit","miss"]){keep[k]=SFX[k];SFX[k]=()=>snd.push(k)}
     try{hitEnemy(e1,.62)}finally{Object.assign(SFX,keep)}
     const late=FX.splice(n);for(const f of late)if(f.type==="txt"){f.x+=.28;f.y-=.18}
