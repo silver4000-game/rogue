@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<meta name="rogue-rev" content="20261104e">
+<meta name="rogue-rev" content="20261104f">
 <meta name="theme-color" content="#9fe0ff">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <script>try{if(navigator.standalone||matchMedia("(display-mode: standalone)").matches){document.documentElement.classList.add("sa");const st=()=>{const g=document.querySelector(".scr");if(!g)return;const r=g.getBoundingClientRect(),d=document.documentElement.style;d.setProperty("--gt",r.top+"px");d.setProperty("--gb",Math.max(0,innerHeight-r.bottom)+"px")};addEventListener("resize",st);addEventListener("load",st);setTimeout(st,300)}}catch(e){}</script>
 <meta name="apple-mobile-web-app-title" content="ふしぎな地下">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261104e">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261104e">
-<link rel="manifest" href="manifest.webmanifest?v=20261104e">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261104f">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261104f">
+<link rel="manifest" href="manifest.webmanifest?v=20261104f">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800;900&display=swap" rel="stylesheet">
 <title>ふしぎな地下ダンジョン</title>
 <style>
@@ -336,7 +336,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
   <button class="big" id="bCont">つづきから</button>
   <button class="big" id="bStart">はじめから</button>
   <div class="tRow"><button class="big sub" id="bHow">あそびかた</button><button class="big sub" id="bRank">ランキング</button></div>
-  <div class="ver">rev 20261104e</div>
+  <div class="ver">rev 20261104f</div>
 </section>
 
 <section id="rank" class="scr">
@@ -407,7 +407,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
 <script>
 "use strict";
 const $=id=>document.getElementById(id);
-const REV="20261104e";
+const REV="20261104f";
 /* ===== 音 ===== */
 let AC=null;
 function ac(){try{if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();if(AC.state==="suspended")AC.resume()}catch(e){}return AC}
@@ -780,7 +780,7 @@ function playerAct(dx,dy){
   if(dx||dy){
     p.dir=[dx,dy];/* やじるしでは こうげきしない（こうげきボタンだけ） */
     const nx=p.x+dx,ny=p.y+dy;
-    {const so=objAt(nx,ny);if(so&&(so.k==="shop"||so.k==="jug")&&canStep(p.x,p.y,dx,dy)){interrupt=true;return false}/* やじるしでは はなさない（むくだけ） */if(so&&OBJS[so.k].statue&&canStep(p.x,p.y,dx,dy)){hitStatue(so,dx,dy);return true}}
+    {const so=objAt(nx,ny);if(so&&(so.k==="shop"||so.k==="jug")&&canStep(p.x,p.y,dx,dy)){interrupt=true;return false}/* やじるしでは はなさない（むくだけ） */if(so&&OBJS[so.k].statue&&canStep(p.x,p.y,dx,dy)){interrupt=true;return false}/* 像は やじるしでは こわさない（むくだけ） */}
     if(p.bind>0&&canStep(p.x,p.y,dx,dy)&&!entAt(nx,ny)){p.bind--;msg(p.bind?"うごけない！（こうそく）":"こうそくが とれた！","w");fx(p.x,p.y,"⛓️","#ccc");endTurn();return true}
     if(!canStep(p.x,p.y,dx,dy)||entAt(nx,ny)){interrupt=true;if(p.conf>0){msg("こんらんして よろめいた。");endTurn();return true}return false}
     const before=G.roomMap[p.y][p.x],fl=G.floor;
@@ -922,7 +922,7 @@ function lvMotion(n){const p=G.p,T=now();const dz=DYING.reduce((m,d)=>Math.max(m
   setTimeout(()=>{if(!G)return;SFX.lvl();FX.push({type:"lvup",x:G.p.x,y:G.p.y,t0:now(),dur:1050,n:G.p.lvq})},Math.max(0,st-T))}
 /* レベルアップ: 攻撃・防御・運・空腹・アイテム運 から1つえらぶ（えらぶまで止まる。何回分もたまる）
    どれも「たくさん上げるほど1回で上がる量が少しずつへる」ので、いろいろ上げた方が強くなる */
-const BAL={fw:1,hpG:26,dm:1,fl:.25,ds:.6,dk:.9,atkG:2,defG:2.1,il:.6,ilb:.3,ilf:7,lvH:10,crit:.10,dodge:.08,drop:.08,gh:.06,ga:.035,bh:1,ba:1,eh:1.25,ea:1.12,ni0:5};
+const BAL={fw:1,hpG:26,dm:1,fl:.25,ds:.6,dk:.9,atkG:2,defG:2.1,il:.6,ilb:.3,ilf:7,lvH:10,crit:.10,dodge:.08,drop:.08,gh:.07,ga:.04,bh:1.2,ba:1.15,eh:1.5,ea:1.3,ni0:5};
 const geo=(n,a,r)=>a*(1-Math.pow(r,n))/(1-r);
 const luckOf=()=>0;
 const r1=v=>Math.round(v*10)/10;
@@ -959,7 +959,7 @@ function popMsg(s){if(noPop)return;const P=$("pop");P.textContent=s;P.style.font
 function chooseStat(k){const p=G.p;if(!(p.lvq>0))return;let m;
   if(k==="atk"){p.atk=r1(p.atk+atkG());p.atkP=(p.atkP||0)+1;m="こうげきが上がった！"}
   else if(k==="def"){p.def=r1(p.def+defG());p.defP=(p.defP||0)+1;m="ぼうぎょが上がった！"}
-  else if(k==="hp"){p.mhp+=BAL.hpG;p.hp+=BAL.hpG;p.hpP=(p.hpP||0)+1;m="HPが上がった！"}
+  else if(k==="hp"){p.mhp+=BAL.lvH;p.hp+=BAL.lvH;/* ふつうの レベルアップと おなじ +10 */p.hpP=(p.hpP||0)+1;m="HPが上がった！"}
   else if(k==="full"){p.food=p.fmax||500;m="おなかが いっぱいに なった！"}/* まんぷく: おなかを 今の最大まで */
     else return;
   msg(m,"g");popMsg(m);p.lvq--;SFX.lvl();if(p.lvq>0)showLv();else $("lvup").classList.remove("on");hud();save()}
