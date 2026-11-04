@@ -1035,7 +1035,7 @@ function explodeE(e,E){SFX.boom();boomFx(e.x,e.y);scrShake=now();msg(E.name+"が
 /* まほうの本 */
 function castBook(e,E){const dist=Math.max(Math.abs(G.p.x-e.x),Math.abs(G.p.y-e.y));if(dist>7)return false;
   if(Math.random()>(E.boss?.5:.72))return false;
-  let list=E.books.slice();const hurt=G.ents.filter(o=>o!==e&&vis(o.x,o.y)&&o.hp<o.mhp*.6);if(!hurt.length&&e.hp>=e.mhp*.6)list=list.filter(b=>b!=="heal");if(G.ents.length>=8)list=list.filter(b=>b!=="summon");
+  let list=E.books.slice();{/* まほうだん・じょうたいの まほうは 8方向の まっすぐ だけ */const dx=G.p.x-e.x,dy=G.p.y-e.y,on=dx===0||dy===0||Math.abs(dx)===Math.abs(dy);const ok=on&&(dist===1?flyStep(e.x,e.y,Math.sign(dx),Math.sign(dy)):lineShot(e,7));if(!ok)list=list.filter(b=>b==="heal"||b==="summon");if(!list.length)return false}const hurt=G.ents.filter(o=>o!==e&&vis(o.x,o.y)&&o.hp<o.mhp*.6);if(!hurt.length&&e.hp>=e.mhp*.6)list=list.filter(b=>b!=="heal");if(G.ents.length>=8)list=list.filter(b=>b!=="summon");
   const p=G.p;list=list.filter(b=>!BOOKS[b].st||!((BOOKS[b].st==="slp"?p.slp:p[BOOKS[b].st])>0));if(!list.length)return false;
   const b=pick(list),B=BOOKS[b];if(e.k!=="mage")FX.push({type:"book",x:e.x,y:e.y,c:B.c,t0:now(),dur:700});/* まどうしは 白い本の 絵を 出さない */SFX.book();msg(E.name+"は "+B.n+"を ひらいた！","w");lunge(e);
   if(b==="bolt"){const d=dmgCalc((e.shot||E.shot)+(E.boss?0:Math.floor(G.floor*.8)),defOf());bolt(e,p);hurtPlayer(d,E.name+"のまほう");msg(d+"のダメージ。","w")}
