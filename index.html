@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<meta name="rogue-rev" content="20261104i">
+<meta name="rogue-rev" content="20261104j">
 <meta name="theme-color" content="#9fe0ff">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <script>try{if(navigator.standalone||matchMedia("(display-mode: standalone)").matches){document.documentElement.classList.add("sa");const st=()=>{const g=document.querySelector(".scr");if(!g)return;const r=g.getBoundingClientRect(),d=document.documentElement.style;d.setProperty("--gt",r.top+"px");d.setProperty("--gb",Math.max(0,innerHeight-r.bottom)+"px")};addEventListener("resize",st);addEventListener("load",st);setTimeout(st,300)}}catch(e){}</script>
 <meta name="apple-mobile-web-app-title" content="ふしぎな地下">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261104i">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261104i">
-<link rel="manifest" href="manifest.webmanifest?v=20261104i">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261104j">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261104j">
+<link rel="manifest" href="manifest.webmanifest?v=20261104j">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800;900&display=swap" rel="stylesheet">
 <title>ふしぎな地下ダンジョン</title>
 <style>
@@ -336,7 +336,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
   <button class="big" id="bCont">つづきから</button>
   <button class="big" id="bStart">はじめから</button>
   <div class="tRow"><button class="big sub" id="bHow">あそびかた</button><button class="big sub" id="bRank">ランキング</button></div>
-  <div class="ver">rev 20261104i</div>
+  <div class="ver">rev 20261104j</div>
 </section>
 
 <section id="rank" class="scr">
@@ -407,7 +407,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
 <script>
 "use strict";
 const $=id=>document.getElementById(id);
-const REV="20261104i";
+const REV="20261104j";
 /* ===== 音 ===== */
 let AC=null;
 function ac(){try{if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();if(AC.state==="suspended")AC.resume()}catch(e){}return AC}
@@ -1019,7 +1019,7 @@ function actE(e,E){
     if(E.beh==="caster"&&e.aware&&seesP&&castBook(e,E))return;
     if(adjacent(e)){enemyAttack(e,E);return}
     if(E.beh==="ranged"&&e.aware&&seesP&&lineShot(e,5)&&Math.random()<.45){const d=dmgCalc((e.shot||E.shot)+(E.boss?0:G.floor),defOf());bolt(e,G.p);msg(E.name+(e.k==="dragon"?"のブレス！":"のまほう！")+d+"のダメージ。","w");hurtPlayer(d,E.name);return}
-    if(E.beh==="archer"&&e.aware&&seesP&&lineShot(e,6)&&Math.random()<.5){/* 矢が とぶ → あたる → ダメージ */const d=dmgCalc(E.shot+Math.floor(G.floor/2),defOf());FX.push({type:"arrow",x:e.x,y:e.y,x2:G.p.x,y2:G.p.y,a:0});SFX.miss&&SFX.miss();FX.push({type:"hit",x:G.p.x,y:G.p.y,t0:now()+impactWait(),c:"#ffffff"});msg(E.name+"の 弓矢！"+d+"のダメージ。","w");hurtPlayer(d,E.name);return}
+    if(E.beh==="archer"&&e.aware&&seesP&&lineShot(e,6)&&Math.random()<.5){/* 矢が とぶ → あたる → ダメージ */const d=dmgCalc(Math.round((E.shot+Math.floor(G.floor/2))*1.4),defOf());/* 弓矢は つよい: いままでの 1.4ばい */FX.push({type:"arrow",x:e.x,y:e.y,x2:G.p.x,y2:G.p.y,a:0});SFX.miss&&SFX.miss();FX.push({type:"hit",x:G.p.x,y:G.p.y,t0:now()+impactWait(),c:"#ffffff"});msg(E.name+"の 弓矢！"+d+"のダメージ。","w");hurtPlayer(d,E.name);return}
     if(E.beh==="erratic"&&Math.random()<.5){const ds=[[-1,-1],[0,-1],[1,-1],[-1,0],[1,0],[-1,1],[0,1],[1,1]];const [dx,dy]=pick(ds);moveE(e,dx,dy);return}
     if(E.hard&&seesP&&Math.random()<.5){/* にげる */let best=null,bv=DIST[e.y][e.x];for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){if(!dx&&!dy)continue;const nx=e.x+dx,ny=e.y+dy;if(!canStep(e.x,e.y,dx,dy)||entAt(nx,ny))continue;if(DIST[ny][nx]>bv&&DIST[ny][nx]<999){bv=DIST[ny][nx];best=[dx,dy]}}if(best){moveE(e,best[0],best[1]);return}}
     if(e.aware&&DIST[e.y][e.x]<999){let best=null,bv=DIST[e.y][e.x];
@@ -1045,7 +1045,7 @@ function castBook(e,E){const dist=Math.max(Math.abs(G.p.x-e.x),Math.abs(G.p.y-e.
   else if(b==="summon"){const sp=freeNear(e.x,e.y);if(sp.length){const [x,y]=pick(sp);const m=mkEnemy(E.boss?"skel":pick(["goblin","bat","frog"]),x,y,false);m.aware=20;m.exp=Math.round(m.exp/2);G.ents.push(m);msg("なかまが あらわれた！","w")}}
   else{bolt(e,p);setSt(p,B.st,B.st==="slp"?3:B.st==="par"?3:8,true)}
   return true}
-function enemyAttack(e,E){if(Math.random()<dodgeRate()){msg(E.name+"のこうげき。ひらりとかわした！");SFX.miss();return}const d=dmgCalc(e.atk,defOf());msg(E.name+"のこうげき。"+d+"のダメージ。","w");lunge(e);hurtPlayer(d,E.name);if(G.over)return;
+function enemyAttack(e,E){if(Math.random()<dodgeRate()){msg(E.name+"のこうげき。ひらりとかわした！");SFX.miss();return}const d=dmgCalc(E.beh==="archer"?Math.max(1,Math.round(e.atk*.6)):e.atk,defOf());/* 弓の敵の なぐりは よわい: 0.6ばい */msg(E.name+"のこうげき。"+d+"のダメージ。","w");lunge(e);hurtPlayer(d,E.name);if(G.over)return;
   if(E.on==="steal"&&(G.p.gold||0)>0){const g=Math.min(G.p.gold,15+G.floor*3);G.p.gold-=g;msg(E.name+"に "+g+"ゴールド ぬすまれた！","w");popMsg("💰 -"+g+"G");FX.push({type:"ring",x:e.x,y:e.y,c:"#ffd24a",t0:now(),dur:700});for(let k=0;k<200;k++){const r=pick(G.rooms),x=r.x+R(r.w),y=r.y+R(r.h);if(wall(x,y))continue;if(!entAt(x,y)&&!(x===G.p.x&&y===G.p.y)&&!objAt(x,y)){e.x=x;e.y=y;break}}e.loot=(e.loot||0)+g;return}
   if(E.on==="mhp"&&Math.random()<.3&&G.p.mhp>10){const v=Math.min(2,G.p.mhp-10);G.p.mhp-=v;G.p.hp=Math.min(G.p.hp,G.p.mhp);msg("さいだいHPが "+v+" へった！","w");popMsg("💔 さいだいHP -"+v);fx(G.p.x,G.p.y,"MAX-"+v,"#ff5a7a")}
   if(E.on==="food"&&Math.random()<.4&&G.p.food>0){const v=Math.min(G.p.food,30);G.p.food-=v;msg("おなかが "+v+" へった！","w");popMsg("🍙 おなか -"+v);fx(G.p.x,G.p.y,"-"+v,"#ffc060")}
