@@ -238,7 +238,8 @@ button{font-family:var(--F)}
 .side button{height:min(60px,17.5vw);font-size:16px}
 #side{gap:8px}
 #pad button.wait{font-size:14px}
-#stat2 .st{display:inline-flex;gap:3px}#stat2 .st i{font-style:normal;padding:0 5px;border-radius:8px;color:#fff;font-weight:900}
+#stat2 .st{display:inline-flex;gap:3px}
+#stat2 #sAtk,#stat2 #sDef,#stat2 #sGold{font-size:13.5px;line-height:16px}/* 数字だけ すこし 大きく */#stat2 .st i{font-style:normal;padding:0 5px;border-radius:8px;color:#fff;font-weight:900}
 #obs{position:fixed;inset:0;z-index:56;display:none;align-items:center;justify-content:center;background:rgba(60,40,110,.45);padding:12px}#obs.on{display:flex}
 #rkd{position:fixed;inset:0;z-index:57;display:none;align-items:center;justify-content:center;background:rgba(60,40,110,.45);padding:12px}#rkd.on{display:flex}
 html.sa #rkd{top:var(--gt,0);bottom:var(--gb,0)}
@@ -1036,7 +1037,7 @@ function castBook(e,E){const dist=Math.max(Math.abs(G.p.x-e.x),Math.abs(G.p.y-e.
   if(Math.random()>(E.boss?.5:.72))return false;
   let list=E.books.slice();const hurt=G.ents.filter(o=>o!==e&&vis(o.x,o.y)&&o.hp<o.mhp*.6);if(!hurt.length&&e.hp>=e.mhp*.6)list=list.filter(b=>b!=="heal");if(G.ents.length>=8)list=list.filter(b=>b!=="summon");
   const p=G.p;list=list.filter(b=>!BOOKS[b].st||!((BOOKS[b].st==="slp"?p.slp:p[BOOKS[b].st])>0));if(!list.length)return false;
-  const b=pick(list),B=BOOKS[b];FX.push({type:"book",x:e.x,y:e.y,c:B.c,t0:now(),dur:700});SFX.book();msg(E.name+"は "+B.n+"を ひらいた！","w");lunge(e);
+  const b=pick(list),B=BOOKS[b];if(e.k!=="mage")FX.push({type:"book",x:e.x,y:e.y,c:B.c,t0:now(),dur:700});/* まどうしは 白い本の 絵を 出さない */SFX.book();msg(E.name+"は "+B.n+"を ひらいた！","w");lunge(e);
   if(b==="bolt"){const d=dmgCalc((e.shot||E.shot)+(E.boss?0:Math.floor(G.floor*.8)),defOf());bolt(e,p);hurtPlayer(d,E.name+"のまほう");msg(d+"のダメージ。","w")}
   else if(b==="heal"){const t=(hurt.length?pick(hurt):e),h=Math.round(t.mhp*.4);t.hp=Math.min(t.mhp,t.hp+h);fx(t.x,t.y,"+"+h,"#7dff9a");msg(ENEMIES[t.k].name+"の HPが 回ふくした。","w")}
   else if(b==="summon"){const sp=freeNear(e.x,e.y);if(sp.length){const [x,y]=pick(sp);const m=mkEnemy(E.boss?"skel":pick(["goblin","bat","frog"]),x,y,false);m.aware=20;m.exp=Math.round(m.exp/2);G.ents.push(m);msg("なかまが あらわれた！","w")}}
