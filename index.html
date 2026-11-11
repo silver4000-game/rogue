@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<meta name="rogue-rev" content="20261111d">
+<meta name="rogue-rev" content="20261111e">
 <meta name="theme-color" content="#9fe0ff">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <script>try{if(navigator.standalone||matchMedia("(display-mode: standalone)").matches){document.documentElement.classList.add("sa");const st=()=>{const g=document.querySelector(".scr");if(!g)return;const r=g.getBoundingClientRect(),d=document.documentElement.style;d.setProperty("--gt",r.top+"px");d.setProperty("--gb",Math.max(0,innerHeight-r.bottom)+"px")};addEventListener("resize",st);addEventListener("load",st);setTimeout(st,300)}}catch(e){}</script>
 <meta name="apple-mobile-web-app-title" content="ふしぎな地下">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261111d">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261111d">
-<link rel="manifest" href="manifest.webmanifest?v=20261111d">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261111e">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261111e">
+<link rel="manifest" href="manifest.webmanifest?v=20261111e">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800;900&display=swap" rel="stylesheet">
 <title>ふしぎな地下ダンジョン</title>
 <style>
@@ -342,7 +342,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
   <button class="big" id="bCont">つづきから</button>
   <button class="big" id="bStart">はじめから</button>
   <div class="tRow"><button class="big sub" id="bHow">あそびかた</button><button class="big sub" id="bRank">ランキング</button></div>
-  <div class="ver">rev 20261111d</div>
+  <div class="ver">rev 20261111e</div>
 </section>
 
 <section id="rank" class="scr">
@@ -417,7 +417,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
 <script>
 "use strict";
 const $=id=>document.getElementById(id);
-const REV="20261111d";
+const REV="20261111e";
 /* ===== 音 ===== */
 let AC=null;
 function ac(){try{if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();if(AC.state==="suspended")AC.resume()}catch(e){}return AC}
@@ -1331,7 +1331,7 @@ function heal(n){const p=G.p,h=Math.min(n,p.mhp-p.hp);p.hp+=h;return h}
 function lineTargets(rng,pierce){const p=G.p,[dx,dy]=p.dir;let x=p.x,y=p.y;const hits=[];for(let k=0;k<rng;k++){if(!flyStep(x,y,dx,dy))break;x+=dx;y+=dy;const o=entAt(x,y);if(o){hits.push(o);if(!pierce)break}}return {hits,end:{x,y}}}
 function dmgE(e,d,col){const E=ENEMIES[e.k];if(e.bar>0){msg(E.name+"の 結界に はじかれた！","w");fx(e.x,e.y,"はじき","#d0b0ff");return false}if(E.hard)d=1;e.hp-=d;e.sleep=0;e.aware=20;e.hf=now();shake(e);lfx(e.x,e.y,""+d,col||"#ffb44a");if(e.hp<=0){killEnemy(e,E);return true}return false}
 function useItem(i){const it=G.bag[i],p=G.p;let consume=true;if(!p.buf)p.buf={atk:0,def:0,regen:0};const I=ITEMS[it.k]||{};
-  {const sk=it.k;if(it.k==="wep"||it.k==="shd"||I.c==="ring"){/* そうびの ときは エフェクト なし */}else if(I.rng){const {hits,end}=lineTargets(I.rng,I.pierce),t=hits[0]||end;sigFx(sk,p.x,p.y,t.x,t.y)}else if(sk==="fire"){const e=nearestEnemy();if(e)sigFx(sk,p.x,p.y,e.x,e.y)}else if(!(it.k==="warp"&&G.boss)&&!(it.k==="stairsc"&&!stOK())&&!((sk==="wepup"&&!p.wep)||(sk==="shdup"&&!p.shd)))sigFx(sk,p.x,p.y)}
+  {const sk=it.k;if(it.k==="wep"||it.k==="shd"||I.c==="ring"){/* そうびの ときは エフェクト なし */}else if(I.rng){const {hits,end}=lineTargets(I.rng,I.pierce),t=hits[0]||end;sigFx(sk,p.x,p.y,t.x,t.y)}else if(sk==="fire"){/* 雷の対象は 下の case で 1回だけ決める */}else if(!(it.k==="warp"&&G.boss)&&!(it.k==="stairsc"&&!stOK())&&!((sk==="wepup"&&!p.wep)||(sk==="shdup"&&!p.shd)))sigFx(sk,p.x,p.y)}
   const aura=()=>{},beam=()=>{};
   switch(it.k){
     case "wep":{if(p.wep&&p.wep.cur){cursedNo(p.wep,"ぶき");consume=false;break}const old=p.wep;p.wep=it.eq;it.eq.idf=1;if(old){G.bag[i]={k:"wep",eq:old};consume=false}msg(nameOf(it)+"をそうびした。（こうげき"+Math.round(atkOf())+"）","g");aura(p,"#ffe08a",700);SFX.pick();revealCurse(it);break}
@@ -1368,7 +1368,12 @@ function useItem(i){const it=G.bag[i],p=G.p;let consume=true;if(!p.buf)p.buf={at
     case "wandup":{const ws=G.bag.filter(q=>q!==it&&isWand(q.k));if(!ws.length){msg("杖を もっていない。");popMsg("…杖が ない");SFX.miss();return}openWpk(it);return}
 case "shdup":{if(!p.shd){msg("たてを そうびしていない。");popMsg("…たてが ない");SFX.miss();return}p.shd.lv=(p.shd.lv||1)+1;p.shd.idf=1;if(p.shd.cur){p.shd.cur=0;p.shd.cv=0;msg("たての のろいが とけた！","g")}SFX.lvl();aura(p,"#9ad0ff",1100);popMsg("🛡️ たて Lv"+p.shd.lv+"！");msg(p.shd.name+"が Lv"+p.shd.lv+"に なった！（まもり"+Math.round(defOf())+"）","y");break}
     case "rstr":case "rdef":case "rheal":case "rfood":case "rluck":case "rexp":{const old=p.ring;p.ring=it.k;if(old){G.bag[i]={k:old};consume=false}msg(ITEMS[it.k].name+"をつけた！","g");aura(p,"#ffd0ff",800);SFX.pick();break}
-    case "fire":{const vs=G.ents.filter(e=>seeE(e)),e=vs.length?pick(vs):null;if(!e){msg("見えるところに敵がいない。");SFX.miss();popMsg("…敵がいない");return}beam(p,e,"#ffb070");SFX.magic();popMsg("⚡ イカズチ！");const d=30+G.floor*4;setTimeout(()=>{if(G.ents.includes(e))boomFx(e.x,e.y)},350);msg(ENEMIES[e.k].name+"に"+d+"のダメージ！","y");dmgE(e,d);break}
+    case "fire":{const vs=G.ents.filter(e=>seeE(e)),e=vs.length?pick(vs):null;if(!e){msg("見えるところに敵がいない。");SFX.miss();popMsg("…敵がいない");return}
+      SFX.magic();popMsg("⚡ イカズチ！");const d=30+G.floor*4,land=FAST?0:420,seg=[];
+      for(let j=0;j<8;j++)seg.push(j===0||j===7?0:(j%2?1:-1)*(.6+Math.random()*.8));
+      FX.push({type:"boltfall",x:e.x,y:e.y,t0:now(),dur:FAST?80:620,land,seg});
+      const finish=()=>{if(!G||G.over)return;if(G.ents.includes(e)){msg(ENEMIES[e.k].name+"に"+d+"のダメージ！","y");dmgE(e,d)}};
+      if(FAST||land<=0)finish();else setTimeout(finish,land);break}
     case "myst":{popMsg("❓ 不思議な 力！");SFX.magic();flashC="#e0c8ff";flash=14;aura(p,"#c090ff",900);
       const can={};
       const visE=()=>G.ents.filter(e=>seeE(e));
@@ -1535,7 +1540,7 @@ function resize(){const w=$("mapWrap").clientWidth,h=$("mapWrap").clientHeight;D
 window.addEventListener("resize",()=>{if($("game").classList.contains("on"))resize()});
 /* こうかの えんしゅつが とどくまでの 時間（ダメージ数字・たおれる動きは そのあと） */
 function impactWait(){const T=now();let m=T;for(const f of FX){let a=0;
-  if(f.type==="sig")a=f.t0+f.dur*(["proj","spin","zig","wave","lance","chain","swap"].includes(f.p)?.6:.35);else if(f.type==="throw")a=f.t0+f.dur;else if(f.type==="beam")a=f.t0+f.dur*.8;else if(f.type==="zap")a=f.t0+f.dur*.3;
+  if(f.type==="sig")a=f.t0+f.dur*(["proj","spin","zig","wave","lance","chain","swap"].includes(f.p)?.6:.35);else if(f.type==="throw")a=f.t0+f.dur;else if(f.type==="beam")a=f.t0+f.dur*.8;else if(f.type==="zap")a=f.t0+f.dur*.3;else if(f.type==="boltfall")a=(now()<f.t0+(f.land||f.dur*.7))?f.t0+(f.land||f.dur*.7):T;
   else if(f.type==="arrow"&&f.a<7)a=T+(7-f.a)*17;else if(f.type==="bolt"&&f.a<10)a=T+(10-f.a)*17;else if(f.type==="slash")a=f.t0+90;else if(f.type==="thrust")a=f.t0+150;if(a>m)m=a}return FAST?0:m-T}
 function fx(x,y,t,c){const w=impactWait();FX.push({x,y,t,c,a:0,type:"txt",st:w>0?now()+w:0})}
 function bolt(a,b){FX.push({x:a.x,y:a.y,x2:b.x,y2:b.y,a:0,type:"bolt"})}
@@ -2440,6 +2445,13 @@ function frame(t){requestAnimationFrame(frame);if(!$("game").classList.contains(
       else if(f.type==="beam"){const tt=Math.min(1,pr*1.25),bx=ox+(f.x+(f.x2-f.x)*tt)*TS+TS/2,by=oy+(f.y+(f.y2-f.y)*tt)*TS+TS/2;cx.globalAlpha=pr>.8?(1-pr)/.2:1;cx.strokeStyle=f.c;cx.lineCap="round";cx.lineWidth=TS*.12;cx.shadowColor=f.c;cx.shadowBlur=TS*.5;cx.beginPath();cx.moveTo(cxp,cyp);cx.lineTo(bx,by);cx.stroke();cx.strokeStyle="#fff";cx.lineWidth=TS*.04;cx.stroke();glow(cx,bx,by,TS*.55,f.c);star(cx,bx,by,TS*.2,"#fff")}
       else if(f.type==="book"){const yy=cyp-TS*(.7+pr*.25);cx.globalAlpha=pr>.8?(1-pr)/.2:1;glow(cx,cxp,yy,TS*.6,f.c);cx.fillStyle="#fff";cx.strokeStyle="#4a2a86";cx.lineWidth=2;const w=TS*.34*Math.min(1,pr*4);cx.beginPath();cx.moveTo(cxp,yy+TS*.12);cx.lineTo(cxp-w,yy);cx.lineTo(cxp-w,yy-TS*.24);cx.lineTo(cxp,yy-TS*.12);cx.lineTo(cxp+w,yy-TS*.24);cx.lineTo(cxp+w,yy);cx.closePath();cx.fill();cx.stroke();cx.fillStyle=f.c;cx.fillRect(cxp-1,yy-TS*.12,2,TS*.24)}
       else if(f.type==="zap"){cx.globalAlpha=1-pr;cx.strokeStyle="#fff8a0";cx.lineWidth=TS*.1;cx.shadowColor="#ffe040";cx.shadowBlur=TS*.5;cx.beginPath();let zx=cxp,zy=cyp-TS*2;cx.moveTo(zx,zy);for(let j=0;j<5;j++){zx=cxp+(j%2?1:-1)*TS*.18;zy+=TS*.42;cx.lineTo(zx,zy)}cx.stroke()}
+      cx.restore();continue}
+    if(f.type==="boltfall"){const el=T-f.t0;if(el<0)continue;if(el>=f.dur){FX.splice(i,1);continue}
+      const cxp=ox+f.x*TS+TS/2,cyp=oy+f.y*TS+TS*.55,top=cyp-TS*4.8,land=f.land||f.dur*.7,fp=Math.min(1,el/Math.max(1,land)),tip=top+(cyp-top)*fp,seg=f.seg||[0,1,-1,1,-1,1,-1,0];
+      cx.save();cx.lineJoin="round";cx.lineCap="round";cx.strokeStyle="#fff8a0";cx.lineWidth=TS*.16;cx.shadowColor="#ffe040";cx.shadowBlur=TS*.6;
+      cx.beginPath();cx.moveTo(cxp,top);for(let j=1;j<seg.length;j++){const yy=top+(tip-top)*j/(seg.length-1);cx.lineTo(cxp+seg[j]*TS*.2,yy)}cx.lineTo(cxp,tip);cx.stroke();
+      cx.shadowBlur=0;cx.strokeStyle="#fff";cx.lineWidth=TS*.06;cx.stroke();
+      if(fp>=1){const a=Math.max(0,1-(el-land)/Math.max(1,f.dur-land));cx.globalAlpha=a;cx.fillStyle="#fffce0";cx.beginPath();cx.arc(cxp,cyp,TS*(.18+a*.3),0,7);cx.fill()}
       cx.restore();continue}
     if(f.type==="txt"){if(f.st&&T<f.st){f.a=0;continue}const sl=f.slow?.45:1,life=f.big?55:(f.slow?90:40),sx0=ox+f.x*TS+TS/2,sy=oy+f.y*TS+TS*(f.big?0.62:0.3)-f.a*0.8*sl;cx.globalAlpha=Math.max(0,1-f.a/life);cx.font="900 "+Math.round(TS*(f.big?0.78:0.5))+"px "+PF;cx.textAlign="center";const tw=cx.measureText(f.t).width/2+4,cw=cx.canvas.width/(window.DPR||1),sx=Math.max(tw,Math.min((cx.canvas.clientWidth||cw)-tw,sx0));/* 画面の はしで 切れない */cx.lineWidth=4;cx.lineJoin="round";cx.strokeStyle="rgba(20,10,30,.9)";cx.strokeText(f.t,sx,sy);cx.fillStyle=f.c;cx.fillText(f.t,sx,sy);cx.globalAlpha=1;if(f.a>life)FX.splice(i,1)}
     else if(f.type==="thrust"){const pr=(T-f.t0)/f.dur;if(pr>=1){FX.splice(i,1);continue}const ext=pr<.45?pr/.45:pr<.7?1:1-(pr-.7)/.3,sx=ox+f.x*TS+TS/2,sy=oy+f.y*TS+TS/2,L=TS*(.35+1.75*ext),an=Math.atan2(f.dy,f.dx),dl=Math.hypot(f.dx,f.dy);
