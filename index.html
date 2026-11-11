@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<meta name="rogue-rev" content="20261111a">
+<meta name="rogue-rev" content="20261111b">
 <meta name="theme-color" content="#9fe0ff">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <script>try{if(navigator.standalone||matchMedia("(display-mode: standalone)").matches){document.documentElement.classList.add("sa");const st=()=>{const g=document.querySelector(".scr");if(!g)return;const r=g.getBoundingClientRect(),d=document.documentElement.style;d.setProperty("--gt",r.top+"px");d.setProperty("--gb",Math.max(0,innerHeight-r.bottom)+"px")};addEventListener("resize",st);addEventListener("load",st);setTimeout(st,300)}}catch(e){}</script>
 <meta name="apple-mobile-web-app-title" content="ふしぎな地下">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261111a">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261111a">
-<link rel="manifest" href="manifest.webmanifest?v=20261111a">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261111b">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261111b">
+<link rel="manifest" href="manifest.webmanifest?v=20261111b">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800;900&display=swap" rel="stylesheet">
 <title>ふしぎな地下ダンジョン</title>
 <style>
@@ -342,7 +342,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
   <button class="big" id="bCont">つづきから</button>
   <button class="big" id="bStart">はじめから</button>
   <div class="tRow"><button class="big sub" id="bHow">あそびかた</button><button class="big sub" id="bRank">ランキング</button></div>
-  <div class="ver">rev 20261111a</div>
+  <div class="ver">rev 20261111b</div>
 </section>
 
 <section id="rank" class="scr">
@@ -417,7 +417,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
 <script>
 "use strict";
 const $=id=>document.getElementById(id);
-const REV="20261111a";
+const REV="20261111b";
 /* ===== 音 ===== */
 let AC=null;
 function ac(){try{if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();if(AC.state==="suspended")AC.resume()}catch(e){}return AC}
@@ -595,7 +595,7 @@ const OBJS={
 /* ===== 状態 ===== */
 let G=null;   /* 1回の冒険 */
 function newRun(cls){cls=CLS[cls]?cls:"warrior";
-  G={floor:1,turn:0,sv:5,idv:1,knownWands:{},wandAlias:makeWandAlias(),p:{x:0,y:0,arrows:5,hp:30,mhp:30,lv:1,exp:0,atk:2,def:2,food:500,fmax:500,wep:{id:"ken",lv:1,cur:0,idf:1},shd:{name:"盾",lv:1,cur:0,idf:1},dir:[0,1],psn:0,slp:0,conf:0,slow:0,par:0,regen:0,kills:0,sv:5,lvq:0,atkP:0,defP:0,hpP:0,cls,gold:0,iluck:cls==="joker"?2:0,ring:null,buf:{atk:0,def:0,regen:0}},
+  G={floor:1,turn:0,sv:5,idv:1,knownWands:{},wandAlias:makeWandAlias(),p:{x:0,y:0,arrows:5,hp:30,mhp:30,lv:1,exp:0,atk:2,def:2,food:500,fmax:500,wep:null,shd:null,dir:[0,1],psn:0,slp:0,conf:0,slow:0,par:0,regen:0,kills:0,sv:5,lvq:0,atkP:0,defP:0,hpP:0,cls,gold:0,iluck:cls==="joker"?2:0,ring:null,buf:{atk:0,def:0,regen:0}},
      bag:[],log:[],map:null,seen:null,ents:[],items:[],stairs:null,rooms:[],spawnT:0,objs:[],boss:0};
   genFloor();msg("ふしぎな地下ダンジョンに入った。","y");msg("どこまで もぐれるかな？ 10階ごとに ボスがいるよ！");
 }
