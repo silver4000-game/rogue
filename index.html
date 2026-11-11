@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<meta name="rogue-rev" content="20261111e">
+<meta name="rogue-rev" content="20261111f">
 <meta name="theme-color" content="#9fe0ff">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <script>try{if(navigator.standalone||matchMedia("(display-mode: standalone)").matches){document.documentElement.classList.add("sa");const st=()=>{const g=document.querySelector(".scr");if(!g)return;const r=g.getBoundingClientRect(),d=document.documentElement.style;d.setProperty("--gt",r.top+"px");d.setProperty("--gb",Math.max(0,innerHeight-r.bottom)+"px")};addEventListener("resize",st);addEventListener("load",st);setTimeout(st,300)}}catch(e){}</script>
 <meta name="apple-mobile-web-app-title" content="ふしぎな地下">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261111e">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261111e">
-<link rel="manifest" href="manifest.webmanifest?v=20261111e">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261111f">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261111f">
+<link rel="manifest" href="manifest.webmanifest?v=20261111f">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800;900&display=swap" rel="stylesheet">
 <title>ふしぎな地下ダンジョン</title>
 <style>
@@ -342,7 +342,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
   <button class="big" id="bCont">つづきから</button>
   <button class="big" id="bStart">はじめから</button>
   <div class="tRow"><button class="big sub" id="bHow">あそびかた</button><button class="big sub" id="bRank">ランキング</button></div>
-  <div class="ver">rev 20261111e</div>
+  <div class="ver">rev 20261111f</div>
 </section>
 
 <section id="rank" class="scr">
@@ -417,7 +417,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
 <script>
 "use strict";
 const $=id=>document.getElementById(id);
-const REV="20261111e";
+const REV="20261111f";
 /* ===== 音 ===== */
 let AC=null;
 function ac(){try{if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();if(AC.state==="suspended")AC.resume()}catch(e){}return AC}
@@ -595,9 +595,9 @@ const OBJS={
 /* ===== 状態 ===== */
 let G=null;   /* 1回の冒険 */
 function newRun(cls){cls=CLS[cls]?cls:"warrior";
-  G={floor:1,turn:0,sv:5,idv:1,knownWands:{},wandAlias:makeWandAlias(),p:{x:0,y:0,arrows:5,hp:30,mhp:30,lv:1,exp:0,atk:2,def:2,food:500,fmax:500,wep:null,shd:null,dir:[0,1],psn:0,slp:0,conf:0,slow:0,par:0,regen:0,kills:0,sv:5,lvq:0,atkP:0,defP:0,hpP:0,cls,gold:0,iluck:cls==="joker"?2:0,ring:null,buf:{atk:0,def:0,regen:0}},
+  G={floor:1,turn:0,sv:5,idv:1,knownWands:{},wandAlias:makeWandAlias(),p:{x:0,y:0,arrows:5,hp:30,mhp:30,lv:1,exp:0,atk:3,def:3,food:500,fmax:500,wep:null,shd:null,dir:[0,1],psn:0,slp:0,conf:0,slow:0,par:0,regen:0,kills:0,sv:5,lvq:0,atkP:0,defP:0,hpP:0,cls,gold:0,iluck:cls==="joker"?2:0,ring:null,buf:{atk:0,def:0,regen:0}},
      bag:[],log:[],map:null,seen:null,ents:[],items:[],stairs:null,rooms:[],spawnT:0,objs:[],boss:0};
-  genFloor();msg("ふしぎな地下ダンジョンに入った。","y");msg("どこまで もぐれるかな？ 10階ごとに ボスがいるよ！");
+  DYING.length=0;HERO_DIE=null;genFloor();msg("ふしぎな地下ダンジョンに入った。","y");msg("どこまで もぐれるかな？ 10階ごとに ボスがいるよ！");
 }
 const bufOf=k=>(G.p.buf&&G.p.buf[k]>0)?1:0;
 const spOn=()=>{const p=G&&G.p;return !!(p&&p.hp*3<=p.mhp*2)};/* HPが 最大の 2/3いか */
@@ -938,7 +938,7 @@ function genBoss(){const map=[],seen=[];for(let y=0;y<MH;y++){map.push(new Array
   const bk=BOSSES[(Math.floor(G.floor/10)-1)%BOSSES.length],b=mkEnemy(bk,rx+rw-4,ry+(rh>>1),false);b.aware=30;G.ents.push(b);updateSight()}
 
 const PROOF_EXP=.1;/* モンスターの証 +1ごとに EXP +10% */
-function killEnemy(e,E){G.ents=G.ents.filter(x=>x!==e);DYING.push({k:e.k,x:e.x,y:e.y,fl:e.fl,t0:now()+impactWait()+(FAST?0:130)});if(e.loot&&!G.items.some(i=>i.x===e.x&&i.y===e.y))G.items.push({x:e.x,y:e.y,k:"gold",amt:e.loot});G.p.kills++;const ex1=(e.exp||E.exp)*(1+PROOF_EXP*(G.p.proofs||0)),ex0=Math.round(ex1),ex=G.p.ring==="rexp"?Math.round(ex0*1.5):ex0;msg(E.name+"をたおした！"+(E.lv3?"":" ("+ex+"EXP)"),"g");SFX.kill();
+function killEnemy(e,E){G.ents=G.ents.filter(x=>x!==e);DYING.push({k:e.k,x:e.x,y:e.y,fl:e.fl,t0:now()+impactWait()+(FAST?0:130),dur:FAST?1:(ENEMIES[e.k].boss?680:420)});if(e.loot&&!G.items.some(i=>i.x===e.x&&i.y===e.y))G.items.push({x:e.x,y:e.y,k:"gold",amt:e.loot});G.p.kills++;const ex1=(e.exp||E.exp)*(1+PROOF_EXP*(G.p.proofs||0)),ex0=Math.round(ex1),ex=G.p.ring==="rexp"?Math.round(ex0*1.5):ex0;msg(E.name+"をたおした！"+(E.lv3?"":" ("+ex+"EXP)"),"g");SFX.kill();
   if(Math.random()<.01){/* モンスターの証: その場に おちる */let pos=null;for(const [dx,dy] of [[0,0],[1,0],[-1,0],[0,1],[0,-1],[1,1],[-1,1],[1,-1],[-1,-1]]){const x=e.x+dx,y=e.y+dy;if(!wall(x,y)&&!objAt(x,y)&&!(x===G.p.x&&y===G.p.y)&&!G.items.some(i=>i.x===x&&i.y===y)){pos={x,y};break}}if(pos){G.items.push({...pos,k:"proof"});msg("なにかが おちた…！","y")}}
   gainExp(ex);if(E.lv3){for(let k=0;k<3;k++)lvOne();msg("レベルが 3つ 上がった！ レベル"+G.p.lv+"！","y");lvMotion(3)}
   if(E.boss){G.stairs.hide=0;G.seen[G.stairs.y][G.stairs.x]=1;popMsg("🎉 階段が あらわれた！");
@@ -947,8 +947,8 @@ const roll13=()=>wpick([[1,5],[2,3],[3,2]]);/* 1:50% 2:30% 3:20% */
 function lvOne(){const p=G.p;p.lv++;p.mhp+=3+roll13();p.atk+=roll13();p.def+=roll13();/* ふつうの レベルアップ: HP+4〜6・こうげき+1〜3・まもり+1〜3（べつべつに ちゅうせん） */p.hp=Math.min(p.mhp,p.hp+BAL.lvH+5);p.lvq=(p.lvq||0)+1}
 function gainExp(n){const p=G.p;p.exp+=n;let c=0;while(p.exp>=needExp(p.lv)){p.exp-=needExp(p.lv);lvOne();c++;msg("レベル"+p.lv+"に上がった！","y")}if(c)lvMotion(c)}
 /* レベルアップの演出: 光と「レベルアップ！」→ そのあと ステータス画面 */
-let lvHold=0;const DYING=[];
-function lvMotion(n){const p=G.p,T=now();const dz=DYING.reduce((m,d)=>Math.max(m,d.t0+420),0);const st=T>lvHold?Math.max(T,lockUntil-200,dz):lvHold-900;lvHold=st+1100;lockUntil=Math.max(lockUntil,lvHold);
+let lvHold=0,HERO_DIE=null;const DYING=[];
+function lvMotion(n){const p=G.p,T=now();const dz=DYING.reduce((m,d)=>Math.max(m,d.t0+(d.dur||420)),0);const st=T>lvHold?Math.max(T,lockUntil-200,dz):lvHold-900;lvHold=st+1100;lockUntil=Math.max(lockUntil,lvHold);
   setTimeout(()=>{if(!G)return;SFX.lvl();FX.push({type:"lvup",x:G.p.x,y:G.p.y,t0:now(),dur:1050,n:G.p.lvq})},Math.max(0,st-T))}
 /* レベルアップ: 攻撃・防御・運・空腹・アイテム運 から1つえらぶ（えらぶまで止まる。何回分もたまる）
    どれも「たくさん上げるほど1回で上がる量が少しずつへる」ので、いろいろ上げた方が強くなる */
@@ -1235,8 +1235,8 @@ function applyThrowHit(it,hit){const p=G.p,E=ENEMIES[hit.k],I=ITEMS[it.k]||{};hi
 
 function closeBag(){$("bag").classList.remove("on")}
 function cellName(it){if(it.k==="proof")return "モンスターの証";if(it.eq&&it.eq.cur&&it.eq.cv)return "💀"+cellName({k:it.k,eq:{...it.eq,cv:0}});if(it.k==="wep")return wdef(it.eq).n+(it.eq.idf?" Lv"+(it.eq.lv||1):" Lv？");if(it.k==="shd")return it.eq.name+(it.eq.idf?" Lv"+(it.eq.lv||1):" Lv？");if(isWand(it.k))return (wandKnown(it.k)?ITEMS[it.k].name:wandFakeName(it.k))+(it.n!=null?" ["+it.n+"]":"");const I=ITEMS[it.k];return I.name+(it.n!=null?" ["+it.n+"]":"")}
-function shortDesc(it){if(it.k==="wep")return it.eq.idf?"こうげき "+wv(it.eq):"";if(it.k==="shd")return it.eq.idf?"まもり "+sv(it.eq):"";if(isWand(it.k)&&!wandKnown(it.k))return "まだ わからない";const I=ITEMS[it.k];return I.sd||I.d}
-function itemDesc(it){if(it.k==="wep"){const W=wdef(it.eq);return W.d+(it.eq.idf?"（こうげき "+wv(it.eq)+"）":"")}if(it.k==="shd"){const S=shDef(it.eq);return S.d+(it.eq.idf?"（まもり "+sv(it.eq)+"）":"")}if(isWand(it.k)&&!wandKnown(it.k))return "まだ わからない。つかうか、鑑識の巻物で しゅるいが わかる。";return ITEMS[it.k].d}
+function shortDesc(it){if(it.k==="wep"||it.k==="shd")return "";if(isWand(it.k)&&!wandKnown(it.k))return "まだ わからない";const I=ITEMS[it.k];return I.sd||I.d}
+function itemDesc(it){if(it.k==="wep")return wdef(it.eq).d;if(it.k==="shd")return shDef(it.eq).d;if(isWand(it.k)&&!wandKnown(it.k))return "まだ わからない。つかうか、鑑識の巻物で しゅるいが わかる。";return ITEMS[it.k].d}
 function slotItem(s){const p=G.p;return s==="wep"?(p.wep?{k:"wep",eq:p.wep}:null):s==="shd"?(p.shd?{k:"shd",eq:p.shd}:null):(p.ring?{k:p.ring}:null)}
 function drawBag(){const L=$("bagList"),p=G.p,swap=bagMode==="swap";$("bagTitle").textContent=swap?"足もとの道具":"持ち物";$("bagN").textContent=G.bag.length+"/"+bagCap();
   $("eqSlots").innerHTML=[["wep","ぶき"],["shd","たて"],["ring","ゆびわ"]].map(([s,l])=>{const it=slotItem(s);const cu=it&&it.eq&&it.eq.cur&&it.eq.cv;return '<button class="slot'+(bagSel===s?" sel":"")+'" data-s="'+s+'"'+(cu?' style="background:linear-gradient(#f3e4ff,#dcc0f4);border-color:#8a2ab0"':'')+'><canvas width="56" height="56" data-k="'+(it?skey(it):"")+'"></canvas><span><small>'+l+'</small>'+(it?'<span style="color:'+(cu?"#7a1fa8":RAR[tierOf(it)].c)+'">'+nameOf(it)+'</span>':"なし")+'</span></button>'}).join("");
@@ -1467,7 +1467,9 @@ $("shopAct").onclick=()=>{const o=shopObj,p=G.p;if(shopMode==="buy"){const it=o.
 $("shopClose").onclick=()=>{SFX.ui();$("shop").classList.remove("on");msg("しょうにん「まいど！」");hud();save()};
 /* ===== おわり ===== */
 function gameOver(src){G.over=true;SFX.die();clearSave();addRank(src);const old=getBest().n;setBest(G.floor);const nb=G.floor>old;
-  setTimeout(()=>{$("rT").textContent="やられてしまった…";$("rT").className=nb?"clear":"";$("rInfo").innerHTML="<b>"+G.floor+"階</b>で "+src+" にやられた。<br>レベル "+G.p.lv+"　たおした敵 "+G.p.kills+"<br>"+(nb?"<b style=\"color:#f3c860\">さいこう記録 こうしん！</b><br>":"")+"さいこう記録: "+getBest().txt;show("result")},900)}
+  const dur=FAST?0:1000;HERO_DIE={t0:now(),dur:dur||1};flashC="#ffe8e0";flash=16;scrShake=now();busy=true;lockUntil=now()+dur+50;
+  const go=()=>{$("rT").textContent="やられてしまった…";$("rT").className=nb?"clear":"";$("rInfo").innerHTML="<b>"+G.floor+"階</b>で "+src+" にやられた。<br>レベル "+G.p.lv+"　たおした敵 "+G.p.kills+"<br>"+(nb?"<b style=\"color:#f3c860\">さいこう記録 こうしん！</b><br>":"")+"さいこう記録: "+getBest().txt;show("result")};
+  if(FAST||dur<=0)go();else setTimeout(go,dur)}
 function setBest(f){const b=+localStorage.getItem("rogue-best")||0;if(f>b)localStorage.setItem("rogue-best",String(f))}
 function getBest(){const b=+localStorage.getItem("rogue-best")||0;return {n:b,txt:b?"地下"+b+"階":"なし"}}
 /* 中断データ（ホーム画面アプリが閉じても続きから） */
@@ -2387,18 +2389,24 @@ function frame(t){requestAnimationFrame(frame);if(!$("game").classList.contains(
     {const ic=[];if(e.psn>0)ic.push("☠");if(e.conf>0)ic.push("💫");if(e.slow>0)ic.push("🐌");if(e.par>0)ic.push("⚡");if(e.sleep>0&&e.sleep<99)ic.push("💤");if(e.hide)ic.push("🛡️");if(e.fuse)ic.push("💢");
       if(ic.length){cx.font=Math.round(TS*.3)+"px sans-serif";cx.textAlign="center";const bob=Math.sin(t/200)*TS*.04;ic.forEach((c,j)=>cx.fillText(c,sx+TS*(.5+(j-(ic.length-1)/2)*.32),sy-TS*.02+bob))}}
     if(e.hp<e.mhp){rr(cx,sx+4,sy+TS-5,TS-8,4,2);cx.fillStyle="rgba(40,0,10,.8)";cx.fill();rr(cx,sx+4,sy+TS-5,Math.max(3,(TS-8)*e.hp/e.mhp),4,2);cx.fillStyle="#ff6b7a";cx.fill()}}
-  {const hf=heroFace(),wid=p.wep?p.wep.id:"",shn=p.shd?p.shd.name:"",hc=cached("hero_"+(p.cls||"warrior")+hf+"_"+wid+"_"+shn,TS,1.3,(g,a,b,s)=>drawHero(g,a,b,s,hf,wid,p.cls,shn)),lo=luOff(p),hx=ox+PV.x*TS+lo[0],hy=oy+PV.y*TS+Math.sin(t/330)*TS*0.02+lo[1]-PV.b*TS*.07;HXY=[hx,hy];blit(hc,hx,hy);
-    if(p.hf&&T>=p.hf&&T-p.hf<160){cx.save();cx.globalCompositeOperation="lighter";cx.globalAlpha=.6*(1-(T-p.hf)/160);blit(hc,hx,hy);cx.restore()}
-    {const ic=[];if(p.psn>0)ic.push("☠");if(p.conf>0)ic.push("💫");if(p.slow>0)ic.push("🐌");if(p.par>0)ic.push("⚡");if(p.slp>0)ic.push("💤");
-      if(ic.length){cx.font=Math.round(TS*.32)+"px sans-serif";cx.textAlign="center";const bob=Math.sin(t/200)*TS*.04;ic.forEach((c,j)=>cx.fillText(c,hx+TS*(.5+(j-(ic.length-1)/2)*.34),hy-TS*.12+bob))}}}
+  {const hf=heroFace(),wid=p.wep?p.wep.id:"",shn=p.shd?p.shd.name:"",hc=cached("hero_"+(p.cls||"warrior")+hf+"_"+wid+"_"+shn,TS,1.3,(g,a,b,s)=>drawHero(g,a,b,s,hf,wid,p.cls,shn)),lo=luOff(p),die=HERO_DIE&&T>=HERO_DIE.t0,pr=die?Math.min(1,(T-HERO_DIE.t0)/Math.max(1,HERO_DIE.dur)):0,shk=die&&pr<.4?Math.sin((T-HERO_DIE.t0)/16)*TS*.18*(1-pr/.4):0,sink=die?pr*pr*TS*.6:0,bob=die?0:Math.sin(t/330)*TS*0.02,hx=ox+PV.x*TS+lo[0]+shk,hy=oy+PV.y*TS+bob+lo[1]-PV.b*TS*.07+sink;HXY=[hx,hy];
+    cx.save();if(die){cx.translate(hx+TS/2,hy+TS*.88);cx.rotate(pr*pr*1.25);cx.globalAlpha=pr<.5?1:Math.max(0,1-(pr-.5)/.5);cx.translate(-(hx+TS/2),-(hy+TS*.88))}
+    blit(hc,hx,hy);
+    if(die&&pr<.28){cx.globalCompositeOperation="lighter";cx.globalAlpha=.95*(1-pr/.28);blit(hc,hx,hy)}
+    else if(!die&&p.hf&&T>=p.hf&&T-p.hf<160){cx.globalCompositeOperation="lighter";cx.globalAlpha=.6*(1-(T-p.hf)/160);blit(hc,hx,hy)}
+    cx.restore();
+    if(!die){const ic=[];if(p.psn>0)ic.push("☠");if(p.conf>0)ic.push("💫");if(p.slow>0)ic.push("🐌");if(p.par>0)ic.push("⚡");if(p.slp>0)ic.push("💤");
+      if(ic.length){cx.font=Math.round(TS*.32)+"px sans-serif";cx.textAlign="center";const ib=Math.sin(t/200)*TS*.04;ic.forEach((c,j)=>cx.fillText(c,hx+TS*(.5+(j-(ic.length-1)/2)*.34),hy-TS*.12+ib))}}}
   /* 部屋の中の光のつぶ */
   const ri=G.roomMap[p.y][p.x];if(ri>=0){const r=G.rooms[ri];cx.globalCompositeOperation="lighter";for(const m of MOTES){m.y-=m.v;if(m.y<0){m.y=1;m.x=Math.random()}const mx=ox+(r.x+m.x*r.w)*TS,my=oy+(r.y+m.y*r.h)*TS;cx.globalAlpha=.25+.25*Math.sin(t/500+m.ph);cx.fillStyle="#bfe0ff";cx.beginPath();cx.arc(mx,my,m.r,0,7);cx.fill()}cx.globalAlpha=1;cx.globalCompositeOperation="source-over"}
   /* まわりを少し暗く（たいまつの明かりのような雰囲気） */
   const vg=cx.createRadialGradient(W/2,H/2,Math.min(W,H)*0.28,W/2,H/2,Math.max(W,H)*0.62);vg.addColorStop(0,"rgba(0,0,0,0)");vg.addColorStop(1,"rgba(59,47,110,.35)");cx.fillStyle=vg;cx.fillRect(0,0,W,H);
-  for(let i=DYING.length-1;i>=0;i--){const d=DYING[i],el=T-d.t0,pr=el/560;if(pr>=1){DYING.splice(i,1);continue}const big=ENEMIES[d.k].boss?1.55:1.25,ec=cached("e_"+d.k,TS,big,(g,a,b,s)=>drawEnemy(g,d.k,a,b,s,false)),sx=ox+d.x*TS,sy=oy+d.y*TS;
-    if(el<0){blitF(ec,sx,sy,d.fl);continue}cx.save();const k=pr<.25?1+pr*.4:1.1-(pr-.25)/.75*1.1;cx.globalAlpha=pr<.25?1:Math.max(0,1-(pr-.25)/.75);cx.translate(sx+TS/2,sy+TS*.85);cx.scale(Math.max(.01,k*(1+(pr>.25?(pr-.25)*.6:0))),Math.max(.01,k));cx.translate(-(sx+TS/2),-(sy+TS*.85));blitF(ec,sx,sy,d.fl);
-    if(pr<.35){cx.globalCompositeOperation="lighter";cx.globalAlpha=.9*(1-pr/.35);blitF(ec,sx,sy,d.fl)}cx.restore();
-    if(pr>.2){const q=(pr-.2)/.8;cx.save();cx.globalAlpha=Math.max(0,1-q);cx.fillStyle="#f4f0ff";for(let j=0;j<7;j++){const a=j/7*6.283+.4,r=TS*(.12+q*.42);cx.beginPath();cx.arc(sx+TS/2+Math.cos(a)*r,sy+TS*.6+Math.sin(a)*r*.6-q*TS*.15,TS*(.11*(1-q)+.03),0,7);cx.fill()}cx.restore()}}
+  for(let i=DYING.length-1;i>=0;i--){const d=DYING[i],dur=d.dur||420,el=T-d.t0,pr=el/dur;if(pr>=1){DYING.splice(i,1);continue}const boss=!!(ENEMIES[d.k]&&ENEMIES[d.k].boss),big=boss?1.7:1.25,ec=cached("e_"+d.k,TS,big,(g,a,b,s)=>drawEnemy(g,d.k,a,b,s,false)),sx=ox+d.x*TS,sy=oy+d.y*TS;
+    if(el<0){blitF(ec,sx,sy,d.fl);continue}
+    const shk=pr<.35?Math.sin(el/16)*TS*(boss?.18:.12)*(1-pr/.35):0,sink=pr<.2?0:(pr-.2)/.8*TS*(boss?.7:.5),alp=pr<.22?1:Math.max(0,1-(pr-.22)/.78),tilt=(pr<.18?0:(pr-.18)*.7)*((d.fl==="l"||(d.fl&&String(d.fl).indexOf("l")>=0))?-1:1);
+    cx.save();cx.translate(sx+TS/2+shk,sy+TS*.85+sink);cx.rotate(tilt);cx.globalAlpha=alp;cx.translate(-(sx+TS/2),-(sy+TS*.85));blitF(ec,sx,sy,d.fl);
+    if(pr<.32){cx.globalCompositeOperation="lighter";cx.globalAlpha=.95*(1-pr/.32);blitF(ec,sx,sy,d.fl)}cx.restore();
+    if(pr>.15&&pr<.95){const q=(pr-.15)/.8;cx.save();cx.globalAlpha=Math.max(0,.7-q*.7);cx.fillStyle="#f4f0ff";for(let j=0;j<7;j++){const a=j/7*6.283+.4,r=TS*(.1+q*.4);cx.beginPath();cx.arc(sx+TS/2+shk+Math.cos(a)*r,sy+TS*.55+sink+Math.sin(a)*r*.55-q*TS*.2,TS*(.1*(1-q)+.03),0,7);cx.fill()}cx.restore()}}
   for(const f of FX)if(f.type==="lvup"){const el=T-f.t0;if(el<0)continue;const pr=el/f.dur;if(pr>=1){f.dead=1;continue}const hx=ox+f.x*TS+TS/2,hy=oy+f.y*TS+TS/2;cx.save();cx.globalCompositeOperation="lighter";
     const a=pr<.15?pr/.15:pr>.7?(1-pr)/.3:1;cx.globalAlpha=a*.55;const gr=cx.createLinearGradient(0,hy-TS*1.6,0,hy+TS*.5);gr.addColorStop(0,"rgba(255,240,150,0)");gr.addColorStop(.6,"rgba(255,240,150,.9)");gr.addColorStop(1,"rgba(255,255,255,.2)");cx.fillStyle=gr;cx.fillRect(hx-TS*.38,hy-TS*1.6,TS*.76,TS*2.1);
     cx.globalAlpha=a;glow(cx,hx,hy,TS*(.7+.15*Math.sin(el/90)),"rgba(255,230,120,.45)");for(let j=0;j<6;j++){const q=(pr*1.6+j/6)%1;star(cx,hx+Math.sin(j*2.1+el/300)*TS*.42,hy+TS*.4-q*TS*1.5,TS*.07*(1-q*.5),"#fff6c0")}cx.restore();
