@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<meta name="rogue-rev" content="20261110b">
+<meta name="rogue-rev" content="20261111a">
 <meta name="theme-color" content="#9fe0ff">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <script>try{if(navigator.standalone||matchMedia("(display-mode: standalone)").matches){document.documentElement.classList.add("sa");const st=()=>{const g=document.querySelector(".scr");if(!g)return;const r=g.getBoundingClientRect(),d=document.documentElement.style;d.setProperty("--gt",r.top+"px");d.setProperty("--gb",Math.max(0,innerHeight-r.bottom)+"px")};addEventListener("resize",st);addEventListener("load",st);setTimeout(st,300)}}catch(e){}</script>
 <meta name="apple-mobile-web-app-title" content="ふしぎな地下">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261110b">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261110b">
-<link rel="manifest" href="manifest.webmanifest?v=20261110b">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261111a">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261111a">
+<link rel="manifest" href="manifest.webmanifest?v=20261111a">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800;900&display=swap" rel="stylesheet">
 <title>ふしぎな地下ダンジョン</title>
 <style>
@@ -342,7 +342,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
   <button class="big" id="bCont">つづきから</button>
   <button class="big" id="bStart">はじめから</button>
   <div class="tRow"><button class="big sub" id="bHow">あそびかた</button><button class="big sub" id="bRank">ランキング</button></div>
-  <div class="ver">rev 20261110b</div>
+  <div class="ver">rev 20261111a</div>
 </section>
 
 <section id="rank" class="scr">
@@ -357,7 +357,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
   <div class="hw"><b>主人公</b>：はじめに 4人から えらぶ。<br>せんし＝ひろう剣・盾のレベルが高め／まほうつかい＝杖をふれる回数＋3／しょうにん＝ポーチ＋4、ひろうお金1.5倍／あそびにん＝いいアイテムをひろいやすい。</div>
   <div class="hw"><b>うごく</b>：十字ボタン（ななめもOK）。押しっぱなしで 続けて歩く。<br><b>むき</b>：光っている間は 矢印で むきだけ かわる。<br><b>こうげき</b>：むいている方向へ こうげき。敵がいなければ からぶり（休むかわりにもなる）。<br><b>足もと</b>：足もとの道具を ひろう・つかう・なげる・いれかえ できる。<br><b>おりる</b>：階段の上で押す。<br><b>ゆみ</b>：いつも もっている。や を 1本つかって むいている方向へ うつ。や は ダンジョンで ひろえる。<br><b>像</b>：こうげきすると こわれて 力が 出る。<br><b>なげる</b>：むいている方向へ 7マスまで。<br><b>むきで とぶ道具</b>：杖・なげる道具は むいている方向へ。「目の前だけ」「7マス」「どこまでも」の しゅるいが ある。巻物は 向きに かんけいなし。</div>
   <div class="hw" id="howList"></div>
-  <div class="hw"><b>おなか</b>：1回うごくと 1へる（さいしょ 500）。0になると HPがへる（でも 1より下には へらない）。塩むすび＝+150、シャケおむすび＝+300、ジャンボおむすび＝おなか ぜんぶ回ふく、まんがにく＝おなかも HPも ぜんぶ回ふく。いぶくろのたね＝最大おなか +100。<br><b>レベル</b>：<b>こうげき・ぼうぎょ・HP</b>から1つえらぶ。どれでも だいじょうぶ。<br><b>ぶき・たての Lv</b>：Lvが高いほど 強い。深い階ほど 高いLvが 出やすい。<br>
+  <div class="hw"><b>おなか</b>：1回うごくと 1へる（さいしょ 500）。0になると HPがへる（でも 1より下には へらない）。塩むすび＝+150、シャケおむすび＝+300、ジャンボおむすび＝おなか ぜんぶ回ふく、まんがにく＝おなかも HPも ぜんぶ回ふく。いぶくろのたね＝最大おなか +100。<br><b>レベル</b>：<b>こうげき・ぼうぎょ・HP</b>から1つえらぶ。どれでも だいじょうぶ。<br><b>ぶき・たての Lv</b>：Lvが高いほど 強い。深い階ほど 高いLvが 出やすい。拾ったばかりは <b>Lv？</b> で、鑑識の巻物をよむと わかる（そうびしても わからない）。<br><b>杖</b>：拾ったときは 「あかの杖」のような 仮の名前。1回つかう（当たっても はずれても）か、鑑識の巻物で ほんとうの しゅるいが わかる。同じしゅるいは 全部 わかる。<br><b>ちずの巻物</b>：この階の 部屋・通路・階段が わかる。わなは 見えない（わなみえの巻物で 見える）。<br>
 <b>ぶきは 6しゅるい</b>：剣（とくぎなし）／ワイドソード（前の3マス）／ロングソード（2マス先）／レインボーソード（ランダムな 状態異常）／日本刀（会心が出やすい）／短剣（2回こうげき）。<br>
 <b>たても 6しゅるい</b>：盾（とくぎなし）／みがわりの盾（状態異常を ふせぐ）／かえしの盾（ダメージを かえす）／はんげきの盾（はんげきする）／いやしの盾（毎ターン 少し回ふく）／かわしの盾（よけやすい）。<br>
 <b>とくぎ</b>：HPが 最大の <b>2/3いか</b> のときだけ はたらく。そのとき HPゲージが オレンジ色に かわって 「とくぎ」と 出る。<br><b>お金</b>：ひろったり 敵が 落としたり。<b>しょうにん</b>が いる階では 買い物が できる（ぶつかると 話せる）。<br><b>状態異常</b>：<b style="color:#5ab030">どく</b>＝HPがへる／<b style="color:#e050c0">こんらん</b>＝思った方へ 歩けない／<b style="color:#d09020">どんそく</b>＝敵が 2回うごく／<b style="color:#8a70e0">ねむり</b>・<b style="color:#d0b000">しびれ</b>＝うごけない。敵にも きく。万能薬で なおる。<br><b>会心の一撃</b>：ときどき ダメージ1.5倍。<br><b>★レア度</b>：★が多いほど 強くて めずらしい。<br><b>ゆびわ</b>：1つだけ。つけている間 ずっと効く。<br><b>モンスターの証</b>：敵を たおすと たまに（1%）ゆかに おちる。ひろうと +1（持ち物の わくは つかわない）。+1ごとに すべての敵の EXPが 10%ふえる。持ち物画面で 見られる。<br><b>ボスの階</b>：10階ごと。ボスを たおすと 階段が出る。ボスは なかまを よぶことも ある。</div>
@@ -417,7 +417,7 @@ html.sa #obs{top:var(--gt,0px)!important;bottom:var(--gb,0px)!important}
 <script>
 "use strict";
 const $=id=>document.getElementById(id);
-const REV="20261110b";
+const REV="20261111a";
 /* ===== 音 ===== */
 let AC=null;
 function ac(){try{if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();if(AC.state==="suspended")AC.resume()}catch(e){}return AC}
@@ -515,6 +515,7 @@ const ITEMS={
   wandup:{name:"杖の巻物",d:"えらんだ 杖 1本の 回数が 3ふえる",w:2,f:3,c:"scroll",art:["scroll","#e8ffe8","#40b070"],sd:"杖 1本 回数+3"},
   shdup:{name:"たての巻物",d:"そうびしている たての Lvが 1上がる。のろいも とける",w:2,f:2,c:"scroll",art:["scroll","#fff0c8","#d9a030"],sd:"たて Lv+1"},
   wanasc:{name:"わなみえの巻物",d:"この階の わなが ぜんぶ 見える",w:2,f:1,c:"scroll",art:["scroll","#ffe4e4","#e04848"],sd:"わなが 見える"},
+  idfy:{name:"鑑識の巻物",d:"持ち物の ぶき・たて・杖 から 1つえらんで、ぶき・たての Lv や 杖の しゅるいが わかる",w:2,f:2,c:"scroll",art:["scroll","#fff6d0","#c8a030"],sd:"ぶき・たて・杖を けんしき"},
   stairsc:{name:"かいだんの巻物",d:"階段のとなりへワープする",w:2,f:2,c:"scroll",art:["scroll","#d8e4ff","#3a5cff"],sd:"階段のそばへ"},
   holy:{name:"せいなる巻物",d:"見えている敵のHPを半分にする",w:2,f:4,c:"scroll",art:["scroll","#ffffff","#ffe27a"],rare:1,sd:"見える敵の HP半分"},
   treasure:{name:"たからの巻物",d:"この階に道具が3つふえる（地図にのる）",w:1,f:3,c:"scroll",art:["scroll","#fff6c8","#ff9ad0"],rare:1,sd:"道具が 3つ出る"},
@@ -594,7 +595,7 @@ const OBJS={
 /* ===== 状態 ===== */
 let G=null;   /* 1回の冒険 */
 function newRun(cls){cls=CLS[cls]?cls:"warrior";
-  G={floor:1,turn:0,sv:5,idv:1,p:{x:0,y:0,arrows:5,hp:30,mhp:30,lv:1,exp:0,atk:2,def:2,food:500,fmax:500,wep:{id:"ken",lv:1,cur:0,idf:1},shd:{name:"盾",lv:1,cur:0,idf:1},dir:[0,1],psn:0,slp:0,conf:0,slow:0,par:0,regen:0,kills:0,sv:5,lvq:0,atkP:0,defP:0,hpP:0,cls,gold:0,iluck:cls==="joker"?2:0,ring:null,buf:{atk:0,def:0,regen:0}},
+  G={floor:1,turn:0,sv:5,idv:1,knownWands:{},wandAlias:makeWandAlias(),p:{x:0,y:0,arrows:5,hp:30,mhp:30,lv:1,exp:0,atk:2,def:2,food:500,fmax:500,wep:{id:"ken",lv:1,cur:0,idf:1},shd:{name:"盾",lv:1,cur:0,idf:1},dir:[0,1],psn:0,slp:0,conf:0,slow:0,par:0,regen:0,kills:0,sv:5,lvq:0,atkP:0,defP:0,hpP:0,cls,gold:0,iluck:cls==="joker"?2:0,ring:null,buf:{atk:0,def:0,regen:0}},
      bag:[],log:[],map:null,seen:null,ents:[],items:[],stairs:null,rooms:[],spawnT:0,objs:[],boss:0};
   genFloor();msg("ふしぎな地下ダンジョンに入った。","y");msg("どこまで もぐれるかな？ 10階ごとに ボスがいるよ！");
 }
@@ -786,9 +787,11 @@ function shootBow(){const p=G.p;if(!G||G.over||busy)return;if(p.lvq>0){showLv();
   let [dx,dy]=p.dir;if(p.conf>0&&Math.random()<.6)[dx,dy]=confDir();p.arrows--;swing(dx,dy);
   let x=p.x,y=p.y,hit=null;for(let i=0;i<10;i++){if(!flyStep(x,y,dx,dy))break;x+=dx;y+=dy;const o=entAt(x,y);if(o){hit=o;break}}
   FX.push({type:"arrow",x:p.x,y:p.y,x2:x,y2:y,a:0});SFX.miss();
-  if(hit){const E=ENEMIES[hit.k];if(E.ghost){msg("や は "+E.name+"を すりぬけた！","w")}else if(hit.hide){msg(E.name+"は こうらで はじいた！","w")}else{let d=dmgCalc(Math.round(atkOf()*.6)+4+Math.floor(G.floor*.6),hit.def);if(E.hard)d=1;hit.aware=20;msg("や が "+E.name+"に あたった！ "+d+"のダメージ。","y");dmgE(hit,d,"#fff")}}
-  else msg("や は 何にも あたらなかった。");
-  hud();endTurn();hud()}
+  const finish=()=>{if(!G||G.over)return;
+    if(hit&&G.ents.includes(hit)){const E=ENEMIES[hit.k];if(E.ghost){msg("や は "+E.name+"を すりぬけた！","w")}else if(hit.hide){msg(E.name+"は こうらで はじいた！","w")}else{let d=dmgCalc(Math.round(atkOf()*.6)+4+Math.floor(G.floor*.6),hit.def);if(E.hard)d=1;hit.aware=20;msg("や が "+E.name+"に あたった！ "+d+"のダメージ。","y");dmgE(hit,d,"#fff")}}
+    else msg("や は 何にも あたらなかった。");
+    hud();endTurn();hud()};
+  const w=FAST?0:impactWait()+40;if(w<=0)finish();else{busy=true;lockUntil=now()+w+50;hud();setTimeout(()=>{busy=false;finish()},w)}}
 /* ===== 状態異常 ===== */
 /* t: どれだけ続くか。magic=まほうで かかった（まほうつかいは かからない） */
 function setSt(o,k,t,magic){const isP=o===G.p,S=STS[k];
@@ -836,7 +839,7 @@ function pickUp(i){const it=G.items[i];
   {G.bag.push(it);const tr=tierOf(it);msg((tr>=2?'<span style="color:'+RAR[tr].c+'">'+nameOf(it)+'</span>':nameOf(it))+"をひろった。"+(tr>=2?rarTag(it)+(tr===4?"！":""):""),"g")}
   SFX.pick();interrupt=true;
 }
-const nameOf=it=>it.k==="proof"?"モンスターの証":it.k==="gold"?it.amt+"ゴールド":it.k==="arrow"?"や "+it.amt+"本":(it.eq&&it.eq.cur&&it.eq.cv?"💀":"")+(it.k==="wep"?wdef(it.eq).n+(it.eq.idf?" Lv"+(it.eq.lv||1):" Lv?"):it.k==="shd"?it.eq.name+(it.eq.idf?" Lv"+(it.eq.lv||1):" Lv?"):"")+(it.eq&&it.eq.cur&&it.eq.cv?"（のろい）":"")+(it.eq?"":ITEMS[it.k].name+(it.n!=null?"（あと"+it.n+"回）":""));
+const nameOf=it=>{if(it.k==="proof")return "モンスターの証";if(it.k==="gold")return it.amt+"ゴールド";if(it.k==="arrow")return "や "+it.amt+"本";if(it.k==="wep"||it.k==="shd"){const cur=it.eq&&it.eq.cur&&it.eq.cv;return (cur?"💀":"")+(it.k==="wep"?wdef(it.eq).n:it.eq.name)+(it.eq.idf?" Lv"+(it.eq.lv||1):" Lv？")+(cur?"（のろい）":"")}if(isWand(it.k)){const n=wandKnown(it.k)?ITEMS[it.k].name:wandFakeName(it.k);return n+(it.n!=null?"（あと"+it.n+"回）":"")}return ITEMS[it.k].name+(it.n!=null?"（あと"+it.n+"回）":"")};
 function dmgCalc(atk,def){atk=Math.max(1,atk);def=Math.max(0,def);const a=atk*(0.85+Math.random()*0.3);return Math.max(1,Math.round(BAL.dm?Math.max(a*BAL.fl,a-def*BAL.ds):a*atk/(atk+def*BAL.dk)))}
 const now=()=>performance.now();let lockUntil=0;
 function talkObj(){const p=G.p,[dx,dy]=p.dir||[0,0];if(!dx&&!dy)return null;const so=objAt(p.x+dx,p.y+dy);return so&&(so.k==="shop"||so.k==="jug")&&canStep(p.x,p.y,dx,dy)?so:null}
@@ -962,7 +965,7 @@ const pct=v=>Math.round(v*100)+"%";
 /* レア度: 1ふつう 2めずらしい 3とてもめずらしい 4でんせつ。強いものほど出にくい */
 const RAR=[null,{n:"ふつう",s:"★",c:"#6a5a90"},{n:"めずらしい",s:"★★",c:"#1586d0"},{n:"とてもめずらしい",s:"★★★",c:"#a03fe0"},{n:"でんせつ",s:"★★★★",c:"#e07800"}];
 const TW=[0,100,30,9,2.5];
-const ITIER={uncurse:2,food2:2,food3:3,fseed:3,cure:2,wsmash:2,wpar:2,wpull:2,wswap:2,wconf:2,wslow:2,wpierce:3,herb:1,food:1,bomb:1,stone1:1,stone2:2,stone3:3,warp:1,mapsc:1,wanasc:1,fire:1,pred:2,thunder:2,sleep:2,ice:2,pstr:2,pdef:2,wsleep:2,wpush:2,stairsc:2,life:2,herb2:3,pregen:3,wbolt:3,holy:3,wepup:3,shdup:3,wandup:3,power:3,dseed:3,rheal:3,rfood:3,meat:3,hseed:4,treasure:4,myst:3,wdrain:4,rstr:4,rdef:4,rluck:4,rexp:4};
+const ITIER={uncurse:2,food2:2,food3:3,fseed:3,cure:2,wsmash:2,wpar:2,wpull:2,wswap:2,wconf:2,wslow:2,wpierce:3,herb:1,food:1,bomb:1,stone1:1,stone2:2,stone3:3,warp:1,mapsc:1,wanasc:1,fire:1,pred:2,thunder:2,sleep:2,ice:2,pstr:2,pdef:2,wsleep:2,wpush:2,stairsc:2,life:2,herb2:3,pregen:3,wbolt:3,holy:3,wepup:3,shdup:3,wandup:3,idfy:2,power:3,dseed:3,rheal:3,rfood:3,meat:3,hseed:4,treasure:4,myst:3,wdrain:4,rstr:4,rdef:4,rluck:4,rexp:4};
 const ISHARE={herb:1.5,food:2.1,bomb:.8,stone1:.7,warp:.7,mapsc:.7,wanasc:.6,fire:.8};
 const wTier=id=>(WDEF[id]&&WDEF[id].r)||1;
 const sTier=sh=>(typeof sh==="string"?(SHIELDS.find(x=>x.name===sh)||{}).r:(sh&&sh.r))||1;
@@ -1165,36 +1168,75 @@ function tileFree(x,y,allowEnt){return !wall(x,y)&&!G.items.some(i=>i.x===x&&i.y
 function dropSpot(x,y,allowEnt){if(tileFree(x,y,true))return [x,y];const c=[];for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){if(!dx&&!dy)continue;const nx=x+dx,ny=y+dy;if(tileFree(nx,ny,allowEnt)&&!(nx===G.p.x&&ny===G.p.y&&!(x===G.p.x&&y===G.p.y)))c.push([nx,ny])}return c.length?pick(c):null}
 function placeItem(it,x,y){const s=dropSpot(x,y,true);if(!s)return false;delete it.shown;G.items.push({...it,x:s[0],y:s[1]});return s}
 const isWand=k=>ITEMS[k]&&ITEMS[k].c==="wand",isPot=k=>["pred","pregen","pstr","pdef"].includes(k);
+/* 杖の 仮の名前（冒険ごとに 色が 入れかわる） */
+const WANDFAKE=[["あか","#ffd0d0","#e03838"],["あお","#d0e8ff","#2060e0"],["きいろ","#fff6b0","#e0b000"],["みどり","#d0ffd0","#208830"],["むらさき","#f0d0ff","#8030c8"],["しろ","#ffffff","#a0a8b8"],["くろ","#d0d0d8","#303040"],["ピンク","#ffd8f0","#e04090"],["みずいろ","#d0fff8","#20a0c0"],["だいだい","#ffe0c0","#e06010"],["ちゃいろ","#f0dcc0","#8a4a20"]];
+function makeWandAlias(){const keys=Object.keys(ITEMS).filter(k=>ITEMS[k].c==="wand"),cols=WANDFAKE.slice();
+  for(let i=cols.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[cols[i],cols[j]]=[cols[j],cols[i]]}
+  const o={};keys.forEach((k,i)=>o[k]=cols[i%cols.length][0]);return o}
+function wandKnown(k){return !isWand(k)||!G||!!(G.knownWands&&G.knownWands[k])}
+function wandFakeName(k){const n=(G&&G.wandAlias&&G.wandAlias[k])||"？？";return n+"の杖"}
+function identWand(k,silent){if(!isWand(k)||wandKnown(k))return false;G.knownWands=G.knownWands||{};G.knownWands[k]=1;if(!silent){msg("これは "+ITEMS[k].name+" だった！","y");popMsg("🪄 "+ITEMS[k].name+"！")}return true}
+function identGear(eq,kind){if(!eq||eq.idf)return false;eq.idf=1;const it={k:kind,eq};msg(nameOf(it)+" だと わかった！","y");popMsg("🔎 "+nameOf(it)+"！");return true}
+
 /* なげる: むいている方向へ 7マスまで。最初の敵に あたる */
-function throwItem(it){const p=G.p,d=p.dir||[0,1],E0=null;let x=p.x,y=p.y,hit=null,n=0;
+function throwItem(it){const p=G.p,d=p.dir||[0,1];let x=p.x,y=p.y,hit=null,n=0;
   for(n=1;n<=7;n++){if(!flyStep(x,y,d[0],d[1]))break;x+=d[0];y+=d[1];const e=entAt(x,y);if(e){hit=e;break}}
   if(!hit)n--;const ex=p.x+d[0]*n,ey=p.y+d[1]*n;
   const tEnd=now()+70+Math.max(1,n)*55;FX.push({type:"throw",k:skey(it),x:p.x,y:p.y,x2:hit?hit.x:ex,y2:hit?hit.y:ey,t0:now(),dur:70+Math.max(1,n)*55});SFX.miss();swing(d[0],d[1]);
-  const nm=nameOf(it);msg(nm+"を なげた。");
-  const land=()=>{if(isPot(it.k)){msg(nm+"は われてしまった。");return}const s=placeItem(it,hit?hit.x:ex,hit?hit.y:ey);if(s&&!FAST)G.items[G.items.length-1].ap=tEnd;/* とんでいる あいだは ゆかに 見せない */if(!s)msg(nm+"は どこかへ 消えてしまった。")};
-  if(!hit){land();return}
-  const E=ENEMIES[hit.k];hit.aware=20;hit.sleep=0;let dmg=0,col="#fff",gone=false,fixed=false;const STD={stone1:20,stone2:40,stone3:80};
-  if(it.k==="wep")dmg=Math.round(wv(it.eq)*1.2+3+G.floor*.5);
-  else if(it.k==="shd")dmg=Math.round(sv(it.eq)+2);
-  else if(it.k==="knife"){dmg=15+G.floor*2;gone=true}
-  else if(STD[it.k]){dmg=STD[it.k];gone=true;fixed=true;col="#ffd24a"}
-  else if(it.k==="ice"){dmg=8+G.floor;gone=true;col="#fff06a";setTimeout(()=>{},0);if(hit.hp-dmg>0)hit.sleepQ=1}
-  else if(it.k==="fire"){dmg=30+G.floor*4;gone=true;col="#ffb44a";msg("巻物が はじけた！","y")}
-  else if(it.k==="bomb"){SFX.boom();boomFx(hit.x,hit.y);msg("ばくだんが 爆発した！","y");for(const e of G.ents.slice()){if(Math.abs(e.x-hit.x)<=1&&Math.abs(e.y-hit.y)<=1){const dd=ENEMIES[e.k].one?1:25+G.floor*2;e.hp-=dd;e.sleep=0;e.aware=20;fx(e.x,e.y,""+dd,"#ffb44a");if(e.hp<=0)killEnemy(e,ENEMIES[e.k])}}return}
-  else if(["herb","herb2","pred"].includes(it.k)){const h=it.k==="herb"?30:it.k==="pred"?60:hit.mhp;const hh=Math.min(h,hit.mhp-hit.hp);hit.hp+=hh;fx(hit.x,hit.y,"+"+hh,"#7dff9a");msg(E.name+"の HPが 回ふくしてしまった…","w");gone=true}
-  else if(it.k==="pregen"){hit.hp=hit.mhp;fx(hit.x,hit.y,"+","#7dff9a");msg(E.name+"は 元気に なってしまった…","w");gone=true}
-  else if(it.k==="pstr"){hit.atk=Math.round(hit.atk*1.3);msg(E.name+"が 強くなってしまった！","w");gone=true}
-  else if(it.k==="pdef"){hit.def+=4;msg(E.name+"の まもりが 上がってしまった！","w");gone=true}
-  else if(it.k==="sleep"||it.k==="wsleep"){hit.sleep=E.boss?3:8;fx(hit.x,hit.y,"Zz","#b9a7ff");msg(E.name+"は ねむってしまった。","y");dmg=it.k==="wsleep"?3:0;gone=it.k==="sleep"}
-  else if(ITEMS[it.k]&&ITEMS[it.k].c==="food"){dmg=2;msg(E.name+"に "+nm+"が ぶつかった。","")}
-  else dmg=isWand(it.k)?4:2;
-  if(dmg>0){if(!fixed)dmg=Math.max(1,dmg-Math.floor((hit.def||0)*.3));if(fixed)FX.push({type:"hit",x:hit.x,y:hit.y,t0:now()+impactWait(),c:col});if(ENEMIES[hit.k].one)dmg=1;hit.hp-=dmg;hit.hf=now();shake(hit);fx(hit.x,hit.y,""+dmg,col);SFX.hit();msg(E.name+"に "+dmg+"の ダメージ！")}
-  if(hit.hp<=0)killEnemy(hit,E);else if(hit.sleepQ){delete hit.sleepQ;hit.sleep=E.boss?3:8;fx(hit.x,hit.y,"Zz","#b9a7ff");msg(E.name+"は ねむってしまった。","y")}
-  if(isPot(it.k))msg(nm+"は われてしまった。");else msg(nm+"は 消えてしまった。")}
+  const nm0=nameOf(it);msg(nm0+"を なげた。");
+  const land=()=>{if(isPot(it.k)){msg(nm0+"は われてしまった。");return}const s=placeItem(it,hit?hit.x:ex,hit?hit.y:ey);if(s&&!FAST)G.items[G.items.length-1].ap=tEnd;if(!s)msg(nm0+"は どこかへ 消えてしまった。")};
+  const apply=()=>{if(!G||G.over)return;if(!hit||!G.ents.includes(hit)){land();return}applyThrowHit(it,hit)};
+  if(FAST)apply();else setTimeout(apply,Math.max(0,tEnd-now()))}
+function applyThrowHit(it,hit){const p=G.p,E=ENEMIES[hit.k],I=ITEMS[it.k]||{};hit.aware=20;hit.sleep=0;
+  const nm=()=>nameOf(it),gone=()=>{if(isPot(it.k))msg(nm()+"は われてしまった。");else msg(nm()+"は 消えてしまった。")};
+  const dmgTo=(d,col,fixed)=>{if(!G.ents.includes(hit))return;if(!fixed)d=Math.max(1,d-Math.floor((hit.def||0)*.3));if(E.hard)d=1;if(E.one)d=1;if(fixed)FX.push({type:"hit",x:hit.x,y:hit.y,t0:now(),c:col||"#ffd24a"});hit.hp-=d;hit.hf=now();shake(hit);fx(hit.x,hit.y,""+d,col||"#fff");SFX.hit();msg(E.name+"に "+d+"の ダメージ！");if(hit.hp<=0)killEnemy(hit,E)};
+  const bump=()=>{dmgTo(2,"#fff");gone()};
+  /* 杖: 1回ぶんの こうかを あたえて、残っていれば 落ちる */
+  if(isWand(it.k)){identWand(it.k);it.n=(it.n==null?I.n:it.n)-1;
+    const k=it.k;
+    if(k==="wbolt"){msg(E.name+"に"+(25+G.floor*3)+"のダメージ！","y");dmgE(hit,25+G.floor*3,"#ffb44a")}
+    else if(k==="wsmash"){msg(E.name+"に"+(40+G.floor*5)+"のダメージ！","y");dmgE(hit,40+G.floor*5,"#ffb44a")}
+    else if(k==="wpierce"){msg(E.name+"に"+(18+G.floor*2)+"のダメージ！","y");dmgE(hit,18+G.floor*2,"#9ac0ff")}
+    else if(k==="wsleep"){hit.sleep=E.boss?4:14;stFX(hit,"slp");msg(E.name+"はねむってしまった。","y")}
+    else if(k==="wpar"){setSt(hit,"par",10)}
+    else if(k==="wconf"){setSt(hit,"conf",12)}
+    else if(k==="wslow"){setSt(hit,"slow",16)}
+    else if(k==="wdrain"){const d=Math.min(15,hit.hp);lfx(p.x,p.y,"+"+heal(d),"#7dff9a");msg(E.name+"からHPをうばった！","y");dmgE(hit,15,"#ff7ab0")}
+    else if(k==="wpush"){ringFx(hit.x,hit.y,"#a0f0ff");for(let t=0;t<200;t++){const r=pick(G.rooms),x=r.x+R(r.w),y=r.y+R(r.h);if(wall(x,y)||entAt(x,y)||(x===p.x&&y===p.y)||objAt(x,y)||Math.max(Math.abs(x-p.x),Math.abs(y-p.y))<=6)continue;hit.x=x;hit.y=y;break}if(G.ents.includes(hit))hit.aware=0;SFX.warp();msg(E.name+"をふきとばした！","y")}
+    else if(k==="wpull"){const [dx,dy]=p.dir,fx2=p.x+dx,fy2=p.y+dy;if(!entAt(fx2,fy2)&&canStep(p.x,p.y,dx,dy)){ringFx(hit.x,hit.y,"#d0a0ff");hit.x=fx2;hit.y=fy2;ringFx(hit.x,hit.y,"#d0a0ff")}msg(E.name+"を ひきよせた！","y");SFX.warp()}
+    else if(k==="wswap"){ringFx(hit.x,hit.y,"#80ffc0");ringFx(p.x,p.y,"#80ffc0");const tx=hit.x,ty=hit.y;hit.x=p.x;hit.y=p.y;p.x=tx;p.y=ty;updateSight();msg(E.name+"と 場所を いれかえた！","y");SFX.warp()}
+    if(it.n>0){const s=placeItem(it,hit.x,hit.y);msg(s?nm()+"は 落ちた。（あと"+it.n+"回）":nm()+"は どこかへ 消えてしまった。")}
+    else msg(nm()+"は 消えてしまった。");
+    return}
+  if(it.k==="wep"){dmgTo(Math.round(wv(it.eq)*1.2+3+G.floor*.5));gone();return}
+  if(it.k==="shd"){dmgTo(Math.round(sv(it.eq)+2));gone();return}
+  if(it.k==="knife"){dmgTo(15+G.floor*2);gone();return}
+  const STD={stone1:20,stone2:40,stone3:80};
+  if(STD[it.k]){dmgTo(STD[it.k],"#ffd24a",true);gone();return}
+  if(it.k==="ice"){const d=8+G.floor;dmgTo(d,"#fff06a");if(G.ents.includes(hit)){hit.sleep=E.boss?3:8;fx(hit.x,hit.y,"Zz","#b9a7ff");msg(E.name+"は ねむってしまった。","y")}gone();return}
+  if(it.k==="bomb"){SFX.boom();boomFx(hit.x,hit.y);msg("ばくだんが 爆発した！","y");for(const e of G.ents.slice()){if(Math.abs(e.x-hit.x)<=1&&Math.abs(e.y-hit.y)<=1){const dd=ENEMIES[e.k].one?1:25+G.floor*2;e.hp-=dd;e.sleep=0;e.aware=20;fx(e.x,e.y,""+dd,"#ffb44a");if(e.hp<=0)killEnemy(e,ENEMIES[e.k])}}return}
+  if(it.k==="herb"||it.k==="pred"||it.k==="pregen"||it.k==="herb2"){const h=it.k==="herb"||it.k==="herb2"?30:it.k==="pred"?100:hit.mhp;const hh=Math.min(h,(hit.mhp||hit.hp)-hit.hp);hit.hp+=Math.max(0,hh);fx(hit.x,hit.y,"+"+Math.max(0,hh),"#7dff9a");msg(E.name+"の HPが 回ふくしてしまった…","w");gone();return}
+  if(it.k==="cure"){clearSt(hit);msg(E.name+"の 状態異常が なおってしまった…","w");gone();return}
+  if(it.k==="meat"){hit.hp=hit.mhp||hit.hp;fx(hit.x,hit.y,"+","#7dff9a");msg(E.name+"は 元気に なってしまった…","w");gone();return}
+  if(I.c==="food"){bump();return}
+  if(it.k==="pstr"){hit.atk=Math.round(hit.atk*1.5);msg(E.name+"が 強くなってしまった！","w");gone();return}
+  if(it.k==="pdef"){hit.def=Math.round((hit.def||0)*1.5);msg(E.name+"の まもりが 上がってしまった！","w");gone();return}
+  if(it.k==="sleep"){hit.sleep=E.boss?3:8;fx(hit.x,hit.y,"Zz","#b9a7ff");msg(E.name+"は ねむってしまった。","y");gone();return}
+  if(it.k==="thunder"){const d=20+G.floor*3;FX.push({type:"zap",x:hit.x,y:hit.y,t0:now(),dur:600});SFX.thunder();msg(E.name+"に かみなり！","y");dmgE(hit,d,"#ffe36b");gone();return}
+  if(it.k==="fire"){const d=30+G.floor*4;msg("巻物が はじけた！","y");dmgE(hit,d,"#ffb44a");gone();return}
+  if(it.k==="holy"){const d=Math.max(1,Math.floor(hit.hp/2));msg("せいなる光が "+E.name+"を つつむ！","y");dmgE(hit,d,"#fff6b0");gone();return}
+  if(it.k==="warp"){if(E.boss){msg("ボスは ワープできなかった。","w");gone();return}ringFx(hit.x,hit.y,"#c8a8ff");for(let t=0;t<200;t++){const r=pick(G.rooms),x=r.x+R(r.w),y=r.y+R(r.h);if(wall(x,y)||entAt(x,y)||(x===p.x&&y===p.y)||objAt(x,y))continue;hit.x=x;hit.y=y;break}if(G.ents.includes(hit))hit.aware=0;SFX.warp();msg(E.name+"は どこかへ ワープした！","y");gone();return}
+  if(it.k==="power"){hit.atk=(hit.atk||0)+1;msg(E.name+"の こうげきが 上がってしまった！","w");gone();return}
+  if(it.k==="dseed"){hit.def=(hit.def||0)+1;msg(E.name+"の まもりが 上がってしまった！","w");gone();return}
+  if(it.k==="life"){hit.mhp=(hit.mhp||hit.hp)+5;hit.hp+=5;fx(hit.x,hit.y,"+5","#7dff9a");msg(E.name+"の 最大HPが ふえてしまった…","w");gone();return}
+  if(it.k==="hseed"){hit.atk=(hit.atk||0)+1;hit.def=(hit.def||0)+1;hit.hp=hit.mhp||hit.hp;fx(hit.x,hit.y,"UP","#ffe060");msg(E.name+"は しあわせそうに 強くなった…","w");gone();return}
+  if(it.k==="myst"){if(Math.random()<.5){const d=20+G.floor*2;msg("ふしぎな巻物："+E.name+"に "+d+"のダメージ！","y");dmgE(hit,d,"#b070ff")}else{const k=pick(["psn","conf","slow","slp","par"]);setSt(hit,k,E.boss?3:8);msg("ふしぎな巻物："+E.name+"に 異常が おきた！","y")}gone();return}
+  bump()}
+
 function closeBag(){$("bag").classList.remove("on")}
-function cellName(it){if(it.k==="proof")return "モンスターの証";if(it.eq&&it.eq.cur&&it.eq.cv)return "💀"+cellName({k:it.k,eq:{...it.eq,cv:0}});if(it.k==="wep")return wdef(it.eq).n+(it.eq.idf?" Lv"+(it.eq.lv||1):" Lv?");if(it.k==="shd")return it.eq.name+(it.eq.idf?" Lv"+(it.eq.lv||1):" Lv?");const I=ITEMS[it.k];return I.name+(it.n!=null?" ["+it.n+"]":"")}
-function shortDesc(it){if(it.k==="wep")return "こうげき "+(it.eq.idf?wv(it.eq):"?");if(it.k==="shd")return "まもり "+(it.eq.idf?sv(it.eq):"?");const I=ITEMS[it.k];return I.sd||I.d}
-function itemDesc(it){if(it.k==="wep"){const W=wdef(it.eq);return W.d+"（こうげき "+(it.eq.idf?wv(it.eq):"?")+"）"}if(it.k==="shd"){const S=shDef(it.eq);return S.d+"（まもり "+(it.eq.idf?sv(it.eq):"?")+"）"}return ITEMS[it.k].d}
+function cellName(it){if(it.k==="proof")return "モンスターの証";if(it.eq&&it.eq.cur&&it.eq.cv)return "💀"+cellName({k:it.k,eq:{...it.eq,cv:0}});if(it.k==="wep")return wdef(it.eq).n+(it.eq.idf?" Lv"+(it.eq.lv||1):" Lv？");if(it.k==="shd")return it.eq.name+(it.eq.idf?" Lv"+(it.eq.lv||1):" Lv？");if(isWand(it.k))return (wandKnown(it.k)?ITEMS[it.k].name:wandFakeName(it.k))+(it.n!=null?" ["+it.n+"]":"");const I=ITEMS[it.k];return I.name+(it.n!=null?" ["+it.n+"]":"")}
+function shortDesc(it){if(it.k==="wep")return "こうげき "+(it.eq.idf?wv(it.eq):"？");if(it.k==="shd")return "まもり "+(it.eq.idf?sv(it.eq):"？");if(isWand(it.k)&&!wandKnown(it.k))return "まだ わからない";const I=ITEMS[it.k];return I.sd||I.d}
+function itemDesc(it){if(it.k==="wep"){const W=wdef(it.eq);return W.d+"（こうげき "+(it.eq.idf?wv(it.eq):"？")+"）"}if(it.k==="shd"){const S=shDef(it.eq);return S.d+"（まもり "+(it.eq.idf?sv(it.eq):"？")+"）"}if(isWand(it.k)&&!wandKnown(it.k))return "まだ わからない。つかうか、鑑識の巻物で しゅるいが わかる。";return ITEMS[it.k].d}
 function slotItem(s){const p=G.p;return s==="wep"?(p.wep?{k:"wep",eq:p.wep}:null):s==="shd"?(p.shd?{k:"shd",eq:p.shd}:null):(p.ring?{k:p.ring}:null)}
 function drawBag(){const L=$("bagList"),p=G.p,swap=bagMode==="swap";$("bagTitle").textContent=swap?"足もとの道具":"持ち物";$("bagN").textContent=G.bag.length+"/"+bagCap();
   $("eqSlots").innerHTML=[["wep","ぶき"],["shd","たて"],["ring","ゆびわ"]].map(([s,l])=>{const it=slotItem(s);const cu=it&&it.eq&&it.eq.cur&&it.eq.cv;return '<button class="slot'+(bagSel===s?" sel":"")+'" data-s="'+s+'"'+(cu?' style="background:linear-gradient(#f3e4ff,#dcc0f4);border-color:#8a2ab0"':'')+'><canvas width="56" height="56" data-k="'+(it?skey(it):"")+'"></canvas><span><small>'+l+'</small>'+(it?'<span style="color:'+(cu?"#7a1fa8":RAR[tierOf(it)].c)+'">'+nameOf(it)+'</span>':"なし")+'</span></button>'}).join("");
@@ -1248,8 +1290,18 @@ let FAST=false;
 {const _db=drawBag;drawBag=function(){_db.apply(this,arguments);placeUse()}}
 /* メニューから つかう: 画面がもどって ひと呼吸 おいてから モーション */
 function menuUse(fn){closeBag();const run=()=>{noPop=true;try{fn()}finally{noPop=false}};if(FAST||!G||G.over){run();return}busy=true;lockUntil=now()+450;hud();setTimeout(()=>{busy=false;if(G&&!G.over)run()},400)}
-function openWpk(sc){const L=$("wpkL");L.innerHTML="";G.bag.forEach((q,j)=>{if(q===sc||!isWand(q.k))return;const b=document.createElement("button");b.textContent=nameOf(q);b.onclick=()=>{if(!G||G.over)return;const k=G.bag.indexOf(sc);if(k<0||!G.bag.includes(q)){$("wpk").classList.remove("on");return}$("wpk").classList.remove("on");q.n=(q.n||0)+3;G.bag.splice(k,1);SFX.lvl();aura(G.p,"#9af0b0",1100);popMsg("🪄 杖 +3かい！");msg(ITEMS[q.k].name+"の 回数が 3 ふえた！（"+q.n+"かい）","y");afterUse()};L.appendChild(b)});$("wpk").classList.add("on");SFX.ui()}
+function openWpk(sc){const L=$("wpkL");L.innerHTML="";G.bag.forEach((q,j)=>{if(q===sc||!isWand(q.k))return;const b=document.createElement("button");b.textContent=nameOf(q);b.onclick=()=>{if(!G||G.over)return;const k=G.bag.indexOf(sc);if(k<0||!G.bag.includes(q)){$("wpk").classList.remove("on");return}$("wpk").classList.remove("on");q.n=(q.n||0)+3;G.bag.splice(k,1);SFX.lvl();aura(G.p,"#9af0b0",1100);popMsg("🪄 杖 +3かい！");msg(nameOf(q)+"の 回数が 3 ふえた！（"+q.n+"かい）","y");afterUse()};L.appendChild(b)});$("wpkT").textContent="🪄 どの 杖に つかう？";$("wpk").classList.add("on");SFX.ui()}
 $("wpkClose").onclick=()=>{$("wpk").classList.remove("on");SFX.ui();hud()};
+function identTargets(except){const L=[];
+  if(G.p.wep&&!G.p.wep.idf)L.push({where:"eq",slot:"wep",it:{k:"wep",eq:G.p.wep}});
+  if(G.p.shd&&!G.p.shd.idf)L.push({where:"eq",slot:"shd",it:{k:"shd",eq:G.p.shd}});
+  (G.bag||[]).forEach(q=>{if(q===except)return;if((q.k==="wep"||q.k==="shd")&&q.eq&&!q.eq.idf)L.push({where:"bag",it:q});else if(isWand(q.k)&&!wandKnown(q.k))L.push({where:"bag",it:q})});
+  return L}
+function openIdfy(sc){const L=$("wpkL");L.innerHTML="";
+  identTargets(sc).forEach(row=>{const b=document.createElement("button");const tag=row.where==="eq"?"（そうび中）":"";b.textContent=nameOf(row.it)+tag;b.onclick=()=>{if(!G||G.over)return;const k=G.bag.indexOf(sc);if(k<0){$("wpk").classList.remove("on");return}
+    $("wpk").classList.remove("on");if(row.it.k==="wep"||row.it.k==="shd")identGear(row.it.eq,row.it.k);else identWand(row.it.k);G.bag.splice(k,1);SFX.magic();afterUse()};L.appendChild(b)});
+  $("wpkT").textContent="🔎 どの 道具を けんしきする？";$("wpk").classList.add("on");SFX.ui()}
+
 function afterUse(ms){hud();if(FAST||G.over){endTurn();return}/* 道具の こうかが 見えてから 敵が うごく */const w=Math.max(ms||700,impactWait()+200,hPend&&G===hPend.G?1050:0);busy=true;lockUntil=now()+w+50;setTimeout(()=>{busy=false;if(G&&!G.over){endTurn();hud()}},w)}
 /* ===== 道具ごとの エフェクト ===== */
 const SIG={
@@ -1259,7 +1311,7 @@ const SIG={
  power:["rise","🔥","#ff7a40"],dseed:["fall","🪨","#a0a8c0"],life:["burst","❤️","#ff5a7a"],hseed:["shine","🌟","#ffe060"],
  pstr:["burst","💢","#ff6040"],pdef:["spiral","🔷","#60a0ff"],
  thunder:["shock","⚡","#fff07a"],sleep:["rain","💤","#b8a8ff"],holy:["pillar","✨","#fff2b0"],warp:["vortex","🌀","#b890ff"],stairsc:["rise","🔼","#8fe0ff"],
- mapsc:["radar","🗺️","#80d0ff"],wanasc:["radar","🪤","#ff8080"],fire:["proj","🔥","#ff8040"],uncurse:["pillar","🕊️","#e8d0ff"],wepup:["fall","⚔️","#ffd060"],shdup:["fall","🛡️","#7ab8ff"],myst:["burst","❓","#b070ff"],treasure:["burst","💎","#80f0ff"],
+ mapsc:["radar","🗺️","#80d0ff"],wanasc:["radar","🪤","#ff8080"],fire:["proj","🔥","#ff8040"],uncurse:["pillar","🕊️","#e8d0ff"],wepup:["fall","⚔️","#ffd060"],shdup:["fall","🛡️","#7ab8ff"],idfy:["radar","🔎","#e8c040"],myst:["burst","❓","#b070ff"],treasure:["burst","💎","#80f0ff"],
  rstr:["orbit","💪","#ff9060"],rdef:["orbit","🔰","#70b0ff"],rheal:["orbit","💚","#70e090"],rfood:["orbit","🍙","#ffc080"],rluck:["orbit","🍀","#80e070"],rexp:["orbit","📘","#a0a0ff"],
  knife:["spin","🔪","#e0e8f0"],ice:["spin","💤","#b9a7ff"],bomb:["burst","💥","#ff9040"],
  wbolt:["proj","✨","#c8a8ff"],wsleep:["proj","✨","#c8a8ff"],wpush:["proj","✨","#c8a8ff"],wdrain:["proj","✨","#c8a8ff"],wsmash:["proj","✨","#c8a8ff"],
@@ -1282,8 +1334,8 @@ function useItem(i){const it=G.bag[i],p=G.p;let consume=true;if(!p.buf)p.buf={at
   {const sk=it.k;if(it.k==="wep"||it.k==="shd"||I.c==="ring"){/* そうびの ときは エフェクト なし */}else if(I.rng){const {hits,end}=lineTargets(I.rng,I.pierce),t=hits[0]||end;sigFx(sk,p.x,p.y,t.x,t.y)}else if(sk==="fire"){const e=nearestEnemy();if(e)sigFx(sk,p.x,p.y,e.x,e.y)}else if(!(it.k==="warp"&&G.boss)&&!(it.k==="stairsc"&&!stOK())&&!((sk==="wepup"&&!p.wep)||(sk==="shdup"&&!p.shd)))sigFx(sk,p.x,p.y)}
   const aura=()=>{},beam=()=>{};
   switch(it.k){
-    case "wep":{if(p.wep&&p.wep.cur){cursedNo(p.wep,"ぶき");consume=false;break}const old=p.wep;p.wep=it.eq;it.eq.idf=1;if(old){G.bag[i]={k:"wep",eq:old};consume=false}msg(nameOf(it)+"をそうびした。（こうげき"+Math.round(atkOf())+"）","g");aura(p,"#ffe08a",700);SFX.pick();revealCurse(it);break}
-    case "shd":{if(p.shd&&p.shd.cur){cursedNo(p.shd,"たて");consume=false;break}const old=p.shd;p.shd=it.eq;it.eq.idf=1;if(old){G.bag[i]={k:"shd",eq:old};consume=false}msg(nameOf(it)+"をそうびした。（まもり"+Math.round(defOf())+"）","g");aura(p,"#9ad0ff",700);SFX.pick();revealCurse(it);break}
+    case "wep":{if(p.wep&&p.wep.cur){cursedNo(p.wep,"ぶき");consume=false;break}const old=p.wep;p.wep=it.eq;if(old){G.bag[i]={k:"wep",eq:old};consume=false}msg(nameOf(it)+"をそうびした。（こうげき"+Math.round(atkOf())+"）","g");aura(p,"#ffe08a",700);SFX.pick();revealCurse(it);break}
+    case "shd":{if(p.shd&&p.shd.cur){cursedNo(p.shd,"たて");consume=false;break}const old=p.shd;p.shd=it.eq;if(old){G.bag[i]={k:"shd",eq:old};consume=false}msg(nameOf(it)+"をそうびした。（まもり"+Math.round(defOf())+"）","g");aura(p,"#9ad0ff",700);SFX.pick();revealCurse(it);break}
     case "herb":case "pred":{const n=it.k==="herb"?30:100,up=it.k==="herb"?1:3,h=heal(n);if(!h){p.mhp+=up;p.hp+=up}
       if(it.k==="herb"&&!FAST){const pe={G,h,up:h?0:up};hPend=pe;setTimeout(()=>{if(hPend===pe)hPend=null;if(G!==pe.G)return;msg(h?"HPが"+h+"回ふくした。":"最大HPが"+up+"ふえた。","g");fx(p.x,p.y,"+"+(h||up),"#7dff9a");popMsg(h?"💚 HP +"+h:"❤️ 最大HP +"+up);aura(p,"#7dff9a");SFX.heal();hud()},950);break}
       msg(h?"HPが"+h+"回ふくした。":"最大HPが"+up+"ふえた。","g");lfx(p.x,p.y,"+"+(h||up),"#7dff9a");popMsg(h?"💚 HP +"+h:"❤️ 最大HP +"+up);aura(p,"#7dff9a");SFX.heal();break}
@@ -1307,13 +1359,14 @@ function useItem(i){const it=G.bag[i],p=G.p;let consume=true;if(!p.buf)p.buf={at
       if(it.k==="warp"){for(let k=0;k<200;k++){const r=pick(G.rooms),x=r.x+R(r.w),y=r.y+R(r.h);if(wall(x,y))continue;if(!entAt(x,y)&&!objAt(x,y)){p.x=x;p.y=y;break}}}
       else{const s2=G.stairs;let ok=false;for(const [dx,dy] of [[0,1],[1,0],[0,-1],[-1,0],[1,1],[-1,1],[1,-1],[-1,-1]]){const x=s2.x+dx,y=s2.y+dy;if(!wall(x,y)&&!entAt(x,y)&&!objAt(x,y)){p.x=x;p.y=y;ok=true;break}}if(!ok){p.x=s2.x;p.y=s2.y}G.seen[s2.y][s2.x]=1}
       FX.push({type:"ring",x:p.x,y:p.y,c:"#ffffff",t0:now()+250,dur:800});aura(p,"#d8c8ff",1000);SFX.warp();updateSight();popMsg(it.k==="warp"?"🌀 ワープ！":"🌀 階段のそばへ！");msg(it.k==="warp"?"どこかへワープした！":"階段のそばへワープした！","y");if(it.k==="warp"){const ix=G.items.findIndex(t=>t.x===p.x&&t.y===p.y);if(ix>=0)pickUp(ix)}break}
-    case "mapsc":{for(let y=0;y<MH;y++)for(let x=0;x<MW;x++)if(G.map[y][x]===0||!wall(x+1,y)||!wall(x-1,y)||!wall(x,y+1)||!wall(x,y-1))G.seen[y][x]=1;G.mapRevealed=true;(G.objs||[]).forEach(o=>o.hid=0);SFX.magic();ringFx(p.x,p.y,"#a0e0ff");popMsg("🗺️ ちずが わかった！");msg("この階の地図と わなが わかった！","y");break}
+    case "mapsc":{for(let y=0;y<MH;y++)for(let x=0;x<MW;x++)if(G.map[y][x]===0||!wall(x+1,y)||!wall(x-1,y)||!wall(x,y+1)||!wall(x,y-1))G.seen[y][x]=1;G.mapRevealed=true;SFX.magic();ringFx(p.x,p.y,"#a0e0ff");popMsg("🗺️ ちずが わかった！");msg("この階の地図が わかった！","y");break}
     case "wanasc":{let n=0;(G.objs||[]).forEach(o=>{if(OBJS[o.k]&&OBJS[o.k].trap){if(o.hid)n++;o.hid=0;G.seen[o.y][o.x]=1}});SFX.magic();ringFx(p.x,p.y,"#ff9a9a");const all=(G.objs||[]).filter(o=>OBJS[o.k]&&OBJS[o.k].trap).length;popMsg(all?"🪤 わなが 見えた！":"…わなは ない");msg(all?"この階の わなが ぜんぶ 見えるように なった！（"+all+"こ）":"この階には わなが ない みたいだ。","y");break}
     case "treasure":{let n=0;for(let k=0;k<200&&n<3;k++){const r=pick(G.rooms),x=r.x+R(r.w),y=r.y+R(r.h);if(wall(x,y))continue;if(G.items.some(i=>i.x===x&&i.y===y)||(G.stairs.x===x&&G.stairs.y===y)||(x===p.x&&y===p.y)||objAt(x,y))continue;G.items.push({x,y,...randItem(),shown:1});G.seen[y][x]=1;n++}SFX.magic();ringFx(p.x,p.y,"#ffd0f0");popMsg("🎁 たからが ふえた！");msg("この階に たからが あらわれた！（地図を見よう）","y");break}
     case "uncurse":{const L=[p.wep,p.shd].filter(q=>q&&q.cur);if(!L.length){msg("のろわれた そうびは ない。");popMsg("…何もおこらない");break}for(const q of L){q.cur=0;q.cv=0}SFX.heal();FX.push({type:"aura",x:p.x,y:p.y,c:"#f4e8ff",t0:now()+300,dur:1000});msg("のろいが とけた！","g");popMsg("🕊️ のろいが とけた！");break}
-    case "wepup":{if(!p.wep){msg("ぶきを そうびしていない。");popMsg("…ぶきが ない");SFX.miss();return}p.wep.lv=(p.wep.lv||1)+1;if(p.wep.cur){p.wep.cur=0;p.wep.cv=0;msg("ぶきの のろいが とけた！","g")}SFX.lvl();aura(p,"#ffe08a",1100);popMsg("⚔️ ぶき Lv"+p.wep.lv+"！");msg(wdef(p.wep).n+"が Lv"+p.wep.lv+"に なった！（こうげき"+Math.round(atkOf())+"）","y");break}
+    case "wepup":{if(!p.wep){msg("ぶきを そうびしていない。");popMsg("…ぶきが ない");SFX.miss();return}p.wep.lv=(p.wep.lv||1)+1;p.wep.idf=1;if(p.wep.cur){p.wep.cur=0;p.wep.cv=0;msg("ぶきの のろいが とけた！","g")}SFX.lvl();aura(p,"#ffe08a",1100);popMsg("⚔️ ぶき Lv"+p.wep.lv+"！");msg(wdef(p.wep).n+"が Lv"+p.wep.lv+"に なった！（こうげき"+Math.round(atkOf())+"）","y");break}
+    case "idfy":{const L=identTargets(it);if(!L.length){msg("けんしきできる 道具が ない。");popMsg("…わかっている");SFX.miss();return}openIdfy(it);return}
     case "wandup":{const ws=G.bag.filter(q=>q!==it&&isWand(q.k));if(!ws.length){msg("杖を もっていない。");popMsg("…杖が ない");SFX.miss();return}openWpk(it);return}
-case "shdup":{if(!p.shd){msg("たてを そうびしていない。");popMsg("…たてが ない");SFX.miss();return}p.shd.lv=(p.shd.lv||1)+1;if(p.shd.cur){p.shd.cur=0;p.shd.cv=0;msg("たての のろいが とけた！","g")}SFX.lvl();aura(p,"#9ad0ff",1100);popMsg("🛡️ たて Lv"+p.shd.lv+"！");msg(p.shd.name+"が Lv"+p.shd.lv+"に なった！（まもり"+Math.round(defOf())+"）","y");break}
+case "shdup":{if(!p.shd){msg("たてを そうびしていない。");popMsg("…たてが ない");SFX.miss();return}p.shd.lv=(p.shd.lv||1)+1;p.shd.idf=1;if(p.shd.cur){p.shd.cur=0;p.shd.cv=0;msg("たての のろいが とけた！","g")}SFX.lvl();aura(p,"#9ad0ff",1100);popMsg("🛡️ たて Lv"+p.shd.lv+"！");msg(p.shd.name+"が Lv"+p.shd.lv+"に なった！（まもり"+Math.round(defOf())+"）","y");break}
     case "rstr":case "rdef":case "rheal":case "rfood":case "rluck":case "rexp":{const old=p.ring;p.ring=it.k;if(old){G.bag[i]={k:old};consume=false}msg(ITEMS[it.k].name+"をつけた！","g");aura(p,"#ffd0ff",800);SFX.pick();break}
     case "fire":{const vs=G.ents.filter(e=>seeE(e)),e=vs.length?pick(vs):null;if(!e){msg("見えるところに敵がいない。");SFX.miss();popMsg("…敵がいない");return}beam(p,e,"#ffb070");SFX.magic();popMsg("⚡ イカズチ！");const d=30+G.floor*4;setTimeout(()=>{if(G.ents.includes(e))boomFx(e.x,e.y)},350);msg(ENEMIES[e.k].name+"に"+d+"のダメージ！","y");dmgE(e,d);break}
     case "myst":{popMsg("❓ 不思議な 力！");SFX.magic();flashC="#e0c8ff";flash=14;aura(p,"#c090ff",900);
@@ -1324,18 +1377,18 @@ case "shdup":{if(!p.shd){msg("たてを そうびしていない。");popMsg("�
         {w:3,ok:()=>visE().length,run:()=>{const t=visE(),e=pick(t);const d=30+G.floor*4;beam(p,e,"#b070ff");msg("ふしぎな巻物："+ENEMIES[e.k].name+"に "+d+"のダメージ！","y");dmgE(e,d)}},
         {w:2,ok:()=>visE().length,run:()=>{const t=visE();msg("ふしぎな巻物：せいなる光！","y");for(const e of t){aura(e,"#fff6b0",900);dmgE(e,Math.max(1,Math.floor(e.hp/2)),"#fff6b0")}}},
         {w:3,ok:()=>visE().length,run:()=>{const t=visE();t.forEach(e=>{e.sleep=ENEMIES[e.k].boss?4:8;stFX(e,"slp")});msg("ふしぎな巻物：敵が ねむった！","y")}},
-        {w:2,ok:()=>true,run:()=>{for(let y=0;y<MH;y++)for(let x=0;x<MW;x++)if(G.map[y][x]===0||!wall(x+1,y)||!wall(x-1,y)||!wall(x,y+1)||!wall(x,y-1))G.seen[y][x]=1;G.mapRevealed=true;(G.objs||[]).forEach(o=>o.hid=0);msg("ふしぎな巻物：この階の地図と わなが わかった！","y")}},
+        {w:2,ok:()=>true,run:()=>{for(let y=0;y<MH;y++)for(let x=0;x<MW;x++)if(G.map[y][x]===0||!wall(x+1,y)||!wall(x-1,y)||!wall(x,y+1)||!wall(x,y-1))G.seen[y][x]=1;G.mapRevealed=true;msg("ふしぎな巻物：この階の地図が わかった！","y")}},
         {w:2,ok:()=>!G.boss,run:()=>{ringFx(p.x,p.y,"#c8a8ff");for(let k=0;k<200;k++){const r=pick(G.rooms),x=r.x+R(r.w),y=r.y+R(r.h);if(wall(x,y)||entAt(x,y)||objAt(x,y))continue;p.x=x;p.y=y;break}updateSight();SFX.warp();msg("ふしぎな巻物：どこかへ ワープした！","y")}},
         {w:2,ok:()=>stOK(),run:()=>{const s2=G.stairs;let ok=false;for(const [dx,dy] of [[0,1],[1,0],[0,-1],[-1,0],[1,1],[-1,1],[1,-1],[-1,-1]]){const x=s2.x+dx,y=s2.y+dy;if(!wall(x,y)&&!entAt(x,y)&&!objAt(x,y)){p.x=x;p.y=y;ok=true;break}}if(!ok){p.x=s2.x;p.y=s2.y}G.seen[s2.y][s2.x]=1;updateSight();SFX.warp();msg("ふしぎな巻物：階段のそばへ ワープした！","y")}},
-        {w:2,ok:()=>p.wep,run:()=>{p.wep.lv=(p.wep.lv||1)+1;if(p.wep.cur){p.wep.cur=0;p.wep.cv=0}msg("ふしぎな巻物：ぶきの Lvが 1上がった！","g")}},
-        {w:2,ok:()=>p.shd,run:()=>{p.shd.lv=(p.shd.lv||1)+1;if(p.shd.cur){p.shd.cur=0;p.shd.cv=0}msg("ふしぎな巻物：たての Lvが 1上がった！","g")}},
+        {w:2,ok:()=>p.wep,run:()=>{p.wep.lv=(p.wep.lv||1)+1;p.wep.idf=1;if(p.wep.cur){p.wep.cur=0;p.wep.cv=0}msg("ふしぎな巻物：ぶきの Lvが 1上がった！","g")}},
+        {w:2,ok:()=>p.shd,run:()=>{p.shd.lv=(p.shd.lv||1)+1;p.shd.idf=1;if(p.shd.cur){p.shd.cur=0;p.shd.cv=0}msg("ふしぎな巻物：たての Lvが 1上がった！","g")}},
         {w:2,ok:()=>p.wep&&p.wep.cur||p.shd&&p.shd.cur,run:()=>{if(p.wep&&p.wep.cur){p.wep.cur=0;p.wep.cv=0}if(p.shd&&p.shd.cur){p.shd.cur=0;p.shd.cv=0}msg("ふしぎな巻物：のろいが とけた！","g")}},
         {w:2,ok:()=>true,run:()=>{const n=heal(Math.max(30,p.mhp));p.hp=p.mhp;msg("ふしぎな巻物：HPが ぜんぶ 回ふくした！","g")}},
         {w:2,ok:()=>true,run:()=>{p.food=p.fmax;msg("ふしぎな巻物：おなかが いっぱいになった！","g")}},
         {w:2,ok:()=>true,run:()=>{p.buf.atk=50;msg("ふしぎな巻物：ちからが みなぎる！（50ターン）","g")}},
         {w:2,ok:()=>true,run:()=>{p.buf.def=50;msg("ふしぎな巻物：体が かたくなった！（50ターン）","g")}},
         {w:2,ok:()=>true,run:()=>{const g=50+G.floor*8;p.gold=(p.gold||0)+g;msg("ふしぎな巻物："+g+"ゴールド てに入れた！","g")}},
-        {w:2,ok:()=>G.bag.some(it=>isWand(it.k)),run:()=>{const L=G.bag.filter(it=>isWand(it.k)),it=pick(L);it.n=(it.n||ITEMS[it.k].n||3)+3;msg("ふしぎな巻物："+ITEMS[it.k].name+"の 回数が 3ふえた！","g")}},
+        {w:2,ok:()=>G.bag.some(it=>isWand(it.k)),run:()=>{const L=G.bag.filter(it=>isWand(it.k)),it=pick(L);it.n=(it.n||ITEMS[it.k].n||3)+3;msg("ふしぎな巻物："+nameOf(it)+"の 回数が 3ふえた！","g")}},
         {w:2,ok:()=>true,run:()=>{for(let j=0;j<3;j++){const r=pick(G.rooms),pos=(()=>{for(let k=0;k<40;k++){const x=r.x+R(r.w),y=r.y+R(r.h);if(!wall(x,y)&&!entAt(x,y)&&!objAt(x,y)&&!(x===p.x&&y===p.y)&&!G.items.some(i=>i.x===x&&i.y===y))return {x,y}}return null})();if(pos)G.items.push({...pos,...randItem(),shown:1,x:pos.x,y:pos.y})}msg("ふしぎな巻物：道具が あらわれた！","y")}},
         /* わるい こうか */
         {w:2,ok:()=>true,run:()=>{setSt(p,"conf",8);msg("ふしぎな巻物：頭が くらくらしてきた…","w")}},
@@ -1355,7 +1408,8 @@ case "shdup":{if(!p.shd){msg("たてを そうびしていない。");popMsg("�
       break}
     default:{
       if(!I.rng)break;
-      if(I.n!=null){it.n=(it.n==null?I.n:it.n)-1;consume=it.n<=0;msg(I.name+"をふった。"+(consume?"":"（あと"+it.n+"回）"))}
+      if(isWand(it.k))identWand(it.k);
+      if(I.n!=null){it.n=(it.n==null?I.n:it.n)-1;consume=it.n<=0;msg((isWand(it.k)?ITEMS[it.k].name:I.name)+"をふった。"+(consume?"":"（あと"+it.n+"回）"))}
       const {hits,end}=lineTargets(I.rng,I.pierce);swing(p.dir[0],p.dir[1]);
       const col=isWand(it.k)?"#c8a8ff":(I.art&&I.art[2])||"#ffffff";/* 杖の まほうは みんな おなじ 見た目 */
       if(I.rng===1&&!hits.length){FX.push({type:"hit",x:end.x,y:end.y,t0:now(),c:col});SFX.miss();msg("目の前に 敵がいない。");popMsg("…目の前に いない");break}
@@ -1382,7 +1436,7 @@ case "shdup":{if(!p.shd){msg("たてを そうびしていない。");popMsg("�
 
 /* ===== しょうにん ===== */
 const PRICE=[0,40,110,260,600];
-function priceOf(it){let b=PRICE[tierOf(it)]||40;if(it.eq&&it.eq.lv)b+=(it.eq.lv-1)*40;return Math.round(b*(1+G.floor*.06)/5)*5}
+function priceOf(it){let b=PRICE[tierOf(it)]||40;if(it.eq&&it.eq.lv&&it.eq.idf)b+=(it.eq.lv-1)*40;return Math.round(b*(1+G.floor*.06)/5)*5}
 const rollN=()=>wpick([[2,1],[3,3],[4,3],[5,2],[6,1]]);/* 杖の 回数: 2〜6（3と4が 多い） */
 function shopStock(){const out=[];for(let i=0;i<5;i++){let it=randItem();if(it.eq)it.eq.cur=0;if(it.k==="gold"||it.k==="arrow")it=randItem();if(it.k==="gold"||it.k==="arrow")continue;out.push(it)}if(out.length)pick(out).half=1;return out}
 const buyPrice=it=>it.half?Math.max(5,Math.round(priceOf(it)/10)*5):priceOf(it);
@@ -1433,6 +1487,9 @@ function migrate(G){const p=G.p;if(G.idv==null){/* 古いセーブ: いままで
   const fixIt=it=>{if(!it)return;if(it.k==="wep")fixW(it.eq);if(it.k==="shd")fixS(it.eq)};
   (G.bag||[]).forEach(fixIt);(G.items||[]).forEach(fixIt);(G.objs||[]).forEach(o=>{fixIt(o.it);(o.stock||[]).forEach(fixIt)});
   if(migrated&&G.log)G.log.push({t:"ぶきと たての しゅるいが かわったよ。",c:"y"});G.objs=G.objs||[];G.boss=G.boss||0;
+  if(!G.wandAlias)G.wandAlias=makeWandAlias();
+  if(!G.knownWands){G.knownWands={};Object.keys(ITEMS).forEach(k=>{if(ITEMS[k].c==="wand")G.knownWands[k]=1})}
+  if(p.wep&&p.wep.idf==null)p.wep.idf=1;if(p.shd&&p.shd.idf==null)p.shd.idf=1;
   if(!G.map||!G.seen||!G.stairs)throw new Error("bad")}
 let loadErr=false;
 function load(){try{const s=localStorage.getItem("rogue-save");if(!s)return false;const g=JSON.parse(s);if(!g||!g.p||!Array.isArray(g.map)||!(g.sv>=5))throw 0;migrate(g);if(Array.isArray(g.objs))g.objs=g.objs.filter(o=>o.k!=="casino");if(g.sp&&g.sp.k==="ca")g.sp=null;G=g;updateSight();return true}catch(e){clearSave();loadErr=true;titleInfo();return false}}
@@ -1464,7 +1521,7 @@ let oldReset=false;
 function titleInfo(){const b=getBest();$("tBest").innerHTML=(oldReset?"<span style=\"color:#e0303a\">ゲームが 大きく かわったので、新しく はじめてね。</span><br>":"")+(loadErr?"<span style=\"color:#e0303a\">前の セーブデータは 読みこめなかったので、新しく はじめてね。</span><br>":"")+(b.n?"さいこう記録: "+b.txt:"");{const has=!!localStorage.getItem("rogue-save");$("bCont").disabled=!has;$("bCont").classList.toggle("off",!has)}}
 function hud(){const p=G.p;$("hFloor").textContent=G.floor+"F";{const pe=hPend&&G===hPend.G?hPend:null,dm=p.mhp-(pe?pe.up:0),dh=Math.min(p.hp,Math.max(1,p.hp-(pe?pe.h+pe.up:0)));$("hpI").style.width=(100*dh/dm)+"%";$("hpT").textContent="HP "+dh+"/"+dm;
       $("hpBar").classList.toggle("sp",spOn())}$("hLv").textContent="Lv"+p.lv;
-  {const wb=document.querySelector("#pad .wait");if(wb){const tl=talkObj()?"はなす":"こうげき";if(wb.textContent!==tl)wb.textContent=tl}}if(p.wep)p.wep.idf=1;if(p.shd)p.shd.idf=1;$("hFood").innerHTML="<small>おなか</small><b>"+p.food+"</b>";$("hFood").classList.toggle("low",p.food<=100);$("sAtk").textContent=Math.round(atkOf());$("sDef").textContent=Math.round(defOf());$("sGold").textContent=p.gold||0;$("bBow").innerHTML="ゆみ<small>"+(p.arrows||0)+"</small>";$("hSt").innerHTML=["psn","conf","slow","slp","par","bind","haste","inv"].filter(k=>p[k]>0).map(k=>'<i style="background:'+STS[k].c+'">'+STS[k].n+'</i>').join("");$("xpI").style.width=(100*p.exp/needExp(p.lv))+"%";
+  {const wb=document.querySelector("#pad .wait");if(wb){const tl=talkObj()?"はなす":"こうげき";if(wb.textContent!==tl)wb.textContent=tl}}$("hFood").innerHTML="<small>おなか</small><b>"+p.food+"</b>";$("hFood").classList.toggle("low",p.food<=100);$("sAtk").textContent=Math.round(atkOf());$("sDef").textContent=Math.round(defOf());$("sGold").textContent=p.gold||0;$("bBow").innerHTML="ゆみ<small>"+(p.arrows||0)+"</small>";$("hSt").innerHTML=["psn","conf","slow","slp","par","bind","haste","inv"].filter(k=>p[k]>0).map(k=>'<i style="background:'+STS[k].c+'">'+STS[k].n+'</i>').join("");$("xpI").style.width=(100*p.exp/needExp(p.lv))+"%";
   $("bDown").classList.toggle("ok",stOK()&&p.x===G.stairs.x&&p.y===G.stairs.y)}
 
 /* ===== 描画（やわらかいイラスト風） ===== */
@@ -1508,7 +1565,7 @@ function vpos(o){const T=now();let r=VP.get(o);if(!r){r={x:o.x,y:o.y,q:[],sx:o.x
   while(r.q.length){const pr=(T-r.t0)/STEP;if(pr>=1){const w=r.q.shift();r.x=r.sx=w.x;r.y=r.sy=w.y;r.t0+=STEP;continue}const w=r.q[0];return {x:r.sx+(w.x-r.sx)*pr,y:r.sy+(w.y-r.sy)*pr,b:Math.sin(pr*Math.PI)}}
   return {x:o.x,y:o.y,b:0}}
 function luOff(o){if(!o.lu||o.lu.t0==null){o.lu=null;return [0,0]}const pr=(now()-o.lu.t0)/180;if(pr>=1||pr<0){o.lu=null;return [0,0]}const k=Math.sin(pr*Math.PI)*TS*.34;return [o.lu.dx*k,o.lu.dy*k]}
-const skey=it=>it.k==="gold"?"gold":it.k==="arrow"?"arrow":it.k==="wep"?"w:"+(it.eq.id||"ken"):it.k==="shd"?"s:"+(it.eq.name||"盾"):it.k;
+const skey=it=>it.k==="gold"?"gold":it.k==="arrow"?"arrow":it.k==="wep"?"w:"+(it.eq.id||"ken"):it.k==="shd"?"s:"+(it.eq.name||"盾"):(isWand(it.k)&&!wandKnown(it.k)?"wfake:"+(G&&G.wandAlias&&G.wandAlias[it.k]||"しろ"):it.k);
 const heroFace=()=>{const d=G.p.dir||[0,1];if(d[0]&&d[1])return (d[1]>0?"d":"u")+(d[0]>0?"r":"l");return d[0]>0?"r":d[0]<0?"l":d[1]<0?"u":"d"};
 const LG=(g,x0,y0,x1,y1,st)=>{const r=g.createLinearGradient(x0,y0,x1,y1);st.forEach((c,i)=>r.addColorStop(i/(st.length-1),c));return r};
 const RG=(g,x,y,r0,r1,st,fx2,fy2)=>{const r=g.createRadialGradient(fx2==null?x:fx2,fy2==null?y:fy2,r0,x,y,r1);st.forEach((c,i)=>r.addColorStop(i/(st.length-1),c));return r};
@@ -2245,7 +2302,9 @@ function drawRing(g,c1,c2,x,y,u){glow(g,x+16*u,y+15*u,11*u,c2+"55");
   g.fillStyle="#e8b44a";rr(g,x+12.5*u,y+11*u,7*u,3*u,1.2*u);g.fill();
   g.fillStyle=LG(g,x+12*u,y+5*u,x+20*u,y+13*u,["#ffffff",c1,c2]);g.beginPath();g.moveTo(x+16*u,y+5*u);g.lineTo(x+20.5*u,y+9*u);g.lineTo(x+16*u,y+13.2*u);g.lineTo(x+11.5*u,y+9*u);g.closePath();g.fill();
   star(g,x+22.5*u,y+6*u,1.6*u,"#fff")}
-function drawItemExtra(g,k,x,y,s){const u=s/32,it=ITEMS[k];
+function drawItemExtra(g,k,x,y,s){const u=s/32;
+  if(k.slice(0,6)==="wfake:"){const row=WANDFAKE.find(x=>x[0]===k.slice(6))||WANDFAKE[5];drawStaff(g,row[1],row[2],x,y,u);return true}
+  const it=ITEMS[k];
   if(k==="proof"){g.fillStyle="#3a7ae0";g.beginPath();g.moveTo(x+12*u,y+5*u);g.lineTo(x+16*u,y+14*u);g.lineTo(x+20*u,y+5*u);g.closePath();g.fill();g.fillStyle="#e0284a";g.beginPath();g.moveTo(x+16*u,y+5*u);g.lineTo(x+13.5*u,y+12*u);g.lineTo(x+18.5*u,y+12*u);g.closePath();g.fill();g.fillStyle=RG(g,x+16*u,y+19*u,1,7*u,["#fff6b0","#ffc830","#c88a10"],x+14*u,y+17*u);g.beginPath();g.arc(x+16*u,y+19*u,6.5*u,0,7);g.fill();g.strokeStyle="#a06a00";g.lineWidth=.9*u;g.stroke();star(g,x+16*u,y+19*u,3.4*u,"#fff2b0");return true}
   if(k==="arrow"){g.save();g.translate(x+16*u,y+16*u);for(const [dx2,a] of [[-4,-.5],[0,-.35],[4,-.2]]){g.save();g.translate(dx2*u,0);g.rotate(a+.6);g.strokeStyle="#a0703a";g.lineWidth=1.6*u;g.beginPath();g.moveTo(0,10*u);g.lineTo(0,-8*u);g.stroke();g.fillStyle="#d8dce8";g.beginPath();g.moveTo(0,-11*u);g.lineTo(-2.4*u,-7*u);g.lineTo(2.4*u,-7*u);g.fill();g.fillStyle="#ff7aa8";g.beginPath();g.moveTo(0,8*u);g.lineTo(-2.4*u,11*u);g.lineTo(0,10*u);g.lineTo(2.4*u,11*u);g.fill();g.restore()}g.restore();return true}
   if(k==="gold"){for(const [cx0,cy0] of [[12,22],[20,22],[16,17]]){g.fillStyle=RG(g,x+cx0*u,y+cy0*u,1,6*u,["#fff6b0","#ffc830","#c88a10"],x+(cx0-2)*u,y+(cy0-2)*u);g.beginPath();g.ellipse(x+cx0*u,y+cy0*u,6*u,4.2*u,0,0,7);g.fill();g.strokeStyle="#a06a00";g.lineWidth=.8*u;g.stroke()}star(g,x+23*u,y+11*u,2*u,"#fff");return true}
@@ -2506,7 +2565,7 @@ document.addEventListener("gesturestart",e=>e.preventDefault());
   $("howList").innerHTML=h;$("howList").querySelectorAll("canvas").forEach(c=>{const x=c.getContext("2d");if(c.dataset.e)drawEnemy(x,c.dataset.e,6,8,52,false);else if(c.dataset.o)drawObj(x,c.dataset.o,4,4,56,false);else drawItemSprite(x,c.dataset.i,2,2,60)})})();
 checkSave();titleInfo();requestAnimationFrame(frame);
 /* テスト用 */
-window.__rogue={pickUp,SHIELDS,spOn,shFx,hurtPlayer,migrate,randItemX:()=>randItem(),set FAST(v){FAST=v},wv,sv,setSt,openShop,openFoot,STS,CLS,BOOKS,bagCap,castBook,get FX(){return FX},WDEF,OBJS,ENEMIES,showLv,tierOf,openSwap,unequip,tryAttack,mkEnemy,BAL,ITEMS,nearestEnemy,chooseStat,get G(){return G},set G(v){G=v},genFloor,playerAct,descend,useItem,updateSight,distMap,canStep,newRun,show,endTurn,MW,MH,shootBow,breakStatue,killEnemy,drawHeroX:drawHero};
+window.__rogue={pickUp,SHIELDS,spOn,shFx,hurtPlayer,migrate,wandKnown,identWand,identGear,nameOf,priceOf,throwItem,applyThrowHit,itemDesc,cellName,randItemX:()=>randItem(),set FAST(v){FAST=v},wv,sv,setSt,openShop,openFoot,STS,CLS,BOOKS,bagCap,castBook,get FX(){return FX},WDEF,OBJS,ENEMIES,showLv,tierOf,openSwap,unequip,tryAttack,mkEnemy,BAL,ITEMS,nearestEnemy,chooseStat,get G(){return G},set G(v){G=v},genFloor,playerAct,descend,useItem,updateSight,distMap,canStep,newRun,show,endTurn,MW,MH,shootBow,breakStatue,killEnemy,drawHeroX:drawHero};
 </script>
 </body>
 </html>
